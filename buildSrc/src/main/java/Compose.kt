@@ -1,0 +1,20 @@
+object Compose {
+    const val composeVersion = "1.2.0-alpha08"
+
+    const val compiler = "androidx.compose.compiler:compiler:$composeVersion"
+    const val ui = "androidx.compose.ui:ui:$composeVersion"
+    const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
+    const val runtime = "androidx.compose.runtime:runtime:$composeVersion"
+
+    private const val navigationComposeVersion = "2.5.0-rc01"
+    const val navigationCompose = "androidx.navigation:navigation-compose:$navigationComposeVersion"
+
+    private const val lifecycleVersion = "2.5.0-rc01"
+    const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion"
+
+    private const val activityComposeVersion = "1.3.1"
+    const val activityCompose = "androidx.activity:activity-compose:$activityComposeVersion"
+
+//    private const val hiltNavigationComposeVersion = "1.0.0-beta01"
+//    const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion"
+}
