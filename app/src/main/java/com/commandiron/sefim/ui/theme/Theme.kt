@@ -10,13 +10,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColorScheme(
-    primary = Purple200,
-    background = MyBackgroundColor
+    primary = MyPrimaryColor,
+    surface = MySurfaceColor,
+    onSurface = MyOnSurfaceColor,
+    background = MyBackgroundColor,
+    onBackground = MyOnBackgroundColor
 )
 
 private val LightColorPalette = lightColorScheme(
-    primary = Purple200,
-    background = MyBackgroundColor
+    primary = MyPrimaryColor,
+    surface = MySurfaceColor,
+    onSurface = MyOnSurfaceColor,
+    background = MyBackgroundColor,
+    onBackground = MyOnBackgroundColor
 )
 
 @Composable

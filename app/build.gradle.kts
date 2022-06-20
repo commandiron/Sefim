@@ -35,7 +35,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs = freeCompilerArgs + listOf(
-            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+            "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi"
         )
     }
     composeOptions {
@@ -66,6 +67,13 @@ dependencies {
     implementation(Google.material3)
     implementation(Google.materialIconsCore)
     implementation(Google.materialIconsExtended)
+
+    implementation(Coil.coil)
+    implementation(Coil.compose)
+    implementation(Coil.composeBase)
+
+    implementation(Accompanist.pager)
+    implementation(Accompanist.indicators)
 
 //    implementation(DaggerHilt.hiltAndroid)
 //    kapt(DaggerHilt.hiltCompiler)
