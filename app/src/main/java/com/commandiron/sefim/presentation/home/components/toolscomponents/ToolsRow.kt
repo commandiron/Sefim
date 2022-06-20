@@ -26,41 +26,16 @@ fun ToolsRow(
         state = state,
         contentPadding = PaddingValues(spacing.spaceSmall),
         horizontalArrangement = Arrangement.spacedBy(spacing.spaceMedium),
+        verticalAlignment = Alignment.CenterVertically
     ){
         tools?.let {
             items(it){ tool ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    ToolGridItem(
-                        tool = tool,
-                        onIconClick = onIconClick
-                    )
-                    if(tool.toolTags.contains(ToolTag.NEW)){
-                        NewSticker(
-                            modifier = Modifier
-                                .align(Alignment.TopStart)
-                        )
-                    }
-                    if(tool.toolTags.contains(ToolTag.LOCKED)){
-                        LockedSticker(
-                            modifier = Modifier
-                                .align(Alignment.Center)
-                                .fillMaxSize(0.35f)
-                        )
-                    }
-                    if (tool.toolTags.contains(ToolTag.CAM)) {
-                        CamSticker(
-                            modifier = Modifier
-                                .align(Alignment.TopEnd)
-                                .fillMaxSize(0.35f)
-                        )
-                    }
-                }
-            }
-            item {
-                Text(text = "Devamı İçin Tıklayın")
+                ToolGridItemWithSticker(
+                    tool = tool,
+                    onIconClick = { onIconClick(tool) },
+                    onIconLongClick = {},
+                    onUnFavorite = {}
+                )
             }
         }
     }

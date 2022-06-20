@@ -13,13 +13,13 @@ import androidx.compose.ui.text.font.FontWeight
 import com.commandiron.sefim.core.LocalSpacing
 
 @Composable
-fun NewSticker(
+fun SoonSticker(
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
     Surface(
         modifier = modifier,
-        color = Color.Red,
+        color = MaterialTheme.colorScheme.tertiary,
         shape = MaterialTheme.shapes.medium,
         shadowElevation = spacing.spaceExtraSmall
     ) {
@@ -28,11 +28,11 @@ fun NewSticker(
         ) {
             Text(
                 modifier = Modifier.padding(horizontal = spacing.spaceSmall),
-                text = "Yeni",
+                text = "Yakında",
                 style = MaterialTheme.typography.labelLarge.copy(
                     fontWeight = FontWeight.Bold
                 ),
-                color = Color.White
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }

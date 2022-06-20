@@ -10,7 +10,18 @@ val Teal200 = Color(0xFF03DAC5)
 val MyBackgroundColor = Color(0xFFFFFFFF)
 val MyOnBackgroundColor = Color(0xFF212121)
 
-val MySurfaceColor = Color(0xFFEDF1E4)
-val MyOnSurfaceColor = Color(0xFF212121)
 
-val MyPrimaryColor = Color(0xFFa5a58d)
+val MyPrimaryColor = Color(0xFF37A296)
+
+val MyPrimaryContainerColor = Color(0xFFCAFDF7)
+val MyOnPrimaryContainerColor = Color(0xFF37A296)
+
+
+val MySecondaryColor = Color(0xFFEDF1E4)
+val MyOnSecondaryColor = Color(0xFF212121)
+
+
+val MyTertiaryColor = Color(0xFFebebeb)
+val MyOnTertiaryColor = Color(0xFF212121)
+
+val MyTertiaryContainerColor = Color(0xFFf5f5f5)

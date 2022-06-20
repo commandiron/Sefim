@@ -8,6 +8,8 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.google.accompanist.systemuicontroller.SystemUiController
 
 val LocalSpacing = compositionLocalOf { Dimensions() }
 
@@ -25,23 +27,20 @@ data class Dimensions(
     val homeScreenPadding: Dp = 24.dp
 )
 
-fun getProvidedValues(
-): Array<ProvidedValue<*>> {
-    return arrayOf(
-        LocalSpacing provides Dimensions()
-    )
+val LocalNavController = compositionLocalOf<NavHostController> {
+    error("No Nav Controller")
+}
+val LocalSystemUiController = compositionLocalOf<SystemUiController> {
+    error("No System Ui Controller")
 }
 
-object NoRippleTheme : RippleTheme {
-    @Composable
-    override fun defaultColor() = Color.Unspecified
-
-    @Composable
-    override fun rippleAlpha(): RippleAlpha =
-        RippleAlpha(
-            draggedAlpha = 0.0f,
-            focusedAlpha = 0.0f,
-            hoveredAlpha = 0.0f,
-            pressedAlpha = 0.0f
-        )
+fun getProvidedValues(
+    navController: NavHostController,
+    systemUiController: SystemUiController,
+): Array<ProvidedValue<*>> {
+    return arrayOf(
+        LocalSpacing provides Dimensions(),
+        LocalNavController provides navController,
+        LocalSystemUiController provides systemUiController
+    )
 }

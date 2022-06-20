@@ -36,7 +36,8 @@ android {
         jvmTarget = "1.8"
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
-            "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi"
+            "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi",
+            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi"
         )
     }
     composeOptions {
@@ -72,8 +73,10 @@ dependencies {
     implementation(Coil.compose)
     implementation(Coil.composeBase)
 
+    implementation(Accompanist.systemUi)
     implementation(Accompanist.pager)
     implementation(Accompanist.indicators)
+    implementation(Accompanist.flowLayout)
 
 //    implementation(DaggerHilt.hiltAndroid)
 //    kapt(DaggerHilt.hiltCompiler)

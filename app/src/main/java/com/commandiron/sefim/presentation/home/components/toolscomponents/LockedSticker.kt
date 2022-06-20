@@ -24,13 +24,13 @@ fun LockedSticker(
         modifier = modifier
             .aspectRatio(1f),
         shape = CircleShape,
-        color = MaterialTheme.colorScheme.surface
+        color = MaterialTheme.colorScheme.tertiary
     ) {
         Icon(
             modifier = Modifier.padding(spacing.spaceExtraSmall),
             imageVector = Icons.Default.Lock,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurface
+            tint = MaterialTheme.colorScheme.primary
         )
     }
 }

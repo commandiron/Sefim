@@ -1,6 +1,6 @@
 package com.commandiron.sefim.presentation.home.components.toolscomponents
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
@@ -23,8 +24,8 @@ import com.commandiron.sefim.ui.theme.SefimTheme
 fun ToolGridItem(
     modifier: Modifier = Modifier,
     tool: ToolPresentation,
-    onIconClick: (ToolPresentation) -> Unit,
-    fontSize: TextUnit = 8.sp,
+    onIconClick: () -> Unit,
+    onIconLongClick: () -> Unit
 ) {
     val spacing = LocalSpacing.current
     Surface(
@@ -32,10 +33,14 @@ fun ToolGridItem(
             .aspectRatio(1f),
         shape = MaterialTheme.shapes.large,
         shadowElevation = spacing.spaceExtraSmall,
-        color = tool.iconBackground ?: MaterialTheme.colorScheme.surface
+        color = tool.iconBackground ?: MaterialTheme.colorScheme.secondary
     ) {
         Box(
-            modifier = Modifier.clickable { onIconClick(tool) },
+            modifier = Modifier
+                .combinedClickable(
+                    onClick = onIconClick,
+                    onLongClick = onIconLongClick
+                ),
         ) {
             Column(
                 modifier = Modifier
@@ -51,7 +56,7 @@ fun ToolGridItem(
                         modifier = Modifier.fillMaxSize(0.8f),
                         painter = painterResource(id = tool.resources),
                         contentDescription = null,
-                        tint = tool.iconTint ?: MaterialTheme.colorScheme.onSurface
+                        tint = tool.iconTint ?: MaterialTheme.colorScheme.onSecondary
                     )
                 }
                 Box(
@@ -63,27 +68,14 @@ fun ToolGridItem(
                     Text(
                         text = tool.title,
                         style = MaterialTheme.typography.labelLarge.copy(
-                            fontSize = fontSize
+                            fontWeight = FontWeight.Bold
                         ),
-                        color = tool.titleColor ?: MaterialTheme.colorScheme.onSurface,
+                        color = tool.titleColor ?: MaterialTheme.colorScheme.onSecondary,
                         textAlign = TextAlign.Center
                     )
                 }
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun PreviewToolGridItem() {
-    SefimTheme() {
-        ToolGridItem(
-            tool = ToolPresentation(
-                title = "Duvar Metraj Hesaplayıcı",
-                resources = R.drawable.tool_wall
-            ),
-            onIconClick = {})
     }
 }
 

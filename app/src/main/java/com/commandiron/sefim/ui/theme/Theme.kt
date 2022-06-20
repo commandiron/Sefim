@@ -11,16 +11,26 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColorScheme(
     primary = MyPrimaryColor,
-    surface = MySurfaceColor,
-    onSurface = MyOnSurfaceColor,
+    primaryContainer = MyPrimaryContainerColor,
+    onPrimaryContainer = MyOnPrimaryContainerColor,
+    secondary = MySecondaryColor,
+    onSecondary =  MyOnSecondaryColor,
+    tertiary = MyTertiaryColor,
+    onTertiary = MyOnTertiaryColor,
+    tertiaryContainer = MyTertiaryContainerColor,
     background = MyBackgroundColor,
     onBackground = MyOnBackgroundColor
 )
 
 private val LightColorPalette = lightColorScheme(
     primary = MyPrimaryColor,
-    surface = MySurfaceColor,
-    onSurface = MyOnSurfaceColor,
+    primaryContainer = MyPrimaryContainerColor,
+    onPrimaryContainer = MyOnPrimaryContainerColor,
+    secondary = MySecondaryColor,
+    onSecondary =  MyOnSecondaryColor,
+    tertiary = MyTertiaryColor,
+    onTertiary = MyOnTertiaryColor,
+    tertiaryContainer = MyTertiaryContainerColor,
     background = MyBackgroundColor,
     onBackground = MyOnBackgroundColor
 )
@@ -38,4 +48,18 @@ fun SefimTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable 
         shapes = Shapes,
         content = content
     )
+}
+
+object NoRippleTheme : RippleTheme {
+    @Composable
+    override fun defaultColor() = Color.Unspecified
+
+    @Composable
+    override fun rippleAlpha(): RippleAlpha =
+        RippleAlpha(
+            draggedAlpha = 0.0f,
+            focusedAlpha = 0.0f,
+            hoveredAlpha = 0.0f,
+            pressedAlpha = 0.0f
+        )
 }

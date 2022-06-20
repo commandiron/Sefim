@@ -1,61 +1,106 @@
 package com.commandiron.sefim.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import com.commandiron.sefim.core.NoRippleTheme
-import com.commandiron.sefim.presentation.home.HomeScreen
-import com.commandiron.sefim.ui.theme.SefimTheme
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import com.commandiron.sefim.core.LocalNavController
+import com.commandiron.sefim.ui.theme.NoRippleTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun BottomNavigation(
-    modifier: Modifier = Modifier,
-    navigationItems: List<NavigationItem>
+    modifier: Modifier = Modifier
 ) {
+    val navController = LocalNavController.current
+    val currentRoute = navController.currentRoute()
+    val navigationItems = listOf(
+        NavigationItem.HomeScreen,
+        NavigationItem.Tools,
+        NavigationItem.MyCalculations,
+        NavigationItem.News
+    )
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+    val bottomNavLineOffsetXAnim = remember { Animatable(0f) }
+    val scope = rememberCoroutineScope()
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
-        NavigationBar(
-            modifier = modifier,
-            containerColor = MaterialTheme.colorScheme.background
+        AnimatedVisibility(
+            visible = navigationItems.map { it.route }.contains(currentRoute),
+            enter = fadeIn(),
+            exit = fadeOut()
         ) {
-            navigationItems.forEach { item ->
-                var isSelected by remember { mutableStateOf(false)}
-                NavigationBarItem(
-                    selected = false,
-                    onClick = {
-                        isSelected = !isSelected
-                    },
-                    icon = {
-                        Icon(
-                            imageVector = if(isSelected) {
-                                item.selectedImageVector
-                            } else item.unSelectedImageVector,
-                            contentDescription = item.title,
-                            tint = if(isSelected) {
-                                MaterialTheme.colorScheme.primary
-                            } else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
+            Box {
+                NavigationBar(
+                    modifier = modifier.height(64.dp),
+                    containerColor = MaterialTheme.colorScheme.background
+                ) {
+                    navigationItems.forEachIndexed { index, item ->
+                        NavigationBarItem(
+                            selected = currentRoute == item.route,
+                            onClick = {
+                                scope.launch {
+                                    bottomNavLineOffsetXAnim.animateTo(
+                                        targetValue = screenWidth.value / navigationItems.size * index,
+                                        animationSpec = tween()
+                                    )
+                                }
+                                navController.navigate(item.route) {
+                                    navController.graph.startDestinationRoute?.let { screen_route ->
+                                        popUpTo(screen_route) {
+                                            saveState = true
+                                        }
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = if(currentRoute == item.route) {
+                                        item.selectedImageVector!!
+                                    } else item.unSelectedImageVector!!,
+                                    contentDescription = null,
+                                    tint = if(currentRoute == item.route) {
+                                        MaterialTheme.colorScheme.primary
+                                    } else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f)
+                                )
+                            },
+                            label = {
+                                Text(
+                                    text = item.title,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    style = MaterialTheme.typography.labelLarge.copy(
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                )
+                            },
+                            alwaysShowLabel = false,
+                            colors = NavigationBarItemDefaults.colors(
+                                indicatorColor = MaterialTheme.colorScheme.background
+                            )
                         )
-                    },
-                    label = {
-                        Text(
-                            text = item.title,
-                            color = MaterialTheme.colorScheme.primary,
-                            style = MaterialTheme.typography.labelLarge
-                        )
-                    },
-                    alwaysShowLabel = isSelected
+                    }
+                }
+                Divider(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .fillMaxWidth(0.25f)
+                        .offset(x = Dp(bottomNavLineOffsetXAnim.value)),
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun PreviewBottomNavigation() {
-    SefimTheme() {
-        BottomNavigation(navigationItems = defaultNavigationItems)
     }
 }

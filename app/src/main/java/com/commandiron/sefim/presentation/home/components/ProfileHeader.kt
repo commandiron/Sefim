@@ -77,7 +77,8 @@ fun ProfileHeader(
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Edit,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
             IconButton(
@@ -85,7 +86,8 @@ fun ProfileHeader(
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Notifications,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
