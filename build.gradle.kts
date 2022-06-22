@@ -5,7 +5,8 @@ buildscript {
     }
     dependencies {
         classpath(Build.androidBuildTools)
-        classpath(Build.kotlinGradlePlugin)
+//        classpath(Build.kotlinGradlePlugin)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.20")
 //        classpath(DaggerHilt.hiltAndroidGradlePlugin)
     }
 }

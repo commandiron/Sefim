@@ -56,10 +56,19 @@ dependencies {
     implementation(Compose.ui)
     implementation(Compose.uiToolingPreview)
     implementation(Compose.runtime)
-    implementation(Compose.navigationCompose)
+    implementation(Compose.navigation)
     implementation(Compose.viewModelCompose)
     implementation(Compose.activityCompose)
 //    implementation(Compose.hiltNavigationCompose)
+
+    implementation(project(Modules.core))
+    implementation(project(Modules.coreUi))
+    implementation(project(Modules.toolsData))
+    implementation(project(Modules.toolsDomain))
+    implementation(project(Modules.toolsPresentation))
+    implementation(project(Modules.newsData))
+    implementation(project(Modules.newsDomain))
+    implementation(project(Modules.newsPresentation))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
@@ -76,7 +85,6 @@ dependencies {
     implementation(Accompanist.systemUi)
     implementation(Accompanist.pager)
     implementation(Accompanist.indicators)
-    implementation(Accompanist.flowLayout)
 
 //    implementation(DaggerHilt.hiltAndroid)
 //    kapt(DaggerHilt.hiltCompiler)

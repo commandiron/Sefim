@@ -5,6 +5,4 @@ object Accompanist {
     const val pager = "com.google.accompanist:accompanist-pager:$accompanistVersion"
     const val indicators =
         "com.google.accompanist:accompanist-pager-indicators:$accompanistVersion"
-    const val flowLayout =
-        "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
 }

@@ -1,4 +1,4 @@
-package com.commandiron.sefim.navigation
+package com.commandiron.core_ui.presentation.bottom_navigation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
@@ -15,16 +15,16 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.commandiron.sefim.core.LocalNavController
-import com.commandiron.sefim.ui.theme.NoRippleTheme
+import com.commandiron.core_ui.theme.NoRippleTheme
+import com.commandiron.sefim.navigation.NavigationItem
 import kotlinx.coroutines.launch
 
 @Composable
 fun BottomNavigation(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    currentRoute: String?,
+    onBottomNavItemClick:(String) -> Unit
 ) {
-    val navController = LocalNavController.current
-    val currentRoute = navController.currentRoute()
     val navigationItems = listOf(
         NavigationItem.HomeScreen,
         NavigationItem.Tools,
@@ -56,15 +56,7 @@ fun BottomNavigation(
                                         animationSpec = tween()
                                     )
                                 }
-                                navController.navigate(item.route) {
-                                    navController.graph.startDestinationRoute?.let { screen_route ->
-                                        popUpTo(screen_route) {
-                                            saveState = true
-                                        }
-                                    }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
+                                onBottomNavItemClick(item.route)
                             },
                             icon = {
                                 Icon(
