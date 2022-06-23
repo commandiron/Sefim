@@ -6,4 +6,4 @@
 
 * Structure - Modularization 🌲
 
-<img src="https://user-images.githubusercontent.com/50905347/174627212-691237a2-88ea-4922-b1e7-95b943099ffe.png" width="250" height="530">
+<img src="https://user-images.githubusercontent.com/50905347/175181842-7ee63190-f8f9-423d-a953-41385f493c5b.png" width="480" height="480">
