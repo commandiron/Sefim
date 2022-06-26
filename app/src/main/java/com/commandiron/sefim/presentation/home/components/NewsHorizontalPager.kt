@@ -11,20 +11,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.news_presentation.model.NewToolsNewsPresentation
-import com.commandiron.news_presentation.model.NewsContentPresentation
-import com.commandiron.news_presentation.model.SectoralNewsPresentation
-import com.commandiron.news_presentation.model.SteelPriceNewsPresentation
-import com.commandiron.sefim.R
+import com.commandiron.news_domain.model.NewToolsNewsPresentation
+import com.commandiron.news_domain.model.NewsContentPresentation
+import com.commandiron.news_domain.model.SectoralNewsPresentation
+import com.commandiron.news_domain.model.SteelPriceNewsPresentation
 import com.google.accompanist.pager.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -90,8 +88,7 @@ fun NewsHorizontalPager(
                             .data(data = "https://www.ie.edu/insights/wp-content/uploads/2020/11/VanSchendel-Construction.jpg")
                             .build()
                     ),
-                    contentDescription = null,
-                    alpha = 0.8f
+                    contentDescription = null
                 )
                 Box(
                     modifier = Modifier
@@ -154,12 +151,23 @@ fun SteelPriceNewsContent(steelPriceNews: SteelPriceNewsPresentation) {
             text = steelPriceNews.title,
             style = MaterialTheme.typography.bodyLarge
         )
-        Text(
-            text = steelPriceNews.q8mmPrice,
-            style = MaterialTheme.typography.displayMedium.copy(
-                fontWeight = FontWeight.Bold
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier.alignBy(LastBaseline),
+                text = "Φ8: ",
+                style = MaterialTheme.typography.bodyLarge
             )
-        )
+            Text(
+                modifier = Modifier.alignBy(LastBaseline),
+                text = steelPriceNews.q8mmPrice,
+                style = MaterialTheme.typography.displayMedium.copy(
+                    fontWeight = FontWeight.Bold
+                )
+            )
+        }
         Text(
             text = "Φ10: " + steelPriceNews.q10mmPrice,
             style = MaterialTheme.typography.bodyLarge

@@ -84,13 +84,22 @@ fun MainContent() {
                     }
                     composable(NavigationItem.HomeScreen.route){
                         HomeScreen(
-                            navigateTo = {
-                                navController.navigate(it)
+                            onIconClick = {
+                                navController.navigate(NavigationItem.Tool.route)
+                                //Navigate to Tool Screen with arguments.
+                            },
+                            onAddClick = {
+                                navController.navigate(NavigationItem.Tools.route)
                             }
                         )
                     }
                     composable(NavigationItem.Tools.route){
-                        ToolsScreen()
+                        ToolsScreen(
+                            onIconClick = {
+                                navController.navigate(NavigationItem.Tool.route)
+                                //Navigate to Tool Screen with arguments.
+                            }
+                        )
                     }
                     composable(NavigationItem.Tool.route){
                         ToolScreen()

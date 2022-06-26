@@ -8,14 +8,12 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.LocalSystemUiController
 import com.commandiron.core_ui.components.carousel.Carousel
@@ -26,19 +24,13 @@ import com.commandiron.tools_presentation.components.tool_items.ToolsVerticalGri
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    navigateTo: (String) -> Unit,
+    onIconClick: (Int) -> Unit,
+    onAddClick: () -> Unit,
 ) {
     val spacing = LocalSpacing.current
     val screenHeightDp = LocalConfiguration.current.screenHeightDp.dp
     val systemUiController = LocalSystemUiController.current
     val state = viewModel.state
-    LaunchedEffect(key1 = true){
-        viewModel.uiEvent.collect{ event ->
-            when(event) {
-                is UiEvent.NavigateTo -> { navigateTo(event.route) }
-            }
-        }
-    }
     systemUiController.setStatusBarColor(
         color = MaterialTheme.colorScheme.primary
     )
@@ -64,7 +56,7 @@ fun HomeScreen(
                 )
         ) {
             ProfileHeader(
-                imageUrl = "",
+                imageUrl = state.profileImageUrl,
                 onEditClick = {},
                 onNotificationClick = {}
             )
@@ -82,9 +74,10 @@ fun HomeScreen(
                 state = lazyGridState,
                 tools = state.favoriteTools,
                 isWobbling = state.isFavoriteIconsWobbling,
-                onIconClick = { viewModel.onEvent(HomeUserEvent.ToolClick) },
-                onAddClick = { viewModel.onEvent(HomeUserEvent.AddToolClick) },
+                onIconClick = { onIconClick(it.id) },
+                onAddClick = { onAddClick() },
                 onIconLongClick = { viewModel.onEvent(HomeUserEvent.ToolLongClick) },
+                onFavorite = {},
                 onUnFavorite = { viewModel.onEvent(HomeUserEvent.UnFavoriteClick) }
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
@@ -93,12 +86,14 @@ fun HomeScreen(
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
-            NewsHorizontalPager(
-                modifier = Modifier
-                    .heightIn(max = screenHeightDp / 4f),
-                newsContent = state.newsContent,
-                onClick = {}
-            )
+            state.newsContent?.let {
+                NewsHorizontalPager(
+                    modifier = Modifier
+                        .heightIn(max = screenHeightDp / 4f),
+                    newsContent = it,
+                    onClick = {}
+                )
+            }
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
             Text(
                 text = "Önerilen Araçlar",
@@ -110,7 +105,7 @@ fun HomeScreen(
                     .heightIn(max = screenHeightDp / 7f),
                 state = lazyListState,
                 tools = state.recommendedTools,
-                onIconClick = { viewModel.onEvent(HomeUserEvent.ToolClick) },
+                onIconClick = { onIconClick(it.id) },
             )
             Carousel(
                 state = lazyListState,

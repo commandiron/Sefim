@@ -1,14 +1,12 @@
 package com.commandiron.sefim.presentation.home
 
-import com.commandiron.news_presentation.model.NewsContentPresentation
-import com.commandiron.news_presentation.model.defaultNewsContent
-import com.commandiron.tools_presentation.model.ToolPresentation
-import com.commandiron.tools_presentation.model.defaultFavoriteTools
-import com.commandiron.tools_presentation.model.defaultTools
+import com.commandiron.news_domain.model.NewsContentPresentation
+import com.commandiron.tools_domain.model.ToolPresentation
 
 data class HomeState(
-    val favoriteTools: List<ToolPresentation> = defaultFavoriteTools,
-    val recommendedTools: List<ToolPresentation> = defaultTools,
-    val newsContent: NewsContentPresentation = defaultNewsContent,
+    val profileImageUrl: String? = null,
+    val favoriteTools: List<ToolPresentation>? = null,
+    val recommendedTools: List<ToolPresentation>? = null,
+    val newsContent: NewsContentPresentation? = null,
     val isFavoriteIconsWobbling: Boolean = false
 )

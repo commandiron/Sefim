@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.tools_presentation.model.ToolPresentation
+import com.commandiron.tools_domain.model.ToolPresentation
 import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
 
 @Composable
@@ -36,6 +36,7 @@ fun ToolsRow(
                     textStyle = textStyle,
                     onIconClick = { onIconClick(tool) },
                     onIconLongClick = {},
+                    onFavorite = {},
                     onUnFavorite = {}
                 )
             }

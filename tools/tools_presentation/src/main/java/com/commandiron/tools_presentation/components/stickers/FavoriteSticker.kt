@@ -8,13 +8,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.R
 
 @Composable
-fun CamSticker(
-    modifier: Modifier = Modifier
+fun FavoriteSticker(
+    modifier: Modifier = Modifier,
+    isFavorite: Boolean = false
 ) {
     val spacing = LocalSpacing.current
     Surface(
@@ -25,9 +27,16 @@ fun CamSticker(
         shadowElevation = spacing.spaceSmall
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_augmented_reality),
+            painter = painterResource(
+                id = if(isFavorite) {
+                    R.drawable.favorite_filled
+                } else {
+                    R.drawable.favorite_outlined
+                }
+            ),
             contentDescription = null,
-            modifier = Modifier.padding(spacing.spaceExtraSmall)
+            modifier = Modifier.padding(spacing.spaceExtraSmall),
+            tint = Color.Unspecified
         )
     }
 }

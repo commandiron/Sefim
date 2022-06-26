@@ -5,6 +5,7 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -14,8 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.TextStyle
-import com.commandiron.tools_presentation.model.ToolPresentation
-import com.commandiron.tools_presentation.model.ToolTag
+import com.commandiron.tools_domain.model.ToolPresentation
+import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.tools_presentation.components.stickers.*
 
 @Composable
@@ -23,8 +24,11 @@ fun ToolItemWithSticker(
     tool: ToolPresentation,
     textStyle: TextStyle,
     isWobbling: Boolean = false,
+    showFavoriteIcon: Boolean = false,
+    isFavorite: Boolean = false,
     onIconClick: () -> Unit,
     onIconLongClick: () -> Unit,
+    onFavorite: () -> Unit,
     onUnFavorite: () -> Unit,
 ) {
     val iconRotateAnim = remember { Animatable(0f) }
@@ -45,12 +49,14 @@ fun ToolItemWithSticker(
     Box(
         modifier = Modifier
             .rotate(iconRotateAnim.value)
+            .combinedClickable(
+                onClick = onIconClick,
+                onLongClick = onIconLongClick
+            ),
     ) {
         ToolItem(
             tool = tool,
-            textStyle = textStyle,
-            onIconClick = onIconClick,
-            onIconLongClick = onIconLongClick
+            textStyle = textStyle
         )
         if(isWobbling) {
             UnFavoriteSticker(
@@ -60,30 +66,41 @@ fun ToolItemWithSticker(
                     .clickable { onUnFavorite() }
             )
         }else{
-            if(tool.toolTags.contains(ToolTag.NEW)){
-                NewSticker(
-                    modifier = Modifier
-                        .align(Alignment.TopStart)
-                )
+            tool.toolTags?.let {
+                if(it.contains(ToolTag.NEW)){
+                    NewSticker(
+                        modifier = Modifier
+                            .align(Alignment.TopStart)
+                    )
+                }
+                if(it.contains(ToolTag.LOCKED)){
+                    LockedSticker(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .fillMaxSize(0.35f)
+                    )
+                }
+                if (it.contains(ToolTag.AR)) {
+                    ArSticker(
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .fillMaxSize(0.35f)
+                    )
+                }
+                if(it.contains(ToolTag.SOON)){
+                    SoonSticker(
+                        modifier = Modifier
+                            .align(Alignment.CenterStart)
+                    )
+                }
             }
-            if(tool.toolTags.contains(ToolTag.LOCKED)){
-                LockedSticker(
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .fillMaxSize(0.35f)
-                )
-            }
-            if (tool.toolTags.contains(ToolTag.CAM)) {
-                CamSticker(
+            if(showFavoriteIcon){
+                FavoriteSticker(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .fillMaxSize(0.35f)
-                )
-            }
-            if(tool.toolTags.contains(ToolTag.SOON)){
-                SoonSticker(
-                    modifier = Modifier
-                        .align(Alignment.CenterStart)
+                        .fillMaxSize(0.25f)
+                        .clickable { onFavorite() },
+                    isFavorite = isFavorite
                 )
             }
         }

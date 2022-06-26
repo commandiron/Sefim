@@ -5,14 +5,18 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.tools_presentation.components.SearchTextField
 import com.commandiron.tools_presentation.components.tool_items.ToolsVerticalGrid
-import com.commandiron.tools_presentation.model.defaultTools
 
 @Composable
-fun ToolsScreen() {
+fun ToolsScreen(
+    viewModel: ToolsViewModel = hiltViewModel(),
+    onIconClick: (Int) -> Unit
+) {
     val spacing = LocalSpacing.current
+    val state = viewModel.state
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,11 +38,13 @@ fun ToolsScreen() {
         ToolsVerticalGrid(
             state = rememberLazyGridState(),
             textStyle = MaterialTheme.typography.bodySmall,
-            tools = defaultTools,
+            tools = state.allTools,
+            showFavoriteIcon = true,
             columnCount = 3,
             addToolIconVisible = false,
-            onIconClick = {},
+            onIconClick = { onIconClick(it.id) },
             onIconLongClick = {},
+            onFavorite = { viewModel.onEvent(ToolsUserEvent.Favorite(it))},
             onUnFavorite = {},
             onAddClick = {}
         )

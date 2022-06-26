@@ -54,6 +54,9 @@ dependencies {
     implementation Compose.hiltNavigationCompose
     implementation Google.material3
 
+    kapt DaggerHilt.hiltCompiler
+    implementation DaggerHilt.hiltAndroid
+
     testImplementation Testing.junit
     androidTestImplementation Testing.junitAndroidExt
     androidTestImplementation Testing.composeUiTestJunit4

@@ -14,7 +14,7 @@ import com.commandiron.sefim.R
 @Composable
 fun ProfileImage(
     modifier: Modifier = Modifier,
-    imageUrl: String = "",
+    imageUrl: String?,
 ) {
     Image(
         painter = rememberAsyncImagePainter(

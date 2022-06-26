@@ -19,7 +19,7 @@ import com.commandiron.core_ui.LocalSpacing
 fun ProfileHeader(
     modifier: Modifier = Modifier,
     height: Dp = 48.dp,
-    imageUrl: String = "",
+    imageUrl: String?,
     onEditClick: () -> Unit,
     onNotificationClick: () -> Unit
 ) {

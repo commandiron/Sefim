@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.sefim.presentation.home.components.GridItemAdd
-import com.commandiron.tools_presentation.model.ToolPresentation
+import com.commandiron.tools_domain.model.ToolPresentation
 
 @Composable
 fun ToolsVerticalGrid(
@@ -17,11 +17,13 @@ fun ToolsVerticalGrid(
     state: LazyGridState,
     tools: List<ToolPresentation>? = null,
     isWobbling: Boolean = false,
+    showFavoriteIcon: Boolean = false,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
     columnCount: Int = 4,
     addToolIconVisible: Boolean = true,
     onIconClick: (ToolPresentation) -> Unit,
     onIconLongClick: () -> Unit,
+    onFavorite: (ToolPresentation) -> Unit,
     onUnFavorite: (ToolPresentation) -> Unit,
     onAddClick: () -> Unit
 ) {
@@ -44,8 +46,11 @@ fun ToolsVerticalGrid(
                         tool = tool,
                         textStyle = textStyle,
                         isWobbling = isWobbling,
+                        showFavoriteIcon = showFavoriteIcon,
+                        isFavorite = tool.isFavorite,
                         onIconClick = { onIconClick(tool) },
                         onIconLongClick = onIconLongClick,
+                        onFavorite = { onFavorite(tool) },
                         onUnFavorite = { onUnFavorite(tool) }
                     )
                 }
