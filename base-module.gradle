@@ -15,9 +15,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
-    buildFeatures {
-        compose true
-    }
     buildTypes {
         release {
             minifyEnabled false
@@ -36,6 +33,9 @@ android {
 }
 
 dependencies {
+    kapt DaggerHilt.hiltCompiler
+    implementation DaggerHilt.hiltAndroid
+
     testImplementation Testing.junit
     androidTestImplementation Testing.junitAndroidExt
     androidTestImplementation Testing.composeUiTestJunit4

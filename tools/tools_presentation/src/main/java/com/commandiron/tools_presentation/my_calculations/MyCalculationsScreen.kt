@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation
+package com.commandiron.tools_presentation.my_calculations
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

@@ -51,5 +51,12 @@ dependencies {
     implementation Compose.navigation
     implementation Compose.viewModelCompose
     implementation Compose.activityCompose
+    implementation Compose.hiltNavigationCompose
     implementation Google.material3
+
+    testImplementation Testing.junit
+    androidTestImplementation Testing.junitAndroidExt
+    androidTestImplementation Testing.composeUiTestJunit4
+    debugImplementation Testing.composeUiTooling
+    debugImplementation Testing.composeUiTestManifest
 }

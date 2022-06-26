@@ -24,7 +24,7 @@ fun GridItemAdd(
             .aspectRatio(1f),
         shape = MaterialTheme.shapes.large,
         shadowElevation = spacing.spaceExtraSmall,
-        color = MaterialTheme.colorScheme.tertiaryContainer
+        color = MaterialTheme.colorScheme.primaryContainer
     ) {
         Box(
             modifier = Modifier.clickable { onAddClick() },

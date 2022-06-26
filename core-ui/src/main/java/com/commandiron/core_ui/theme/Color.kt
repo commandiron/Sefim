@@ -5,17 +5,21 @@ import androidx.compose.ui.graphics.Color
 val MyBackgroundColor = Color(0xFFF6F6F6)
 val MyOnBackgroundColor = Color(0xFF212121)
 
-
 val MyPrimaryColor = Color(0xFF37A296)
 val MyOnPrimaryColor = Color(0xFFFFFFFF)
 
-val MyPrimaryContainerColor = Color(0xFFCAFDF7)
-val MyOnPrimaryContainerColor = Color(0xFF37A296)
-
-val MySecondaryColor = Color(0xFFEDF1E4)
-val MyOnSecondaryColor = Color(0xFF212121)
+val MyPrimaryContainerColor = Color(0xFFF0F3EA)
+val MyOnPrimaryContainerColor = Color(0xFF212121)
 
 val MyTertiaryColor = Color(0xFFebebeb)
 val MyOnTertiaryColor = Color(0xFF212121)
 
-val MyTertiaryContainerColor = Color(0xFFFFFFFF)
+val color1 = Color(0xFFffadad)
+val color2 = Color(0xFFa0c4ff)
+val color3 =  Color(0xFFffd6a5)
+val color4 = Color(0xFFfdffb6)
+val color5 = Color(0xFFcaffbf)
+val color6 = Color(0xFF9bf6ff)
+val color7 = Color(0xFFa0c4ff)
+val color8 = Color(0xFFbdb2ff)
+val color9 = Color(0xFFffc6ff)

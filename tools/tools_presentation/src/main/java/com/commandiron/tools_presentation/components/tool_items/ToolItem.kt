@@ -1,5 +1,6 @@
 package com.commandiron.tools_presentation.components.tool_items
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
@@ -9,12 +10,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.theme.MyPrimaryColor
+import com.commandiron.core_ui.theme.MyPrimaryContainerColor
 import com.commandiron.tools_presentation.model.ToolPresentation
 
 @Composable
@@ -31,7 +36,7 @@ fun ToolItem(
             .aspectRatio(1f),
         shape = MaterialTheme.shapes.large,
         shadowElevation = spacing.spaceSmall,
-        color = tool.iconBackground ?: MaterialTheme.colorScheme.secondary
+        color = tool.iconBackground ?: MaterialTheme.colorScheme.primaryContainer
     ) {
         Box(
             modifier = Modifier
@@ -55,7 +60,7 @@ fun ToolItem(
                         modifier = Modifier.fillMaxSize(0.8f),
                         painter = painterResource(id = tool.resources),
                         contentDescription = null,
-                        tint = tool.iconTint ?: MaterialTheme.colorScheme.onSecondary
+                        tint = tool.iconTint ?: Color.Unspecified
                     )
                 }
                 Text(
@@ -63,7 +68,7 @@ fun ToolItem(
                     modifier = Modifier
                         .fillMaxSize()
                         .weight(2f),
-                    color = tool.titleColor ?: MaterialTheme.colorScheme.onSecondary,
+                    color = tool.titleColor ?: MaterialTheme.colorScheme.onPrimaryContainer,
                     style = textStyle.copy(fontWeight = FontWeight.Bold),
                     overflow = TextOverflow.Ellipsis,
                     softWrap = true,

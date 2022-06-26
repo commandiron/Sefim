@@ -27,8 +27,7 @@ fun LockedSticker(
         Icon(
             modifier = Modifier.padding(spacing.spaceExtraSmall),
             imageVector = Icons.Default.Lock,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary
+            contentDescription = null
         )
     }
 }

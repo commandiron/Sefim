@@ -37,7 +37,7 @@ fun SearchTextField(
                 color = MaterialTheme.colorScheme.background
             )
             .background(
-                MaterialTheme.colorScheme.tertiaryContainer,
+                MaterialTheme.colorScheme.primaryContainer,
                 RoundedCornerShape(percent = 50)
             ),
         value = text,

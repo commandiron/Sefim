@@ -30,8 +30,7 @@ fun SoonSticker(
                 text = "Yakında",
                 style = MaterialTheme.typography.labelLarge.copy(
                     fontWeight = FontWeight.Bold
-                ),
-                color = MaterialTheme.colorScheme.primary
+                )
             )
         }
     }

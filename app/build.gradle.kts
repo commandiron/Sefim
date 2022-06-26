@@ -1,8 +1,8 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-//    id("dagger.hilt.android.plugin")
-//    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -59,7 +59,7 @@ dependencies {
     implementation(Compose.navigation)
     implementation(Compose.viewModelCompose)
     implementation(Compose.activityCompose)
-//    implementation(Compose.hiltNavigationCompose)
+    implementation(Compose.hiltNavigationCompose)
 
     implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
@@ -86,8 +86,8 @@ dependencies {
     implementation(Accompanist.pager)
     implementation(Accompanist.indicators)
 
-//    implementation(DaggerHilt.hiltAndroid)
-//    kapt(DaggerHilt.hiltCompiler)
+    implementation(DaggerHilt.hiltAndroid)
+    kapt(DaggerHilt.hiltCompiler)
 
     testImplementation(Testing.junit)
 

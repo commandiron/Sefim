@@ -2,30 +2,38 @@ package com.commandiron.sefim.presentation.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.commandiron.news_presentation.model.NewsPresentation
 import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.news_presentation.model.NewToolsNewsPresentation
+import com.commandiron.news_presentation.model.NewsContentPresentation
+import com.commandiron.news_presentation.model.SectoralNewsPresentation
+import com.commandiron.news_presentation.model.SteelPriceNewsPresentation
+import com.commandiron.sefim.R
 import com.google.accompanist.pager.*
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.absoluteValue
 
 @Composable
 fun NewsHorizontalPager(
-    news: List<NewsPresentation>,
     modifier: Modifier = Modifier,
+    newsContent: NewsContentPresentation,
     onClick: () -> Unit,
 ) {
     val spacing = LocalSpacing.current
@@ -35,14 +43,20 @@ fun NewsHorizontalPager(
         shape = MaterialTheme.shapes.extraLarge,
         color = MaterialTheme.colorScheme.background
     ) {
+        val steelPriceNewsListSize = newsContent.steelPriceNewsList?.size ?: 0
+        val newToolNewsListSize = newsContent.newToolNewsList?.size ?: 0
+        val sectoralNewsListSize = newsContent.sectoralNewsList?.size ?: 0
+        val pagerCount = steelPriceNewsListSize + newToolNewsListSize + sectoralNewsListSize
         HorizontalPager(
             state = pagerState,
-            count = news.size
+            count = pagerCount,
+            contentPadding = PaddingValues(vertical = spacing.spaceSmall)
         ) { page ->
             Surface(
                 modifier = Modifier
+                    .aspectRatio(1.5f)
                     .fillMaxHeight()
-                    .fillMaxWidth(0.75f)
+                    .fillMaxWidth(0.85f)
                     .graphicsLayer {
                         val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
 
@@ -66,90 +80,55 @@ fun NewsHorizontalPager(
                     .clickable { onClick() }
                 ,
                 shape = MaterialTheme.shapes.large,
-                color = MaterialTheme.colorScheme.tertiaryContainer
+                color = MaterialTheme.colorScheme.primaryContainer,
+                shadowElevation = spacing.spaceSmall
             ) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                Image(
+                    painter = rememberAsyncImagePainter(
+                        ImageRequest
+                            .Builder(LocalContext.current)
+                            .data(data = "https://www.ie.edu/insights/wp-content/uploads/2020/11/VanSchendel-Construction.jpg")
+                            .build()
+                    ),
+                    contentDescription = null,
+                    alpha = 0.8f
+                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(0.6f)
-                            .background(MaterialTheme.colorScheme.primary ),
-                        painter = rememberAsyncImagePainter(
-                            ImageRequest
-                                .Builder(LocalContext.current)
-                                .data(data = news[page].backgroundImageUrl)
-                                .build()
-                        ),
-                        contentDescription = null,
-                        contentScale = ContentScale.FillBounds
-                    )
-
+                    when {
+                        page < steelPriceNewsListSize -> {
+                            SteelPriceNewsContent(
+                                newsContent.steelPriceNewsList!![page]
+                            )
+                        }
+                        page < steelPriceNewsListSize + newToolNewsListSize -> {
+                            NewToolNewsContent(
+                                newsContent.newToolNewsList!![page - steelPriceNewsListSize]
+                            )
+                        }
+                        page < steelPriceNewsListSize + newToolNewsListSize + sectoralNewsListSize -> {
+                            SectoralNewsContent(
+                                newsContent.sectoralNewsList!![
+                                        page - steelPriceNewsListSize - newToolNewsListSize
+                                ]
+                            )
+                        }
+                    }
                 }
-
             }
-
-//            news[page].steelPriceContentPresentation?.let {
-//                Surface(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .padding(spacing.spaceLarge),
-//                    shape = MaterialTheme.shapes.large,
-//                    color = MaterialTheme.colorScheme.primaryContainer.copy(0.9f)
-//                ) {
-//                    Column(
-//                        horizontalAlignment = Alignment.CenterHorizontally,
-//                        verticalArrangement = Arrangement.Center
-//                    ) {
-//                        Text(text = it.date + " " + it.title)
-//                        Row(
-//                            horizontalArrangement = Arrangement.Center
-//                        ) {
-//                            Spacer(modifier = Modifier.weight(1f))
-//                            Text(
-//                                modifier = Modifier
-//                                    .weight(2f)
-//                                    .alignBy(LastBaseline),
-//                                text = it.Q8Price,
-//                                style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
-//                                textAlign = TextAlign.Center
-//                            )
-//                            Text(
-//                                modifier = Modifier
-//                                    .weight(1f)
-//                                    .alignBy(LastBaseline),
-//                                text = "(Φ8)",
-//                                style = MaterialTheme.typography.bodySmall,
-//                                textAlign = TextAlign.Start
-//                            )
-//                        }
-//                        Text(
-//                            text = "Φ10 Fiyat: ${it.Q10Price}",
-//                            style = MaterialTheme.typography.bodySmall
-//                        )
-//                        Text(
-//                            text = "Φ12-32 Fiyat: ${it.Q1232Price}",
-//                            style = MaterialTheme.typography.bodySmall
-//                        )
-//                        Text(
-//                            text = "(KDV Dahil, Nakliye Hariç)",
-//                            style = MaterialTheme.typography.bodySmall
-//                        )
-//                    }
-//                }
-//            }
         }
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = spacing.spaceSmall),
+                .padding(bottom = spacing.spaceMedium),
             contentAlignment = Alignment.BottomCenter
         ) {
             HorizontalPagerIndicator(
                 pagerState = pagerState,
-                inactiveColor = MaterialTheme.colorScheme.primaryContainer,
+                inactiveColor = MaterialTheme.colorScheme.primary.copy(0.2f),
                 activeColor = MaterialTheme.colorScheme.primary,
                 indicatorHeight = 1.dp,
                 indicatorWidth = 16.dp,
@@ -157,4 +136,58 @@ fun NewsHorizontalPager(
             )
         }
     }
+}
+
+@Composable
+fun SteelPriceNewsContent(steelPriceNews: SteelPriceNewsPresentation) {
+    val spacing = LocalSpacing.current
+    Column(
+        modifier = Modifier
+            .background(
+                color = MaterialTheme.colorScheme.primaryContainer.copy(0.8f),
+                shape = MaterialTheme.shapes.small
+            )
+            .padding(spacing.spaceSmall),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = steelPriceNews.title,
+            style = MaterialTheme.typography.bodyLarge
+        )
+        Text(
+            text = steelPriceNews.q8mmPrice,
+            style = MaterialTheme.typography.displayMedium.copy(
+                fontWeight = FontWeight.Bold
+            )
+        )
+        Text(
+            text = "Φ10: " + steelPriceNews.q10mmPrice,
+            style = MaterialTheme.typography.bodyLarge
+        )
+        Text(
+            text = "Φ12-32: " + steelPriceNews.q1232mmPrice,
+            style = MaterialTheme.typography.bodyLarge
+        )
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(spacing.spaceSmall)
+        ,
+        contentAlignment = Alignment.TopEnd
+    ) {
+        Text(
+            text = SimpleDateFormat("dd.MM.yyyy EEEE", Locale.getDefault()).format(Date()),
+            style = MaterialTheme.typography.bodySmall,
+            color = LocalContentColor.current.copy(0.5f)
+        )
+    }
+}
+@Composable
+fun NewToolNewsContent(newToolsNews: NewToolsNewsPresentation) {
+    Text(text = newToolsNews.title)
+}
+@Composable
+fun SectoralNewsContent(sectoralNews: SectoralNewsPresentation) {
+    Text(text = sectoralNews.title)
 }

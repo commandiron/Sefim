@@ -10,117 +10,93 @@ data class ToolPresentation(
     val iconBackground: Color? = null,
     val iconTint: Color? = null,
     val titleColor: Color? = null,
-    val toolTags: List<ToolTag> = listOf(),
-    val wobblingEffectEnabled: Boolean = false
+    val toolTags: List<ToolTag> = listOf()
 )
 
 val defaultTools = listOf(
     ToolPresentation(
+        title = "Hava Durumu",
+        resources = R.drawable.cloudy,
+    ),
+    ToolPresentation(
         title = "Duvar Metraj Hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFffadad),
+        resources = R.drawable.brick_wall,
         toolTags = listOf(ToolTag.NEW)
     ),
     ToolPresentation(
         title = "Gazbeton Palet Hesaplayıcı",
-        resources = R.drawable.gazbeton_palet_hesaplayici,
-        iconBackground = Color(0xFFffd6a5),
+        resources = R.drawable.pallet,
         toolTags = listOf(ToolTag.NEW, ToolTag.LOCKED)
     ),
     ToolPresentation(
         title = "İnşaat Demiri Ağırlık Hesaplayıcı",
-        resources = R.drawable.insaat_demir_agirlik_hesapcayici,
-        iconBackground = Color(0xFFfdffb6),
+        resources = R.drawable.iron_bar,
         toolTags = listOf(ToolTag.NEW)
     ),
     ToolPresentation(
         title = "Kaba İnşaat Maliyet Hesaplayıcı",
-        resources = R.drawable.kaba_insaat_maliyet_hesaplayici,
-        iconBackground = Color(0xFFcaffbf),
+        resources = R.drawable.construction,
         toolTags = listOf(ToolTag.SOON)
     ),
     ToolPresentation(
         title = "Kamera ile uzunluk ölçümü",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFF9bf6ff),
-        toolTags = listOf(ToolTag.CAM)
+        resources = R.drawable.tape_measure,
+        toolTags = listOf(ToolTag.CAM, ToolTag.SOON)
     ),
     ToolPresentation(
-        title = "Test Tool hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFa0c4ff)
+        title = "Tool For View",
+        resources = R.drawable.construction,
     ),
     ToolPresentation(
-        title = "Test Tool hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFbdb2ff)
+        title = "Tool For View",
+        resources = R.drawable.construction,
     ),
     ToolPresentation(
-        title = "Test Tool hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFffc6ff)
+        title = "Tool For View",
+        resources = R.drawable.construction,
     ),
     ToolPresentation(
-        title = "Test Tool hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFa0c4ff)
+        title = "Tool For View",
+        resources = R.drawable.construction,
     ),
     ToolPresentation(
-        title = "Test Tool hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFbdb2ff)
+        title = "Tool For View",
+        resources = R.drawable.construction,
     ),
     ToolPresentation(
-        title = "Test Tool hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFffc6ff)
+        title = "Tool For View",
+        resources = R.drawable.construction,
     ),
-    ToolPresentation(
-        title = "Test Tool hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFa0c4ff)
-    ),
-    ToolPresentation(
-        title = "Test Tool hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFbdb2ff)
-    ),
-    ToolPresentation(
-        title = "Test Tool hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFffc6ff)
-    )
 )
 
-val defaultFavorites = listOf(
+val defaultFavoriteTools = listOf(
+    ToolPresentation(
+        title = "Hava Durumu",
+        resources = R.drawable.cloudy,
+    ),
     ToolPresentation(
         title = "Duvar Metraj Hesaplayıcı",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFFffadad),
+        resources = R.drawable.brick_wall,
         toolTags = listOf(ToolTag.NEW)
     ),
     ToolPresentation(
         title = "Gazbeton Palet Hesaplayıcı",
-        resources = R.drawable.gazbeton_palet_hesaplayici,
-        iconBackground = Color(0xFFffd6a5),
+        resources = R.drawable.pallet,
         toolTags = listOf(ToolTag.NEW)
     ),
     ToolPresentation(
         title = "İnşaat Demiri Ağırlık Hesaplayıcı",
-        resources = R.drawable.insaat_demir_agirlik_hesapcayici,
-        iconBackground = Color(0xFFfdffb6),
+        resources = R.drawable.iron_bar,
         toolTags = listOf(ToolTag.NEW)
     ),
     ToolPresentation(
         title = "Kaba İnşaat Maliyet Hesaplayıcı",
-        resources = R.drawable.kaba_insaat_maliyet_hesaplayici,
-        iconBackground = Color(0xFFcaffbf),
+        resources = R.drawable.construction,
         toolTags = listOf(ToolTag.SOON)
     ),
     ToolPresentation(
         title = "Kamera ile uzunluk ölçümü",
-        resources = R.drawable.duvar_metraj_hesaplayici,
-        iconBackground = Color(0xFF9bf6ff),
-        toolTags = listOf(ToolTag.CAM)
+        resources = R.drawable.tape_measure,
+        toolTags = listOf(ToolTag.CAM, ToolTag.SOON)
     ),
 )

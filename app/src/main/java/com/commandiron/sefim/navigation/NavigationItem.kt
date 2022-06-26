@@ -27,6 +27,10 @@ sealed class NavigationItem(
         selectedImageVector = Icons.Default.Calculate,
         unSelectedImageVector = Icons.Outlined.Calculate
     )
+    object Tool : NavigationItem(
+        title = "Araç",
+        route = "tool"
+    )
     object MyCalculations : NavigationItem(
         title = "Hesaplamalarım",
         route = "myCalculations",

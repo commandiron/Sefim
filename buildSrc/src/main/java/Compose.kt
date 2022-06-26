@@ -1,5 +1,5 @@
 object Compose {
-    const val composeVersion = "1.2.0-alpha08"
+    const val composeVersion = "1.1.1"
 
     const val compiler = "androidx.compose.compiler:compiler:$composeVersion"
     const val ui = "androidx.compose.ui:ui:$composeVersion"
@@ -15,6 +15,6 @@ object Compose {
     private const val activityComposeVersion = "1.3.1"
     const val activityCompose = "androidx.activity:activity-compose:$activityComposeVersion"
 
-//    private const val hiltNavigationComposeVersion = "1.0.0-beta01"
-//    const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion"
+    private const val hiltNavigationComposeVersion = "1.0.0-beta01"
+    const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion"
 }

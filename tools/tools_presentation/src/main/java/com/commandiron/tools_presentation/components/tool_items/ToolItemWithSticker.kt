@@ -7,7 +7,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -23,14 +22,15 @@ import com.commandiron.tools_presentation.components.stickers.*
 fun ToolItemWithSticker(
     tool: ToolPresentation,
     textStyle: TextStyle,
+    isWobbling: Boolean = false,
     onIconClick: () -> Unit,
     onIconLongClick: () -> Unit,
     onUnFavorite: () -> Unit,
 ) {
     val iconRotateAnim = remember { Animatable(0f) }
-    LaunchedEffect(key1 = tool.wobblingEffectEnabled){
-        if(tool.wobblingEffectEnabled){
-            iconRotateAnim.animateTo(-5f)
+    LaunchedEffect(key1 = isWobbling){
+        if(isWobbling){
+            iconRotateAnim.animateTo(-5f, animationSpec = tween(180))
             iconRotateAnim.animateTo(
                 targetValue = 5f,
                 animationSpec = infiniteRepeatable(
@@ -38,6 +38,8 @@ fun ToolItemWithSticker(
                     RepeatMode.Reverse
                 )
             )
+        }else{
+            iconRotateAnim.animateTo(0f, animationSpec = tween(180))
         }
     }
     Box(
@@ -50,41 +52,40 @@ fun ToolItemWithSticker(
             onIconClick = onIconClick,
             onIconLongClick = onIconLongClick
         )
-        if(tool.toolTags.contains(ToolTag.NEW)){
-            NewSticker(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-            )
-        }
-        if(tool.toolTags.contains(ToolTag.LOCKED)){
-            LockedSticker(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .fillMaxSize(0.35f)
-                    .clickable { onIconClick() }
-            )
-        }
-        if (tool.toolTags.contains(ToolTag.CAM)) {
-            CamSticker(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .fillMaxSize(0.35f)
-            )
-        }
-        if(tool.toolTags.contains(ToolTag.SOON)){
-            SoonSticker(
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-            )
-        }
-        if (tool.wobblingEffectEnabled) {
+        if(isWobbling) {
             UnFavoriteSticker(
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .fillMaxSize(0.35f)
-                    .clickable{ onUnFavorite() }
+                    .clickable { onUnFavorite() }
             )
+        }else{
+            if(tool.toolTags.contains(ToolTag.NEW)){
+                NewSticker(
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                )
+            }
+            if(tool.toolTags.contains(ToolTag.LOCKED)){
+                LockedSticker(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .fillMaxSize(0.35f)
+                )
+            }
+            if (tool.toolTags.contains(ToolTag.CAM)) {
+                CamSticker(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .fillMaxSize(0.35f)
+                )
+            }
+            if(tool.toolTags.contains(ToolTag.SOON)){
+                SoonSticker(
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                )
+            }
         }
-
     }
 }

@@ -16,6 +16,7 @@ fun ToolsVerticalGrid(
     modifier: Modifier = Modifier,
     state: LazyGridState,
     tools: List<ToolPresentation>? = null,
+    isWobbling: Boolean = false,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
     columnCount: Int = 4,
     addToolIconVisible: Boolean = true,
@@ -42,6 +43,7 @@ fun ToolsVerticalGrid(
                     ToolItemWithSticker(
                         tool = tool,
                         textStyle = textStyle,
+                        isWobbling = isWobbling,
                         onIconClick = { onIconClick(tool) },
                         onIconLongClick = onIconLongClick,
                         onUnFavorite = { onUnFavorite(tool) }

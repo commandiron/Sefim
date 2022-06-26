@@ -27,8 +27,7 @@ fun CamSticker(
         Icon(
             painter = painterResource(id = R.drawable.ic_augmented_reality),
             contentDescription = null,
-            modifier = Modifier.padding(spacing.spaceExtraSmall),
-            tint = MaterialTheme.colorScheme.primary
+            modifier = Modifier.padding(spacing.spaceExtraSmall)
         )
     }
 }
