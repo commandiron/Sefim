@@ -18,3 +18,33 @@ Sefim is a native android tools app for construction site supervisors written in
    * Database operations - CRUD
    * Various animations
    * Language - Turkish
+* Tech-stack ⚛️
+    * [Kotlin](https://kotlinlang.org/) + [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform background operation
+    * [Jetpack](https://developer.android.com/jetpack)
+        * [Compose](https://developer.android.com/jetpack/compose) - toolkit for building native UI
+        * [Navigation](https://developer.android.com/topic/libraries/architecture/navigation/) - deal with whole in-app navigation      
+        * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way
+    * [Accompanist](https://github.com/google/accompanist)
+        * systemUi
+        * pager
+        * permissions
+        * navigation
+        * placeholder
+        * swipe refresh
+    * [Coil](https://coil-kt.github.io/coil/) - image loading library 
+    * [Hilt](https://dagger.dev/hilt/) - DI
+    * [Google Firebase](https://firebase.google.com)
+        * auth
+        * database
+        * storage
+    * [Google Play Services](https://developers.google.com/android)
+        * auth
+        * maps
+        * location
+* Architecture 🏗️
+    * Model-View-ViewModel
+    * [Android Architecture components](https://developer.android.com/topic/libraries/architecture) ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
+ 
+ * Todo ✔️
+   * Language - English ❌
+   * Dark Theme ❌
