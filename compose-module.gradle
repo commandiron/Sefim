@@ -38,7 +38,8 @@ android {
         freeCompilerArgs += [
                 "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
                 "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi",
-                "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi"
+                "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+                "-opt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi"
         ]
     }
 }

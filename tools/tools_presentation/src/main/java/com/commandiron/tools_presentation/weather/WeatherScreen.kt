@@ -17,9 +17,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core.R
+import com.commandiron.core_ui.LocalPermissionsState
+import com.commandiron.core_ui.components.OnLifecycleEvent
+import com.commandiron.tools_presentation.weather.components.CheckFineLocationPermission
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,8 +33,28 @@ fun WeatherScreen(
     navigateUp:() -> Unit
 ) {
     val spacing = LocalSpacing.current
+    val permissionsState = LocalPermissionsState.current
     val state = viewModel.state
+    CheckFineLocationPermission(
+        permissionsState = permissionsState,
+        permissionGranted = {
+            viewModel.onEvent(WeatherUserEvent.FineLocationPermissionGranted)
+        },
+        permissionDenied = {
+            viewModel.onEvent(WeatherUserEvent.FineLocationPermissionDenied)
+        }
+    )
+
+    OnLifecycleEvent { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_START -> {
+                permissionsState.launchMultiplePermissionRequest()
+            }
+            else -> return@OnLifecycleEvent
+        }
+    }
     LaunchedEffect(key1 = true){
+        permissionsState.launchMultiplePermissionRequest()
         viewModel.uiEvent.collect{ event ->
             when(event) {
                 UiEvent.NavigateUp -> { navigateUp() }
@@ -60,7 +84,9 @@ fun WeatherScreen(
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null
-                    ) { viewModel.onEvent(WeatherUserEvent.BackClick) },
+                    ) {
+                        viewModel.onEvent(WeatherUserEvent.BackTextClick)
+                    },
                 text = "Geri Dön",
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.Bold
@@ -77,12 +103,22 @@ fun WeatherScreen(
                     modifier = Modifier.alignBy(LastBaseline),
                     imageVector = Icons.Outlined.LocationOn,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = if(state.locationPermissionGranted){
+                        MaterialTheme.colorScheme.primary
+                    } else{ MaterialTheme.colorScheme.error }
                 )
-                Text(
-                    text = "İstanbul, Türkiye",
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
-                )
+                if(state.locationPermissionGranted){
+                    Text(
+                        text = state.myCity,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                    )
+                }else{
+                    Text(
+                        text = "Konum İzni Gerekiyor",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
             }
         }
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
@@ -108,7 +144,7 @@ fun WeatherScreen(
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = "Parçalı Bulutlu",
+            text = state.weatherDescription,
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
         )
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
@@ -120,7 +156,7 @@ fun WeatherScreen(
                 color = MaterialTheme.colorScheme.background
             )
             Text(
-                text = "29",
+                text = state.weatherTemp,
                 style = MaterialTheme.typography.displayLarge.copy(
                     fontSize = 128.sp
                 ),
@@ -150,7 +186,7 @@ fun WeatherScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "64%",
+                        text = "${state.weatherHumidity}%",
                         style = MaterialTheme.typography.titleLarge
                     )
                     Text(text = "Nem")
@@ -166,7 +202,7 @@ fun WeatherScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "11km",
+                        text = "${state.weatherVisibility} km",
                         style = MaterialTheme.typography.titleLarge
                     )
                     Text(text = "Görüş")
@@ -182,7 +218,7 @@ fun WeatherScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "8km",
+                        text = "${state.weatherWindSpeed} km",
                         style = MaterialTheme.typography.titleLarge
                     )
                     Text(text = "Rüzgar")

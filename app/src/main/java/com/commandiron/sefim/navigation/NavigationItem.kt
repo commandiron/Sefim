@@ -35,10 +35,6 @@ sealed class NavigationItem(
         selectedImageVector = Icons.Default.Calculate,
         unSelectedImageVector = Icons.Outlined.Calculate
     )
-    object Weather : NavigationItem(
-        title = defaultTools[0].title,
-        route = defaultTools[0].route
-    )
     object MyCalculations : NavigationItem(
         title = "Hesaplamalarım",
         route = "myCalculations",
@@ -50,5 +46,9 @@ sealed class NavigationItem(
         route = "news",
         selectedImageVector = Icons.Default.Feed,
         unSelectedImageVector = Icons.Outlined.Feed
+    )
+    object Weather : NavigationItem(
+        title = defaultTools[0].title,
+        route = defaultTools[0].route
     )
 }

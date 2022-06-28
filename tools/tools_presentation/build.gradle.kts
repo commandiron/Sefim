@@ -7,6 +7,6 @@ dependencies {
     "implementation"(project(Modules.coreUi))
     "implementation"(project(Modules.toolsDomain))
 
-    "implementation"(Google.materialIconsCore)
-    "implementation"(Google.materialIconsExtended)
+    "implementation"(Accompanist.permissions)
+    "implementation"(Google.playServicesMaps)
 }

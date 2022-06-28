@@ -5,6 +5,7 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.systemuicontroller.SystemUiController
 
 val LocalSpacing = compositionLocalOf { Dimensions() }
@@ -23,7 +24,9 @@ data class Dimensions(
     val defaultHorizontalScreenPadding: Dp = 24.dp,
     val bottomNavigationHeight: Dp = 80.dp
 )
-
+val LocalPermissionsState = compositionLocalOf<MultiplePermissionsState> {
+    error("No Permission State")
+}
 val LocalNavController = compositionLocalOf<NavHostController> {
     error("No Nav Controller")
 }
@@ -32,12 +35,14 @@ val LocalSystemUiController = compositionLocalOf<SystemUiController> {
 }
 
 fun getProvidedValuesOnApp(
+    permissionsState: MultiplePermissionsState,
     navController: NavHostController,
     systemUiController: SystemUiController,
 ): Array<ProvidedValue<*>> {
     return arrayOf(
         LocalSpacing provides Dimensions(),
         LocalNavController provides navController,
+        LocalPermissionsState provides permissionsState,
         LocalSystemUiController provides systemUiController
     )
 }

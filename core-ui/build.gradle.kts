@@ -3,5 +3,6 @@ apply {
 }
 
 dependencies {
-    "implementation" (Accompanist.systemUi)
+    "implementation"(Accompanist.systemUi)
+    "implementation"(Accompanist.permissions)
 }

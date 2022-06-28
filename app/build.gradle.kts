@@ -37,7 +37,9 @@ android {
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
             "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi",
-            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi"
+            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+            "-opt-in=androidx.compose.animation.ExperimentalAnimationApi",
+            "-opt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi"
         )
     }
     composeOptions {
@@ -85,6 +87,8 @@ dependencies {
     implementation(Accompanist.systemUi)
     implementation(Accompanist.pager)
     implementation(Accompanist.indicators)
+    implementation(Accompanist.navigationAnimation)
+    implementation(Accompanist.permissions)
 
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)

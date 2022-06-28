@@ -25,6 +25,9 @@ object ToolsDomainModule {
             unFavoriteTool = UnFavoriteTool(repository),
             getFavoriteTools = GetFavoriteTools(repository),
             filterTools = FilterTools(),
+            getUserLastKnownPosition = GetUserLastKnownPosition(repository),
+            getLatLngFromLocation = GetLatLngFromLocation(),
+            getCityFromLatLng = GetCityFromLatLng(repository),
             getWeather = GetWeather(repository)
         )
     }

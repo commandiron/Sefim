@@ -52,7 +52,7 @@ fun BottomNavigation(
                                 scope.launch {
                                     bottomNavLineOffsetXAnim.animateTo(
                                         targetValue = screenWidth.value / navigationItems.size * index,
-                                        animationSpec = tween()
+                                        animationSpec = tween(durationMillis = 700)
                                     )
                                 }
                                 onBottomNavItemClick(item.route)

@@ -7,4 +7,10 @@ object Google {
 
     private const val materialIconsExtendedVersion = "1.1.1"
     const val materialIconsExtended = "androidx.compose.material:material-icons-extended:$materialIconsExtendedVersion"
+
+    private const val playServicesLocationVersion = "20.0.0"
+    const val playServicesLocation = "com.google.android.gms:play-services-location:$playServicesLocationVersion"
+
+    private const val playServicesMapsVersion = "18.0.2"
+    const val playServicesMaps = "com.google.android.gms:play-services-maps:$playServicesMapsVersion"
 }

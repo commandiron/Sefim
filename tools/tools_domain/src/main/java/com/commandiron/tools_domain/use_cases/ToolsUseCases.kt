@@ -8,5 +8,8 @@ class ToolsUseCases(
     val unFavoriteTool: UnFavoriteTool,
     val getFavoriteTools: GetFavoriteTools,
     val filterTools: FilterTools,
+    val getUserLastKnownPosition: GetUserLastKnownPosition,
+    val getLatLngFromLocation: GetLatLngFromLocation,
+    val getCityFromLatLng: GetCityFromLatLng,
     val getWeather: GetWeather
 )
