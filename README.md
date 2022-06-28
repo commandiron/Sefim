@@ -24,22 +24,15 @@ Sefim is a native android tools app for construction site supervisors written in
         * [Compose](https://developer.android.com/jetpack/compose) - toolkit for building native UI
         * [Navigation](https://developer.android.com/topic/libraries/architecture/navigation/) - deal with whole in-app navigation      
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way
+    * [Retrofit](https://square.github.io/retrofit/) - HTTP client
     * [Accompanist](https://github.com/google/accompanist)
         * systemUi
         * pager
         * permissions
         * navigation
-        * placeholder
-        * swipe refresh
     * [Coil](https://coil-kt.github.io/coil/) - image loading library 
     * [Hilt](https://dagger.dev/hilt/) - DI
-    * [Google Firebase](https://firebase.google.com)
-        * auth
-        * database
-        * storage
     * [Google Play Services](https://developers.google.com/android)
-        * auth
-        * maps
         * location
 * Architecture 🏗️
     * Model-View-ViewModel
