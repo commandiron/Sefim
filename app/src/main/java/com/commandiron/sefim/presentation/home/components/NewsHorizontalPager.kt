@@ -3,6 +3,7 @@ package com.commandiron.sefim.presentation.home.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -11,18 +12,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.news_domain.model.NewToolsNewsPresentation
-import com.commandiron.news_domain.model.NewsContentPresentation
-import com.commandiron.news_domain.model.SectoralNewsPresentation
-import com.commandiron.news_domain.model.SteelPriceNewsPresentation
+import com.commandiron.news_domain.model.*
+import com.commandiron.tools_domain.model.Tool
+import com.commandiron.tools_presentation.components.tool_items.ToolItem
 import com.google.accompanist.pager.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,7 +34,7 @@ import kotlin.math.absoluteValue
 fun NewsHorizontalPager(
     modifier: Modifier = Modifier,
     newsContent: NewsContentPresentation,
-    onClick: () -> Unit,
+    onClick: (NewsContentType) -> Unit,
 ) {
     val spacing = LocalSpacing.current
     val pagerState = rememberPagerState()
@@ -75,7 +77,6 @@ fun NewsHorizontalPager(
 
                         alpha = alphaLerp
                     }
-                    .clickable { onClick() }
                 ,
                 shape = MaterialTheme.shapes.large,
                 color = MaterialTheme.colorScheme.primaryContainer,
@@ -98,19 +99,22 @@ fun NewsHorizontalPager(
                     when {
                         page < steelPriceNewsListSize -> {
                             SteelPriceNewsContent(
-                                newsContent.steelPriceNewsList!![page]
+                                steelPriceNews = newsContent.steelPriceNewsList!![page],
+                                onClick = { onClick(NewsContentType.STEEL_PRICE) }
                             )
                         }
                         page < steelPriceNewsListSize + newToolNewsListSize -> {
                             NewToolNewsContent(
-                                newsContent.newToolNewsList!![page - steelPriceNewsListSize]
+                                newToolsNews = newsContent.newToolNewsList!![page - steelPriceNewsListSize],
+                                onClick = { onClick(NewsContentType.NEW_TOOL) }
                             )
                         }
                         page < steelPriceNewsListSize + newToolNewsListSize + sectoralNewsListSize -> {
                             SectoralNewsContent(
-                                newsContent.sectoralNewsList!![
-                                        page - steelPriceNewsListSize - newToolNewsListSize
-                                ]
+                                sectoralNews = newsContent.sectoralNewsList!![
+                                    page - steelPriceNewsListSize - newToolNewsListSize
+                                ],
+                                onClick = { onClick(NewsContentType.SECTORAL_NEWS) }
                             )
                         }
                     }
@@ -136,7 +140,10 @@ fun NewsHorizontalPager(
 }
 
 @Composable
-fun SteelPriceNewsContent(steelPriceNews: SteelPriceNewsPresentation) {
+fun SteelPriceNewsContent(
+    steelPriceNews: SteelPriceNewsPresentation,
+    onClick: () -> Unit
+) {
     val spacing = LocalSpacing.current
     Column(
         modifier = Modifier
@@ -144,8 +151,12 @@ fun SteelPriceNewsContent(steelPriceNews: SteelPriceNewsPresentation) {
                 color = MaterialTheme.colorScheme.primaryContainer.copy(0.8f),
                 shape = MaterialTheme.shapes.small
             )
-            .padding(spacing.spaceSmall),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxSize(0.75f)
+            .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
+                onClick()
+            },
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = steelPriceNews.title,
@@ -192,10 +203,68 @@ fun SteelPriceNewsContent(steelPriceNews: SteelPriceNewsPresentation) {
     }
 }
 @Composable
-fun NewToolNewsContent(newToolsNews: NewToolsNewsPresentation) {
-    Text(text = newToolsNews.title)
+fun NewToolNewsContent(
+    newToolsNews: NewToolsNewsPresentation,
+    onClick: () -> Unit
+) {
+    val spacing = LocalSpacing.current
+    Column(
+        modifier = Modifier
+            .background(
+                color = MaterialTheme.colorScheme.primaryContainer.copy(0.8f),
+                shape = MaterialTheme.shapes.small
+            )
+            .fillMaxSize(0.75f)
+            .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
+                onClick()
+            },
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = newToolsNews.title)
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
+        ToolItem(
+            modifier = Modifier.fillMaxWidth(0.35f),
+            tool = Tool(
+                id = 0,
+                title = newToolsNews.toolTitle,
+                resources = newToolsNews.toolResources,
+                route = newToolsNews.toolRoute
+            ),
+        )
+    }
+
 }
 @Composable
-fun SectoralNewsContent(sectoralNews: SectoralNewsPresentation) {
-    Text(text = sectoralNews.title)
+fun SectoralNewsContent(
+    sectoralNews: SectoralNewsPresentation,
+    onClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .background(
+                color = MaterialTheme.colorScheme.primaryContainer.copy(0.8f),
+                shape = MaterialTheme.shapes.small
+            )
+            .fillMaxSize(0.75f)
+            .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
+                onClick()
+            },
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = sectoralNews.title,
+            style = MaterialTheme.typography.titleSmall.copy(
+                fontWeight = FontWeight.Bold
+            ),
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = "Haberin Devamını Oku ->",
+            style = MaterialTheme.typography.bodySmall,
+            color = Color.Blue,
+            textAlign = TextAlign.Center
+        )
+    }
 }

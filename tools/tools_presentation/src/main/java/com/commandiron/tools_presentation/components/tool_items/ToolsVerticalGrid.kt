@@ -9,22 +9,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.sefim.presentation.home.components.GridItemAdd
-import com.commandiron.tools_domain.model.ToolPresentation
+import com.commandiron.tools_domain.model.Tool
 
 @Composable
 fun ToolsVerticalGrid(
     modifier: Modifier = Modifier,
     state: LazyGridState,
-    tools: List<ToolPresentation>? = null,
+    tools: List<Tool>? = null,
     isWobbling: Boolean = false,
     showFavoriteIcon: Boolean = false,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
     columnCount: Int = 4,
     addToolIconVisible: Boolean = true,
-    onIconClick: (ToolPresentation) -> Unit,
+    onIconClick: (Tool) -> Unit,
     onIconLongClick: () -> Unit,
-    onFavorite: (ToolPresentation) -> Unit,
-    onUnFavorite: (ToolPresentation) -> Unit,
+    onFavorite: (Tool) -> Unit,
+    onUnFavorite: (Tool) -> Unit,
     onAddClick: () -> Unit
 ) {
     val spacing = LocalSpacing.current

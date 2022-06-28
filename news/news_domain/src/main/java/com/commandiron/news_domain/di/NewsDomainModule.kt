@@ -1,7 +1,8 @@
 package com.commandiron.news_domain.di
 
 import com.commandiron.news_domain.repository.NewsRepository
-import com.commandiron.news_domain.use_cases.GetNewsContent
+import com.commandiron.news_domain.use_cases.GetAllNews
+import com.commandiron.news_domain.use_cases.PrepopulateAllNewsIntoNewsDb
 import com.commandiron.news_domain.use_cases.NewsUseCases
 import dagger.Module
 import dagger.Provides
@@ -19,7 +20,8 @@ object NewsDomainModule {
         repository: NewsRepository,
     ): NewsUseCases {
         return NewsUseCases(
-            getNewsContent = GetNewsContent(repository)
+            prepopulateAllNewsIntoNewsDb = PrepopulateAllNewsIntoNewsDb(repository),
+            getAllNews = GetAllNews(repository)
         )
     }
 }

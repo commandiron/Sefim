@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -15,14 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.TextStyle
-import com.commandiron.tools_domain.model.ToolPresentation
+import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.tools_presentation.components.stickers.*
 
 @Composable
 fun ToolItemWithSticker(
-    tool: ToolPresentation,
-    textStyle: TextStyle,
+    tool: Tool,
+    textStyle: TextStyle = MaterialTheme.typography.labelLarge,
     isWobbling: Boolean = false,
     showFavoriteIcon: Boolean = false,
     isFavorite: Boolean = false,
@@ -34,16 +35,16 @@ fun ToolItemWithSticker(
     val iconRotateAnim = remember { Animatable(0f) }
     LaunchedEffect(key1 = isWobbling){
         if(isWobbling){
-            iconRotateAnim.animateTo(-5f, animationSpec = tween(180))
+            iconRotateAnim.animateTo(-5f, animationSpec = tween(280))
             iconRotateAnim.animateTo(
                 targetValue = 5f,
                 animationSpec = infiniteRepeatable(
-                    tween(180),
+                    tween(280),
                     RepeatMode.Reverse
                 )
             )
         }else{
-            iconRotateAnim.animateTo(0f, animationSpec = tween(180))
+            iconRotateAnim.animateTo(0f, animationSpec = tween(280))
         }
     }
     Box(
@@ -52,7 +53,7 @@ fun ToolItemWithSticker(
             .combinedClickable(
                 onClick = onIconClick,
                 onLongClick = onIconLongClick
-            ),
+            )
     ) {
         ToolItem(
             tool = tool,
@@ -66,33 +67,31 @@ fun ToolItemWithSticker(
                     .clickable { onUnFavorite() }
             )
         }else{
-            tool.toolTags?.let {
-                if(it.contains(ToolTag.NEW)){
-                    NewSticker(
-                        modifier = Modifier
-                            .align(Alignment.TopStart)
-                    )
-                }
-                if(it.contains(ToolTag.LOCKED)){
-                    LockedSticker(
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .fillMaxSize(0.35f)
-                    )
-                }
-                if (it.contains(ToolTag.AR)) {
-                    ArSticker(
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .fillMaxSize(0.35f)
-                    )
-                }
-                if(it.contains(ToolTag.SOON)){
-                    SoonSticker(
-                        modifier = Modifier
-                            .align(Alignment.CenterStart)
-                    )
-                }
+            if(tool.toolTags.contains(ToolTag.NEW)){
+                NewSticker(
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                )
+            }
+            if(tool.toolTags.contains(ToolTag.LOCKED)){
+                LockedSticker(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .fillMaxSize(0.35f)
+                )
+            }
+            if (tool.toolTags.contains(ToolTag.AR)) {
+                ArSticker(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .fillMaxSize(0.35f)
+                )
+            }
+            if(tool.toolTags.contains(ToolTag.SOON)){
+                SoonSticker(
+                    modifier = Modifier
+                        .align(Alignment.CenterStart)
+                )
             }
             if(showFavoriteIcon){
                 FavoriteSticker(

@@ -20,7 +20,7 @@ data class Dimensions(
     val spaceXXLarge: Dp = 128.dp,
     val spaceXXXLarge: Dp = 256.dp,
 
-    val homeScreenPadding: Dp = 24.dp,
+    val defaultHorizontalScreenPadding: Dp = 24.dp,
     val bottomNavigationHeight: Dp = 80.dp
 )
 

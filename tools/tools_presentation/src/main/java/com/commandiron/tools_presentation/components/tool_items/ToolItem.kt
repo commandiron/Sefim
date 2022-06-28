@@ -1,5 +1,6 @@
 package com.commandiron.tools_presentation.components.tool_items
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -14,14 +15,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.tools_domain.model.ToolPresentation
+import com.commandiron.tools_domain.model.Tool
 
 @Composable
 fun ToolItem(
     modifier: Modifier = Modifier,
-    tool: ToolPresentation,
-    textStyle: TextStyle
+    tool: Tool,
+    textStyle: TextStyle = MaterialTheme.typography.labelLarge
 ) {
     val spacing = LocalSpacing.current
     Surface(
@@ -49,17 +51,21 @@ fun ToolItem(
                     tint = Color.Unspecified
                 )
             }
-            Text(
-                text = tool.title,
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(2f),
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                style = textStyle.copy(fontWeight = FontWeight.Bold),
-                overflow = TextOverflow.Ellipsis,
-                softWrap = true,
-                textAlign = TextAlign.Center
-            )
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = tool.title,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    style = textStyle.copy(fontWeight = FontWeight.Bold),
+                    overflow = TextOverflow.Ellipsis,
+                    softWrap = true,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }

@@ -60,7 +60,7 @@ fun ProfileHeader(
                 }
                 Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
                 Text(
-                    text = "Emir Demirli",
+                    text = "Şefim",
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Medium),
                 )
             }

@@ -10,5 +10,8 @@ dependencies {
     "implementation"(Room.roomKtx)
     "implementation"(Room.roomRuntime)
 
+    "implementation"(Retrofit.okHttp)
+    "implementation"(Retrofit.retrofit)
+    "implementation"(Retrofit.okHttpLoggingInterceptor)
     "implementation"(Retrofit.moshiConverter)
 }

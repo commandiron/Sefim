@@ -21,7 +21,7 @@ fun LockedSticker(
         modifier = modifier
             .aspectRatio(1f),
         shape = CircleShape,
-        color = MaterialTheme.colorScheme.tertiary,
+        color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.75f),
         shadowElevation = spacing.spaceSmall
     ) {
         Icon(

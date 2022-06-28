@@ -1,4 +1,4 @@
-package com.commandiron.core_ui.presentation.bottom_navigation
+package com.commandiron.sefim.navigation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
@@ -16,7 +16,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.commandiron.core_ui.theme.NoRippleTheme
-import com.commandiron.sefim.navigation.NavigationItem
 import kotlinx.coroutines.launch
 
 @Composable

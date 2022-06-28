@@ -5,10 +5,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.commandiron.news_domain.use_cases.NewsUseCases
+import com.commandiron.tools_domain.use_cases.ToolsUseCases
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AppViewModel: ViewModel() {
+@HiltViewModel
+class AppViewModel @Inject constructor(
+    newsUseCases: NewsUseCases,
+    toolsUseCases: ToolsUseCases
+): ViewModel() {
 
     var state by mutableStateOf(AppState())
         private set
@@ -25,5 +33,5 @@ class AppViewModel: ViewModel() {
 
 data class AppState(
     val isColdSplashScreenVisible: Boolean = true,
-    val coldSplashScreenDelay: Long = 0L
+    val coldSplashScreenDelay: Long = 1000L
 )

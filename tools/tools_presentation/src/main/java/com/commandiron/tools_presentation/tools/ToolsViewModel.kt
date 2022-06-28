@@ -6,10 +6,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.commandiron.core.util.UiEvent
+import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -29,29 +31,55 @@ class ToolsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            toolsUseCases.getAllTools().onEach {
-                state = state.copy(
-                    allTools = it
-                )
-            }
+            state = state.copy(
+                filteredTools = toolsUseCases.getAllTools(),
+                allTools = toolsUseCases.getAllTools()
+            )
         }
     }
 
     fun onEvent(userEvent: ToolsUserEvent) {
         when (userEvent) {
-            ToolsUserEvent.ToolClick -> {
-
-            }
             is ToolsUserEvent.Favorite -> {
                 viewModelScope.launch {
-                    toolsUseCases.favoriteTool(userEvent.toolPresentation.copy(isFavorite = true))
+                    if(userEvent.tool.isFavorite){
+                        toolsUseCases.unFavoriteTool(userEvent.tool).onEach{}.collect()
+                    }else{
+                        if(userEvent.tool.toolTags.contains(ToolTag.SOON)){
+                            //Yakında gelecek snackbar
+                        }else if (userEvent.tool.toolTags.contains(ToolTag.LOCKED)){
+                            //Kilitli, açmak için kayıt olunuz, alert dialog.
+                        }else{
+                            toolsUseCases.favoriteTool(userEvent.tool).onEach{}.collect()
+                        }
+                    }
+                    state = state.copy(
+                        filteredTools = toolsUseCases.getAllTools()
+                    )
                 }
+            }
+            is ToolsUserEvent.IconClick -> {
+                if(!userEvent.tool.toolTags.contains(ToolTag.SOON)){
+                    sendUiEvent(UiEvent.Navigate(userEvent.tool.route))
+                }else{
+                    //Yakında gelecek.
+                }
+            }
+            is ToolsUserEvent.SearchChange -> {
+                state = state.copy(searchText = userEvent.text)
+                state = state.copy(
+                    filteredTools = toolsUseCases
+                        .filterTools(
+                            query = userEvent.text,
+                            tools = state.allTools ?: listOf()
+                        )
+                )
             }
         }
     }
 
     private fun sendUiEvent(uiEvent: UiEvent){
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch() {
             _uiEvent.send(uiEvent)
         }
     }

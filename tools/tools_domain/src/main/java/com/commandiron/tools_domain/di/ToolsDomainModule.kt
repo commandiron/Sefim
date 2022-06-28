@@ -18,11 +18,14 @@ object ToolsDomainModule {
         repository: ToolsRepository
     ): ToolsUseCases {
         return ToolsUseCases(
-            insertAllTools = InsertAllTools(repository),
+            prePopulateAllToolsInToolsDb = PrepopulateAllToolsInToolsDb(repository),
             getAllTools = GetAllTools(repository),
             getRecommendedTools = GetRecommendedTools(repository),
             favoriteTool = FavoriteTool(repository),
-            getFavoriteTools = GetFavoriteTools(repository)
+            unFavoriteTool = UnFavoriteTool(repository),
+            getFavoriteTools = GetFavoriteTools(repository),
+            filterTools = FilterTools(),
+            getWeather = GetWeather(repository)
         )
     }
 }

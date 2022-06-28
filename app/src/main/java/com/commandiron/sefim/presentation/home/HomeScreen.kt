@@ -8,12 +8,14 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.LocalSystemUiController
 import com.commandiron.core_ui.components.carousel.Carousel
@@ -24,24 +26,30 @@ import com.commandiron.tools_presentation.components.tool_items.ToolsVerticalGri
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onIconClick: (Int) -> Unit,
-    onAddClick: () -> Unit,
+    navigateTo: (String) -> Unit
 ) {
     val spacing = LocalSpacing.current
     val screenHeightDp = LocalConfiguration.current.screenHeightDp.dp
     val systemUiController = LocalSystemUiController.current
     val state = viewModel.state
+    LaunchedEffect(key1 = true){
+        viewModel.uiEvent.collect{ event ->
+            when(event) {
+                is UiEvent.Navigate -> navigateTo(event.route)
+                else -> {}
+            }
+        }
+    }
     systemUiController.setStatusBarColor(
         color = MaterialTheme.colorScheme.primary
     )
     systemUiController.setNavigationBarColor(
         color = MaterialTheme.colorScheme.onBackground
     )
-    val interactionSource = remember { MutableInteractionSource() }
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .clickable(interactionSource = interactionSource, indication = null) {
+            .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
                 viewModel.onEvent(HomeUserEvent.SpaceClick)
             }
     ) {
@@ -49,9 +57,9 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    start = spacing.homeScreenPadding,
+                    start = spacing.defaultHorizontalScreenPadding,
                     top = spacing.spaceMedium,
-                    end = spacing.homeScreenPadding,
+                    end = spacing.defaultHorizontalScreenPadding,
                     bottom = spacing.bottomNavigationHeight
                 )
         ) {
@@ -74,11 +82,11 @@ fun HomeScreen(
                 state = lazyGridState,
                 tools = state.favoriteTools,
                 isWobbling = state.isFavoriteIconsWobbling,
-                onIconClick = { onIconClick(it.id) },
-                onAddClick = { onAddClick() },
+                onIconClick = { viewModel.onEvent(HomeUserEvent.IconClick(it)) },
+                onAddClick = { viewModel.onEvent(HomeUserEvent.AddClick) },
                 onIconLongClick = { viewModel.onEvent(HomeUserEvent.ToolLongClick) },
                 onFavorite = {},
-                onUnFavorite = { viewModel.onEvent(HomeUserEvent.UnFavoriteClick) }
+                onUnFavorite = { viewModel.onEvent(HomeUserEvent.UnFavoriteClick(it)) }
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
             Text(
@@ -86,38 +94,43 @@ fun HomeScreen(
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
-            state.newsContent?.let {
+            state.newsContent?.let { news ->
                 NewsHorizontalPager(
                     modifier = Modifier
                         .heightIn(max = screenHeightDp / 4f),
-                    newsContent = it,
-                    onClick = {}
+                    newsContent = news,
+                    onClick = { viewModel.onEvent(HomeUserEvent.NewsClick(it)) }
                 )
             }
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
-            Text(
-                text = "Önerilen Araçlar",
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-            )
-            val lazyListState = rememberLazyListState()
-            ToolsRow(
-                modifier = Modifier
-                    .heightIn(max = screenHeightDp / 7f),
-                state = lazyListState,
-                tools = state.recommendedTools,
-                onIconClick = { onIconClick(it.id) },
-            )
-            Carousel(
-                state = lazyListState,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp),
-                colors = CarouselDefaults.colors(
-                    thumbColor = MaterialTheme.colorScheme.primary,
-                    scrollingThumbColor = MaterialTheme.colorScheme.primary,
-                    backgroundColor = MaterialTheme.colorScheme.primary.copy(0.2f)
-                )
-            )
+            state.recommendedTools?.let { recommendedTools ->
+                if(recommendedTools.isNotEmpty()){
+                    Text(
+                        text = "Önerilen Araçlar",
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                    )
+                    val lazyListState = rememberLazyListState()
+                    ToolsRow(
+                        modifier = Modifier
+                            .heightIn(max = screenHeightDp / 7f),
+                        state = lazyListState,
+                        tools = recommendedTools,
+                        onIconClick = { viewModel.onEvent(HomeUserEvent.IconClick(it)) },
+                        onFavorite = { viewModel.onEvent(HomeUserEvent.FavoriteClick(it)) }
+                    )
+                    Carousel(
+                        state = lazyListState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(1.dp),
+                        colors = CarouselDefaults.colors(
+                            thumbColor = MaterialTheme.colorScheme.primary,
+                            scrollingThumbColor = MaterialTheme.colorScheme.primary,
+                            backgroundColor = MaterialTheme.colorScheme.primary.copy(0.2f)
+                        )
+                    )
+                }
+            }
         }
     }
 

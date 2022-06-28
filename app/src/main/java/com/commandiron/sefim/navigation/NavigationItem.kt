@@ -1,9 +1,17 @@
 package com.commandiron.sefim.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.filled.Calculate
+import androidx.compose.material.icons.filled.Feed
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.outlined.Calculate
+import androidx.compose.material.icons.outlined.Feed
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Save
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.commandiron.tools_domain.model.Tool
+import com.commandiron.tools_domain.model.defaultTools
 
 sealed class NavigationItem(
     var title:String,
@@ -27,9 +35,9 @@ sealed class NavigationItem(
         selectedImageVector = Icons.Default.Calculate,
         unSelectedImageVector = Icons.Outlined.Calculate
     )
-    object Tool : NavigationItem(
-        title = "Araç",
-        route = "tool"
+    object Weather : NavigationItem(
+        title = defaultTools[0].title,
+        route = defaultTools[0].route
     )
     object MyCalculations : NavigationItem(
         title = "Hesaplamalarım",

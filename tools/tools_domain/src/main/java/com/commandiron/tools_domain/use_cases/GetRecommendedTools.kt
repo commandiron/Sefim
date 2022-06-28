@@ -1,11 +1,16 @@
 package com.commandiron.tools_domain.use_cases
 
-import com.commandiron.tools_domain.model.ToolPresentation
+import com.commandiron.tools_domain.model.Tool
+import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.tools_domain.repository.ToolsRepository
-import kotlinx.coroutines.flow.Flow
+import kotlin.random.Random
 
 class GetRecommendedTools(
     private val repository: ToolsRepository
 ) {
-    operator fun invoke() : Flow<List<ToolPresentation>> = repository.getAllTools()
+    suspend operator fun invoke(): List<Tool> {
+        return repository.getAllTools().filter {
+            !it.isFavorite && ToolTag.SOON !in (it.toolTags)
+        }
+    }
 }

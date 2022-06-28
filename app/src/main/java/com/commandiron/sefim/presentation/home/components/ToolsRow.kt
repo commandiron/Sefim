@@ -10,16 +10,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.tools_domain.model.ToolPresentation
+import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
 
 @Composable
 fun ToolsRow(
     modifier: Modifier = Modifier,
     state: LazyListState,
-    tools: List<ToolPresentation>? = null,
+    tools: List<Tool>,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
-    onIconClick: (ToolPresentation) -> Unit,
+    onIconClick: (Tool) -> Unit,
+    onFavorite: (Tool) -> Unit,
 ) {
     val spacing = LocalSpacing.current
     LazyRow(
@@ -29,17 +30,16 @@ fun ToolsRow(
         horizontalArrangement = Arrangement.spacedBy(spacing.spaceMedium),
         verticalAlignment = Alignment.CenterVertically
     ){
-        tools?.let {
-            items(it){ tool ->
-                ToolItemWithSticker(
-                    tool = tool,
-                    textStyle = textStyle,
-                    onIconClick = { onIconClick(tool) },
-                    onIconLongClick = {},
-                    onFavorite = {},
-                    onUnFavorite = {}
-                )
-            }
+        items(tools){ tool ->
+            ToolItemWithSticker(
+                tool = tool,
+                textStyle = textStyle,
+                showFavoriteIcon = true,
+                onIconClick = { onIconClick(tool) },
+                onIconLongClick = {},
+                onFavorite = { onFavorite(tool) },
+                onUnFavorite = {}
+            )
         }
     }
 }

@@ -4,6 +4,7 @@ package com.commandiron.sefim
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.material.Scaffold
@@ -14,9 +15,10 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.commandiron.core.domain.preferences.Preferences
 import com.commandiron.core_ui.components.FixedAppDecoration
 import com.commandiron.core_ui.getProvidedValuesOnApp
-import com.commandiron.core_ui.presentation.bottom_navigation.BottomNavigation
+import com.commandiron.sefim.navigation.BottomNavigation
 import com.commandiron.sefim.navigation.NavigationItem
 import com.commandiron.tools_presentation.my_calculations.MyCalculationsScreen
 import com.commandiron.tools_presentation.tools.ToolsScreen
@@ -26,29 +28,33 @@ import com.commandiron.core_ui.theme.SefimTheme
 import com.commandiron.news_presentation.NewsScreen
 import com.commandiron.sefim.navigation.bottomNavigate
 import com.commandiron.sefim.navigation.currentRoute
-import com.commandiron.tools_presentation.tool.ToolScreen
+import com.commandiron.tools_presentation.weather.WeatherScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel: AppViewModel by viewModels()
+    @Inject
+    lateinit var preferences: Preferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen().setKeepVisibleCondition{
             viewModel.state.isColdSplashScreenVisible
         }
+        val shouldShowHotSplash = preferences.loadShouldShowHotSplash()
         setContent {
-            MainContent()
+            MainContent(shouldShowHotSplash )
         }
     }
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainContent() {
+fun MainContent(shouldShowHotSplash : Boolean) {
     SefimTheme {
         val navController = rememberNavController()
         val systemUiController = rememberSystemUiController()
@@ -64,6 +70,7 @@ fun MainContent() {
                     BottomNavigation(
                         currentRoute = navController.currentRoute(),
                         onBottomNavItemClick = {
+                            navController.popBackStack()
                             navController.bottomNavigate(route = it)
                         }
                     )
@@ -72,7 +79,11 @@ fun MainContent() {
             ) {
                 NavHost(
                     navController = navController,
-                    startDestination = NavigationItem.HotSplashScreen.route
+                    startDestination = if(shouldShowHotSplash) {
+                        NavigationItem.HotSplashScreen.route
+                    } else {
+                        NavigationItem.HomeScreen.route
+                    }
                 ){
                     composable(NavigationItem.HotSplashScreen.route){
                         HotSplashScreen (
@@ -84,25 +95,24 @@ fun MainContent() {
                     }
                     composable(NavigationItem.HomeScreen.route){
                         HomeScreen(
-                            onIconClick = {
-                                navController.navigate(NavigationItem.Tool.route)
-                                //Navigate to Tool Screen with arguments.
-                            },
-                            onAddClick = {
-                                navController.navigate(NavigationItem.Tools.route)
+                            navigateTo = {
+                                navController.navigate(it)
                             }
                         )
                     }
                     composable(NavigationItem.Tools.route){
                         ToolsScreen(
-                            onIconClick = {
-                                navController.navigate(NavigationItem.Tool.route)
-                                //Navigate to Tool Screen with arguments.
+                            navigateTo = {
+                                navController.navigate(it)
                             }
                         )
                     }
-                    composable(NavigationItem.Tool.route){
-                        ToolScreen()
+                    composable(NavigationItem.Weather.route){
+                        WeatherScreen(
+                            navigateUp = {
+                                navController.navigateUp()
+                            }
+                        )
                     }
                     composable(NavigationItem.MyCalculations.route){
                         MyCalculationsScreen()
@@ -110,6 +120,10 @@ fun MainContent() {
                     composable(NavigationItem.News.route){
                         NewsScreen()
                     }
+                }
+                BackHandler {
+                    navController.popBackStack()
+                    navController.navigate(NavigationItem.HomeScreen.route)
                 }
             }
         }

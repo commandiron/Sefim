@@ -11,5 +11,6 @@ data class ToolEntity(
     val title: String,
     val resources : Int,
     val isFavorite: Boolean,
-    val toolTags: String
+    val toolTags: String,
+    val route: String
 )

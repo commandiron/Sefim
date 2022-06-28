@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.core_ui.R
+import com.commandiron.core.R
 
 @Composable
 fun FavoriteSticker(

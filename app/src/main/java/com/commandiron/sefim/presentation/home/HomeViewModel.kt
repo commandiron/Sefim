@@ -5,9 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.commandiron.core.util.Response
 import com.commandiron.core.util.UiEvent
-import com.commandiron.news_domain.use_cases.NewsUseCases
 import com.commandiron.sefim.navigation.NavigationItem
+import com.commandiron.news_domain.model.NewsContentType
+import com.commandiron.news_domain.use_cases.NewsUseCases
+import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    newsUseCases: NewsUseCases,
-    toolsUseCases: ToolsUseCases,
+    private val newsUseCases: NewsUseCases,
+    private val toolsUseCases: ToolsUseCases,
 ): ViewModel() {
 
     var state by mutableStateOf(HomeState())
@@ -31,24 +34,17 @@ class HomeViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
-        viewModelScope.launch {
-            toolsUseCases.insertAllTools()
-            //Burası bir kere çalışacak splash ekranında sonra ayarlayacağım.
-        }
-        toolsUseCases.getRecommendedTools().onEach {
-            println("1: " + it)
-            state = state.copy(recommendedTools = it)
-        }
-        toolsUseCases.getFavoriteTools().onEach {
-            state = state.copy(favoriteTools = it)
-        }
-        state = state.copy(
-            newsContent = newsUseCases.getNewsContent()
-        )
+        refreshData()
     }
 
     fun onEvent(userEvent: HomeUserEvent) {
         when (userEvent) {
+            HomeUserEvent.AddClick -> {
+                sendUiEvent(UiEvent.Navigate(NavigationItem.Tools.route))
+            }
+            is HomeUserEvent.IconClick -> {
+                sendUiEvent(UiEvent.Navigate(userEvent.tool.route))
+            }
             HomeUserEvent.ToolLongClick -> {
                 state = state.copy(
                     isFavoriteIconsWobbling = true
@@ -59,9 +55,64 @@ class HomeViewModel @Inject constructor(
                     isFavoriteIconsWobbling = false
                 )
             }
-            HomeUserEvent.UnFavoriteClick -> {
+            is HomeUserEvent.UnFavoriteClick -> {
                 //Open Alert Dialog
+                viewModelScope.launch {
+                    toolsUseCases.unFavoriteTool(userEvent.tool).onEach {
+                        when(it){
+                            is Response.Error -> {
+                                //Favorilere eklenemedi
+                            }
+                            Response.Loading -> {
+                                //Loading
+                            }
+                            is Response.Success -> {
+                                refreshData()
+                            }
+                        }
+                    }.collect()
+                }
             }
+            is HomeUserEvent.NewsClick -> {
+                if(userEvent.newsContentType == NewsContentType.NEW_TOOL){
+                    sendUiEvent(UiEvent.Navigate(NavigationItem.Tools.route))
+                }else{
+                    sendUiEvent(UiEvent.Navigate(NavigationItem.News.route))
+                }
+            }
+            is HomeUserEvent.FavoriteClick -> {
+                if(userEvent.tool.toolTags.contains(ToolTag.SOON)){
+                    //Yakında gelecek snackbar
+                }else if (userEvent.tool.toolTags.contains(ToolTag.LOCKED)){
+                    //Kilitli, açmak için kayıt olunuz, alert dialog.
+                }else{
+                    viewModelScope.launch {
+                        toolsUseCases.favoriteTool(userEvent.tool).onEach {
+                            when(it){
+                                is Response.Error -> {
+                                    //Favorilere eklenemedi
+                                }
+                                Response.Loading -> {
+                                    //Loading
+                                }
+                                is Response.Success -> {
+                                    refreshData()
+                                }
+                            }
+                        }.collect()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun refreshData(){
+        viewModelScope.launch {
+            state = state.copy(
+                favoriteTools = toolsUseCases.getFavoriteTools(),
+                newsContent = newsUseCases.getAllNews(),
+                recommendedTools = toolsUseCases.getRecommendedTools()
+            )
         }
     }
 

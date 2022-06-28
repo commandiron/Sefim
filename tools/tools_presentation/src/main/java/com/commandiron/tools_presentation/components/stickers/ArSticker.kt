@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.tools_presentation.R
+import com.commandiron.core.R
 
 @Composable
 fun ArSticker(
@@ -21,7 +21,7 @@ fun ArSticker(
         modifier = modifier
             .aspectRatio(1f),
         shape = CircleShape,
-        color = MaterialTheme.colorScheme.tertiary,
+        color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.75f),
         shadowElevation = spacing.spaceSmall
     ) {
         Icon(

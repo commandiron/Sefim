@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.R
 import com.commandiron.core_ui.components.AppLogoWithName
@@ -18,10 +19,11 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun HotSplashScreen(
+    viewModel: HotSplashViewModel = hiltViewModel(),
     onFinish:() -> Unit
 ) {
     LaunchedEffect(key1 = true){
-        delay(0)
+        delay(5000)
         onFinish()
     }
     Surface(
