@@ -11,5 +11,7 @@ class ToolsUseCases(
     val getUserLastKnownPosition: GetUserLastKnownPosition,
     val getLatLngFromLocation: GetLatLngFromLocation,
     val getCityFromLatLng: GetCityFromLatLng,
-    val getWeather: GetWeather
+    val getWeather: GetWeather,
+    val calculateUnitToPallet: CalculateUnitToPallet,
+    val calculatePalletToUnit: CalculatePalletToUnit
 )

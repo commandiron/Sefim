@@ -21,34 +21,20 @@ val defaultTools = listOf(
     ),
     Tool(
         id = 1,
-        title = "Duvar Metraj Hesaplayıcı",
-        resources = R.drawable.brick_wall,
-        toolTags = listOf(ToolTag.NEW),
-        route = "wallQuantityCalculator"
-    ),
-    Tool(
-        id = 2,
         title = "Gazbeton Palet Hesaplayıcı",
         resources = R.drawable.pallet,
         toolTags = listOf(ToolTag.NEW),
         route = "aeratedConcretePalletCalculator"
     ),
     Tool(
-        id = 3,
-        title = "İnşaat Demiri Ağırlık Hesaplayıcı",
-        resources = R.drawable.iron_bar,
-        toolTags = listOf(ToolTag.NEW),
-        route = "aerated concrete pallet calculator"
-    ),
-    Tool(
-        id = 4,
+        id = 2,
         title = "Kaba İnşaat Maliyet Hesaplayıcı",
         resources = R.drawable.construction,
         toolTags = listOf(ToolTag.SOON),
         route = "roughConstructionCostCalculator"
     ),
     Tool(
-        id = 5,
+        id = 3,
         title = "Kamera ile uzunluk ölçümü",
         resources = R.drawable.tape_measure,
         toolTags = listOf(ToolTag.AR, ToolTag.SOON),

@@ -65,7 +65,11 @@ class ToolsRepositoryImpl(
             coarseLocationPermission == PackageManager.PERMISSION_GRANTED){
             fusedLocationClient.lastLocation.addOnCompleteListener { task ->
                 if(task.isSuccessful){
-                    trySend(Response.Success(task.result))
+                    task.result?.let {
+                        trySend(Response.Success(task.result))
+                    } ?: run {
+                        trySend(Response.Error(task.exception?.message?: "location is null"))
+                    }
                 }else{
                     trySend(Response.Error(task.exception?.message?: "Location Failed"))
                 }

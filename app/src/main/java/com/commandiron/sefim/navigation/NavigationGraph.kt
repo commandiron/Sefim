@@ -11,6 +11,7 @@ import com.commandiron.core_ui.LocalPermissionsState
 import com.commandiron.news_presentation.NewsScreen
 import com.commandiron.sefim.presentation.home.HomeScreen
 import com.commandiron.sefim.presentation.hot_splash.HotSplashScreen
+import com.commandiron.tools_presentation.aeratedConcTool.AeratedConcToolScreen
 import com.commandiron.tools_presentation.my_calculations.MyCalculationsScreen
 import com.commandiron.tools_presentation.tools.ToolsScreen
 import com.commandiron.tools_presentation.weather.WeatherScreen
@@ -193,6 +194,27 @@ fun NavigationGraph(
                     navController.navigateUp()
                 }
             )
+        }
+        composable(
+            route = NavigationItem.AeratedConcTool.route,
+            enterTransition = {
+                when(initialState.destination.route){
+                    else -> slideIntoContainer(
+                        towards = AnimatedContentScope.SlideDirection.Up,
+                        animationSpec = tween(700)
+                    )
+                }
+            },
+            exitTransition = {
+                when (targetState.destination.route) {
+                    else -> slideOutOfContainer(
+                        towards = AnimatedContentScope.SlideDirection.Down,
+                        animationSpec = tween(700)
+                    )
+                }
+            }
+        ){
+            AeratedConcToolScreen()
         }
     }
 }

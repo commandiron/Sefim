@@ -13,10 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AppViewModel @Inject constructor(
-    newsUseCases: NewsUseCases,
-    toolsUseCases: ToolsUseCases
-): ViewModel() {
+class AppViewModel @Inject constructor(): ViewModel() {
 
     var state by mutableStateOf(AppState())
         private set

@@ -51,4 +51,8 @@ sealed class NavigationItem(
         title = defaultTools[0].title,
         route = defaultTools[0].route
     )
+    object AeratedConcTool : NavigationItem(
+        title = defaultTools[1].title,
+        route = defaultTools[1].route
+    )
 }

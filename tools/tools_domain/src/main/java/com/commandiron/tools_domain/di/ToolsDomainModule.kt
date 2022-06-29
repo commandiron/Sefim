@@ -28,7 +28,9 @@ object ToolsDomainModule {
             getUserLastKnownPosition = GetUserLastKnownPosition(repository),
             getLatLngFromLocation = GetLatLngFromLocation(),
             getCityFromLatLng = GetCityFromLatLng(repository),
-            getWeather = GetWeather(repository)
+            getWeather = GetWeather(repository),
+            calculateUnitToPallet = CalculateUnitToPallet(),
+            calculatePalletToUnit = CalculatePalletToUnit()
         )
     }
 }

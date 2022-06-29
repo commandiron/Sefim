@@ -3,6 +3,7 @@ package com.commandiron.tools_data.di
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.commandiron.tools_data.BuildConfig
 import com.commandiron.tools_data.local.ToolsDatabase
 import com.commandiron.tools_data.remote.OpenWeatherApi
 import com.commandiron.tools_data.remote.OpenWeatherApi.Companion.BASE_URL
@@ -40,7 +41,7 @@ object ToolsDataModule {
         httpClient.addInterceptor { chain ->
             val originalRequest = chain.request()
             val newHttpUrl = originalRequest.url.newBuilder()
-                .addQueryParameter("appid","84d2aaacca24c0faf9a390ddae080e27")
+                .addQueryParameter("appid", BuildConfig.OPEN_WEATHER_API_KEY)
                 .build()
             val newRequest = originalRequest.newBuilder()
                 .url(newHttpUrl)
