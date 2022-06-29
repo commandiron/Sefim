@@ -27,55 +27,165 @@ class AeratedConcToolViewModel @Inject constructor(
 
     fun onEvent(userEvent: AeratedConcToolUserEvent) {
         when (userEvent) {
-            is AeratedConcToolUserEvent.PieceChange -> {
-                state = state.copy(piecePallet = userEvent.text)
-                if(state.unitConverterIsChanged){
-                    calculatePalletToUnit()
+            is AeratedConcToolUserEvent.SquareMetersPalletChange -> {
+                state = state.copy(squareMetersPallet = userEvent.text)
+                if(state.squareMetersPalletUnitConverterIsChanged){
+                    //Calculate
                 }else{
-                    calculateUnitToPallet()
+                    //Calculate
                 }
             }
-            AeratedConcToolUserEvent.PieceKeyboardDone -> {
+            AeratedConcToolUserEvent.SquareMetersPalletKeyboardDone -> {
                 sendUiEvent(UiEvent.HideKeyboard)
             }
-            AeratedConcToolUserEvent.ThicknessClick -> {
-                state = state.copy(thicknessDropDownIsExpanded = !state.thicknessDropDownIsExpanded)
+            AeratedConcToolUserEvent.SquareMetersPalletChangeUnitClick -> {
+                state = state.copy(
+                    squareMetersPalletUnitConverterIsChanged = !state.squareMetersPalletUnitConverterIsChanged,
+                    squareMetersPalletResult = "--"
+                )
+                if(state.squareMetersPalletUnitConverterIsChanged){
+                    state = state.copy(
+                        squareMetersPallet = "",
+                        squareMetersPalletLabel = "Palet",
+                        squareMetersPalletSymbol = " Palet",
+                        squareMetersPalletResultSymbol = "m2",
+                    )
+                }else{
+                    state = state.copy(
+                        squareMetersPallet = "",
+                        squareMetersPalletLabel = "m2",
+                        squareMetersPalletSymbol = " m2",
+                        squareMetersPalletResultSymbol = "Palet",
+                    )
+                }
             }
-            AeratedConcToolUserEvent.ThicknessDropDownDismissClick -> {
-                state = state.copy(thicknessDropDownIsExpanded = false)
+            AeratedConcToolUserEvent.SquareMetersPiecePalletThicknessClick -> {
+                state = state.copy(
+                    squareMetersPalletThicknessDropDownIsExpanded =
+                    !state.squareMetersPalletThicknessDropDownIsExpanded
+                )
             }
-            is AeratedConcToolUserEvent.ThicknessDropDownSelect -> {
+            is AeratedConcToolUserEvent.SquareMetersPalletThicknessDropDownSelect -> {
                 state = state.copy(
                     thickness = state
                         .thicknessList[userEvent.listIndex],
-                    thicknessDropDownIsExpanded = false
+                    squareMetersPalletThicknessDropDownIsExpanded = false
                 )
-                if(state.unitConverterIsChanged){
+                if(state.squareMetersPalletUnitConverterIsChanged){
+                    //Calculate
+                }else{
+                    //Calculate
+                }
+            }
+
+            is AeratedConcToolUserEvent.CubicMetersPalletChange -> {
+                state = state.copy(cubicMetersPallet = userEvent.text)
+                if(state.cubicMetersPalletUnitConverterIsChanged){
+                    //Calculate
+                }else{
+                    //Calculate
+                }
+            }
+            AeratedConcToolUserEvent.CubicMetersPalletKeyboardDone -> {
+                sendUiEvent(UiEvent.HideKeyboard)
+            }
+            AeratedConcToolUserEvent.CubicMetersPalletChangeUnitClick -> {
+                state = state.copy(
+                    cubicMetersPalletUnitConverterIsChanged = !state.cubicMetersPalletUnitConverterIsChanged,
+                    cubicMetersPalletResult = "--"
+                )
+                if(state.cubicMetersPalletUnitConverterIsChanged){
+                    state = state.copy(
+                        cubicMetersPallet = "",
+                        cubicMetersPalletLabel = "Palet",
+                        cubicMetersPalletSymbol = " Palet",
+                        cubicMetersPalletResultSymbol = "m3",
+                    )
+                }else{
+                    state = state.copy(
+                        cubicMetersPallet = "",
+                        cubicMetersPalletLabel = "m3",
+                        cubicMetersPalletSymbol = " m3",
+                        cubicMetersPalletResultSymbol = "Palet",
+                    )
+                }
+            }
+            AeratedConcToolUserEvent.CubicMetersPiecePalletThicknessClick -> {
+                state = state.copy(
+                    cubicMetersPalletThicknessDropDownIsExpanded =
+                    !state.cubicMetersPalletThicknessDropDownIsExpanded
+                )
+            }
+            is AeratedConcToolUserEvent.CubicMetersPalletThicknessDropDownSelect -> {
+                state = state.copy(
+                    thickness = state
+                        .thicknessList[userEvent.listIndex],
+                    cubicMetersPalletThicknessDropDownIsExpanded = false
+                )
+                if(state.cubicMetersPalletUnitConverterIsChanged){
+                    //Calculate
+                }else{
+                    //Calculate
+                }
+            }
+
+            is AeratedConcToolUserEvent.PiecePalletChange -> {
+                state = state.copy(piecePallet = userEvent.text)
+                if(state.piecePalletUnitConverterIsChanged){
                     calculatePalletToUnit()
                 }else{
                     calculateUnitToPallet()
                 }
             }
-            AeratedConcToolUserEvent.ChangeUnitClick -> {
+            AeratedConcToolUserEvent.PiecePalletKeyboardDone -> {
+                sendUiEvent(UiEvent.HideKeyboard)
+            }
+            AeratedConcToolUserEvent.PiecePalletChangeUnitClick -> {
                 state = state.copy(
-                    unitConverterIsChanged = !state.unitConverterIsChanged,
-                    result = ""
+                    piecePalletUnitConverterIsChanged = !state.piecePalletUnitConverterIsChanged,
+                    piecePalletResult = "--"
                 )
-                if(state.unitConverterIsChanged){
+                if(state.piecePalletUnitConverterIsChanged){
                     state = state.copy(
                         piecePallet = "",
                         piecePalletLabel = "Palet",
                         piecePalletSymbol = " Palet",
-                        resultSymbol = "Adet",
+                        piecePalletResultSymbol = "Adet",
                     )
                 }else{
                     state = state.copy(
                         piecePallet = "",
                         piecePalletLabel = "Adet",
                         piecePalletSymbol = " Adet",
-                        resultSymbol = "Palet",
+                        piecePalletResultSymbol = "Palet",
                     )
                 }
+            }
+            AeratedConcToolUserEvent.PiecePalletThicknessClick -> {
+                state = state.copy(
+                    piecePalletThicknessDropDownIsExpanded =
+                    !state.piecePalletThicknessDropDownIsExpanded
+                )
+            }
+            is AeratedConcToolUserEvent.PiecePalletThicknessDropDownSelect -> {
+                state = state.copy(
+                    thickness = state
+                        .thicknessList[userEvent.listIndex],
+                    piecePalletThicknessDropDownIsExpanded = false
+                )
+                if(state.piecePalletUnitConverterIsChanged){
+                    calculatePalletToUnit()
+                }else{
+                    calculateUnitToPallet()
+                }
+            }
+
+            AeratedConcToolUserEvent.ThicknessDropDownDismissClick -> {
+                state = state.copy(
+                    squareMetersPalletThicknessDropDownIsExpanded = false,
+                    cubicMetersPalletThicknessDropDownIsExpanded = false,
+                    piecePalletThicknessDropDownIsExpanded = false
+                )
             }
         }
     }
@@ -88,7 +198,7 @@ class AeratedConcToolViewModel @Inject constructor(
                 thickness = state.thickness.toDouble()
             )
             state = state.copy(
-                result = result.toString()
+                piecePalletResult = result.toString()
             )
         }
     }
@@ -101,7 +211,7 @@ class AeratedConcToolViewModel @Inject constructor(
                 thickness = state.thickness.toDouble()
             )
             state = state.copy(
-                result = result.toString()
+                piecePalletResult = result.toString()
             )
         }
     }

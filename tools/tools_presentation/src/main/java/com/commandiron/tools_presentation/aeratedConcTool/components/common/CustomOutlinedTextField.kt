@@ -1,6 +1,5 @@
-package com.commandiron.tools_presentation.aeratedConcTool.components
+package com.commandiron.tools_presentation.aeratedConcTool.components.common
 
-import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*

@@ -9,7 +9,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.tools_presentation.aeratedConcTool.components.PieceToPalletComponent
+import com.commandiron.tools_presentation.aeratedConcTool.components.converters.CubicMetersPalletConverter
+import com.commandiron.tools_presentation.aeratedConcTool.components.converters.PiecePalletConverter
+import com.commandiron.tools_presentation.aeratedConcTool.components.converters.SquareMetersPalletConverter
 
 @Composable
 fun AeratedConcToolScreen(
@@ -39,90 +41,15 @@ fun AeratedConcToolScreen(
             )
     ) {
         Text(
-            text = "Gazbeton Palet Hesaplayıcı",
+            text = "Gazbeton Hesaplama Aracı",
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
         )
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
-        PieceToPalletComponent(
-            title = state.piecePalletLabel
-                    + " - "
-                    + state.resultSymbol,
-            onChangeUnitClick = { viewModel.onEvent(AeratedConcToolUserEvent.ChangeUnitClick) },
-            firstValue = state.piecePallet,
-            firstValueChange = { viewModel.onEvent(AeratedConcToolUserEvent.PieceChange(it)) },
-            firstValueLabel = state.piecePalletLabel,
-            firstValueSymbol = state.piecePalletSymbol,
-            firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.PieceKeyboardDone) },
-            secondValue = state.thickness,
-            secondValueChange = {},
-            secondValueLabel = state.thicknessLabel,
-            secondValueSymbol = state.thicknessSymbol,
-            secondValueOnClick = { viewModel.onEvent(AeratedConcToolUserEvent.ThicknessClick) },
-            dropDownIsExpanded = state.thicknessDropDownIsExpanded,
-            dropDownItems = state.thicknessList,
-            onDropDownItemSelect = {
-                viewModel.onEvent(AeratedConcToolUserEvent.ThicknessDropDownSelect(it))
-            },
-            onDropDownDismissRequest = {
-                viewModel.onEvent(AeratedConcToolUserEvent.ThicknessDropDownDismissClick)
-            },
-            resultText = state.result,
-            resultSymbol = state.resultSymbol
-        )
+        SquareMetersPalletConverter(state, viewModel)
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
-        PieceToPalletComponent(
-            title = state.piecePalletLabel
-                    + " - "
-                    + state.resultSymbol,
-            onChangeUnitClick = { viewModel.onEvent(AeratedConcToolUserEvent.ChangeUnitClick) },
-            firstValue = state.piecePallet,
-            firstValueChange = { viewModel.onEvent(AeratedConcToolUserEvent.PieceChange(it)) },
-            firstValueLabel = state.piecePalletLabel,
-            firstValueSymbol = state.piecePalletSymbol,
-            firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.PieceKeyboardDone) },
-            secondValue = state.thickness,
-            secondValueChange = {},
-            secondValueLabel = state.thicknessLabel,
-            secondValueSymbol = state.thicknessSymbol,
-            secondValueOnClick = { viewModel.onEvent(AeratedConcToolUserEvent.ThicknessClick) },
-            dropDownIsExpanded = state.thicknessDropDownIsExpanded,
-            dropDownItems = state.thicknessList,
-            onDropDownItemSelect = {
-                viewModel.onEvent(AeratedConcToolUserEvent.ThicknessDropDownSelect(it))
-            },
-            onDropDownDismissRequest = {
-                viewModel.onEvent(AeratedConcToolUserEvent.ThicknessDropDownDismissClick)
-            },
-            resultText = state.result,
-            resultSymbol = state.resultSymbol
-        )
+        CubicMetersPalletConverter(state, viewModel)
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
-        PieceToPalletComponent(
-            title = state.piecePalletLabel
-                    + " - "
-                    + state.resultSymbol,
-            onChangeUnitClick = { viewModel.onEvent(AeratedConcToolUserEvent.ChangeUnitClick) },
-            firstValue = state.piecePallet,
-            firstValueChange = { viewModel.onEvent(AeratedConcToolUserEvent.PieceChange(it)) },
-            firstValueLabel = state.piecePalletLabel,
-            firstValueSymbol = state.piecePalletSymbol,
-            firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.PieceKeyboardDone) },
-            secondValue = state.thickness,
-            secondValueChange = {},
-            secondValueLabel = state.thicknessLabel,
-            secondValueSymbol = state.thicknessSymbol,
-            secondValueOnClick = { viewModel.onEvent(AeratedConcToolUserEvent.ThicknessClick) },
-            dropDownIsExpanded = state.thicknessDropDownIsExpanded,
-            dropDownItems = state.thicknessList,
-            onDropDownItemSelect = {
-                viewModel.onEvent(AeratedConcToolUserEvent.ThicknessDropDownSelect(it))
-            },
-            onDropDownDismissRequest = {
-                viewModel.onEvent(AeratedConcToolUserEvent.ThicknessDropDownDismissClick)
-            },
-            resultText = state.result,
-            resultSymbol = state.resultSymbol
-        )
+        PiecePalletConverter(state, viewModel)
     }
 }
 

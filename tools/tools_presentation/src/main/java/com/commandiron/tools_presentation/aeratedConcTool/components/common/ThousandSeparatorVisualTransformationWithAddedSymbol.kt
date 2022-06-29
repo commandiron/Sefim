@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.aeratedConcTool.components
+package com.commandiron.tools_presentation.aeratedConcTool.components.common
 
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping

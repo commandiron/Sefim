@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.aeratedConcTool.components
+package com.commandiron.tools_presentation.aeratedConcTool.components.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,7 +13,7 @@ import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.R
 
 @Composable
-fun PieceToPalletComponent(
+fun AeratedConcConverterComponent(
     modifier: Modifier = Modifier,
     title: String,
     onChangeUnitClick:() -> Unit,
@@ -42,6 +42,7 @@ fun PieceToPalletComponent(
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
             )
             IconButton(
+                modifier = Modifier.padding(spacing.spaceExtraSmall),
                 onClick = onChangeUnitClick,
                 colors = IconButtonDefaults.iconButtonColors(
                     contentColor = MaterialTheme.colorScheme.primary

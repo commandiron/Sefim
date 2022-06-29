@@ -83,7 +83,7 @@ fun ToolItemWithSticker(
             if (tool.toolTags.contains(ToolTag.AR)) {
                 ArSticker(
                     modifier = Modifier
-                        .align(Alignment.BottomEnd)
+                        .align(Alignment.CenterEnd)
                         .fillMaxSize(0.35f)
                 )
             }

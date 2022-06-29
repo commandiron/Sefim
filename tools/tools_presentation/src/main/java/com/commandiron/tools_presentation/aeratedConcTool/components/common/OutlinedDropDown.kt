@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.aeratedConcTool.components
+package com.commandiron.tools_presentation.aeratedConcTool.components.common
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
