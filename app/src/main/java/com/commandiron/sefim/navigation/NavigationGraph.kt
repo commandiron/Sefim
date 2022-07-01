@@ -214,7 +214,11 @@ fun NavigationGraph(
                 }
             }
         ){
-            AeratedConcToolScreen()
+            AeratedConcToolScreen(
+                navigateUp = {
+                    navController.navigateUp()
+                }
+            )
         }
     }
 }

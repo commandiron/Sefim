@@ -1,7 +1,7 @@
 package com.commandiron.tools_domain.use_cases
 
-class CalculateUnitToPallet {
-    operator fun invoke(unit: Int, thickness: Double) : Double {
+class CalculateSquareMeterToPallet {
+    operator fun invoke(squareMeter: Double, thickness: Double) : Double {
         var pallet = 1.0
         when(thickness){
             8.5 -> pallet = 1.071
@@ -21,6 +21,6 @@ class CalculateUnitToPallet {
             35.5 -> pallet = 0.945
             40.0 -> pallet = 1.08
         }
-        return Math.round(unit*0.6*0.25*thickness/100/pallet * 100.0) / 100.0
+        return Math.round(squareMeter*thickness/100/pallet * 100.0) / 100.0
     }
 }

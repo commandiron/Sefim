@@ -1,5 +1,6 @@
 package com.commandiron.core_ui
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.Dp
@@ -21,8 +22,13 @@ data class Dimensions(
     val spaceXXLarge: Dp = 128.dp,
     val spaceXXXLarge: Dp = 256.dp,
 
-    val defaultHorizontalScreenPadding: Dp = 24.dp,
-    val bottomNavigationHeight: Dp = 80.dp
+    val bottomNavigationHeight: Dp = 80.dp,
+    val defaultScreenPadding: PaddingValues = PaddingValues(
+        start = 24.dp,
+        top = spaceMedium,
+        end = 24.dp,
+        bottom = bottomNavigationHeight
+    )
 )
 val LocalPermissionsState = compositionLocalOf<MultiplePermissionsState> {
     error("No Permission State")

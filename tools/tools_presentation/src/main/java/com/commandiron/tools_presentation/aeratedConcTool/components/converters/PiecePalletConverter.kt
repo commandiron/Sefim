@@ -14,17 +14,17 @@ fun PiecePalletConverter(
     AeratedConcConverterComponent(
         title = state.piecePalletLabel
                 + " - "
-                + state.piecePalletResultSymbol,
+                + state.piecePalletResultUnit,
         onChangeUnitClick = { viewModel.onEvent(AeratedConcToolUserEvent.PiecePalletChangeUnitClick) },
         firstValue = state.piecePallet,
         firstValueChange = { viewModel.onEvent(AeratedConcToolUserEvent.PiecePalletChange(it)) },
         firstValueLabel = state.piecePalletLabel,
-        firstValueSymbol = state.piecePalletSymbol,
-        firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.PiecePalletKeyboardDone) },
+        firstValueUnit = state.piecePalletUnit,
+        firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.KeyboardDone) },
         secondValue = state.thickness,
         secondValueChange = {},
         secondValueLabel = state.thicknessLabel,
-        secondValueSymbol = state.thicknessSymbol,
+        secondValueUnit = state.thicknessUnit,
         secondValueOnClick = { viewModel.onEvent(AeratedConcToolUserEvent.PiecePalletThicknessClick) },
         dropDownIsExpanded = state.piecePalletThicknessDropDownIsExpanded,
         dropDownItems = state.thicknessList,
@@ -35,6 +35,6 @@ fun PiecePalletConverter(
             viewModel.onEvent(AeratedConcToolUserEvent.ThicknessDropDownDismissClick)
         },
         resultText = state.piecePalletResult,
-        resultSymbol = state.piecePalletResultSymbol
+        resultUnit = state.piecePalletResultUnit
     )
 }

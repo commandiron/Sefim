@@ -14,17 +14,17 @@ fun CubicMetersPalletConverter(
     AeratedConcConverterComponent(
         title = state.cubicMetersPalletLabel
                 + " - "
-                + state.cubicMetersPalletResultSymbol,
+                + state.cubicMetersPalletResultUnit,
         onChangeUnitClick = { viewModel.onEvent(AeratedConcToolUserEvent.CubicMetersPalletChangeUnitClick) },
         firstValue = state.cubicMetersPallet,
         firstValueChange = { viewModel.onEvent(AeratedConcToolUserEvent.CubicMetersPalletChange(it)) },
         firstValueLabel = state.cubicMetersPalletLabel,
-        firstValueSymbol = state.cubicMetersPalletSymbol,
-        firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.CubicMetersPalletKeyboardDone) },
+        firstValueUnit = state.cubicMetersPalletUnit,
+        firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.KeyboardDone) },
         secondValue = state.thickness,
         secondValueChange = {},
         secondValueLabel = state.thicknessLabel,
-        secondValueSymbol = state.thicknessSymbol,
+        secondValueUnit = state.thicknessUnit,
         secondValueOnClick = { viewModel.onEvent(AeratedConcToolUserEvent.CubicMetersPiecePalletThicknessClick) },
         dropDownIsExpanded = state.cubicMetersPalletThicknessDropDownIsExpanded,
         dropDownItems = state.thicknessList,
@@ -35,6 +35,6 @@ fun CubicMetersPalletConverter(
             viewModel.onEvent(AeratedConcToolUserEvent.ThicknessDropDownDismissClick)
         },
         resultText = state.cubicMetersPalletResult,
-        resultSymbol = state.cubicMetersPalletResultSymbol
+        resultUnit = state.cubicMetersPalletResultUnit
     )
 }

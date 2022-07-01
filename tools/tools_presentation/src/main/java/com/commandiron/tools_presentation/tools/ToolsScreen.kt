@@ -29,12 +29,7 @@ fun ToolsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(
-                start = spacing.defaultHorizontalScreenPadding,
-                top = spacing.spaceMedium,
-                end = spacing.defaultHorizontalScreenPadding,
-                bottom = spacing.bottomNavigationHeight
-            ),
+            .padding(spacing.defaultScreenPadding),
     ){
         SearchTextField(
             modifier = Modifier.fillMaxWidth(),

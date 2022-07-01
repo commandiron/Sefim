@@ -23,6 +23,7 @@ import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core.R
 import com.commandiron.core_ui.LocalPermissionsState
 import com.commandiron.core_ui.components.OnLifecycleEvent
+import com.commandiron.tools_presentation.BackText
 import com.commandiron.tools_presentation.weather.components.CheckFineLocationPermission
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,7 +45,6 @@ fun WeatherScreen(
             viewModel.onEvent(WeatherUserEvent.FineLocationPermissionDenied)
         }
     )
-
     OnLifecycleEvent { _, event ->
         when (event) {
             Lifecycle.Event.ON_START -> {
@@ -65,12 +65,7 @@ fun WeatherScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(
-                start = spacing.defaultHorizontalScreenPadding,
-                top = spacing.spaceMedium,
-                end = spacing.defaultHorizontalScreenPadding,
-                bottom = spacing.bottomNavigationHeight
-            ),
+            .padding(spacing.defaultScreenPadding),
         verticalArrangement = Arrangement.Center
     ) {
         Row(
@@ -78,21 +73,7 @@ fun WeatherScreen(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                modifier = Modifier
-                    .alignBy(LastBaseline)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null
-                    ) {
-                        viewModel.onEvent(WeatherUserEvent.BackTextClick)
-                    },
-                text = "Geri Dön",
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontWeight = FontWeight.Bold
-                ),
-                color = MaterialTheme.colorScheme.primary
-            )
+            BackText { viewModel.onEvent(WeatherUserEvent.BackTextClick) }
             Row(
                 modifier = Modifier
                     .alignBy(LastBaseline)

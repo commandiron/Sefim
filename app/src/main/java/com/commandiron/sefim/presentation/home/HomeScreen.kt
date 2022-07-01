@@ -49,19 +49,16 @@ fun HomeScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
-                viewModel.onEvent(HomeUserEvent.SpaceClick)
-            }
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null) {
+                    viewModel.onEvent(HomeUserEvent.SpaceClick)
+                }
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(
-                    start = spacing.defaultHorizontalScreenPadding,
-                    top = spacing.spaceMedium,
-                    end = spacing.defaultHorizontalScreenPadding,
-                    bottom = spacing.bottomNavigationHeight
-                )
+                .padding(spacing.defaultScreenPadding)
         ) {
             ProfileHeader(
                 imageUrl = state.profileImageUrl,

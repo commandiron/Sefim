@@ -20,19 +20,19 @@ fun AeratedConcConverterComponent(
     firstValue: String,
     firstValueChange:(String) -> Unit,
     firstValueLabel: String,
-    firstValueSymbol: String,
+    firstValueUnit: String,
     firstValueOnDone: () -> Unit,
     secondValue: String,
     secondValueChange:(String) -> Unit,
     secondValueLabel: String,
-    secondValueSymbol: String,
+    secondValueUnit: String,
     secondValueOnClick: () -> Unit,
     dropDownIsExpanded: Boolean,
     dropDownItems: List<String>,
     onDropDownItemSelect: (Int) -> Unit,
     onDropDownDismissRequest: (Int?) -> Unit,
     resultText: String,
-    resultSymbol: String
+    resultUnit: String
 ) {
     val spacing = LocalSpacing.current
     Column(modifier = modifier) {
@@ -67,7 +67,7 @@ fun AeratedConcConverterComponent(
                 value = firstValue,
                 onValueChange = firstValueChange,
                 label = firstValueLabel,
-                symbol = firstValueSymbol,
+                Unit = firstValueUnit,
                 onDone = firstValueOnDone
             )
             Spacer(modifier = Modifier.width(spacing.spaceSmall))
@@ -78,7 +78,7 @@ fun AeratedConcConverterComponent(
                 value = secondValue,
                 onValueChange = secondValueChange,
                 label = secondValueLabel,
-                symbol = secondValueSymbol,
+                Unit = secondValueUnit,
                 onClick = secondValueOnClick,
                 isExpanded = dropDownIsExpanded,
                 items = dropDownItems,
@@ -105,7 +105,7 @@ fun AeratedConcConverterComponent(
                 Spacer(modifier = Modifier.width(spacing.spaceSmall))
                 if(resultText.isNotEmpty()){
                     Text(
-                        text = resultSymbol,
+                        text = resultUnit,
                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                         textAlign = TextAlign.Center
                     )

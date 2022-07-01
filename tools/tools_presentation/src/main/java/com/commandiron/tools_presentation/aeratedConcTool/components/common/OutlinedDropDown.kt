@@ -19,7 +19,7 @@ fun OutlinedDropDown(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
-    symbol: String,
+    Unit: String,
     textStyle: TextStyle = MaterialTheme.typography.bodyLarge,
     onClick:() -> Unit,
     isExpanded: Boolean,
@@ -56,9 +56,9 @@ fun OutlinedDropDown(
                     style = MaterialTheme.typography.bodyMedium
                 )
             },
-            visualTransformation = ThousandSeparatorVisualTransformationWithAddedSymbol(
+            visualTransformation = ThousandSeparatorVisualTransformationWithAddedUnit(
                 maxFractionDigits = 1,
-                addedSymbol = symbol
+                addedUnit = Unit
             ),
             shape = MaterialTheme.shapes.large
         )

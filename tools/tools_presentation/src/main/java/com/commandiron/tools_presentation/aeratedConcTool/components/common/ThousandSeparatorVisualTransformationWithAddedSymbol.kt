@@ -8,21 +8,21 @@ import java.text.DecimalFormat
 import kotlin.math.max
 import kotlin.math.min
 
-class ThousandSeparatorVisualTransformationWithAddedSymbol(
+class ThousandSeparatorVisualTransformationWithAddedUnit(
     var maxFractionDigits: Int = Int.MAX_VALUE,
-    var addedSymbol: String = "",
+    var addedUnit: String = "",
     var minFractionDigits: Int = 0
 ) : VisualTransformation {
-    private val symbols = DecimalFormat().decimalFormatSymbols
+    private val decimalFormatSymbols = DecimalFormat().decimalFormatSymbols
     private val commaReplacementPattern = Regex("\\B(?=(?:\\d{3})+(?!\\d))")
 
     override fun filter(text: AnnotatedString): TransformedText {
         if (text.isEmpty())
             return TransformedText(text, OffsetMapping.Identity)
 
-        val comma = symbols.groupingSeparator
-        val dot = symbols.decimalSeparator
-        val zero = symbols.zeroDigit
+        val comma = decimalFormatSymbols.groupingSeparator
+        val dot = decimalFormatSymbols.decimalSeparator
+        val zero = decimalFormatSymbols.zeroDigit
 
         var (intPart, fracPart) = text.text.split(dot)
             .let { Pair(it[0], it.getOrNull(1)) }
@@ -55,7 +55,7 @@ class ThousandSeparatorVisualTransformationWithAddedSymbol(
             normalizedIntPart != intPart
         )
 
-        return TransformedText(newText + AnnotatedString(addedSymbol), offsetMapping)
+        return TransformedText(newText + AnnotatedString(addedUnit), offsetMapping)
     }
 
     private inner class ThousandSeparatorOffsetMapping(

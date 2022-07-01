@@ -30,7 +30,13 @@ object ToolsDomainModule {
             getCityFromLatLng = GetCityFromLatLng(repository),
             getWeather = GetWeather(repository),
             calculateUnitToPallet = CalculateUnitToPallet(),
-            calculatePalletToUnit = CalculatePalletToUnit()
+            calculatePalletToUnit = CalculatePalletToUnit(),
+            calculateSquareMeterToPallet = CalculateSquareMeterToPallet(),
+            calculatePalletToSquareMeter = CalculatePalletToSquareMeter(),
+            calculateCubicMeterToPallet = CalculateCubicMeterToPallet(),
+            calculatePalletToCubicMeter = CalculatePalletToCubicMeter(),
+            calculateSquareToCubic = CalculateSquareToCubic(),
+            calculateCubicToSquare = CalculateCubicToSquare()
         )
     }
 }

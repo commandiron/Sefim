@@ -20,7 +20,7 @@ fun CustomOutlinedTextField(
     value: String,
     onValueChange:(String) -> Unit,
     label: String,
-    symbol: String,
+    Unit: String,
     onDone:() -> Unit,
 ) {
     val focusRequester = FocusRequester()
@@ -28,7 +28,11 @@ fun CustomOutlinedTextField(
     OutlinedTextField(
         modifier = modifier.focusRequester(focusRequester),
         value = value,
-        onValueChange = onValueChange,
+        onValueChange = {
+            if(it.toDoubleOrNull() != null || it.isEmpty()){
+                onValueChange(it)
+            }
+        },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Number,
             autoCorrect = false
@@ -49,9 +53,9 @@ fun CustomOutlinedTextField(
                 style = MaterialTheme.typography.bodyMedium
             )
         },
-        visualTransformation = ThousandSeparatorVisualTransformationWithAddedSymbol(
+        visualTransformation = ThousandSeparatorVisualTransformationWithAddedUnit(
             maxFractionDigits = 2,
-            addedSymbol = symbol
+            addedUnit = Unit
         ),
         shape = MaterialTheme.shapes.large
     )

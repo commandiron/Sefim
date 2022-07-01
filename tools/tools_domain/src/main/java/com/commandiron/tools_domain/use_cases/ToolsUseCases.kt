@@ -13,5 +13,11 @@ class ToolsUseCases(
     val getCityFromLatLng: GetCityFromLatLng,
     val getWeather: GetWeather,
     val calculateUnitToPallet: CalculateUnitToPallet,
-    val calculatePalletToUnit: CalculatePalletToUnit
+    val calculatePalletToUnit: CalculatePalletToUnit,
+    val calculateSquareMeterToPallet: CalculateSquareMeterToPallet,
+    val calculatePalletToSquareMeter: CalculatePalletToSquareMeter,
+    val calculateCubicMeterToPallet: CalculateCubicMeterToPallet,
+    val calculatePalletToCubicMeter: CalculatePalletToCubicMeter,
+    val calculateSquareToCubic: CalculateSquareToCubic,
+    val calculateCubicToSquare: CalculateCubicToSquare
 )
