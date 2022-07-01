@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.aeratedConcTool.components.common
+package com.commandiron.tools_presentation.aeratedConcTool.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,6 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.R
+import com.commandiron.tools_presentation.components.CustomOutlinedNumberTextField
+import com.commandiron.tools_presentation.components.OutlinedDropDown
 
 @Composable
 fun AeratedConcConverterComponent(
@@ -29,7 +31,7 @@ fun AeratedConcConverterComponent(
     secondValueOnClick: () -> Unit,
     dropDownIsExpanded: Boolean,
     dropDownItems: List<String>,
-    onDropDownItemSelect: (Int) -> Unit,
+    onDropDownItemSelect: (String) -> Unit,
     onDropDownDismissRequest: (Int?) -> Unit,
     resultText: String,
     resultUnit: String
@@ -60,15 +62,15 @@ fun AeratedConcConverterComponent(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            CustomOutlinedTextField(
+            CustomOutlinedNumberTextField(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight(),
                 value = firstValue,
                 onValueChange = firstValueChange,
+                onDone = firstValueOnDone,
                 label = firstValueLabel,
-                Unit = firstValueUnit,
-                onDone = firstValueOnDone
+                Unit = firstValueUnit
             )
             Spacer(modifier = Modifier.width(spacing.spaceSmall))
             OutlinedDropDown(

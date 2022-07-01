@@ -1,8 +1,6 @@
-package com.commandiron.tools_presentation.weather
+package com.commandiron.tools_presentation.weatherTool
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.LocationOn
@@ -24,7 +22,7 @@ import com.commandiron.core.R
 import com.commandiron.core_ui.LocalPermissionsState
 import com.commandiron.core_ui.components.OnLifecycleEvent
 import com.commandiron.tools_presentation.BackText
-import com.commandiron.tools_presentation.weather.components.CheckFineLocationPermission
+import com.commandiron.tools_presentation.weatherTool.components.CheckFineLocationPermission
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -2,10 +2,10 @@ package com.commandiron.news_data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.commandiron.news_data.local.entity.NewsContentEntity
+import com.commandiron.news_data.local.entity.NewsEntity
 
 @Database(
-    entities = [NewsContentEntity::class],
+    entities = [NewsEntity::class],
     version = 1,
     exportSchema = false
 )

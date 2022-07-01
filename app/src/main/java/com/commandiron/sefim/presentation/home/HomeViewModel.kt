@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.commandiron.core.util.Response
 import com.commandiron.core.util.UiEvent
 import com.commandiron.sefim.navigation.NavigationItem
-import com.commandiron.news_domain.model.NewsContentType
 import com.commandiron.news_domain.use_cases.NewsUseCases
+import com.commandiron.sefim.presentation.home.model.HomeNews
 import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -73,13 +73,6 @@ class HomeViewModel @Inject constructor(
                     }.collect()
                 }
             }
-            is HomeUserEvent.NewsClick -> {
-                if(userEvent.newsContentType == NewsContentType.NEW_TOOL){
-                    sendUiEvent(UiEvent.Navigate(NavigationItem.Tools.route))
-                }else{
-                    sendUiEvent(UiEvent.Navigate(NavigationItem.News.route))
-                }
-            }
             is HomeUserEvent.FavoriteClick -> {
                 if(userEvent.tool.toolTags.contains(ToolTag.SOON)){
                     //Yakında gelecek snackbar
@@ -103,6 +96,15 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
+            is HomeUserEvent.NewToolClick -> {
+                sendUiEvent(UiEvent.Navigate(userEvent.tool.route))
+            }
+            is HomeUserEvent.NewsClick -> {
+                sendUiEvent(UiEvent.Navigate(NavigationItem.News.route))
+            }
+            HomeUserEvent.RebarPriceClick -> {
+                sendUiEvent(UiEvent.Navigate(NavigationItem.RebarPricesTool.route))
+            }
         }
     }
 
@@ -110,7 +112,11 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             state = state.copy(
                 favoriteTools = toolsUseCases.getFavoriteTools(),
-                newsContent = newsUseCases.getAllNews(),
+                homeNews = HomeNews(
+                    rebarPrice = toolsUseCases.getRebarPrices().first(),
+                    newTool = toolsUseCases.getNewestTool(),
+                    newsList = newsUseCases.getAllNews()
+                ),
                 recommendedTools = toolsUseCases.getRecommendedTools()
             )
         }

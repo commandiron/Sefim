@@ -26,6 +26,7 @@ import com.commandiron.tools_presentation.components.tool_items.ToolsVerticalGri
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
+    onAddClick:() -> Unit,
     navigateTo: (String) -> Unit
 ) {
     val spacing = LocalSpacing.current
@@ -80,7 +81,7 @@ fun HomeScreen(
                 tools = state.favoriteTools,
                 isWobbling = state.isFavoriteIconsWobbling,
                 onIconClick = { viewModel.onEvent(HomeUserEvent.IconClick(it)) },
-                onAddClick = { viewModel.onEvent(HomeUserEvent.AddClick) },
+                onAddClick = onAddClick,
                 onIconLongClick = { viewModel.onEvent(HomeUserEvent.ToolLongClick) },
                 onFavorite = {},
                 onUnFavorite = { viewModel.onEvent(HomeUserEvent.UnFavoriteClick(it)) }
@@ -91,12 +92,14 @@ fun HomeScreen(
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
-            state.newsContent?.let { news ->
+            state.homeNews?.let { homeNews ->
                 NewsHorizontalPager(
                     modifier = Modifier
                         .heightIn(max = screenHeightDp / 4f),
-                    newsContent = news,
-                    onClick = { viewModel.onEvent(HomeUserEvent.NewsClick(it)) }
+                    homeNews = homeNews,
+                    onRebarPriceClick = { viewModel.onEvent(HomeUserEvent.RebarPriceClick) },
+                    onNewToolClick = { viewModel.onEvent(HomeUserEvent.NewToolClick(it)) },
+                    onNewsClick = { viewModel.onEvent(HomeUserEvent.NewsClick(it)) }
                 )
             }
             Spacer(modifier = Modifier.height(spacing.spaceSmall))

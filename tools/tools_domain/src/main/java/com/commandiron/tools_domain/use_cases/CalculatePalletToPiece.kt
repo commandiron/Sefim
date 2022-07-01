@@ -1,6 +1,6 @@
 package com.commandiron.tools_domain.use_cases
 
-class CalculatePalletToUnit {
+class CalculatePalletToPiece {
     operator fun invoke(pallet: Int, thickness: Double) : Int {
         var unit = 1
         when(thickness){

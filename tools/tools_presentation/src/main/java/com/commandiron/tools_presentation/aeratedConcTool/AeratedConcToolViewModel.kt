@@ -64,8 +64,7 @@ class AeratedConcToolViewModel @Inject constructor(
             }
             is AeratedConcToolUserEvent.SquareMetersPalletThicknessDropDownSelect -> {
                 state = state.copy(
-                    thickness = state
-                        .thicknessList[userEvent.listIndex],
+                    thickness = userEvent.text,
                     squareMetersPalletThicknessDropDownIsExpanded = false
                 )
                 if(state.squareMetersPalletUnitConverterIsChanged){
@@ -112,8 +111,7 @@ class AeratedConcToolViewModel @Inject constructor(
             }
             is AeratedConcToolUserEvent.CubicMetersPalletThicknessDropDownSelect -> {
                 state = state.copy(
-                    thickness = state
-                        .thicknessList[userEvent.listIndex],
+                    thickness = userEvent.text,
                     cubicMetersPalletThicknessDropDownIsExpanded = false
                 )
                 if(state.cubicMetersPalletUnitConverterIsChanged){
@@ -160,8 +158,7 @@ class AeratedConcToolViewModel @Inject constructor(
             }
             is AeratedConcToolUserEvent.PiecePalletThicknessDropDownSelect -> {
                 state = state.copy(
-                    thickness = state
-                        .thicknessList[userEvent.listIndex],
+                    thickness = userEvent.text,
                     piecePalletThicknessDropDownIsExpanded = false
                 )
                 if(state.piecePalletUnitConverterIsChanged){
@@ -208,8 +205,7 @@ class AeratedConcToolViewModel @Inject constructor(
             }
             is AeratedConcToolUserEvent.SquareCubicThicknessDropDownSelect -> {
                 state = state.copy(
-                    thickness = state
-                        .thicknessList[userEvent.listIndex],
+                    thickness = userEvent.text,
                     squareCubicThicknessDropDownIsExpanded = false
                 )
                 if(state.squareCubicUnitConverterIsChanged){
@@ -238,8 +234,8 @@ class AeratedConcToolViewModel @Inject constructor(
     private fun calculateUnitToPallet(){
         if(state.piecePallet.isNotEmpty() &&
             state.thickness.isNotEmpty()){
-            val result = toolsUseCases.calculateUnitToPallet(
-                unit = state.piecePallet.toInt(),
+            val result = toolsUseCases.calculatePieceToPallet(
+                piece = state.piecePallet.toInt(),
                 thickness = state.thickness.toDouble()
             )
             state = state.copy(
@@ -255,7 +251,7 @@ class AeratedConcToolViewModel @Inject constructor(
     private fun calculatePalletToUnit(){
         if(state.piecePallet.isNotEmpty() &&
             state.thickness.isNotEmpty()){
-            val result = toolsUseCases.calculatePalletToUnit(
+            val result = toolsUseCases.calculatePalletToPiece(
                 pallet = state.piecePallet.toInt(),
                 thickness = state.thickness.toDouble()
             )

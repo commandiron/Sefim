@@ -1,5 +1,7 @@
 package com.commandiron.tools_domain.use_cases
 
+import kotlin.math.roundToInt
+
 class CalculateSquareMeterToPallet {
     operator fun invoke(squareMeter: Double, thickness: Double) : Double {
         var pallet = 1.0
@@ -21,6 +23,6 @@ class CalculateSquareMeterToPallet {
             35.5 -> pallet = 0.945
             40.0 -> pallet = 1.08
         }
-        return Math.round(squareMeter*thickness/100/pallet * 100.0) / 100.0
+        return (squareMeter * thickness / 100 / pallet * 100.0).roundToInt() / 100.0
     }
 }

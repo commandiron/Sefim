@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.aeratedConcTool.components.common
+package com.commandiron.tools_presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,7 +11,7 @@ fun CustomDropDownMenu(
     modifier: Modifier = Modifier,
     isExpanded: Boolean,
     dropDownItems: List<String>?,
-    onSelect:(Int) -> Unit,
+    onSelect:(String) -> Unit,
     onDismissRequest:(Int?) -> Unit,
 ) {
     var selectedIndex by remember { mutableStateOf<Int?>(null) }
@@ -41,7 +41,7 @@ fun CustomDropDownMenu(
                     enabled = !enabled
                     selectedIndex = index
                     selectedIndex?.let {
-                        onSelect(it)
+                        onSelect(title)
                     }
                 },
                 trailingIcon = {

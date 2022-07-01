@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.aeratedConcTool.components.common
+package com.commandiron.tools_presentation.components
 
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -14,14 +14,15 @@ import androidx.compose.ui.text.style.TextAlign
 
 
 @Composable
-fun CustomOutlinedTextField(
+fun CustomOutlinedNumberTextField(
     modifier: Modifier = Modifier,
     textStyle: TextStyle = MaterialTheme.typography.bodyLarge,
     value: String,
     onValueChange:(String) -> Unit,
+    onDone:() -> Unit,
     label: String,
     Unit: String,
-    onDone:() -> Unit,
+    forceValueInt: Boolean = false
 ) {
     val focusRequester = FocusRequester()
     val focusManager = LocalFocusManager.current
@@ -29,8 +30,14 @@ fun CustomOutlinedTextField(
         modifier = modifier.focusRequester(focusRequester),
         value = value,
         onValueChange = {
-            if(it.toDoubleOrNull() != null || it.isEmpty()){
-                onValueChange(it)
+            if(forceValueInt){
+                if(it.toIntOrNull() != null || it.isEmpty()){
+                    onValueChange(it)
+                }
+            }else{
+                if(it.toDoubleOrNull() != null || it.isEmpty()){
+                    onValueChange(it)
+                }
             }
         },
         keyboardOptions = KeyboardOptions(

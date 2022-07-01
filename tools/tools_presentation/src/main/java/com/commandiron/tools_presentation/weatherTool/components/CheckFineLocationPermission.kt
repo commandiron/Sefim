@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.weather.components
+package com.commandiron.tools_presentation.weatherTool.components
 
 import android.Manifest
 import androidx.compose.runtime.Composable

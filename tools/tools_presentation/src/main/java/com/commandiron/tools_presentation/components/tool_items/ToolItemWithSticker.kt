@@ -22,6 +22,7 @@ import com.commandiron.tools_presentation.components.stickers.*
 
 @Composable
 fun ToolItemWithSticker(
+    modifier: Modifier = Modifier,
     tool: Tool,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
     isWobbling: Boolean = false,
@@ -48,7 +49,7 @@ fun ToolItemWithSticker(
         }
     }
     Box(
-        modifier = Modifier
+        modifier = modifier
             .rotate(iconRotateAnim.value)
             .combinedClickable(
                 onClick = onIconClick,

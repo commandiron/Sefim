@@ -23,8 +23,11 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.news_domain.model.*
+import com.commandiron.sefim.presentation.home.model.HomeNews
+import com.commandiron.tools_domain.model.RebarPrice
 import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_presentation.components.tool_items.ToolItem
+import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
 import com.google.accompanist.pager.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,8 +36,10 @@ import kotlin.math.absoluteValue
 @Composable
 fun NewsHorizontalPager(
     modifier: Modifier = Modifier,
-    newsContent: NewsContentPresentation,
-    onClick: (NewsContentType) -> Unit,
+    homeNews: HomeNews,
+    onRebarPriceClick: () -> Unit,
+    onNewToolClick: (Tool) -> Unit,
+    onNewsClick:(News) -> Unit
 ) {
     val spacing = LocalSpacing.current
     val pagerState = rememberPagerState()
@@ -43,10 +48,7 @@ fun NewsHorizontalPager(
         shape = MaterialTheme.shapes.extraLarge,
         color = MaterialTheme.colorScheme.background
     ) {
-        val steelPriceNewsListSize = newsContent.steelPriceNewsList?.size ?: 0
-        val newToolNewsListSize = newsContent.newToolNewsList?.size ?: 0
-        val sectoralNewsListSize = newsContent.sectoralNewsList?.size ?: 0
-        val pagerCount = steelPriceNewsListSize + newToolNewsListSize + sectoralNewsListSize
+        val pagerCount = 2 + homeNews.newsList.size
         HorizontalPager(
             state = pagerState,
             count = pagerCount,
@@ -96,25 +98,23 @@ fun NewsHorizontalPager(
                         .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    when {
-                        page < steelPriceNewsListSize -> {
-                            SteelPriceNewsContent(
-                                steelPriceNews = newsContent.steelPriceNewsList!![page],
-                                onClick = { onClick(NewsContentType.STEEL_PRICE) }
+                    when (page) {
+                        0 -> {
+                            RebarPriceContent(
+                                rebarPrice = homeNews.rebarPrice,
+                                onClick = onRebarPriceClick
                             )
                         }
-                        page < steelPriceNewsListSize + newToolNewsListSize -> {
-                            NewToolNewsContent(
-                                newToolsNews = newsContent.newToolNewsList!![page - steelPriceNewsListSize],
-                                onClick = { onClick(NewsContentType.NEW_TOOL) }
+                        1 -> {
+                            NewToolContent(
+                                newTool = homeNews.newTool,
+                                onClick = onNewToolClick
                             )
                         }
-                        page < steelPriceNewsListSize + newToolNewsListSize + sectoralNewsListSize -> {
-                            SectoralNewsContent(
-                                sectoralNews = newsContent.sectoralNewsList!![
-                                    page - steelPriceNewsListSize - newToolNewsListSize
-                                ],
-                                onClick = { onClick(NewsContentType.SECTORAL_NEWS) }
+                        else -> {
+                            NewsContent(
+                                news = homeNews.newsList[page - 2],
+                                onClick = onNewsClick
                             )
                         }
                     }
@@ -140,8 +140,8 @@ fun NewsHorizontalPager(
 }
 
 @Composable
-fun SteelPriceNewsContent(
-    steelPriceNews: SteelPriceNewsPresentation,
+fun RebarPriceContent(
+    rebarPrice: RebarPrice,
     onClick: () -> Unit
 ) {
     val spacing = LocalSpacing.current
@@ -152,14 +152,19 @@ fun SteelPriceNewsContent(
                 shape = MaterialTheme.shapes.small
             )
             .fillMaxSize(0.75f)
-            .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
+            .padding(spacing.spaceSmall)
+            .clickable(interactionSource = remember { MutableInteractionSource() },
+                indication = null) {
                 onClick()
             },
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = steelPriceNews.title,
+            text = rebarPrice.date,
+            style = MaterialTheme.typography.bodySmall
+        )
+        Text(
+            text = rebarPrice.city + " " + "Demir Fiyatları",
             style = MaterialTheme.typography.bodyLarge
         )
         Row(
@@ -173,39 +178,26 @@ fun SteelPriceNewsContent(
             )
             Text(
                 modifier = Modifier.alignBy(LastBaseline),
-                text = steelPriceNews.q8mmPrice,
+                text = rebarPrice.q8mmPrice,
                 style = MaterialTheme.typography.displayMedium.copy(
                     fontWeight = FontWeight.Bold
                 )
             )
         }
         Text(
-            text = "Φ10: " + steelPriceNews.q10mmPrice,
+            text = "Φ10: " + rebarPrice.q10mmPrice,
             style = MaterialTheme.typography.bodyLarge
         )
         Text(
-            text = "Φ12-32: " + steelPriceNews.q1232mmPrice,
+            text = "Φ12-32: " + rebarPrice.q1232mmPrice,
             style = MaterialTheme.typography.bodyLarge
-        )
-    }
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(spacing.spaceSmall)
-        ,
-        contentAlignment = Alignment.TopEnd
-    ) {
-        Text(
-            text = SimpleDateFormat("dd.MM.yyyy EEEE", Locale.getDefault()).format(Date()),
-            style = MaterialTheme.typography.bodySmall,
-            color = LocalContentColor.current.copy(0.5f)
         )
     }
 }
 @Composable
-fun NewToolNewsContent(
-    newToolsNews: NewToolsNewsPresentation,
-    onClick: () -> Unit
+fun NewToolContent(
+    newTool: Tool,
+    onClick: (Tool) -> Unit
 ) {
     val spacing = LocalSpacing.current
     Column(
@@ -215,31 +207,28 @@ fun NewToolNewsContent(
                 shape = MaterialTheme.shapes.small
             )
             .fillMaxSize(0.75f)
-            .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
-                onClick()
-            },
+            .padding(spacing.spaceSmall),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = newToolsNews.title)
+        Text(text = "Yeni Aracımız Çıktı")
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        ToolItem(
-            modifier = Modifier.fillMaxWidth(0.35f),
-            tool = Tool(
-                id = 0,
-                title = newToolsNews.toolTitle,
-                resources = newToolsNews.toolResources,
-                route = newToolsNews.toolRoute
-            ),
+        ToolItemWithSticker(
+            tool = newTool,
+            onIconClick = { onClick(newTool) },
+            onIconLongClick = {},
+            onFavorite = {},
+            onUnFavorite = {}
         )
     }
 
 }
 @Composable
-fun SectoralNewsContent(
-    sectoralNews: SectoralNewsPresentation,
-    onClick: () -> Unit
+fun NewsContent(
+    news: News,
+    onClick: (News) -> Unit
 ) {
+    val spacing = LocalSpacing.current
     Column(
         modifier = Modifier
             .background(
@@ -247,14 +236,16 @@ fun SectoralNewsContent(
                 shape = MaterialTheme.shapes.small
             )
             .fillMaxSize(0.75f)
-            .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {
-                onClick()
+            .padding(spacing.spaceSmall)
+            .clickable(interactionSource = remember { MutableInteractionSource() },
+                indication = null) {
+                onClick(news)
             },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = sectoralNews.title,
+            text = news.title,
             style = MaterialTheme.typography.titleSmall.copy(
                 fontWeight = FontWeight.Bold
             ),

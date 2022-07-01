@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.aeratedConcTool.components.common
+package com.commandiron.tools_presentation.components
 
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
@@ -55,7 +55,7 @@ class ThousandSeparatorVisualTransformationWithAddedUnit(
             normalizedIntPart != intPart
         )
 
-        return TransformedText(newText + AnnotatedString(addedUnit), offsetMapping)
+        return TransformedText(newText + AnnotatedString(" $addedUnit"), offsetMapping)
     }
 
     private inner class ThousandSeparatorOffsetMapping(

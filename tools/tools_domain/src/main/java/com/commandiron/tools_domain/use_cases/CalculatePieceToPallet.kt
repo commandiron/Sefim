@@ -1,7 +1,9 @@
 package com.commandiron.tools_domain.use_cases
 
-class CalculateUnitToPallet {
-    operator fun invoke(unit: Int, thickness: Double) : Double {
+import kotlin.math.roundToInt
+
+class CalculatePieceToPallet {
+    operator fun invoke(piece: Int, thickness: Double) : Double {
         var pallet = 1.0
         when(thickness){
             8.5 -> pallet = 1.071
@@ -21,6 +23,6 @@ class CalculateUnitToPallet {
             35.5 -> pallet = 0.945
             40.0 -> pallet = 1.08
         }
-        return Math.round(unit*0.6*0.25*thickness/100/pallet * 100.0) / 100.0
+        return (piece * 0.6 * 0.25 * thickness / 100 / pallet * 100.0).roundToInt() / 100.0
     }
 }

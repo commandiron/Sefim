@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.aeratedConcTool.components.common
+package com.commandiron.tools_presentation.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -24,7 +24,7 @@ fun OutlinedDropDown(
     onClick:() -> Unit,
     isExpanded: Boolean,
     items: List<String>?,
-    onItemSelect:(Int) -> Unit,
+    onItemSelect:(String) -> Unit,
     onDismissRequest:(Int?) -> Unit,
 ) {
     val focusRequester = FocusRequester()

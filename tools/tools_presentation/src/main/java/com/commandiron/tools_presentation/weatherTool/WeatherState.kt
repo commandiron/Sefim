@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.weather
+package com.commandiron.tools_presentation.weatherTool
 
 import com.google.android.gms.maps.model.LatLng
 

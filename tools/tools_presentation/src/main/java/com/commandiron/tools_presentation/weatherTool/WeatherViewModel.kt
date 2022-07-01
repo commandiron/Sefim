@@ -1,4 +1,4 @@
-package com.commandiron.tools_presentation.weather
+package com.commandiron.tools_presentation.weatherTool
 
 import android.location.Location
 import androidx.compose.runtime.getValue

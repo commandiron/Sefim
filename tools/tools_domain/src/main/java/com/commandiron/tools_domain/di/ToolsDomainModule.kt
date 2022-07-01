@@ -20,6 +20,7 @@ object ToolsDomainModule {
         return ToolsUseCases(
             prePopulateAllToolsInToolsDb = PrepopulateAllToolsInToolsDb(repository),
             getAllTools = GetAllTools(repository),
+            getNewestTool = GetNewestTool(repository),
             getRecommendedTools = GetRecommendedTools(repository),
             favoriteTool = FavoriteTool(repository),
             unFavoriteTool = UnFavoriteTool(repository),
@@ -29,14 +30,16 @@ object ToolsDomainModule {
             getLatLngFromLocation = GetLatLngFromLocation(),
             getCityFromLatLng = GetCityFromLatLng(repository),
             getWeather = GetWeather(repository),
-            calculateUnitToPallet = CalculateUnitToPallet(),
-            calculatePalletToUnit = CalculatePalletToUnit(),
+            calculatePieceToPallet = CalculatePieceToPallet(),
+            calculatePalletToPiece = CalculatePalletToPiece(),
             calculateSquareMeterToPallet = CalculateSquareMeterToPallet(),
             calculatePalletToSquareMeter = CalculatePalletToSquareMeter(),
             calculateCubicMeterToPallet = CalculateCubicMeterToPallet(),
             calculatePalletToCubicMeter = CalculatePalletToCubicMeter(),
             calculateSquareToCubic = CalculateSquareToCubic(),
-            calculateCubicToSquare = CalculateCubicToSquare()
+            calculateCubicToSquare = CalculateCubicToSquare(),
+            getRebarPrices = GetRebarPrices(),
+            calculateRebarWeight = CalculateRebarWeight()
         )
     }
 }

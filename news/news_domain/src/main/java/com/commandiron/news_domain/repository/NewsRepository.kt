@@ -1,8 +1,8 @@
 package com.commandiron.news_domain.repository
 
-import com.commandiron.news_domain.model.NewsContentPresentation
+import com.commandiron.news_domain.model.News
 
 interface NewsRepository {
-    suspend fun insertAllNews(news: NewsContentPresentation)
-    suspend fun getAllNews(): NewsContentPresentation
+    suspend fun insertAllNews(newsList: List<News>)
+    suspend fun getAllNews(): List<News>
 }

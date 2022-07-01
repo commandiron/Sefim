@@ -1,8 +1,12 @@
-package com.commandiron.tools_presentation.aeratedConcTool
+package com.commandiron.tools_presentation.rebarPricesTool
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
@@ -10,14 +14,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.tools_presentation.BackText
-import com.commandiron.tools_presentation.aeratedConcTool.components.converters.CubicMetersPalletConverter
-import com.commandiron.tools_presentation.aeratedConcTool.components.converters.PiecePalletConverter
-import com.commandiron.tools_presentation.aeratedConcTool.components.converters.SquareCubicConverter
-import com.commandiron.tools_presentation.aeratedConcTool.components.converters.SquareMetersPalletConverter
+import com.commandiron.tools_presentation.rebarPricesTool.components.RebarPriceItem
 
 @Composable
-fun AeratedConcToolScreen(
-    viewModel: AeratedConcToolViewModel = hiltViewModel(),
+fun RebarPricesScreen(
+    viewModel: RebarPricesViewModel = hiltViewModel(),
     navigateUp:() -> Unit
 ) {
     val spacing = LocalSpacing.current
@@ -41,19 +42,25 @@ fun AeratedConcToolScreen(
             .fillMaxSize()
             .padding(spacing.defaultScreenPadding)
     ) {
-        BackText { viewModel.onEvent(AeratedConcToolUserEvent.BackTextClick) }
+        BackText { viewModel.onEvent( RebarPricesUserEvent.BackTextClick ) }
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
         Text(
-            text = "Gazbeton Hesaplama Aracı",
+            text = "İnşaat Demiri Fiyatları",
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
         )
-        Spacer(modifier = Modifier.height(spacing.spaceMedium))
-        SquareMetersPalletConverter(state, viewModel)
-        Spacer(modifier = Modifier.height(spacing.spaceMedium))
-        CubicMetersPalletConverter(state, viewModel)
-        Spacer(modifier = Modifier.height(spacing.spaceMedium))
-        PiecePalletConverter(state, viewModel)
-        Spacer(modifier = Modifier.height(spacing.spaceMedium))
-        SquareCubicConverter(state,viewModel)
+        Spacer(modifier = Modifier.height(spacing.spaceLarge))
+        LazyColumn {
+            state.rebarPrices?.let {
+                items(it){ item ->
+                    RebarPriceItem(
+                        date = item.date,
+                        city = item.city,
+                        q8mmPrice = item.q8mmPrice,
+                        q10mmPrice = item.q10mmPrice,
+                        q1232mmPrice = item.q1232mmPrice
+                    )
+                }
+            }
+        }
     }
 }

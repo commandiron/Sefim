@@ -7,6 +7,9 @@ class PrepopulateAllNewsIntoNewsDb(
     private val repository: NewsRepository
 ) {
     suspend operator fun invoke(){
-        repository.insertAllNews(defaultNews)
+        val newsList = listOf<News>(
+            //News to be insert
+        )
+        repository.insertAllNews(newsList)
     }
 }

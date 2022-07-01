@@ -27,13 +27,11 @@ fun BottomNavigation(
     val navigationItems = listOf(
         NavigationItem.HomeScreen,
         NavigationItem.Tools,
-        NavigationItem.MyCalculations,
         NavigationItem.News
     )
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     val bottomNavLineOffsetXAnim = remember { Animatable(0f) }
-    val scope = rememberCoroutineScope()
     CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
         AnimatedVisibility(
             visible = navigationItems.map { it.route }.contains(currentRoute),
@@ -46,17 +44,17 @@ fun BottomNavigation(
                     containerColor = MaterialTheme.colorScheme.background
                 ) {
                     navigationItems.forEachIndexed { index, item ->
+                        LaunchedEffect(key1 = currentRoute){
+                            if(currentRoute == item.route){
+                                bottomNavLineOffsetXAnim.animateTo(
+                                    targetValue = screenWidth.value / navigationItems.size * index,
+                                    animationSpec = tween(durationMillis = 700)
+                                )
+                            }
+                        }
                         NavigationBarItem(
                             selected = currentRoute == item.route,
-                            onClick = {
-                                scope.launch {
-                                    bottomNavLineOffsetXAnim.animateTo(
-                                        targetValue = screenWidth.value / navigationItems.size * index,
-                                        animationSpec = tween(durationMillis = 700)
-                                    )
-                                }
-                                onBottomNavItemClick(item.route)
-                            },
+                            onClick = { onBottomNavItemClick(item.route) },
                             icon = {
                                 Icon(
                                     imageVector = if(currentRoute == item.route) {
@@ -70,7 +68,7 @@ fun BottomNavigation(
                             },
                             label = {
                                 Text(
-                                    text = item.title,
+                                    text = item.title ?: "",
                                     color = MaterialTheme.colorScheme.primary,
                                     style = MaterialTheme.typography.labelLarge.copy(
                                         fontWeight = FontWeight.Bold
@@ -87,7 +85,7 @@ fun BottomNavigation(
                 Divider(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
-                        .fillMaxWidth(0.25f)
+                        .fillMaxWidth(1f / navigationItems.size)
                         .offset(x = Dp(bottomNavLineOffsetXAnim.value)),
                     color = MaterialTheme.colorScheme.primary
                 )

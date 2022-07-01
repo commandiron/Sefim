@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.commandiron.tools_presentation.aeratedConcTool.AeratedConcToolState
 import com.commandiron.tools_presentation.aeratedConcTool.AeratedConcToolUserEvent
 import com.commandiron.tools_presentation.aeratedConcTool.AeratedConcToolViewModel
-import com.commandiron.tools_presentation.aeratedConcTool.components.common.AeratedConcConverterComponent
+import com.commandiron.tools_presentation.aeratedConcTool.components.AeratedConcConverterComponent
 
 @Composable
 fun SquareCubicConverter(

@@ -1,25 +1,19 @@
 package com.commandiron.sefim.navigation
 
-import android.Manifest
-import android.nfc.tech.NfcV
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
-import com.commandiron.core_ui.LocalPermissionsState
 import com.commandiron.news_presentation.NewsScreen
 import com.commandiron.sefim.presentation.home.HomeScreen
 import com.commandiron.sefim.presentation.hot_splash.HotSplashScreen
 import com.commandiron.tools_presentation.aeratedConcTool.AeratedConcToolScreen
-import com.commandiron.tools_presentation.my_calculations.MyCalculationsScreen
+import com.commandiron.tools_presentation.rebarCalculatorTool.RebarCalculatorScreen
+import com.commandiron.tools_presentation.rebarPricesTool.RebarPricesScreen
 import com.commandiron.tools_presentation.tools.ToolsScreen
-import com.commandiron.tools_presentation.weather.WeatherScreen
-import com.commandiron.tools_presentation.weather.WeatherUserEvent
+import com.commandiron.tools_presentation.weatherTool.WeatherScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.permissions.PermissionStatus
-import com.google.accompanist.permissions.shouldShowRationale
 
 @Composable
 fun NavigationGraph(
@@ -78,6 +72,11 @@ fun NavigationGraph(
             HomeScreen(
                 navigateTo = {
                     navController.navigate(it)
+                },
+                onAddClick = {
+                    navController.bottomNavigate(
+                        NavigationItem.Tools.route
+                    )
                 }
             )
         }
@@ -89,7 +88,7 @@ fun NavigationGraph(
                         towards = AnimatedContentScope.SlideDirection.Left,
                         animationSpec = tween(700)
                     )
-                    NavigationItem.MyCalculations.route -> slideIntoContainer(
+                    NavigationItem.News.route -> slideIntoContainer(
                         towards = AnimatedContentScope.SlideDirection.Right,
                         animationSpec = tween(700)
                     )
@@ -102,7 +101,7 @@ fun NavigationGraph(
                         towards = AnimatedContentScope.SlideDirection.Right,
                         animationSpec = tween(700)
                     )
-                    NavigationItem.MyCalculations.route -> slideOutOfContainer(
+                    NavigationItem.News.route -> slideOutOfContainer(
                         towards = AnimatedContentScope.SlideDirection.Left,
                         animationSpec = tween(700)
                     )
@@ -117,15 +116,11 @@ fun NavigationGraph(
             )
         }
         composable(
-            route = NavigationItem.MyCalculations.route,
+            route = NavigationItem.News.route,
             enterTransition = {
                 when(initialState.destination.route){
                     NavigationItem.Tools.route -> slideIntoContainer(
                         towards = AnimatedContentScope.SlideDirection.Left,
-                        animationSpec = tween(700)
-                    )
-                    NavigationItem.News.route -> slideIntoContainer(
-                        towards = AnimatedContentScope.SlideDirection.Right,
                         animationSpec = tween(700)
                     )
                     else -> null
@@ -137,33 +132,6 @@ fun NavigationGraph(
                         towards = AnimatedContentScope.SlideDirection.Right,
                         animationSpec = tween(700)
                     )
-                    NavigationItem.News.route -> slideOutOfContainer(
-                        towards = AnimatedContentScope.SlideDirection.Left,
-                        animationSpec = tween(700)
-                    )
-                    else -> null
-                }
-            }
-        ){
-            MyCalculationsScreen()
-        }
-        composable(
-            route = NavigationItem.News.route,
-            enterTransition = {
-                when(initialState.destination.route){
-                    NavigationItem.MyCalculations.route -> slideIntoContainer(
-                        towards = AnimatedContentScope.SlideDirection.Left,
-                        animationSpec = tween(700)
-                    )
-                    else -> null
-                }
-            },
-            exitTransition = {
-                when (targetState.destination.route) {
-                    NavigationItem.MyCalculations.route -> slideOutOfContainer(
-                        towards = AnimatedContentScope.SlideDirection.Right,
-                        animationSpec = tween(700)
-                    )
                     else -> null
                 }
             }
@@ -171,7 +139,32 @@ fun NavigationGraph(
             NewsScreen()
         }
         composable(
-            route = NavigationItem.Weather.route,
+            route = NavigationItem.RebarPricesTool.route,
+            enterTransition = {
+                when(initialState.destination.route){
+                    else -> slideIntoContainer(
+                        towards = AnimatedContentScope.SlideDirection.Up,
+                        animationSpec = tween(700)
+                    )
+                }
+            },
+            exitTransition = {
+                when (targetState.destination.route) {
+                    else -> slideOutOfContainer(
+                        towards = AnimatedContentScope.SlideDirection.Down,
+                        animationSpec = tween(700)
+                    )
+                }
+            }
+        ){
+            RebarPricesScreen(
+                navigateUp = {
+                    navController.navigateUp()
+                }
+            )
+        }
+        composable(
+            route = NavigationItem.WeatherTool.route,
             enterTransition = {
                 when(initialState.destination.route){
                     else -> slideIntoContainer(
@@ -196,7 +189,7 @@ fun NavigationGraph(
             )
         }
         composable(
-            route = NavigationItem.AeratedConcTool.route,
+            route = NavigationItem.AeratedConcretePalletCalculatorTool.route,
             enterTransition = {
                 when(initialState.destination.route){
                     else -> slideIntoContainer(
@@ -215,6 +208,31 @@ fun NavigationGraph(
             }
         ){
             AeratedConcToolScreen(
+                navigateUp = {
+                    navController.navigateUp()
+                }
+            )
+        }
+        composable(
+            route = NavigationItem.RebarCalculatorTool.route,
+            enterTransition = {
+                when(initialState.destination.route){
+                    else -> slideIntoContainer(
+                        towards = AnimatedContentScope.SlideDirection.Up,
+                        animationSpec = tween(700)
+                    )
+                }
+            },
+            exitTransition = {
+                when (targetState.destination.route) {
+                    else -> slideOutOfContainer(
+                        towards = AnimatedContentScope.SlideDirection.Down,
+                        animationSpec = tween(700)
+                    )
+                }
+            }
+        ){
+            RebarCalculatorScreen(
                 navigateUp = {
                     navController.navigateUp()
                 }
