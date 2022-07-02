@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.Strings.Turkish.REBAR_PRICES
 import com.commandiron.tools_presentation.BackText
 import com.commandiron.tools_presentation.rebarPricesTool.components.RebarPriceItem
 
@@ -45,7 +46,7 @@ fun RebarPricesScreen(
         BackText { viewModel.onEvent( RebarPricesUserEvent.BackTextClick ) }
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
         Text(
-            text = "İnşaat Demiri Fiyatları",
+            text = REBAR_PRICES,
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
         )
         Spacer(modifier = Modifier.height(spacing.spaceLarge))

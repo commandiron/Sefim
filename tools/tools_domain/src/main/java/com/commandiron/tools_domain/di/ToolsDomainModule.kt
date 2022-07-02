@@ -38,7 +38,7 @@ object ToolsDomainModule {
             calculatePalletToCubicMeter = CalculatePalletToCubicMeter(),
             calculateSquareToCubic = CalculateSquareToCubic(),
             calculateCubicToSquare = CalculateCubicToSquare(),
-            getRebarPrices = GetRebarPrices(),
+            getRebarPrices = GetRebarPrices(repository),
             calculateRebarWeight = CalculateRebarWeight()
         )
     }

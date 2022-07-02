@@ -41,7 +41,8 @@ android {
             "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi",
             "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
             "-opt-in=androidx.compose.animation.ExperimentalAnimationApi",
-            "-opt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi"
+            "-opt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi",
+            "-opt-in=kotlinx.coroutines.InternalCoroutinesApi"
         )
     }
     composeOptions {

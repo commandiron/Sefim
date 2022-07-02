@@ -17,4 +17,7 @@ dependencies {
 
     "implementation"(Google.playServicesLocation)
     "implementation"(Google.playServicesMaps)
+
+    //Jsoup
+    "implementation" (Jsoup.jsoup)
 }

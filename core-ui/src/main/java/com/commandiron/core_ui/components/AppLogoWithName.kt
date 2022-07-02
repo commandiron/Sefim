@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import com.commandiron.core_ui.R
+import com.commandiron.core_ui.Strings.APP_NAME
 
 @Composable
 fun AppLogoWithName(
@@ -61,7 +62,7 @@ fun AppName(
 ) {
     Text(
         modifier = modifier,
-        text = "Şefim",
+        text = APP_NAME,
         style = MaterialTheme.typography.bodyLarge.copy(
             fontWeight = FontWeight.Bold
         ),

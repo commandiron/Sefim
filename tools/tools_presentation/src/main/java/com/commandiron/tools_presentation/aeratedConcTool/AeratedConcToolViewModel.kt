@@ -6,6 +6,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.commandiron.core.util.UiEvent
+import com.commandiron.core_ui.Strings.CUBIC_METER
+import com.commandiron.core_ui.Strings.EMPTY_RESULT_DOUBLE_DASH
+import com.commandiron.core_ui.Strings.EMPTY_STRING
+import com.commandiron.core_ui.Strings.SQUARE_METER
+import com.commandiron.core_ui.Strings.Turkish.PALLET
+import com.commandiron.core_ui.Strings.Turkish.PIECE
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -38,21 +44,21 @@ class AeratedConcToolViewModel @Inject constructor(
             AeratedConcToolUserEvent.SquareMetersPalletChangeUnitClick -> {
                 state = state.copy(
                     squareMetersPalletUnitConverterIsChanged = !state.squareMetersPalletUnitConverterIsChanged,
-                    squareMetersPalletResult = "--"
+                    squareMetersPalletResult = EMPTY_RESULT_DOUBLE_DASH
                 )
                 if(state.squareMetersPalletUnitConverterIsChanged){
                     state = state.copy(
-                        squareMetersPallet = "",
-                        squareMetersPalletLabel = "Palet",
-                        squareMetersPalletUnit = " Palet",
-                        squareMetersPalletResultUnit = "m2",
+                        squareMetersPallet = EMPTY_STRING,
+                        squareMetersPalletLabel = PALLET,
+                        squareMetersPalletUnit = PALLET,
+                        squareMetersPalletResultUnit = SQUARE_METER,
                     )
                 }else{
                     state = state.copy(
-                        squareMetersPallet = "",
-                        squareMetersPalletLabel = "m2",
-                        squareMetersPalletUnit = " m2",
-                        squareMetersPalletResultUnit = "Palet",
+                        squareMetersPallet = EMPTY_STRING,
+                        squareMetersPalletLabel = SQUARE_METER,
+                        squareMetersPalletUnit = SQUARE_METER,
+                        squareMetersPalletResultUnit = PALLET,
                     )
                 }
             }
@@ -85,21 +91,21 @@ class AeratedConcToolViewModel @Inject constructor(
             AeratedConcToolUserEvent.CubicMetersPalletChangeUnitClick -> {
                 state = state.copy(
                     cubicMetersPalletUnitConverterIsChanged = !state.cubicMetersPalletUnitConverterIsChanged,
-                    cubicMetersPalletResult = "--"
+                    cubicMetersPalletResult = EMPTY_RESULT_DOUBLE_DASH
                 )
                 if(state.cubicMetersPalletUnitConverterIsChanged){
                     state = state.copy(
-                        cubicMetersPallet = "",
-                        cubicMetersPalletLabel = "Palet",
-                        cubicMetersPalletUnit = " Palet",
-                        cubicMetersPalletResultUnit = "m3",
+                        cubicMetersPallet = EMPTY_STRING,
+                        cubicMetersPalletLabel = PALLET,
+                        cubicMetersPalletUnit = PALLET,
+                        cubicMetersPalletResultUnit = CUBIC_METER,
                     )
                 }else{
                     state = state.copy(
-                        cubicMetersPallet = "",
-                        cubicMetersPalletLabel = "m3",
-                        cubicMetersPalletUnit = " m3",
-                        cubicMetersPalletResultUnit = "Palet",
+                        cubicMetersPallet = EMPTY_STRING,
+                        cubicMetersPalletLabel = CUBIC_METER,
+                        cubicMetersPalletUnit = CUBIC_METER,
+                        cubicMetersPalletResultUnit = PALLET,
                     )
                 }
             }
@@ -132,21 +138,21 @@ class AeratedConcToolViewModel @Inject constructor(
             AeratedConcToolUserEvent.PiecePalletChangeUnitClick -> {
                 state = state.copy(
                     piecePalletUnitConverterIsChanged = !state.piecePalletUnitConverterIsChanged,
-                    piecePalletResult = "--"
+                    piecePalletResult = EMPTY_RESULT_DOUBLE_DASH
                 )
                 if(state.piecePalletUnitConverterIsChanged){
                     state = state.copy(
-                        piecePallet = "",
-                        piecePalletLabel = "Palet",
-                        piecePalletUnit = " Palet",
-                        piecePalletResultUnit = "Adet",
+                        piecePallet = EMPTY_STRING,
+                        piecePalletLabel = PALLET,
+                        piecePalletUnit = PALLET,
+                        piecePalletResultUnit = PIECE,
                     )
                 }else{
                     state = state.copy(
-                        piecePallet = "",
-                        piecePalletLabel = "Adet",
-                        piecePalletUnit = " Adet",
-                        piecePalletResultUnit = "Palet",
+                        piecePallet = EMPTY_STRING,
+                        piecePalletLabel = PIECE,
+                        piecePalletUnit = PIECE,
+                        piecePalletResultUnit = PALLET,
                     )
                 }
             }
@@ -179,21 +185,21 @@ class AeratedConcToolViewModel @Inject constructor(
             AeratedConcToolUserEvent.SquareCubicChangeUnitClick -> {
                 state = state.copy(
                     squareCubicUnitConverterIsChanged = !state.squareCubicUnitConverterIsChanged,
-                    squareCubicResult = "--"
+                    squareCubicResult = EMPTY_RESULT_DOUBLE_DASH
                 )
                 if(state.squareCubicUnitConverterIsChanged){
                     state = state.copy(
-                        squareCubic = "",
-                        squareCubicLabel = "m3",
-                        squareCubicUnit = " m3",
-                        squareCubicResultUnit = "m2",
+                        squareCubic = EMPTY_STRING,
+                        squareCubicLabel = CUBIC_METER,
+                        squareCubicUnit = CUBIC_METER,
+                        squareCubicResultUnit = SQUARE_METER,
                     )
                 }else{
                     state = state.copy(
-                        squareCubic = "",
-                        squareCubicLabel = "m2",
-                        squareCubicUnit = " m2",
-                        squareCubicResultUnit = "m3",
+                        squareCubic = EMPTY_STRING,
+                        squareCubicLabel = SQUARE_METER,
+                        squareCubicUnit = SQUARE_METER,
+                        squareCubicResultUnit = CUBIC_METER,
                     )
                 }
             }
@@ -243,7 +249,7 @@ class AeratedConcToolViewModel @Inject constructor(
             )
         }else{
             state = state.copy(
-                piecePalletResult = "--"
+                piecePalletResult = EMPTY_RESULT_DOUBLE_DASH
             )
         }
     }
@@ -260,7 +266,7 @@ class AeratedConcToolViewModel @Inject constructor(
             )
         }else{
             state = state.copy(
-                piecePalletResult = "--"
+                piecePalletResult = EMPTY_RESULT_DOUBLE_DASH
             )
         }
     }
@@ -277,7 +283,7 @@ class AeratedConcToolViewModel @Inject constructor(
             )
         }else{
             state = state.copy(
-                squareMetersPalletResult = "--"
+                squareMetersPalletResult = EMPTY_RESULT_DOUBLE_DASH
             )
         }
     }
@@ -294,7 +300,7 @@ class AeratedConcToolViewModel @Inject constructor(
             )
         }else{
             state = state.copy(
-                squareMetersPalletResult = "--"
+                squareMetersPalletResult = EMPTY_RESULT_DOUBLE_DASH
             )
         }
     }
@@ -311,7 +317,7 @@ class AeratedConcToolViewModel @Inject constructor(
             )
         }else{
             state = state.copy(
-                cubicMetersPalletResult = "--"
+                cubicMetersPalletResult = EMPTY_RESULT_DOUBLE_DASH
             )
         }
     }
@@ -328,7 +334,7 @@ class AeratedConcToolViewModel @Inject constructor(
             )
         }else{
             state = state.copy(
-                cubicMetersPalletResult = "--"
+                cubicMetersPalletResult = EMPTY_RESULT_DOUBLE_DASH
             )
         }
     }
@@ -345,7 +351,7 @@ class AeratedConcToolViewModel @Inject constructor(
             )
         }else{
             state = state.copy(
-                squareCubicResult = "--"
+                squareCubicResult = EMPTY_RESULT_DOUBLE_DASH
             )
         }
     }
@@ -362,7 +368,7 @@ class AeratedConcToolViewModel @Inject constructor(
             )
         }else{
             state = state.copy(
-                squareCubicResult = "--"
+                squareCubicResult = EMPTY_RESULT_DOUBLE_DASH
             )
         }
     }

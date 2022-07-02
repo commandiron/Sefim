@@ -5,7 +5,7 @@ import com.commandiron.tools_domain.model.RebarPrice
 import com.commandiron.tools_domain.model.Tool
 
 data class HomeNews(
-    val rebarPrice: RebarPrice,
-    val newTool: Tool,
-    val newsList: List<News>,
+    val rebarPrice: RebarPrice? = null,
+    val newTool: Tool? = null,
+    val newsList: List<News> = listOf(),
 )

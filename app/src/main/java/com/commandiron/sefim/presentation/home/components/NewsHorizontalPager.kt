@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -100,16 +99,21 @@ fun NewsHorizontalPager(
                 ) {
                     when (page) {
                         0 -> {
-                            RebarPriceContent(
-                                rebarPrice = homeNews.rebarPrice,
-                                onClick = onRebarPriceClick
-                            )
+                            homeNews.rebarPrice?.let {
+                                RebarPriceContent(
+                                    rebarPrice = it,
+                                    onClick = onRebarPriceClick
+                                )
+                            }
+
                         }
                         1 -> {
-                            NewToolContent(
-                                newTool = homeNews.newTool,
-                                onClick = onNewToolClick
-                            )
+                            homeNews.newTool?.let {
+                                NewToolContent(
+                                    newTool = it,
+                                    onClick = onNewToolClick
+                                )
+                            }
                         }
                         else -> {
                             NewsContent(

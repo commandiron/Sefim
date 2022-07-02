@@ -9,6 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.Strings.Turkish.SOON
+import com.commandiron.core_ui.Strings.Turkish.WITH_YOU
 import com.commandiron.core_ui.components.AppLogoWithName
 
 @Composable
@@ -22,13 +24,13 @@ fun NewsScreen(
         verticalArrangement = Arrangement.Center
     ){
         Text(
-            text = "YAKINDA",
+            text = SOON,
             style = MaterialTheme.typography.displayMedium,
             color = LocalContentColor.current.copy(alpha = 0.5f)
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         Text(
-            text = "SİZLERLE",
+            text = WITH_YOU,
             style = MaterialTheme.typography.displayMedium,
             color = LocalContentColor.current.copy(alpha = 0.5f)
         )

@@ -18,6 +18,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.LocalSystemUiController
+import com.commandiron.core_ui.Strings.Turkish.INNOVATIONS
+import com.commandiron.core_ui.Strings.Turkish.MY_FAVORITE_TOOLS
+import com.commandiron.core_ui.Strings.Turkish.NEWS
+import com.commandiron.core_ui.Strings.Turkish.RECOMMENDED_TOOLS
 import com.commandiron.core_ui.components.carousel.Carousel
 import com.commandiron.core_ui.components.carousel.CarouselDefaults
 import com.commandiron.sefim.presentation.home.components.*
@@ -68,7 +72,7 @@ fun HomeScreen(
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             Text(
-                text = "Favori Araçlarım",
+                text = MY_FAVORITE_TOOLS,
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
@@ -88,7 +92,7 @@ fun HomeScreen(
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
             Text(
-                text = "Haberler - Yenilikler",
+                text = "$NEWS - $INNOVATIONS",
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
@@ -106,7 +110,7 @@ fun HomeScreen(
             state.recommendedTools?.let { recommendedTools ->
                 if(recommendedTools.isNotEmpty()){
                     Text(
-                        text = "Önerilen Araçlar",
+                        text = RECOMMENDED_TOOLS,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     )
                     val lazyListState = rememberLazyListState()

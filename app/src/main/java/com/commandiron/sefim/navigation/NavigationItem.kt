@@ -8,6 +8,9 @@ import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.Feed
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.commandiron.core_ui.Strings.Turkish.MAIN_SCREEN
+import com.commandiron.core_ui.Strings.Turkish.NEWS
+import com.commandiron.core_ui.Strings.Turkish.TOOLS
 
 sealed class NavigationItem(
     val title: String? = null,
@@ -19,19 +22,19 @@ sealed class NavigationItem(
         route = "splashScreen"
     )
     object HomeScreen : NavigationItem(
-        title = "Ana Ekran",
+        title = MAIN_SCREEN,
         route = "homeScreen",
         selectedImageVector = Icons.Default.Home,
         unSelectedImageVector = Icons.Outlined.Home
     )
     object Tools : NavigationItem(
-        title = "Araçlar",
+        title = TOOLS,
         route = "tools",
         selectedImageVector = Icons.Default.Calculate,
         unSelectedImageVector = Icons.Outlined.Calculate
     )
     object News : NavigationItem(
-        title = "Haberler",
+        title = NEWS,
         route = "news",
         selectedImageVector = Icons.Default.Feed,
         unSelectedImageVector = Icons.Outlined.Feed

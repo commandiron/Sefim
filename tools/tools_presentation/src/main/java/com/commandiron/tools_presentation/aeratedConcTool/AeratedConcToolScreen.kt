@@ -9,6 +9,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.Strings.Turkish.AERATED_CONCRETE_CALCULATOR
 import com.commandiron.tools_presentation.BackText
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.CubicMetersPalletConverter
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.PiecePalletConverter
@@ -44,7 +45,7 @@ fun AeratedConcToolScreen(
         BackText { viewModel.onEvent(AeratedConcToolUserEvent.BackTextClick) }
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
         Text(
-            text = "Gazbeton Hesaplama Aracı",
+            text = AERATED_CONCRETE_CALCULATOR,
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
         )
         Spacer(modifier = Modifier.height(spacing.spaceMedium))

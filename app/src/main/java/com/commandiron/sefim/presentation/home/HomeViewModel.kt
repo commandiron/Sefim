@@ -10,6 +10,7 @@ import com.commandiron.core.util.UiEvent
 import com.commandiron.sefim.navigation.NavigationItem
 import com.commandiron.news_domain.use_cases.NewsUseCases
 import com.commandiron.sefim.presentation.home.model.HomeNews
+import com.commandiron.tools_domain.model.RebarPrice
 import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -113,12 +114,32 @@ class HomeViewModel @Inject constructor(
             state = state.copy(
                 favoriteTools = toolsUseCases.getFavoriteTools(),
                 homeNews = HomeNews(
-                    rebarPrice = toolsUseCases.getRebarPrices().first(),
                     newTool = toolsUseCases.getNewestTool(),
                     newsList = newsUseCases.getAllNews()
                 ),
                 recommendedTools = toolsUseCases.getRecommendedTools()
             )
+        }
+        getRebarPrices()
+    }
+
+    private fun getRebarPrices(){
+        viewModelScope.launch {
+            toolsUseCases.getRebarPrices().onEach { response ->
+                when(response){
+                    is Response.Error -> {
+                    }
+                    Response.Loading -> {
+                    }
+                    is Response.Success -> {
+                        state = state.copy(
+                            homeNews = state.homeNews?.copy(
+                                rebarPrice = response.data[1]
+                            ),
+                        )
+                    }
+                }
+            }.collect()
         }
     }
 

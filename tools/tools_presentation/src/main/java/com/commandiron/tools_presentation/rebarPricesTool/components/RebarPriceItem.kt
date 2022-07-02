@@ -6,11 +6,14 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.text.font.FontWeight
 import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.Strings.EMPTY_RESULT_DOUBLE_DASH
+import com.commandiron.core_ui.Strings.PHI_10
+import com.commandiron.core_ui.Strings.PHI_12_DASH_32
+import com.commandiron.core_ui.Strings.PHI_8
 
 @Composable
 fun RebarPriceItem(
@@ -51,21 +54,21 @@ fun RebarPriceItem(
             Row {
                 Text(
                     modifier = Modifier.alignBy(LastBaseline),
-                    text = "Φ8: ",
+                    text = "$PHI_8: ",
                     style = MaterialTheme.typography.titleSmall
                 )
                 Text(
                     modifier = Modifier.alignBy(LastBaseline),
-                    text = "$q8mmPrice TL",
+                    text = q8mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
                     style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold)
                 )
             }
             Text(
-                text = "Φ10: $q10mmPrice TL",
+                text = "$PHI_10: ${q10mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH }}",
                 style = MaterialTheme.typography.titleSmall
             )
             Text(
-                text = "Φ12-32: $q1232mmPrice TL",
+                text = "$PHI_12_DASH_32: ${q1232mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH }}",
                 style = MaterialTheme.typography.titleSmall
             )
         }

@@ -1,0 +1,36 @@
+package com.commandiron.core_ui
+
+object Strings {
+    const val APP_NAME = "Şefim"
+    const val EMPTY_STRING = ""
+    const val EMPTY_RESULT_DOUBLE_DASH = "--"
+    const val SQUARE_METER = "m²"
+    const val CUBIC_METER = "m³"
+    const val PHI_8 = "Φ8"
+    const val PHI_10 = "Φ10"
+    const val PHI_12_DASH_32 = "Φ12-32"
+    object Turkish {
+        const val SOON = "Yakında"
+        const val WITH_YOU = "Sizlerle"
+        const val AERATED_CONCRETE_CALCULATOR = "Gazbeton Hesaplama Aracı"
+        const val REBAR_QUANTITY_CALCULATOR = "İnşaat Demiri Metraj Hesaplayıcı"
+        const val GRAND_TOTAL = "Genel Toplam"
+        const val REBAR_PRICES = "İnşaat Demiri Fiyatları"
+        const val SEARCH = "Ara"
+        const val LOCATION_PERMISSION_REQUIRED = "Konum İzni Gerekiyor"
+        const val TODAY_REPORT = "Bugünün Raporu"
+        const val DEGREE_SYMBOL = "°"
+        const val HUMIDITY = "Nem"
+        const val SIGHT = "Görüş"
+        const val WIND = "Rüzgar"
+        const val TURN_BACK = "Geri Dön"
+        const val MY_FAVORITE_TOOLS = "Favori Araçlarım"
+        const val NEWS = "Haberler"
+        const val INNOVATIONS = "Yenilikler"
+        const val RECOMMENDED_TOOLS = "Önerilen Araçlar"
+        const val PALLET = "Palet"
+        const val PIECE = "Adet"
+        const val MAIN_SCREEN = "Ana Ekran"
+        const val TOOLS = "Araçlar"
+    }
+}

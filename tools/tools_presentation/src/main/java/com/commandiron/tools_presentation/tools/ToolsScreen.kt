@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.Strings.Turkish.SEARCH
 import com.commandiron.tools_presentation.components.SearchTextField
 import com.commandiron.tools_presentation.components.tool_items.ToolsVerticalGrid
 
@@ -34,7 +35,7 @@ fun ToolsScreen(
         SearchTextField(
             modifier = Modifier.fillMaxWidth(),
             text = state.searchText,
-            hint = "ARA",
+            hint = SEARCH.uppercase(),
             onChange = {viewModel.onEvent(ToolsUserEvent.SearchChange(it))},
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))

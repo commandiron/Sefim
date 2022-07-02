@@ -20,6 +20,12 @@ import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core.R
 import com.commandiron.core_ui.LocalPermissionsState
+import com.commandiron.core_ui.Strings.Turkish.DEGREE_SYMBOL
+import com.commandiron.core_ui.Strings.Turkish.HUMIDITY
+import com.commandiron.core_ui.Strings.Turkish.LOCATION_PERMISSION_REQUIRED
+import com.commandiron.core_ui.Strings.Turkish.SIGHT
+import com.commandiron.core_ui.Strings.Turkish.TODAY_REPORT
+import com.commandiron.core_ui.Strings.Turkish.WIND
 import com.commandiron.core_ui.components.OnLifecycleEvent
 import com.commandiron.tools_presentation.BackText
 import com.commandiron.tools_presentation.weatherTool.components.CheckFineLocationPermission
@@ -93,7 +99,7 @@ fun WeatherScreen(
                     )
                 }else{
                     Text(
-                        text = "Konum İzni Gerekiyor",
+                        text = LOCATION_PERMISSION_REQUIRED,
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.error
                     )
@@ -103,7 +109,7 @@ fun WeatherScreen(
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
         Text(
             modifier = Modifier.align(Alignment.Start),
-            text = "Bugünün Raporu ",
+            text = "$TODAY_REPORT ",
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
         )
         Text(
@@ -128,7 +134,7 @@ fun WeatherScreen(
         )
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
             Text(
-                text = "°",
+                text = DEGREE_SYMBOL,
                 style = MaterialTheme.typography.displayLarge.copy(
                     fontSize = 128.sp
                 ),
@@ -141,7 +147,7 @@ fun WeatherScreen(
                 ),
             )
             Text(
-                text = "°",
+                text = DEGREE_SYMBOL,
                 style = MaterialTheme.typography.displayLarge.copy(
                     fontSize = 128.sp
                 ),
@@ -168,7 +174,7 @@ fun WeatherScreen(
                         text = "${state.weatherHumidity}%",
                         style = MaterialTheme.typography.titleLarge
                     )
-                    Text(text = "Nem")
+                    Text(text = HUMIDITY)
                 }
                 Divider(
                     modifier = Modifier
@@ -184,7 +190,7 @@ fun WeatherScreen(
                         text = "${state.weatherVisibility} km",
                         style = MaterialTheme.typography.titleLarge
                     )
-                    Text(text = "Görüş")
+                    Text(text = SIGHT)
                 }
                 Divider(
                     modifier = Modifier
@@ -200,7 +206,7 @@ fun WeatherScreen(
                         text = "${state.weatherWindSpeed} km",
                         style = MaterialTheme.typography.titleLarge
                     )
-                    Text(text = "Rüzgar")
+                    Text(text = WIND)
                 }
             }
         }

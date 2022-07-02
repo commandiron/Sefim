@@ -2,6 +2,7 @@ package com.commandiron.tools_domain.repository
 
 import android.location.Location
 import com.commandiron.core.util.Response
+import com.commandiron.tools_domain.model.RebarPrice
 import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_domain.model.WeatherPresentation
 import com.google.android.gms.maps.model.LatLng
@@ -14,4 +15,5 @@ interface ToolsRepository {
     suspend fun getUserLastKnownPosition(): Flow<Response<Location>>
     fun getCityAndCountryNameFromLatLng(latLng: LatLng): String
     suspend fun getWeather(latitude: String, longitude: String) : Flow<Response<WeatherPresentation>>
+    suspend fun getRebarPrices(): Flow<Response<List<RebarPrice>>>
 }

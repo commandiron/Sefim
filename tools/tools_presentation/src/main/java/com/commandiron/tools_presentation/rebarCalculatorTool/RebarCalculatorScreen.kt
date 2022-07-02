@@ -20,6 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.Strings.Turkish.GRAND_TOTAL
+import com.commandiron.core_ui.Strings.Turkish.REBAR_QUANTITY_CALCULATOR
 import com.commandiron.tools_presentation.BackText
 import com.commandiron.tools_presentation.components.CustomOutlinedNumberTextField
 import com.commandiron.tools_presentation.components.OutlinedDropDown
@@ -53,7 +55,7 @@ fun RebarCalculatorScreen(
         BackText { viewModel.onEvent(RebarCalculatorUserEvent.BackTextClick) }
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
         Text(
-            text = "İnşaat Demiri Metraj Hesaplayıcı",
+            text = REBAR_QUANTITY_CALCULATOR,
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
         )
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
@@ -153,7 +155,7 @@ fun RebarCalculatorScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Genel Toplam: ",
+                        text = "$GRAND_TOTAL : ",
                         style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center
                     )

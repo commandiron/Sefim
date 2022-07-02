@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import com.commandiron.core_ui.Strings.Turkish.TURN_BACK
 
 @Composable
 fun BackText(
@@ -21,7 +22,7 @@ fun BackText(
             ) {
                 onClick()
             },
-        text = "Geri Dön",
+        text = TURN_BACK,
         style = MaterialTheme.typography.bodyLarge.copy(
             fontWeight = FontWeight.Bold
         ),
