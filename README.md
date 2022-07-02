@@ -4,9 +4,9 @@ Sefim is a native android tools app for construction site supervisors written in
 
 * Screenshots 🖼️
 
-<img src="https://user-images.githubusercontent.com/50905347/174627212-691237a2-88ea-4922-b1e7-95b943099ffe.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176216875-d5062c1a-475b-45a7-8ec9-2ed4b0373180.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176216881-d0c39657-739c-4eab-a8ba-ae98a9ae2177.png" width="250" height="530">
+<img src="https://user-images.githubusercontent.com/50905347/174627212-691237a2-88ea-4922-b1e7-95b943099ffe.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946391-d27a581f-9f47-4001-b70b-a4a944d78399.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946401-482da9a1-49cc-452f-9bea-8e255a364c53.png" width="250" height="530">
 
-<img src="https://user-images.githubusercontent.com/50905347/176216882-15d5a552-6a48-4356-98a7-d1b74a316035.png" width="250" height="530">
+<img src="https://user-images.githubusercontent.com/50905347/176946406-15034228-cc8d-4986-a94c-b20c9b5f4d07.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946411-23140ae4-b233-4c8f-b6ce-aa2dead00d61.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176947847-82ebbd1a-a35e-4e99-a05d-4930cf8cfd3f.png" width="250" height="530">
 
 * Structure - Modularization 🌲
 
@@ -15,6 +15,7 @@ Sefim is a native android tools app for construction site supervisors written in
 * Application - Features ☕
    * One time splash screen
    * Geolocation
+   * Calculation tools
    * Database operations - CRUD
    * Various animations
    * Language - Turkish
@@ -39,5 +40,6 @@ Sefim is a native android tools app for construction site supervisors written in
     * [Android Architecture components](https://developer.android.com/topic/libraries/architecture) ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
  
  * Todo ✔️
+   * Test ❌
    * Language - English ❌
    * Dark Theme ❌
