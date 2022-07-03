@@ -1,20 +1,25 @@
 package com.commandiron.tools_presentation.rebarPricesTool
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.Strings.Turkish.REBAR_PRICES
-import com.commandiron.tools_presentation.BackText
+import com.commandiron.tools_presentation.components.ToolHeader
 import com.commandiron.tools_presentation.rebarPricesTool.components.RebarPriceItem
 
 @Composable
@@ -43,11 +48,9 @@ fun RebarPricesScreen(
             .fillMaxSize()
             .padding(spacing.defaultScreenPadding)
     ) {
-        BackText { viewModel.onEvent( RebarPricesUserEvent.BackTextClick ) }
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
-        Text(
-            text = REBAR_PRICES,
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+        ToolHeader(
+            title = REBAR_PRICES,
+            onIconClick = {viewModel.onEvent(RebarPricesUserEvent.Back)}
         )
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
         LazyColumn {
@@ -60,6 +63,7 @@ fun RebarPricesScreen(
                         q10mmPrice = item.q10mmPrice,
                         q1232mmPrice = item.q1232mmPrice
                     )
+                    Spacer(modifier = Modifier.height(spacing.spaceMedium))
                 }
             }
         }

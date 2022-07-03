@@ -1,11 +1,9 @@
 package com.commandiron.tools_presentation.rebarPricesTool.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.text.font.FontWeight
@@ -26,23 +24,23 @@ fun RebarPriceItem(
     val spacing = LocalSpacing.current
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(spacing.spaceSmall),
-        shape = MaterialTheme.shapes.large,
+            .fillMaxWidth(),
+        shape = MaterialTheme.shapes.small,
         elevation = CardDefaults.cardElevation(defaultElevation = spacing.spaceSmall),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
         )
     ) {
         Column(
             modifier = Modifier
-                .padding(horizontal = spacing.spaceMedium, vertical = spacing.spaceSmall)
+                .padding(horizontal = spacing.spaceMedium, vertical = spacing.spaceMedium)
         ) {
             Row() {
                 Text(
                     modifier = Modifier.alignBy(LastBaseline),
                     text = city,
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                    color = MaterialTheme.colorScheme.primary
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
@@ -51,26 +49,53 @@ fun RebarPriceItem(
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
-            Row {
-                Text(
-                    modifier = Modifier.alignBy(LastBaseline),
-                    text = "$PHI_8: ",
-                    style = MaterialTheme.typography.titleSmall
-                )
-                Text(
-                    modifier = Modifier.alignBy(LastBaseline),
-                    text = q8mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
-                    style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold)
-                )
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
+            Divider(color = MaterialTheme.colorScheme.onTertiaryContainer)
+            Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        modifier = Modifier,
+                        text = PHI_8,
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                    Text(
+                        modifier = Modifier,
+                        text = q8mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
+                        style = MaterialTheme.typography.titleSmall
+                    )
+
+                }
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = PHI_10,
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                    Text(
+                        text = q10mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                }
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = PHI_12_DASH_32,
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                    Text(
+                        text = q1232mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                }
             }
-            Text(
-                text = "$PHI_10: ${q10mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH }}",
-                style = MaterialTheme.typography.titleSmall
-            )
-            Text(
-                text = "$PHI_12_DASH_32: ${q1232mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH }}",
-                style = MaterialTheme.typography.titleSmall
-            )
         }
     }
 }

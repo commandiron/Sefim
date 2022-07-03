@@ -231,7 +231,7 @@ class AeratedConcToolViewModel @Inject constructor(
                     piecePalletThicknessDropDownIsExpanded = false
                 )
             }
-            AeratedConcToolUserEvent.BackTextClick -> {
+            AeratedConcToolUserEvent.Back -> {
                 sendUiEvent(UiEvent.NavigateUp)
             }
         }

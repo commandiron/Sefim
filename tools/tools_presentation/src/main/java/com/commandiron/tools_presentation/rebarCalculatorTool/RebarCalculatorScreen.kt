@@ -22,9 +22,9 @@ import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.Strings.Turkish.GRAND_TOTAL
 import com.commandiron.core_ui.Strings.Turkish.REBAR_QUANTITY_CALCULATOR
-import com.commandiron.tools_presentation.BackText
 import com.commandiron.tools_presentation.components.CustomOutlinedNumberTextField
 import com.commandiron.tools_presentation.components.OutlinedDropDown
+import com.commandiron.tools_presentation.components.ToolHeader
 
 @Composable
 fun RebarCalculatorScreen(
@@ -52,13 +52,11 @@ fun RebarCalculatorScreen(
             .fillMaxSize()
             .padding(spacing.defaultScreenPadding)
     ) {
-        BackText { viewModel.onEvent(RebarCalculatorUserEvent.BackTextClick) }
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
-        Text(
-            text = REBAR_QUANTITY_CALCULATOR,
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+        ToolHeader(
+            title = REBAR_QUANTITY_CALCULATOR,
+            onIconClick = {viewModel.onEvent(RebarCalculatorUserEvent.Back)}
         )
-        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+        Spacer(modifier = Modifier.height(spacing.spaceLarge))
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall)

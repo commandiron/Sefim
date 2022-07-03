@@ -9,7 +9,6 @@ import com.commandiron.core.util.Response
 import com.commandiron.core.util.UiEvent
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -36,7 +35,7 @@ class RebarPricesViewModel @Inject constructor(
 
     fun onEvent(userEvent:  RebarPricesUserEvent) {
         when (userEvent) {
-            RebarPricesUserEvent.BackTextClick -> {
+            RebarPricesUserEvent.Back -> {
                 sendUiEvent(UiEvent.NavigateUp)
             }
         }

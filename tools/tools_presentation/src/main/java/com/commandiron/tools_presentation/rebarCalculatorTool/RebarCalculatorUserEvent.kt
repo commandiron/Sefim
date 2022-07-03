@@ -1,7 +1,7 @@
 package com.commandiron.tools_presentation.rebarCalculatorTool
 
 sealed class RebarCalculatorUserEvent{
-    object BackTextClick: RebarCalculatorUserEvent()
+    object Back: RebarCalculatorUserEvent()
     object AddRebarCalculatorItem: RebarCalculatorUserEvent()
     data class PieceValueChange(val index: Int, val text: String): RebarCalculatorUserEvent()
     data class LengthValueChange(val index: Int, val text: String): RebarCalculatorUserEvent()

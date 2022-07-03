@@ -16,6 +16,8 @@ private val DarkColorPalette = darkColorScheme(
     onPrimaryContainer = MyOnPrimaryContainerColor,
     tertiary = MyTertiaryColor,
     onTertiary = MyOnTertiaryColor,
+    tertiaryContainer = MyTertiaryContainerColor,
+    onTertiaryContainer = MyOnTertiaryContainerColor,
     background = MyBackgroundColor,
     onBackground = MyOnBackgroundColor
 )
@@ -27,6 +29,8 @@ private val LightColorPalette = lightColorScheme(
     onPrimaryContainer = MyOnPrimaryContainerColor,
     tertiary = MyTertiaryColor,
     onTertiary = MyOnTertiaryColor,
+    tertiaryContainer = MyTertiaryContainerColor,
+    onTertiaryContainer = MyOnTertiaryContainerColor,
     background = MyBackgroundColor,
     onBackground = MyOnBackgroundColor
 )

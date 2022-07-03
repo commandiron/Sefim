@@ -24,9 +24,9 @@ data class Dimensions(
 
     val bottomNavigationHeight: Dp = 80.dp,
     val defaultScreenPadding: PaddingValues = PaddingValues(
-        start = 24.dp,
-        top = spaceMedium,
-        end = 24.dp,
+        start = spaceMedium,
+        top = spaceLarge,
+        end = spaceMedium,
         bottom = bottomNavigationHeight
     )
 )

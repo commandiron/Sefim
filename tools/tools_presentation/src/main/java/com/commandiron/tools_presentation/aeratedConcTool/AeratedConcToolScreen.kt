@@ -1,6 +1,8 @@
 package com.commandiron.tools_presentation.aeratedConcTool
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -9,12 +11,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core.util.UiEvent
 import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.Strings
 import com.commandiron.core_ui.Strings.Turkish.AERATED_CONCRETE_CALCULATOR
-import com.commandiron.tools_presentation.BackText
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.CubicMetersPalletConverter
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.PiecePalletConverter
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.SquareCubicConverter
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.SquareMetersPalletConverter
+import com.commandiron.tools_presentation.components.ToolHeader
+import com.commandiron.tools_presentation.rebarPricesTool.RebarPricesUserEvent
 
 @Composable
 fun AeratedConcToolScreen(
@@ -42,13 +46,11 @@ fun AeratedConcToolScreen(
             .fillMaxSize()
             .padding(spacing.defaultScreenPadding)
     ) {
-        BackText { viewModel.onEvent(AeratedConcToolUserEvent.BackTextClick) }
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
-        Text(
-            text = AERATED_CONCRETE_CALCULATOR,
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+        ToolHeader(
+            title = AERATED_CONCRETE_CALCULATOR,
+            onIconClick = {viewModel.onEvent(AeratedConcToolUserEvent.Back)}
         )
-        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+        Spacer(modifier = Modifier.height(spacing.spaceLarge))
         SquareMetersPalletConverter(state, viewModel)
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
         CubicMetersPalletConverter(state, viewModel)

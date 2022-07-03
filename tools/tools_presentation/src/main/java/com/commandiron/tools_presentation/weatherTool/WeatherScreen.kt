@@ -1,8 +1,11 @@
 package com.commandiron.tools_presentation.weatherTool
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -27,7 +30,6 @@ import com.commandiron.core_ui.Strings.Turkish.SIGHT
 import com.commandiron.core_ui.Strings.Turkish.TODAY_REPORT
 import com.commandiron.core_ui.Strings.Turkish.WIND
 import com.commandiron.core_ui.components.OnLifecycleEvent
-import com.commandiron.tools_presentation.BackText
 import com.commandiron.tools_presentation.weatherTool.components.CheckFineLocationPermission
 import java.text.SimpleDateFormat
 import java.util.*
@@ -70,14 +72,20 @@ fun WeatherScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(spacing.defaultScreenPadding),
-        verticalArrangement = Arrangement.Center
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            BackText { viewModel.onEvent(WeatherUserEvent.BackTextClick) }
+            Icon(
+                modifier = Modifier
+                    .alignBy(LastBaseline)
+                    .clickable { viewModel.onEvent(WeatherUserEvent.Back) },
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
+            )
             Row(
                 modifier = Modifier
                     .alignBy(LastBaseline)

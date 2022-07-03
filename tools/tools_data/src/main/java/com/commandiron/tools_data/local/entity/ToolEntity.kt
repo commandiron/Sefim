@@ -2,7 +2,6 @@ package com.commandiron.tools_data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 
 @Entity
 data class ToolEntity(

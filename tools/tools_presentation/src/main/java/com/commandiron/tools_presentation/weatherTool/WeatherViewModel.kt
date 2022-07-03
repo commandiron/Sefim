@@ -35,7 +35,7 @@ class WeatherViewModel @Inject constructor(
 
     fun onEvent(userEvent: WeatherUserEvent) {
         when (userEvent) {
-            WeatherUserEvent.BackTextClick -> {
+            WeatherUserEvent.Back -> {
                 sendUiEvent(UiEvent.NavigateUp)
             }
             WeatherUserEvent.FineLocationPermissionDenied -> {

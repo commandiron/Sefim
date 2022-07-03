@@ -29,7 +29,7 @@ class RebarCalculatorViewModel @Inject constructor(
 
     fun onEvent(userEvent:  RebarCalculatorUserEvent) {
         when (userEvent) {
-            RebarCalculatorUserEvent.BackTextClick -> {
+            RebarCalculatorUserEvent.Back -> {
                 sendUiEvent(UiEvent.NavigateUp)
             }
             RebarCalculatorUserEvent.AddRebarCalculatorItem -> {

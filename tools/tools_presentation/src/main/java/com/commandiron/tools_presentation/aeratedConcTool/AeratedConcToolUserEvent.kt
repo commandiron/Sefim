@@ -24,5 +24,5 @@ sealed class AeratedConcToolUserEvent{
 
     object KeyboardDone: AeratedConcToolUserEvent()
     object ThicknessDropDownDismissClick: AeratedConcToolUserEvent()
-    object BackTextClick: AeratedConcToolUserEvent()
+    object Back: AeratedConcToolUserEvent()
 }
