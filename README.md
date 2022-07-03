@@ -35,6 +35,7 @@ Sefim is a native android tools app for construction site supervisors written in
     * [Hilt](https://dagger.dev/hilt/) - DI
     * [Google Play Services](https://developers.google.com/android)
         * location
+    * [Jsoup](https://jsoup.org) - perform web scraping
 * Architecture 🏗️
     * Model-View-ViewModel
     * [Android Architecture components](https://developer.android.com/topic/libraries/architecture) ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
