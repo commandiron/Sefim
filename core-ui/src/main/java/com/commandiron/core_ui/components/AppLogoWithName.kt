@@ -2,8 +2,6 @@ package com.commandiron.core_ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -14,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import com.commandiron.core_ui.R
-import com.commandiron.core_ui.Strings.APP_NAME
+import com.commandiron.core_ui.util.Strings.APP_NAME
 
 @Composable
 fun AppLogoWithName(

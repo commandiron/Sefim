@@ -6,16 +6,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.commandiron.core.util.UiEvent
-import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.core_ui.Strings.Turkish.SEARCH
+import com.commandiron.core_ui.util.UiEvent
+import com.commandiron.core_ui.util.LocalSpacing
+import com.commandiron.core_ui.util.Strings.Turkish.SEARCH
 import com.commandiron.tools_presentation.components.SearchTextField
 import com.commandiron.tools_presentation.components.tool_items.ToolsVerticalGrid
 
 @Composable
 fun ToolsScreen(
     viewModel: ToolsViewModel = hiltViewModel(),
-    navigateTo: (String) -> Unit
+    navigateTo: (String) -> Unit,
+    showSnackbar: (String) -> Unit
 ) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
@@ -23,6 +24,7 @@ fun ToolsScreen(
         viewModel.uiEvent.collect{ event ->
             when(event) {
                 is UiEvent.Navigate -> navigateTo(event.route)
+                is UiEvent.ShowSnackbar -> showSnackbar(event.message)
                 else -> {}
             }
         }
@@ -30,7 +32,7 @@ fun ToolsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(spacing.defaultScreenPadding),
+            .padding(spacing.defaultScreenPaddingForCompact),
     ){
         SearchTextField(
             modifier = Modifier.fillMaxWidth(),

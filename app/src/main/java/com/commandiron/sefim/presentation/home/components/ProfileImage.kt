@@ -1,6 +1,7 @@
 package com.commandiron.sefim.presentation.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,6 +16,7 @@ import com.commandiron.sefim.R
 fun ProfileImage(
     modifier: Modifier = Modifier,
     imageUrl: String?,
+    onClick:() -> Unit
 ) {
     Image(
         painter = rememberAsyncImagePainter(
@@ -32,7 +34,8 @@ fun ProfileImage(
         ),
         contentDescription = null,
         modifier = modifier
-            .clip(MaterialTheme.shapes.large),
+            .clip(MaterialTheme.shapes.large)
+            .clickable { onClick() },
         contentScale = ContentScale.Crop
     )
 }

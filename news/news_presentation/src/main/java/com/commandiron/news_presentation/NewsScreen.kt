@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.core_ui.Strings.Turkish.SOON
-import com.commandiron.core_ui.Strings.Turkish.WITH_YOU
+import com.commandiron.core_ui.util.Strings.Turkish.SOON
+import com.commandiron.core_ui.util.Strings.Turkish.WITH_YOU
 import com.commandiron.core_ui.components.AppLogoWithName
+import com.commandiron.core_ui.util.LocalSpacing
 
 @Composable
 fun NewsScreen(

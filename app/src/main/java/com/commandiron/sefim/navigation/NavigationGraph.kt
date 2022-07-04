@@ -18,7 +18,8 @@ import com.google.accompanist.navigation.animation.composable
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    shouldShowHotSplash: Boolean
+    shouldShowHotSplash: Boolean,
+    showSnackBar:(String) -> Unit
 ) {
     AnimatedNavHost(
         navController = navController,
@@ -73,11 +74,7 @@ fun NavigationGraph(
                 navigateTo = {
                     navController.navigate(it)
                 },
-                onAddClick = {
-                    navController.bottomNavigate(
-                        NavigationItem.Tools.route
-                    )
-                }
+                showSnackbar = showSnackBar
             )
         }
         composable(
@@ -112,7 +109,8 @@ fun NavigationGraph(
             ToolsScreen(
                 navigateTo = {
                     navController.navigate(it)
-                }
+                },
+                showSnackbar = showSnackBar
             )
         }
         composable(

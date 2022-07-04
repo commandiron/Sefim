@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ToolsRepository {
     suspend fun insertAllTools(tools: List<Tool>)
-    suspend fun getAllTools(): List<Tool>
+    suspend fun getAllTools(): Flow<Response<List<Tool>>>
     suspend fun insertTool(tool: Tool): Flow<Response<Unit>>
     suspend fun getUserLastKnownPosition(): Flow<Response<Location>>
     fun getCityAndCountryNameFromLatLng(latLng: LatLng): String

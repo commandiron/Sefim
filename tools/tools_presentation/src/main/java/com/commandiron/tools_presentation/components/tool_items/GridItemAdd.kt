@@ -1,4 +1,4 @@
-package com.commandiron.sefim.presentation.home.components
+package com.commandiron.tools_presentation.components.tool_items
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -11,7 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.util.LocalSpacing
 
 @Composable
 fun GridItemAdd(

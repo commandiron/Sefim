@@ -81,6 +81,7 @@ dependencies {
     implementation(AndroidX.appCompat)
     implementation(AndroidX.splashScreen)
 
+    implementation(Google.material)
     implementation(Google.material3)
     implementation(Google.materialIconsCore)
     implementation(Google.materialIconsExtended)

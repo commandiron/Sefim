@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.commandiron.core.util.Response
-import com.commandiron.core.util.UiEvent
+import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel

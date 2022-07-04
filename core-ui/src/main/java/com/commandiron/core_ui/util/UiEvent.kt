@@ -1,4 +1,4 @@
-package com.commandiron.core.util
+package com.commandiron.core_ui.util
 
 sealed class UiEvent {
     object NavigateUp: UiEvent()

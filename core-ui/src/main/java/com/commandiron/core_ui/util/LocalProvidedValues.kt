@@ -1,4 +1,4 @@
-package com.commandiron.core_ui
+package com.commandiron.core_ui.util
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.ProvidedValue
@@ -23,9 +23,15 @@ data class Dimensions(
     val spaceXXXLarge: Dp = 256.dp,
 
     val bottomNavigationHeight: Dp = 80.dp,
-    val defaultScreenPadding: PaddingValues = PaddingValues(
+    val defaultScreenPaddingForCompact: PaddingValues = PaddingValues(
         start = spaceMedium,
         top = spaceLarge,
+        end = spaceMedium,
+        bottom = bottomNavigationHeight
+    ),
+    val defaultScreenPaddingForExpanded: PaddingValues = PaddingValues(
+        start = spaceMedium,
+        top = spaceSmall,
         end = spaceMedium,
         bottom = bottomNavigationHeight
     )
@@ -39,16 +45,20 @@ val LocalNavController = compositionLocalOf<NavHostController> {
 val LocalSystemUiController = compositionLocalOf<SystemUiController> {
     error("No System Ui Controller")
 }
-
+val LocalWindowTypeInfo = compositionLocalOf<WindowInfo> {
+    error("No Window Info")
+}
 fun getProvidedValuesOnApp(
     permissionsState: MultiplePermissionsState,
     navController: NavHostController,
     systemUiController: SystemUiController,
+    windowInfo: WindowInfo
 ): Array<ProvidedValue<*>> {
     return arrayOf(
         LocalSpacing provides Dimensions(),
         LocalNavController provides navController,
         LocalPermissionsState provides permissionsState,
-        LocalSystemUiController provides systemUiController
+        LocalSystemUiController provides systemUiController,
+        LocalWindowTypeInfo provides windowInfo
     )
 }

@@ -3,6 +3,7 @@ package com.commandiron.tools_presentation.weatherTool
 import com.google.android.gms.maps.model.LatLng
 
 data class WeatherState(
+    val isLoading: Boolean = false,
     val title: String = "",
     val myLatLng: LatLng = LatLng(41.015137,28.979530),
     val myCity: String = "İstanbul",

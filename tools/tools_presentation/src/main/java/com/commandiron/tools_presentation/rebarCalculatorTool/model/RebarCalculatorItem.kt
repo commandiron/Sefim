@@ -1,6 +1,9 @@
 package com.commandiron.tools_presentation.rebarCalculatorTool.model
 
+import java.util.*
+
 data class RebarCalculatorItem(
+    val itemId: String = UUID.randomUUID().toString(),
     val pieceValue: String = "1",
     val pieceLabel: String = "Adet",
     val pieceUnit: String = "Adet",

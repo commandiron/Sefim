@@ -6,6 +6,7 @@ import android.location.Geocoder
 import android.location.Location
 import androidx.core.app.ActivityCompat
 import com.commandiron.core.util.Response
+import com.commandiron.core.util.Strings.ExceptionMessages.EMPTY_LIST
 import com.commandiron.core.util.Strings.ExceptionMessages.LOCATION_FAILED
 import com.commandiron.core.util.Strings.ExceptionMessages.LOCATION_IS_NULL
 import com.commandiron.core.util.Strings.ExceptionMessages.SOMETHING_BAD_HAPPENED
@@ -41,12 +42,14 @@ class ToolsRepositoryImpl(
         dao.insertAllTools(tools.map { it.toToolEntity() })
     }
 
-    override suspend fun getAllTools(): List<Tool> {
-        return dao
-            .getAllTools()
-            .map { entities ->
-                entities.toTool()
-            }
+    override suspend fun getAllTools(): Flow<Response<List<Tool>>> = flow {
+        emit(Response.Loading)
+        try {
+            val allTools = dao.getAllTools().map { entities -> entities.toTool() }
+            emit(Response.Success(allTools))
+        }catch (e: Exception){
+            emit(Response.Error(e.message ?: SOMETHING_BAD_HAPPENED))
+        }
     }
 
     override suspend fun insertTool(tool: Tool) : Flow<Response<Unit>> = flow {
@@ -114,9 +117,9 @@ class ToolsRepositoryImpl(
                     val rebarPrices = mutableListOf<RebarPrice>()
                     val dataForLoop: Elements?
 
-                    val DATA_URL = BuildConfig.JSOUP_DATA_URL
+                    val dataUrl = BuildConfig.JSOUP_DATA_URL
 
-                    val doc = Jsoup.connect(DATA_URL).get()
+                    val doc = Jsoup.connect(dataUrl).get()
                     val cssQuery = "body > div.body > div > div:nth-child(1) > div > div.col-md-8.mb-5.mb-lg-0.order-first.order-md-2 > div.card.analiztablocard > div.card-body > div > table > tbody"
                     val fullData = doc.select(cssQuery)
                     dataForLoop = fullData.first()?.children()?.select("tr")
@@ -126,7 +129,7 @@ class ToolsRepositoryImpl(
                             val dataChildren = i.children()
                             val rebarPrice =
                                 RebarPrice(
-                                    date = SimpleDateFormat("dd.MM.yyyy EEEE", Locale.getDefault()).format(Date()),
+                                    date = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date()),
                                     city = dataChildren.select("th").text(),
                                     q8mmPrice = dataChildren.select("td:nth-child(2)").text(),
                                     q10mmPrice = dataChildren.select("td:nth-child(3)").text(),
@@ -135,7 +138,12 @@ class ToolsRepositoryImpl(
                             rebarPrices += rebarPrice
                         }
                     }
-                    send(Response.Success(rebarPrices))
+                    if(rebarPrices.isNotEmpty()){
+                        send(Response.Success(rebarPrices))
+                    }else{
+                        send(Response.Error(EMPTY_LIST))
+                    }
+
                 }
             }
 

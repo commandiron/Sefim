@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.commandiron.core_ui.LocalSpacing
 import com.commandiron.core_ui.R
+import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.tools_presentation.components.CustomOutlinedNumberTextField
 import com.commandiron.tools_presentation.components.OutlinedDropDown
 

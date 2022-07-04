@@ -6,20 +6,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LastBaseline
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.core_ui.Strings.EMPTY_RESULT_DOUBLE_DASH
-import com.commandiron.core_ui.Strings.PHI_10
-import com.commandiron.core_ui.Strings.PHI_12_DASH_32
-import com.commandiron.core_ui.Strings.PHI_8
+import com.commandiron.core_ui.util.LocalSpacing
+import com.commandiron.core_ui.util.Strings.EMPTY_RESULT_DOUBLE_DASH
+import com.commandiron.core_ui.util.Strings.PHI_10
+import com.commandiron.core_ui.util.Strings.PHI_12_DASH_32
+import com.commandiron.core_ui.util.Strings.PHI_8
+import com.commandiron.tools_domain.model.RebarPrice
 
 @Composable
 fun RebarPriceItem(
-    date: String,
-    city: String,
-    q8mmPrice: String,
-    q10mmPrice: String,
-    q1232mmPrice: String,
+    rebarPrice: RebarPrice,
+    textStyle: TextStyle = MaterialTheme.typography.titleSmall
 ) {
     val spacing = LocalSpacing.current
     Card(
@@ -28,7 +27,7 @@ fun RebarPriceItem(
         shape = MaterialTheme.shapes.small,
         elevation = CardDefaults.cardElevation(defaultElevation = spacing.spaceSmall),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
         )
     ) {
         Column(
@@ -38,19 +37,19 @@ fun RebarPriceItem(
             Row() {
                 Text(
                     modifier = Modifier.alignBy(LastBaseline),
-                    text = city,
-                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                    text = rebarPrice.city,
+                    style = textStyle.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.primary
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
                     modifier = Modifier.alignBy(LastBaseline),
-                    text = date,
+                    text = rebarPrice.date,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
-            Divider(color = MaterialTheme.colorScheme.onTertiaryContainer)
+            Divider(color = LocalContentColor.current.copy(alpha = 0.1f))
             Spacer(modifier = Modifier.height(spacing.spaceExtraSmall))
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -62,12 +61,12 @@ fun RebarPriceItem(
                     Text(
                         modifier = Modifier,
                         text = PHI_8,
-                        style = MaterialTheme.typography.titleSmall
+                        style = textStyle
                     )
                     Text(
                         modifier = Modifier,
-                        text = q8mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
-                        style = MaterialTheme.typography.titleSmall
+                        text = rebarPrice.q8mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
+                        style = textStyle
                     )
 
                 }
@@ -76,11 +75,11 @@ fun RebarPriceItem(
                 ) {
                     Text(
                         text = PHI_10,
-                        style = MaterialTheme.typography.titleSmall
+                        style = textStyle
                     )
                     Text(
-                        text = q10mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
-                        style = MaterialTheme.typography.titleSmall
+                        text = rebarPrice.q10mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
+                        style = textStyle
                     )
                 }
                 Column(
@@ -88,11 +87,11 @@ fun RebarPriceItem(
                 ) {
                     Text(
                         text = PHI_12_DASH_32,
-                        style = MaterialTheme.typography.titleSmall
+                        style = textStyle
                     )
                     Text(
-                        text = q1232mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
-                        style = MaterialTheme.typography.titleSmall
+                        text = rebarPrice.q1232mmPrice.ifEmpty { EMPTY_RESULT_DOUBLE_DASH },
+                        style = textStyle
                     )
                 }
             }

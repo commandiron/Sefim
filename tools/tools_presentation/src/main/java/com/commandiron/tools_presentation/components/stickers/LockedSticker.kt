@@ -10,7 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.util.LocalSpacing
 
 @Composable
 fun LockedSticker(

@@ -6,11 +6,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.commandiron.core.util.Response
-import com.commandiron.core.util.UiEvent
+import com.commandiron.core_ui.util.Strings.Turkish.LOCKED
+import com.commandiron.core_ui.util.Strings.Turkish.SOMETHING_WENT_WRONG
+import com.commandiron.core_ui.util.Strings.Turkish.SOON_THREE_DOT
+import com.commandiron.core_ui.util.Strings.Turkish.THIS_FEATURE_IS_NOT_ACTIVE_YET
+import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.sefim.navigation.NavigationItem
 import com.commandiron.news_domain.use_cases.NewsUseCases
-import com.commandiron.sefim.presentation.home.model.HomeNews
-import com.commandiron.tools_domain.model.RebarPrice
 import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,6 +42,15 @@ class HomeViewModel @Inject constructor(
 
     fun onEvent(userEvent: HomeUserEvent) {
         when (userEvent) {
+            HomeUserEvent.EditClick -> {
+                sendUiEvent(UiEvent.ShowSnackbar(THIS_FEATURE_IS_NOT_ACTIVE_YET))
+            }
+            HomeUserEvent.NotificationClick -> {
+                sendUiEvent(UiEvent.ShowSnackbar(THIS_FEATURE_IS_NOT_ACTIVE_YET))
+            }
+            HomeUserEvent.ProfilePictureClick -> {
+                sendUiEvent(UiEvent.ShowSnackbar(THIS_FEATURE_IS_NOT_ACTIVE_YET))
+            }
             HomeUserEvent.AddClick -> {
                 sendUiEvent(UiEvent.Navigate(NavigationItem.Tools.route))
             }
@@ -57,18 +68,16 @@ class HomeViewModel @Inject constructor(
                 )
             }
             is HomeUserEvent.UnFavoriteClick -> {
-                //Open Alert Dialog
                 viewModelScope.launch {
                     toolsUseCases.unFavoriteTool(userEvent.tool).onEach {
                         when(it){
                             is Response.Error -> {
-                                //Favorilere eklenemedi
+                                sendUiEvent(UiEvent.ShowSnackbar(SOMETHING_WENT_WRONG))
                             }
-                            Response.Loading -> {
-                                //Loading
-                            }
+                            Response.Loading -> {}
                             is Response.Success -> {
-                                refreshData()
+                                getFavoriteTools()
+                                getRecommendedTools()
                             }
                         }
                     }.collect()
@@ -76,21 +85,20 @@ class HomeViewModel @Inject constructor(
             }
             is HomeUserEvent.FavoriteClick -> {
                 if(userEvent.tool.toolTags.contains(ToolTag.SOON)){
-                    //Yakında gelecek snackbar
+                    sendUiEvent(UiEvent.ShowSnackbar(SOON_THREE_DOT))
                 }else if (userEvent.tool.toolTags.contains(ToolTag.LOCKED)){
-                    //Kilitli, açmak için kayıt olunuz, alert dialog.
+                    sendUiEvent(UiEvent.ShowSnackbar(LOCKED))
                 }else{
                     viewModelScope.launch {
                         toolsUseCases.favoriteTool(userEvent.tool).onEach {
                             when(it){
                                 is Response.Error -> {
-                                    //Favorilere eklenemedi
+                                    sendUiEvent(UiEvent.ShowSnackbar(SOMETHING_WENT_WRONG))
                                 }
-                                Response.Loading -> {
-                                    //Loading
-                                }
+                                Response.Loading -> {}
                                 is Response.Success -> {
-                                    refreshData()
+                                    getFavoriteTools()
+                                    getRecommendedTools()
                                 }
                             }
                         }.collect()
@@ -106,40 +114,106 @@ class HomeViewModel @Inject constructor(
             HomeUserEvent.RebarPriceClick -> {
                 sendUiEvent(UiEvent.Navigate(NavigationItem.RebarPricesTool.route))
             }
+            HomeUserEvent.NewsRefresh -> {
+                refreshData()
+            }
         }
     }
 
     private fun refreshData(){
-        viewModelScope.launch {
-            state = state.copy(
-                favoriteTools = toolsUseCases.getFavoriteTools(),
-                homeNews = HomeNews(
-                    newTool = toolsUseCases.getNewestTool(),
-                    newsList = newsUseCases.getAllNews()
-                ),
-                recommendedTools = toolsUseCases.getRecommendedTools()
-            )
-        }
+        getFavoriteTools()
+        getRecommendedTools()
         getRebarPrices()
+        getNewestTool()
+        getNewsList()
+    }
+
+    private fun getFavoriteTools(){
+        viewModelScope.launch {
+            toolsUseCases.getFavoriteTools().collect{ response ->
+                when(response){
+                    is Response.Error -> {
+                        println("1")
+                    }
+                    Response.Loading -> {
+                        println("2")
+                    }
+                    is Response.Success -> {
+                        println("3:" + response.data)
+                        state = state.copy(
+                            favoriteTools = response.data
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getRecommendedTools(){
+        viewModelScope.launch {
+            toolsUseCases.getRecommendedTools().collect{ response ->
+                when(response){
+                    is Response.Error -> {}
+                    Response.Loading -> {}
+                    is Response.Success -> {
+                        state = state.copy(
+                            recommendedTools = response.data
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun getRebarPrices(){
         viewModelScope.launch {
-            toolsUseCases.getRebarPrices().onEach { response ->
+            toolsUseCases.getRebarPrices().collect{ response ->
                 when(response){
                     is Response.Error -> {
+                        state = state.copy(
+                            newsIsLoading = false,
+                            newsHasError = true
+                        )
                     }
                     Response.Loading -> {
+                        state = state.copy(
+                            newsIsLoading = true,
+                            newsHasError = false
+                        )
                     }
                     is Response.Success -> {
                         state = state.copy(
-                            homeNews = state.homeNews?.copy(
-                                rebarPrice = response.data[1]
+                            homeNews = state.homeNews.copy(
+                                rebarPrice = response.data[1],
                             ),
+                            newsIsLoading = false,
+                            newsHasError = false
                         )
                     }
                 }
-            }.collect()
+            }
+        }
+    }
+
+    private fun getNewestTool(){
+        viewModelScope.launch {
+            toolsUseCases.getNewestTool().collect{ tool ->
+                state = state.copy(
+                    homeNews = state.homeNews.copy(
+                        newTool = tool,
+                    ),
+                )
+            }
+        }
+    }
+
+    private fun getNewsList(){
+        viewModelScope.launch {
+            state = state.copy(
+                homeNews = state.homeNews.copy(
+                    newsList = newsUseCases.getAllNews()
+                ),
+            )
         }
     }
 

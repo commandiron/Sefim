@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
 

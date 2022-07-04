@@ -1,4 +1,4 @@
-package com.commandiron.core_ui
+package com.commandiron.core_ui.util
 
 object Strings {
     const val APP_NAME = "Şefim"
@@ -32,5 +32,10 @@ object Strings {
         const val PIECE = "Adet"
         const val MAIN_SCREEN = "Ana Ekran"
         const val TOOLS = "Araçlar"
+        const val THIS_FEATURE_IS_NOT_ACTIVE_YET = "Bu özellik henüz aktif değil."
+        const val SNACKBAR_CLOSE_ACTION_TEXT = "Kapat"
+        const val SOON_THREE_DOT = "Yakında..."
+        const val LOCKED = "Kilitli."
+        const val SOMETHING_WENT_WRONG = "Bir hata oluştu."
     }
 }

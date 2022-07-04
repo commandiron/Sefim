@@ -5,9 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,30 +15,33 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.news_domain.model.*
 import com.commandiron.sefim.presentation.home.model.HomeNews
 import com.commandiron.tools_domain.model.RebarPrice
 import com.commandiron.tools_domain.model.Tool
-import com.commandiron.tools_presentation.components.tool_items.ToolItem
 import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
+import com.commandiron.tools_presentation.rebarPricesTool.components.RebarPriceItem
 import com.google.accompanist.pager.*
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.math.absoluteValue
 
 @Composable
 fun NewsHorizontalPager(
     modifier: Modifier = Modifier,
+    isLoading: Boolean = false,
+    hasError: Boolean = false,
     homeNews: HomeNews,
+    bodyTextStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     onRebarPriceClick: () -> Unit,
     onNewToolClick: (Tool) -> Unit,
-    onNewsClick:(News) -> Unit
+    onNewsClick:(News) -> Unit,
+    refresh:() -> Unit
 ) {
     val spacing = LocalSpacing.current
     val pagerState = rememberPagerState()
@@ -57,7 +60,7 @@ fun NewsHorizontalPager(
                 modifier = Modifier
                     .aspectRatio(1.5f)
                     .fillMaxHeight()
-                    .fillMaxWidth(0.85f)
+                    .fillMaxWidth()
                     .graphicsLayer {
                         val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
 
@@ -92,34 +95,54 @@ fun NewsHorizontalPager(
                     ),
                     contentDescription = null
                 )
+                if(hasError){
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.TopEnd
+                    ) {
+                        IconButton(
+                            onClick = { refresh() }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Refresh,
+                                contentDescription = null
+                            )
+                        }
+                    }
+                }
                 Box(
                     modifier = Modifier
                         .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    when (page) {
-                        0 -> {
-                            homeNews.rebarPrice?.let {
-                                RebarPriceContent(
-                                    rebarPrice = it,
-                                    onClick = onRebarPriceClick
-                                )
-                            }
+                    if(isLoading){
+                        CircularProgressIndicator()
+                    }else{
+                        when (page) {
+                            0 -> {
+                                homeNews.rebarPrice?.let {
+                                    RebarPriceContent(
+                                        rebarPrice = it,
+                                        bodyTextStyle = bodyTextStyle,
+                                        onClick = onRebarPriceClick
+                                    )
+                                }
 
-                        }
-                        1 -> {
-                            homeNews.newTool?.let {
-                                NewToolContent(
-                                    newTool = it,
-                                    onClick = onNewToolClick
+                            }
+                            1 -> {
+                                homeNews.newTool?.let {
+                                    NewToolContent(
+                                        newTool = it,
+                                        onClick = onNewToolClick
+                                    )
+                                }
+                            }
+                            else -> {
+                                NewsContent(
+                                    news = homeNews.newsList[page - 2],
+                                    onClick = onNewsClick
                                 )
                             }
-                        }
-                        else -> {
-                            NewsContent(
-                                news = homeNews.newsList[page - 2],
-                                onClick = onNewsClick
-                            )
                         }
                     }
                 }
@@ -146,6 +169,7 @@ fun NewsHorizontalPager(
 @Composable
 fun RebarPriceContent(
     rebarPrice: RebarPrice,
+    bodyTextStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     onClick: () -> Unit
 ) {
     val spacing = LocalSpacing.current
@@ -155,46 +179,22 @@ fun RebarPriceContent(
                 color = MaterialTheme.colorScheme.primaryContainer.copy(0.8f),
                 shape = MaterialTheme.shapes.small
             )
-            .fillMaxSize(0.75f)
-            .padding(spacing.spaceSmall)
+            .fillMaxSize(0.9f)
+            .padding(spacing.spaceExtraSmall)
             .clickable(interactionSource = remember { MutableInteractionSource() },
                 indication = null) {
                 onClick()
             },
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
-            text = rebarPrice.date,
-            style = MaterialTheme.typography.bodySmall
+            text = "Günlük Demir Fiyatı:",
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
         )
-        Text(
-            text = rebarPrice.city + " " + "Demir Fiyatları",
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                modifier = Modifier.alignBy(LastBaseline),
-                text = "Φ8: ",
-                style = MaterialTheme.typography.bodyLarge
-            )
-            Text(
-                modifier = Modifier.alignBy(LastBaseline),
-                text = rebarPrice.q8mmPrice,
-                style = MaterialTheme.typography.displayMedium.copy(
-                    fontWeight = FontWeight.Bold
-                )
-            )
-        }
-        Text(
-            text = "Φ10: " + rebarPrice.q10mmPrice,
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Text(
-            text = "Φ12-32: " + rebarPrice.q1232mmPrice,
-            style = MaterialTheme.typography.bodyLarge
+        RebarPriceItem(
+            rebarPrice = rebarPrice,
+            textStyle = bodyTextStyle
         )
     }
 }
@@ -210,12 +210,15 @@ fun NewToolContent(
                 color = MaterialTheme.colorScheme.primaryContainer.copy(0.8f),
                 shape = MaterialTheme.shapes.small
             )
-            .fillMaxSize(0.75f)
+            .fillMaxSize(0.9f)
             .padding(spacing.spaceSmall),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.SpaceEvenly
     ) {
-        Text(text = "Yeni Aracımız Çıktı")
+        Text(
+            text = "Yeni Aracımız Çıktı",
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
+        )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         ToolItemWithSticker(
             tool = newTool,

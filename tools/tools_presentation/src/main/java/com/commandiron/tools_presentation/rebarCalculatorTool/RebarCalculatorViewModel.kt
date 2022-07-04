@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.commandiron.core.util.UiEvent
+import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import com.commandiron.tools_presentation.rebarCalculatorTool.model.RebarCalculatorItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,6 +37,17 @@ class RebarCalculatorViewModel @Inject constructor(
                     rebarCalculatorItems = state.rebarCalculatorItems.plus(RebarCalculatorItem())
                 )
 
+            }
+            is RebarCalculatorUserEvent.DeleteRebarCalculatorItem -> {
+                state = state.copy(
+                    rebarCalculatorItems =
+                    state.rebarCalculatorItems
+                        .toMutableList()
+                        .also {
+                            it.removeAt(userEvent.index)
+                        }
+                )
+                calculateGrandResult()
             }
             is RebarCalculatorUserEvent.PieceValueChange -> {
                 state = state.copy(
@@ -148,16 +159,7 @@ class RebarCalculatorViewModel @Inject constructor(
                         )
                     }
             )
-            var grandResult = 0.0
-            state.rebarCalculatorItems.forEach {
-                if(it.resultText.toDoubleOrNull() != null){
-                    grandResult += it.resultText.toDouble()
-                }
-            }
-            grandResult = (grandResult * 1000.0).roundToInt() / 1000.0
-            state = state.copy(
-                grandResult = grandResult.toString()
-            )
+            calculateGrandResult()
         }else{
             state = state.copy(
                 rebarCalculatorItems =
@@ -175,6 +177,20 @@ class RebarCalculatorViewModel @Inject constructor(
                     }
             )
         }
+    }
+
+    private fun calculateGrandResult(){
+        var grandResult = 0.0
+        state.rebarCalculatorItems.forEach {
+            if(it.resultText.toDoubleOrNull() != null){
+                grandResult += it.resultText.toDouble()
+            }
+        }
+        grandResult = (grandResult * 1000.0).roundToInt() / 1000.0
+        state = state.copy(
+            grandResult = grandResult.toString(),
+            grandResult2 = (((grandResult / 1000) * 100.0).roundToInt() / 100.0) .toString()
+        )
     }
 
     private fun sendUiEvent(uiEvent: UiEvent){

@@ -1,13 +1,14 @@
 package com.commandiron.tools_presentation.weatherTool
 
 import android.location.Location
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.commandiron.core.util.Response
-import com.commandiron.core.util.UiEvent
+import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -57,12 +58,20 @@ class WeatherViewModel @Inject constructor(
             toolsUseCases.getUserLastKnownPosition().onEach { response ->
                 when (response) {
                     is Response.Error -> {
-
+                        Log.e("WeatherViewModel", response.message)
+                        state = state.copy(
+                            isLoading = false
+                        )
                     }
                     Response.Loading -> {
-
+                        state = state.copy(
+                            isLoading = true
+                        )
                     }
                     is Response.Success -> {
+                        state = state.copy(
+                            isLoading = false
+                        )
                         getLatLngFromLocation(response.data)
                         getCityFromLatLng()
                         getWeatherFromLatLng()                    }
@@ -88,9 +97,21 @@ class WeatherViewModel @Inject constructor(
         viewModelScope.launch {
             toolsUseCases.getWeather(state.myLatLng).onEach { response ->
                 when(response){
-                    is Response.Error -> {}
-                    Response.Loading -> {}
+                    is Response.Error -> {
+                        Log.e("WeatherViewModel", response.message)
+                        state = state.copy(
+                            isLoading = false
+                        )
+                    }
+                    Response.Loading -> {
+                        state = state.copy(
+                            isLoading = true
+                        )
+                    }
                     is Response.Success -> {
+                        state = state.copy(
+                            isLoading = false
+                        )
                         state = state.copy(
                             weatherDescription = response.data.description,
                             weatherTemp = response.data.temp,

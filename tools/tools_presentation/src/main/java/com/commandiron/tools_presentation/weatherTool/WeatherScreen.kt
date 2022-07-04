@@ -1,7 +1,6 @@
 package com.commandiron.tools_presentation.weatherTool
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -19,17 +18,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
-import com.commandiron.core.util.UiEvent
-import com.commandiron.core_ui.LocalSpacing
+import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.core.R
-import com.commandiron.core_ui.LocalPermissionsState
-import com.commandiron.core_ui.Strings.Turkish.DEGREE_SYMBOL
-import com.commandiron.core_ui.Strings.Turkish.HUMIDITY
-import com.commandiron.core_ui.Strings.Turkish.LOCATION_PERMISSION_REQUIRED
-import com.commandiron.core_ui.Strings.Turkish.SIGHT
-import com.commandiron.core_ui.Strings.Turkish.TODAY_REPORT
-import com.commandiron.core_ui.Strings.Turkish.WIND
+import com.commandiron.core_ui.util.Strings.Turkish.DEGREE_SYMBOL
+import com.commandiron.core_ui.util.Strings.Turkish.HUMIDITY
+import com.commandiron.core_ui.util.Strings.Turkish.LOCATION_PERMISSION_REQUIRED
+import com.commandiron.core_ui.util.Strings.Turkish.SIGHT
+import com.commandiron.core_ui.util.Strings.Turkish.TODAY_REPORT
+import com.commandiron.core_ui.util.Strings.Turkish.WIND
 import com.commandiron.core_ui.components.OnLifecycleEvent
+import com.commandiron.core_ui.util.LocalPermissionsState
+import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.tools_presentation.weatherTool.components.CheckFineLocationPermission
 import java.text.SimpleDateFormat
 import java.util.*
@@ -71,7 +70,7 @@ fun WeatherScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(spacing.defaultScreenPadding),
+            .padding(spacing.defaultScreenPaddingForCompact),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -126,95 +125,105 @@ fun WeatherScreen(
             color = LocalContentColor.current.copy(alpha = 0.5f)
         )
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
-        Icon(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxSize(0.25f),
-            painter = painterResource(id = R.drawable.partyly_cloudy),
-            contentDescription = null,
-            tint = Color.Unspecified
-        )
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
-        Text(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = state.weatherDescription,
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
-        )
-        Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-            Text(
-                text = DEGREE_SYMBOL,
-                style = MaterialTheme.typography.displayLarge.copy(
-                    fontSize = 128.sp
-                ),
-                color = MaterialTheme.colorScheme.background
-            )
-            Text(
-                text = state.weatherTemp,
-                style = MaterialTheme.typography.displayLarge.copy(
-                    fontSize = 128.sp
-                ),
-            )
-            Text(
-                text = DEGREE_SYMBOL,
-                style = MaterialTheme.typography.displayLarge.copy(
-                    fontSize = 128.sp
-                ),
-            )
-        }
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
-        Card(
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
-            border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Row(
-                modifier = Modifier.padding(
-                    vertical = spacing.spaceLarge,
-                    horizontal = spacing.spaceMedium
-                ),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(
-                    modifier = Modifier.weight(1f),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "${state.weatherHumidity}%",
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                    Text(text = HUMIDITY)
-                }
-                Divider(
+            if(state.isLoading){
+                CircularProgressIndicator()
+            }else{
+                Icon(
                     modifier = Modifier
-                        .width(1.dp)
-                        .fillMaxHeight(0.5f),
-                    color = MaterialTheme.colorScheme.primary
+                        .fillMaxWidth()
+                        .fillMaxSize(0.25f),
+                    painter = painterResource(id = R.drawable.partyly_cloudy),
+                    contentDescription = null,
+                    tint = Color.Unspecified
                 )
-                Column(
-                    modifier = Modifier.weight(1f),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+                Spacer(modifier = Modifier.height(spacing.spaceLarge))
+                Text(
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    text = state.weatherDescription,
+                    style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+                )
+                Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
                     Text(
-                        text = "${state.weatherVisibility} km",
-                        style = MaterialTheme.typography.titleLarge
+                        text = DEGREE_SYMBOL,
+                        style = MaterialTheme.typography.displayLarge.copy(
+                            fontSize = 128.sp
+                        ),
+                        color = MaterialTheme.colorScheme.background
                     )
-                    Text(text = SIGHT)
+                    Text(
+                        text = state.weatherTemp,
+                        style = MaterialTheme.typography.displayLarge.copy(
+                            fontSize = 128.sp
+                        ),
+                    )
+                    Text(
+                        text = DEGREE_SYMBOL,
+                        style = MaterialTheme.typography.displayLarge.copy(
+                            fontSize = 128.sp
+                        ),
+                    )
                 }
-                Divider(
-                    modifier = Modifier
-                        .width(1.dp)
-                        .fillMaxHeight(0.5f),
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Column(
-                    modifier = Modifier.weight(1f),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Spacer(modifier = Modifier.height(spacing.spaceLarge))
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
+                    border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
                 ) {
-                    Text(
-                        text = "${state.weatherWindSpeed} km",
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                    Text(text = WIND)
+                    Row(
+                        modifier = Modifier.padding(
+                            vertical = spacing.spaceLarge,
+                            horizontal = spacing.spaceMedium
+                        ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "${state.weatherHumidity}%",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                            Text(text = HUMIDITY)
+                        }
+                        Divider(
+                            modifier = Modifier
+                                .width(1.dp)
+                                .fillMaxHeight(0.5f),
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "${state.weatherVisibility} km",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                            Text(text = SIGHT)
+                        }
+                        Divider(
+                            modifier = Modifier
+                                .width(1.dp)
+                                .fillMaxHeight(0.5f),
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "${state.weatherWindSpeed} km",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                            Text(text = WIND)
+                        }
+                    }
                 }
             }
         }

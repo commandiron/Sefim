@@ -8,9 +8,9 @@ import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.Feed
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.commandiron.core_ui.Strings.Turkish.MAIN_SCREEN
-import com.commandiron.core_ui.Strings.Turkish.NEWS
-import com.commandiron.core_ui.Strings.Turkish.TOOLS
+import com.commandiron.core_ui.util.Strings.Turkish.MAIN_SCREEN
+import com.commandiron.core_ui.util.Strings.Turkish.NEWS
+import com.commandiron.core_ui.util.Strings.Turkish.TOOLS
 
 sealed class NavigationItem(
     val title: String? = null,

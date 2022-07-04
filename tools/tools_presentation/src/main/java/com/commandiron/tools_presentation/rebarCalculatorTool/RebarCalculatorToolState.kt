@@ -5,6 +5,8 @@ import com.commandiron.tools_presentation.rebarCalculatorTool.model.RebarCalcula
 data class RebarCalculatorToolState(
     val rebarCalculatorItems: List<RebarCalculatorItem> = listOf(RebarCalculatorItem()),
     val grandResult: String = "--",
-    val grandResultUnit: String = "kg"
+    val grandResultUnit: String = "kg",
+    val grandResult2: String = "--",
+    val grandResult2Unit: String = "ton"
 )
 

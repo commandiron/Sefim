@@ -1,24 +1,18 @@
 package com.commandiron.tools_presentation.aeratedConcTool
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.commandiron.core.util.UiEvent
-import com.commandiron.core_ui.LocalSpacing
-import com.commandiron.core_ui.Strings
-import com.commandiron.core_ui.Strings.Turkish.AERATED_CONCRETE_CALCULATOR
+import com.commandiron.core_ui.util.LocalSpacing
+import com.commandiron.core_ui.util.UiEvent
+import com.commandiron.core_ui.util.Strings.Turkish.AERATED_CONCRETE_CALCULATOR
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.CubicMetersPalletConverter
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.PiecePalletConverter
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.SquareCubicConverter
 import com.commandiron.tools_presentation.aeratedConcTool.components.converters.SquareMetersPalletConverter
 import com.commandiron.tools_presentation.components.ToolHeader
-import com.commandiron.tools_presentation.rebarPricesTool.RebarPricesUserEvent
 
 @Composable
 fun AeratedConcToolScreen(
@@ -44,7 +38,7 @@ fun AeratedConcToolScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(spacing.defaultScreenPadding)
+            .padding(spacing.defaultScreenPaddingForCompact)
     ) {
         ToolHeader(
             title = AERATED_CONCRETE_CALCULATOR,
