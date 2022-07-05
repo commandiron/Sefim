@@ -9,8 +9,9 @@ Sefim is a native android tools app for construction site supervisors written in
 
 * Videos 🧪
 
-<img src="https://user-images.githubusercontent.com/50905347/177283107-5ec2fde6-cbd1-49ef-9482-bd3012430e2f.gif" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283131-ae926038-8ac6-4f31-b8e1-2588480283a5.gif" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283135-61edfa48-f691-4b8c-b687-7c88acea6648.gif" width="125" height="265">
-<img src="https://user-images.githubusercontent.com/50905347/177283146-f88a205f-147c-43bc-9ec3-1ee193462b44.gif" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283159-8991a048-de80-4c60-b40d-d5f7e5c68db8.gif" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283166-cecac9ef-ad78-4e84-b417-dfe4fd71c6a8.gif" width="125" height="265">
+<img src="https://user-images.githubusercontent.com/50905347/177283107-5ec2fde6-cbd1-49ef-9482-bd3012430e2f.gif" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283131-ae926038-8ac6-4f31-b8e1-2588480283a5.gif" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283135-61edfa48-f691-4b8c-b687-7c88acea6648.gif" width="250" height="530">
+
+<img src="https://user-images.githubusercontent.com/50905347/177283146-f88a205f-147c-43bc-9ec3-1ee193462b44.gif" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283159-8991a048-de80-4c60-b40d-d5f7e5c68db8.gif" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283166-cecac9ef-ad78-4e84-b417-dfe4fd71c6a8.gif" width="250" height="530">
 
 * Structure - Modularization 🌲
 
