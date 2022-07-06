@@ -16,4 +16,3 @@ local.properties
 
 # Project exclude paths
 /buildSrc/build/
-/app/release
