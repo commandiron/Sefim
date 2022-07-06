@@ -1,6 +1,6 @@
 package com.commandiron.news_domain.use_cases
 
-import com.commandiron.news_domain.model.News
+import com.commandiron.core.model.News
 import com.commandiron.news_domain.repository.NewsRepository
 
 class GetAllNews(

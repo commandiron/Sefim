@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -21,13 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.commandiron.core.model.News
 import com.commandiron.core_ui.util.LocalSpacing
-import com.commandiron.news_domain.model.*
-import com.commandiron.sefim.presentation.home.model.HomeNews
-import com.commandiron.tools_domain.model.RebarPrice
-import com.commandiron.tools_domain.model.Tool
+import com.commandiron.rebarpricestool_domain.model.RebarPrice
+import com.commandiron.core.model.Tool
+import com.commandiron.rebarpricestool_presentation.components.RebarPriceItem
 import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
-import com.commandiron.tools_presentation.rebarPricesTool.components.RebarPriceItem
 import com.google.accompanist.pager.*
 import kotlin.math.absoluteValue
 
@@ -36,7 +34,9 @@ fun NewsHorizontalPager(
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
     hasError: Boolean = false,
-    homeNews: HomeNews,
+    rebarPrice: RebarPrice?,
+    newTool: Tool?,
+    newsList: List<News>?,
     bodyTextStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     onRebarPriceClick: () -> Unit,
     onNewToolClick: (Tool) -> Unit,
@@ -50,7 +50,10 @@ fun NewsHorizontalPager(
         shape = MaterialTheme.shapes.extraLarge,
         color = MaterialTheme.colorScheme.background
     ) {
-        val pagerCount = 2 + homeNews.newsList.size
+        var pagerCount = 2
+        newsList?.let {
+            pagerCount += it.size
+        }
         HorizontalPager(
             state = pagerState,
             count = pagerCount,
@@ -120,17 +123,16 @@ fun NewsHorizontalPager(
                     }else{
                         when (page) {
                             0 -> {
-                                homeNews.rebarPrice?.let {
+                                rebarPrice?.let {
                                     RebarPriceContent(
                                         rebarPrice = it,
                                         bodyTextStyle = bodyTextStyle,
                                         onClick = onRebarPriceClick
                                     )
                                 }
-
                             }
                             1 -> {
-                                homeNews.newTool?.let {
+                                newTool?.let {
                                     NewToolContent(
                                         newTool = it,
                                         onClick = onNewToolClick
@@ -138,10 +140,12 @@ fun NewsHorizontalPager(
                                 }
                             }
                             else -> {
-                                NewsContent(
-                                    news = homeNews.newsList[page - 2],
-                                    onClick = onNewsClick
-                                )
+                                newsList?.let {
+                                    NewsContent(
+                                        news = it[page - 2],
+                                        onClick = onNewsClick
+                                    )
+                                }
                             }
                         }
                     }

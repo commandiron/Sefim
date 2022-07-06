@@ -25,21 +25,7 @@ object ToolsDomainModule {
             favoriteTool = FavoriteTool(repository),
             unFavoriteTool = UnFavoriteTool(repository),
             getFavoriteTools = GetFavoriteTools(repository),
-            filterTools = FilterTools(),
-            getUserLastKnownPosition = GetUserLastKnownPosition(repository),
-            getLatLngFromLocation = GetLatLngFromLocation(),
-            getCityFromLatLng = GetCityFromLatLng(repository),
-            getWeather = GetWeather(repository),
-            calculatePieceToPallet = CalculatePieceToPallet(),
-            calculatePalletToPiece = CalculatePalletToPiece(),
-            calculateSquareMeterToPallet = CalculateSquareMeterToPallet(),
-            calculatePalletToSquareMeter = CalculatePalletToSquareMeter(),
-            calculateCubicMeterToPallet = CalculateCubicMeterToPallet(),
-            calculatePalletToCubicMeter = CalculatePalletToCubicMeter(),
-            calculateSquareToCubic = CalculateSquareToCubic(),
-            calculateCubicToSquare = CalculateCubicToSquare(),
-            getRebarPrices = GetRebarPrices(repository),
-            calculateRebarWeight = CalculateRebarWeight()
+            filterTools = FilterTools()
         )
     }
 }

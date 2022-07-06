@@ -1,6 +1,6 @@
 package com.commandiron.tools_presentation.tools
 
-import com.commandiron.tools_domain.model.Tool
+import com.commandiron.core.model.Tool
 
 sealed class ToolsUserEvent{
     data class IconClick(val tool: Tool): ToolsUserEvent()

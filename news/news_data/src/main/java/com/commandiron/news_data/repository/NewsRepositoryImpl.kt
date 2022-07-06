@@ -3,7 +3,7 @@ package com.commandiron.news_data.repository
 import com.commandiron.news_data.local.NewsDao
 import com.commandiron.news_data.mapper.toNews
 import com.commandiron.news_data.mapper.toNewsEntity
-import com.commandiron.news_domain.model.News
+import com.commandiron.core.model.News
 import com.commandiron.news_domain.repository.NewsRepository
 
 class NewsRepositoryImpl(

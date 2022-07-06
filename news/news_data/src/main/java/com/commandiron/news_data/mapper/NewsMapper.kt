@@ -1,7 +1,7 @@
 package com.commandiron.news_data.mapper
 
 import com.commandiron.news_data.local.entity.NewsEntity
-import com.commandiron.news_domain.model.News
+import com.commandiron.core.model.News
 
 fun NewsEntity.toNews(): News {
     return News(

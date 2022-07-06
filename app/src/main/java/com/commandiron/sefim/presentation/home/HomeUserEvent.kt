@@ -1,7 +1,7 @@
 package com.commandiron.sefim.presentation.home
 
-import com.commandiron.news_domain.model.News
-import com.commandiron.tools_domain.model.Tool
+import com.commandiron.core.model.News
+import com.commandiron.core.model.Tool
 
 sealed class HomeUserEvent{
     object ProfilePictureClick: HomeUserEvent()

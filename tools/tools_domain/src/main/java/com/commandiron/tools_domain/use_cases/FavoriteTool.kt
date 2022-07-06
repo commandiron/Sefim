@@ -1,13 +1,11 @@
 package com.commandiron.tools_domain.use_cases
 
-import com.commandiron.tools_domain.model.Tool
+import com.commandiron.core.model.Tool
 import com.commandiron.tools_domain.repository.ToolsRepository
 
 class FavoriteTool(
     private val repository: ToolsRepository
 ) {
     suspend operator fun invoke(tool: Tool) =
-        repository.insertTool(
-            tool.copy(isFavorite = true)
-        )
+        repository.insertTool(tool.copy(isFavorite = true))
 }

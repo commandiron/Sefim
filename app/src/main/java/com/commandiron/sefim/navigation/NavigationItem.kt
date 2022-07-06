@@ -8,6 +8,10 @@ import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.Feed
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.commandiron.core.model.aeratedConcTool
+import com.commandiron.core.model.rebarCalculatorTool
+import com.commandiron.core.model.rebarPricesTool
+import com.commandiron.core.model.weatherTool
 import com.commandiron.core_ui.util.Strings.Turkish.MAIN_SCREEN
 import com.commandiron.core_ui.util.Strings.Turkish.NEWS
 import com.commandiron.core_ui.util.Strings.Turkish.TOOLS
@@ -19,11 +23,11 @@ sealed class NavigationItem(
     var unSelectedImageVector: ImageVector? = null
 ){
     object HotSplashScreen : NavigationItem(
-        route = "splashScreen"
+        route = "hotSplash"
     )
     object HomeScreen : NavigationItem(
         title = MAIN_SCREEN,
-        route = "homeScreen",
+        route = "home",
         selectedImageVector = Icons.Default.Home,
         unSelectedImageVector = Icons.Outlined.Home
     )
@@ -40,15 +44,19 @@ sealed class NavigationItem(
         unSelectedImageVector = Icons.Outlined.Feed
     )
     object RebarPricesTool : NavigationItem(
-        route = "rebarPrices"
+        title = rebarPricesTool.title,
+        route = rebarPricesTool.route
     )
     object WeatherTool : NavigationItem(
-        route = "weather"
+        title = weatherTool.title,
+        route = weatherTool.route
     )
     object AeratedConcretePalletCalculatorTool : NavigationItem(
-        route = "aeratedConcretePalletCalculator"
+        title = aeratedConcTool.title,
+        route = aeratedConcTool.route
     )
     object RebarCalculatorTool : NavigationItem(
-        route = "rebarCalculator"
+        title = rebarCalculatorTool.title,
+        route = rebarCalculatorTool.route
     )
 }

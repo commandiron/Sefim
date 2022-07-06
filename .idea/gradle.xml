@@ -11,6 +11,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/aeratedConcTool" />
+            <option value="$PROJECT_DIR$/aeratedConcTool/aeratedConcTool_domain" />
+            <option value="$PROJECT_DIR$/aeratedConcTool/aeratedConcTool_presentation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
@@ -19,10 +22,21 @@
             <option value="$PROJECT_DIR$/news/news_data" />
             <option value="$PROJECT_DIR$/news/news_domain" />
             <option value="$PROJECT_DIR$/news/news_presentation" />
+            <option value="$PROJECT_DIR$/rebarCalculatorTool" />
+            <option value="$PROJECT_DIR$/rebarCalculatorTool/rebarCalculatorTool_domain" />
+            <option value="$PROJECT_DIR$/rebarCalculatorTool/rebarCalculatorTool_presentation" />
+            <option value="$PROJECT_DIR$/rebarPricesTool" />
+            <option value="$PROJECT_DIR$/rebarPricesTool/rebarPricesTool_data" />
+            <option value="$PROJECT_DIR$/rebarPricesTool/rebarPricesTool_domain" />
+            <option value="$PROJECT_DIR$/rebarPricesTool/rebarPricesTool_presentation" />
             <option value="$PROJECT_DIR$/tools" />
             <option value="$PROJECT_DIR$/tools/tools_data" />
             <option value="$PROJECT_DIR$/tools/tools_domain" />
             <option value="$PROJECT_DIR$/tools/tools_presentation" />
+            <option value="$PROJECT_DIR$/weatherTool" />
+            <option value="$PROJECT_DIR$/weatherTool/weatherTool_data" />
+            <option value="$PROJECT_DIR$/weatherTool/weatherTool_domain" />
+            <option value="$PROJECT_DIR$/weatherTool/weatherTool_presentation" />
           </set>
         </option>
       </GradleProjectSettings>

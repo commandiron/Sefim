@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.commandiron.core_ui.util.LocalSpacing
-import com.commandiron.tools_domain.model.Tool
+import com.commandiron.core.model.Tool
 
 @Composable
 fun ToolItem(

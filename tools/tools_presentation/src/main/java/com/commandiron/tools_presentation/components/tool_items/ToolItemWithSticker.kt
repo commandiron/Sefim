@@ -16,8 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.TextStyle
-import com.commandiron.tools_domain.model.Tool
-import com.commandiron.tools_domain.model.ToolTag
+import com.commandiron.core.model.Tool
+import com.commandiron.core.model.ToolTag
 import com.commandiron.tools_presentation.components.stickers.*
 
 @Composable

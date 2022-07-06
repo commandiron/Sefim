@@ -10,7 +10,7 @@ interface ToolsDao {
     suspend fun insertAllTools(toolEntities: List<ToolEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTool(toolEntity: ToolEntity)
+    suspend fun insertTool(toolEntity: ToolEntity): Long
 
     @Query(" SELECT * FROM toolentity")
     suspend fun getAllTools(): List<ToolEntity>

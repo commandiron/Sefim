@@ -8,19 +8,5 @@ class ToolsUseCases(
     val favoriteTool: FavoriteTool,
     val unFavoriteTool: UnFavoriteTool,
     val getFavoriteTools: GetFavoriteTools,
-    val filterTools: FilterTools,
-    val getUserLastKnownPosition: GetUserLastKnownPosition,
-    val getLatLngFromLocation: GetLatLngFromLocation,
-    val getCityFromLatLng: GetCityFromLatLng,
-    val getWeather: GetWeather,
-    val calculatePieceToPallet: CalculatePieceToPallet,
-    val calculatePalletToPiece: CalculatePalletToPiece,
-    val calculateSquareMeterToPallet: CalculateSquareMeterToPallet,
-    val calculatePalletToSquareMeter: CalculatePalletToSquareMeter,
-    val calculateCubicMeterToPallet: CalculateCubicMeterToPallet,
-    val calculatePalletToCubicMeter: CalculatePalletToCubicMeter,
-    val calculateSquareToCubic: CalculateSquareToCubic,
-    val calculateCubicToSquare: CalculateCubicToSquare,
-    val getRebarPrices: GetRebarPrices,
-    val calculateRebarWeight: CalculateRebarWeight
+    val filterTools: FilterTools
 )

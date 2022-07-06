@@ -5,16 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.commandiron.core.util.Response
 import com.commandiron.core_ui.util.Strings.Turkish.LOCKED
 import com.commandiron.core_ui.util.Strings.Turkish.SOON_THREE_DOT
 import com.commandiron.core_ui.util.UiEvent
-import com.commandiron.tools_domain.model.ToolTag
+import com.commandiron.core.model.ToolTag
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,8 +29,10 @@ class ToolsViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
+    var getAllToolsJob: Job = Job()
+
     init {
-        getAllTools()
+        refresh()
     }
 
     fun onEvent(userEvent: ToolsUserEvent) {
@@ -40,40 +40,16 @@ class ToolsViewModel @Inject constructor(
             is ToolsUserEvent.Favorite -> {
                 viewModelScope.launch {
                     if(userEvent.tool.isFavorite){
-                        toolsUseCases.unFavoriteTool(userEvent.tool).onEach{ response ->
-                            when(response){
-                                is Response.Error -> {
-
-                                }
-                                Response.Loading -> {
-
-                                }
-                                is Response.Success -> {
-                                    getAllTools()
-                                    filterTools(state.searchText)
-                                }
-                            }
-                        }.collect()
+                        toolsUseCases.unFavoriteTool(userEvent.tool)
+                        refresh()
                     }else{
                         if(userEvent.tool.toolTags.contains(ToolTag.SOON)){
                             sendUiEvent(UiEvent.ShowSnackbar(SOON_THREE_DOT))
                         }else if (userEvent.tool.toolTags.contains(ToolTag.LOCKED)){
                             sendUiEvent(UiEvent.ShowSnackbar(LOCKED))
                         }else{
-                            toolsUseCases.favoriteTool(userEvent.tool).onEach{ response ->
-                                when(response){
-                                    is Response.Error -> {
-
-                                    }
-                                    Response.Loading -> {
-
-                                    }
-                                    is Response.Success -> {
-                                        getAllTools()
-                                        filterTools(state.searchText)
-                                    }
-                                }
-                            }.collect()
+                            toolsUseCases.favoriteTool(userEvent.tool)
+                            refresh()
                         }
                     }
                 }
@@ -92,31 +68,23 @@ class ToolsViewModel @Inject constructor(
         }
     }
 
+    private fun refresh(){
+        getAllTools()
+        getAllToolsJob.invokeOnCompletion {
+            filterTools(state.searchText)
+        }
+    }
+
     private fun getAllTools(){
-        viewModelScope.launch {
-            toolsUseCases.getAllTools().collect{ response ->
-                when(response){
-                    is Response.Error -> {}
-                    Response.Loading -> {}
-                    is Response.Success -> {
-                        state = state.copy(
-                            filteredTools = response.data,
-                            allTools = response.data
-                        )
-                    }
-                }
-            }
+        getAllToolsJob = viewModelScope.launch {
+            val allTools = toolsUseCases.getAllTools()
+            state = state.copy(allTools = allTools)
         }
     }
 
     private fun filterTools(query: String){
-        state = state.copy(
-            filteredTools = toolsUseCases
-                .filterTools(
-                    query = query,
-                    tools = state.allTools ?: listOf()
-                )
-        )
+        val filteredTools = toolsUseCases.filterTools(query, state.allTools ?: listOf())
+        state = state.copy(filteredTools = filteredTools)
     }
 
     private fun sendUiEvent(uiEvent: UiEvent){

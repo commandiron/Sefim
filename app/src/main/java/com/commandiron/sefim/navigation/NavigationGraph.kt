@@ -2,16 +2,18 @@ package com.commandiron.sefim.navigation
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.core.tween
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import com.commandiron.aeratedconctool_presentation.AeratedConcToolScreen
+import com.commandiron.core_ui.util.LocalSystemUiController
 import com.commandiron.news_presentation.NewsScreen
+import com.commandiron.rebarcalculatortool_presentation.RebarCalculatorScreen
+import com.commandiron.rebarpricestool_presentation.RebarPricesScreen
 import com.commandiron.sefim.presentation.home.HomeScreen
 import com.commandiron.sefim.presentation.hot_splash.HotSplashScreen
-import com.commandiron.tools_presentation.aeratedConcTool.AeratedConcToolScreen
-import com.commandiron.tools_presentation.rebarCalculatorTool.RebarCalculatorScreen
-import com.commandiron.tools_presentation.rebarPricesTool.RebarPricesScreen
 import com.commandiron.tools_presentation.tools.ToolsScreen
-import com.commandiron.tools_presentation.weatherTool.WeatherScreen
+import com.commandiron.weathertool_presentation.WeatherScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -21,6 +23,13 @@ fun NavigationGraph(
     shouldShowHotSplash: Boolean,
     showSnackBar:(String) -> Unit
 ) {
+    val systemUiController = LocalSystemUiController.current
+    systemUiController.setStatusBarColor(
+        color = MaterialTheme.colorScheme.background
+    )
+    systemUiController.setNavigationBarColor(
+        color = MaterialTheme.colorScheme.onBackground
+    )
     AnimatedNavHost(
         navController = navController,
         startDestination = if(shouldShowHotSplash) {

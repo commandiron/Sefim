@@ -1,5 +1,6 @@
 package com.commandiron.sefim.presentation.home.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -7,8 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.commandiron.core_ui.components.carousel.Carousel
 import com.commandiron.core_ui.components.carousel.CarouselDefaults
@@ -64,7 +67,9 @@ fun CompactWindowTypeContent(
                 .heightIn(max = screenHeightDp / 4f),
             isLoading = state.newsIsLoading,
             hasError = state.newsHasError,
-            homeNews = state.homeNews,
+            rebarPrice = state.rebarPrice,
+            newTool = state.newTool,
+            newsList = state.newsList,
             onRebarPriceClick = { viewModel.onEvent(HomeUserEvent.RebarPriceClick) },
             onNewToolClick = { viewModel.onEvent(HomeUserEvent.NewToolClick(it)) },
             onNewsClick = { viewModel.onEvent(HomeUserEvent.NewsClick(it)) },

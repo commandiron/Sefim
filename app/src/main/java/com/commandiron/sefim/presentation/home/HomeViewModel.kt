@@ -7,19 +7,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.commandiron.core.util.Response
 import com.commandiron.core_ui.util.Strings.Turkish.LOCKED
-import com.commandiron.core_ui.util.Strings.Turkish.SOMETHING_WENT_WRONG
 import com.commandiron.core_ui.util.Strings.Turkish.SOON_THREE_DOT
 import com.commandiron.core_ui.util.Strings.Turkish.THIS_FEATURE_IS_NOT_ACTIVE_YET
 import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.sefim.navigation.NavigationItem
 import com.commandiron.news_domain.use_cases.NewsUseCases
-import com.commandiron.tools_domain.model.ToolTag
+import com.commandiron.core.model.ToolTag
+import com.commandiron.rebarpricestool_domain.use_cases.RebarPricesToolUseCases
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,6 +26,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val newsUseCases: NewsUseCases,
     private val toolsUseCases: ToolsUseCases,
+    private val rebarPricesToolUseCases: RebarPricesToolUseCases
 ): ViewModel() {
 
     var state by mutableStateOf(HomeState())
@@ -69,18 +68,9 @@ class HomeViewModel @Inject constructor(
             }
             is HomeUserEvent.UnFavoriteClick -> {
                 viewModelScope.launch {
-                    toolsUseCases.unFavoriteTool(userEvent.tool).onEach {
-                        when(it){
-                            is Response.Error -> {
-                                sendUiEvent(UiEvent.ShowSnackbar(SOMETHING_WENT_WRONG))
-                            }
-                            Response.Loading -> {}
-                            is Response.Success -> {
-                                getFavoriteTools()
-                                getRecommendedTools()
-                            }
-                        }
-                    }.collect()
+                    toolsUseCases.unFavoriteTool(userEvent.tool)
+                    getFavoriteTools()
+                    getRecommendedTools()
                 }
             }
             is HomeUserEvent.FavoriteClick -> {
@@ -90,18 +80,9 @@ class HomeViewModel @Inject constructor(
                     sendUiEvent(UiEvent.ShowSnackbar(LOCKED))
                 }else{
                     viewModelScope.launch {
-                        toolsUseCases.favoriteTool(userEvent.tool).onEach {
-                            when(it){
-                                is Response.Error -> {
-                                    sendUiEvent(UiEvent.ShowSnackbar(SOMETHING_WENT_WRONG))
-                                }
-                                Response.Loading -> {}
-                                is Response.Success -> {
-                                    getFavoriteTools()
-                                    getRecommendedTools()
-                                }
-                            }
-                        }.collect()
+                        toolsUseCases.favoriteTool(userEvent.tool)
+                        getFavoriteTools()
+                        getRecommendedTools()
                     }
                 }
             }
@@ -130,46 +111,24 @@ class HomeViewModel @Inject constructor(
 
     private fun getFavoriteTools(){
         viewModelScope.launch {
-            toolsUseCases.getFavoriteTools().collect{ response ->
-                when(response){
-                    is Response.Error -> {
-                        println("1")
-                    }
-                    Response.Loading -> {
-                        println("2")
-                    }
-                    is Response.Success -> {
-                        println("3:" + response.data)
-                        state = state.copy(
-                            favoriteTools = response.data
-                        )
-                    }
-                }
-            }
+            val favoriteTools = toolsUseCases.getFavoriteTools()
+            state = state.copy(favoriteTools = favoriteTools)
         }
     }
 
     private fun getRecommendedTools(){
         viewModelScope.launch {
-            toolsUseCases.getRecommendedTools().collect{ response ->
-                when(response){
-                    is Response.Error -> {}
-                    Response.Loading -> {}
-                    is Response.Success -> {
-                        state = state.copy(
-                            recommendedTools = response.data
-                        )
-                    }
-                }
-            }
+            val recommendedTools = toolsUseCases.getRecommendedTools()
+            state = state.copy(recommendedTools = recommendedTools)
         }
     }
 
     private fun getRebarPrices(){
         viewModelScope.launch {
-            toolsUseCases.getRebarPrices().collect{ response ->
+            rebarPricesToolUseCases.getRebarPrices().collect{ response ->
                 when(response){
                     is Response.Error -> {
+                        sendUiEvent(UiEvent.ShowSnackbar(response.message))
                         state = state.copy(
                             newsIsLoading = false,
                             newsHasError = true
@@ -182,10 +141,9 @@ class HomeViewModel @Inject constructor(
                         )
                     }
                     is Response.Success -> {
+                        val rebarPrice = response.data[1]
                         state = state.copy(
-                            homeNews = state.homeNews.copy(
-                                rebarPrice = response.data[1],
-                            ),
+                            rebarPrice = rebarPrice,
                             newsIsLoading = false,
                             newsHasError = false
                         )
@@ -197,23 +155,15 @@ class HomeViewModel @Inject constructor(
 
     private fun getNewestTool(){
         viewModelScope.launch {
-            toolsUseCases.getNewestTool().collect{ tool ->
-                state = state.copy(
-                    homeNews = state.homeNews.copy(
-                        newTool = tool,
-                    ),
-                )
-            }
+            val newestTool = toolsUseCases.getNewestTool()
+            state = state.copy(newTool = newestTool)
         }
     }
 
     private fun getNewsList(){
         viewModelScope.launch {
-            state = state.copy(
-                homeNews = state.homeNews.copy(
-                    newsList = newsUseCases.getAllNews()
-                ),
-            )
+            val allNews = newsUseCases.getAllNews()
+            state = state.copy(newsList = allNews)
         }
     }
 
