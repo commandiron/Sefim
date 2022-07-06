@@ -7,6 +7,8 @@ Sefim is a native android tools app for construction site supervisors written in
 <img src="https://user-images.githubusercontent.com/50905347/174627212-691237a2-88ea-4922-b1e7-95b943099ffe.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946391-d27a581f-9f47-4001-b70b-a4a944d78399.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946401-482da9a1-49cc-452f-9bea-8e255a364c53.png" width="125" height="265">
 <img src="https://user-images.githubusercontent.com/50905347/176946406-15034228-cc8d-4986-a94c-b20c9b5f4d07.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946411-23140ae4-b233-4c8f-b6ce-aa2dead00d61.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176947847-82ebbd1a-a35e-4e99-a05d-4930cf8cfd3f.png" width="125" height="265">
 
+<img src="https://user-images.githubusercontent.com/50905347/177568068-da254744-1262-41cd-b639-8eaf44dc4820.png" width="530" height="250">
+
 * Ux 🧪
 
 <img src="https://user-images.githubusercontent.com/50905347/177283107-5ec2fde6-cbd1-49ef-9482-bd3012430e2f.gif" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283131-ae926038-8ac6-4f31-b8e1-2588480283a5.gif" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177283135-61edfa48-f691-4b8c-b687-7c88acea6648.gif" width="250" height="530">
