@@ -85,7 +85,7 @@ fun ExpandedWindowTypeContent(viewModel: RebarPricesViewModel) {
             title = REBAR_PRICES,
             onIconClick = {viewModel.onEvent(RebarPricesUserEvent.Back)}
         )
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
+        Spacer(modifier = Modifier.height(spacing.spaceMedium))
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(spacing.spaceSmall),

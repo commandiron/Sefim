@@ -65,7 +65,7 @@ fun OutlinedDropDown(
         )
         CustomDropDownMenu(
             modifier = Modifier
-                .fillMaxHeight(0.2f)
+                .fillMaxHeight(0.3f)
                 .fillMaxWidth(0.25f),
             isExpanded = isExpanded,
             dropDownItems = items,

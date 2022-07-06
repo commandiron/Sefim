@@ -32,7 +32,8 @@ data class Dimensions(
     val defaultScreenPaddingForCompactNoBottomNav: PaddingValues = PaddingValues(
         start = spaceMedium,
         top = spaceLarge,
-        end = spaceMedium
+        end = spaceMedium,
+        bottom = spaceSmall
     ),
     val defaultScreenPaddingForExpanded: PaddingValues = PaddingValues(
         start = spaceMedium,
@@ -43,7 +44,8 @@ data class Dimensions(
     val defaultScreenPaddingForExpandedNoBottomNav: PaddingValues = PaddingValues(
         start = spaceMedium,
         top = spaceSmall,
-        end = spaceMedium
+        end = spaceMedium,
+        bottom = spaceSmall
     )
 )
 val LocalPermissionsState = compositionLocalOf<MultiplePermissionsState> {

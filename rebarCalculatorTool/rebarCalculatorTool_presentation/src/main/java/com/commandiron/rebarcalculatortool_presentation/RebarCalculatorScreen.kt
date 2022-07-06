@@ -31,6 +31,8 @@ import com.commandiron.core_ui.util.Strings.Turkish.REBAR_QUANTITY_CALCULATOR
 import com.commandiron.core_ui.components.CustomOutlinedNumberTextField
 import com.commandiron.core_ui.components.OutlinedDropDown
 import com.commandiron.core_ui.components.ToolHeader
+import com.commandiron.core_ui.util.LocalWindowTypeInfo
+import com.commandiron.core_ui.util.WindowInfo
 
 @Composable
 fun RebarCalculatorScreen(
@@ -38,6 +40,7 @@ fun RebarCalculatorScreen(
     navigateUp:() -> Unit
 ) {
     val spacing = LocalSpacing.current
+    val windowTypeInfo = LocalWindowTypeInfo.current
     val keyboardController = LocalSoftwareKeyboardController.current
     val state = viewModel.state
     LaunchedEffect(key1 = true){
@@ -56,13 +59,22 @@ fun RebarCalculatorScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(spacing.defaultScreenPaddingForCompact)
+            .padding(
+                if(windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact){
+                    spacing.defaultScreenPaddingForCompact
+                }else spacing.defaultScreenPaddingForExpandedNoBottomNav
+            )
     ) {
         ToolHeader(
             title = REBAR_QUANTITY_CALCULATOR,
             onIconClick = {viewModel.onEvent(RebarCalculatorUserEvent.Back)}
         )
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
+        Spacer(
+            modifier = Modifier.height(
+                if(windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact)
+                    spacing.spaceLarge else spacing.spaceMedium
+            )
+        )
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall)
@@ -258,6 +270,5 @@ fun RebarCalculatorScreen(
                 }
             }
         }
-
     }
 }
