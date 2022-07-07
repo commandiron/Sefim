@@ -4,10 +4,13 @@ Sefim is a native android tools app for construction site supervisors written in
 
 * Screenshots 🖼️
 
-<img src="https://user-images.githubusercontent.com/50905347/174627212-691237a2-88ea-4922-b1e7-95b943099ffe.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946391-d27a581f-9f47-4001-b70b-a4a944d78399.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946401-482da9a1-49cc-452f-9bea-8e255a364c53.png" width="125" height="265">
-<img src="https://user-images.githubusercontent.com/50905347/176946406-15034228-cc8d-4986-a94c-b20c9b5f4d07.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946411-23140ae4-b233-4c8f-b6ce-aa2dead00d61.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176947847-82ebbd1a-a35e-4e99-a05d-4930cf8cfd3f.png" width="125" height="265">
+<img src="https://user-images.githubusercontent.com/50905347/177814247-03837c5f-60bd-4d1e-acac-622356a7ad82.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772775-bc3fbbe7-5aac-411f-a791-26288fda540f.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772776-b0c9cdc0-a706-4a1a-8d20-e9e5b9c87128.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772779-be6434de-01c2-42fe-81d9-b4c2c43cbdf1.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177773247-16fbdb60-29c9-44cc-9376-7165e35cc391.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177773255-3ff0d8e9-627f-4d01-934b-a8b33201dfd6.png" width="125" height="265">
 
-<img src="https://user-images.githubusercontent.com/50905347/177569632-0d71a037-b375-4545-ab2a-84c0f18dd1a8.png" width="265" height="125">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177569639-ad0b47e4-87c6-4829-bd8e-5da0b9eb31f4.png" width="265" height="125">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177569645-c1f26516-4453-4372-acf9-fc6cbf0875b3.png" width="265" height="125">
+<img src="https://user-images.githubusercontent.com/50905347/177774059-627892f7-8ffe-4b8a-abfe-89912b519628.png" width="265" height="125"><img src="https://user-images.githubusercontent.com/50905347/177774062-917a9f5d-f04a-4085-b22f-8832a494fdd1.png" width="265" height="125"><img src="https://user-images.githubusercontent.com/50905347/177774067-7e0550b0-0a4c-44c1-a824-92d0a7be1f6f.png" width="265" height="125">
+
+* Screenshots 🖼️ - Dark mode
+
+<img src="https://user-images.githubusercontent.com/50905347/177814980-2b651351-ec48-49ee-bee8-119a611ec6e6.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177817354-bf73b0d8-9b29-4d2f-bdbe-a2aac603244e.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177817357-dd898358-37cd-40ab-a6c1-359e16b55a34.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177814995-767bd799-7136-4e94-9776-b1e9572f23a6.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177817366-6eeafebc-5e19-4f07-be80-5ed5d91bc539.png" width="125" height="265">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177817372-576fdfad-d1bc-4d7d-9f96-3dddcfbf21f9.png" width="125" height="265">
 
 * Ux 🧪
 
@@ -21,10 +24,12 @@ Sefim is a native android tools app for construction site supervisors written in
 
 * Application - Features ☕
    * One time splash screen
-   * Geolocation
-   * Calculation tools
+   * Geolocation - permissions
+   * Various calculation tools
+   * Web scrapping
    * Database operations - CRUD
    * Various animations
+   * Unit tests
    * Language - Turkish
 * Tech-stack ⚛️
     * [Kotlin](https://kotlinlang.org/) + [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform background operation
@@ -43,11 +48,11 @@ Sefim is a native android tools app for construction site supervisors written in
     * [Google Play Services](https://developers.google.com/android)
         * location
     * [Jsoup](https://jsoup.org) - perform web scraping
+    * [Junit 4](https://junit.org/junit4/) - perform unit tests
 * Architecture 🏗️
     * Model-View-ViewModel
     * [Android Architecture components](https://developer.android.com/topic/libraries/architecture) ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
  
  * Todo ✔️
-   * Test ❌
-   * Language - English ❌
-   * Dark Theme ❌
+   * Test ❌ - working on
+   * Dark Theme ✔️
