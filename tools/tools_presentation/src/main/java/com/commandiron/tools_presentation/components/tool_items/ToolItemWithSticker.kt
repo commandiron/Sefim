@@ -6,6 +6,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -99,7 +100,12 @@ fun ToolItemWithSticker(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .fillMaxSize(0.25f)
-                        .clickable { onFavorite() },
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ){
+                            onFavorite()
+                         },
                     isFavorite = isFavorite
                 )
             }

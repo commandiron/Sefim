@@ -28,7 +28,7 @@ fun NavigationGraph(
         color = MaterialTheme.colorScheme.background
     )
     systemUiController.setNavigationBarColor(
-        color = MaterialTheme.colorScheme.onBackground
+        color = MaterialTheme.colorScheme.background
     )
     AnimatedNavHost(
         navController = navController,
@@ -192,7 +192,8 @@ fun NavigationGraph(
             WeatherScreen(
                 navigateUp = {
                     navController.navigateUp()
-                }
+                },
+                showSnackbar = showSnackBar
             )
         }
         composable(

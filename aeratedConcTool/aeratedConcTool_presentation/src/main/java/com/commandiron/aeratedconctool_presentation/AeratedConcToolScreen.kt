@@ -70,24 +70,26 @@ fun CompactWindowTypeContent(viewModel: AeratedConcToolViewModel) {
 fun ExpandedWindowTypeContent(viewModel: AeratedConcToolViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(spacing.defaultScreenPaddingForExpandedNoBottomNav)
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(spacing.defaultScreenPaddingForExpandedNoBottomNav)
     ) {
-        item {
-            ToolHeader(
-                title = AERATED_CONCRETE_CALCULATOR,
-                onIconClick = {viewModel.onEvent(AeratedConcToolUserEvent.Back)}
-            )
-            Spacer(modifier = Modifier.height(spacing.spaceMedium))
-            SquareMetersPalletConverter(state, viewModel)
-            Spacer(modifier = Modifier.height(spacing.spaceMedium))
-            CubicMetersPalletConverter(state, viewModel)
-            Spacer(modifier = Modifier.height(spacing.spaceMedium))
-            PiecePalletConverter(state, viewModel)
-            Spacer(modifier = Modifier.height(spacing.spaceMedium))
-            SquareCubicConverter(state,viewModel)
+        ToolHeader(
+            title = AERATED_CONCRETE_CALCULATOR,
+            onIconClick = {viewModel.onEvent(AeratedConcToolUserEvent.Back)}
+        )
+        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+        LazyColumn {
+            item {
+
+                SquareMetersPalletConverter(state, viewModel)
+                Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                CubicMetersPalletConverter(state, viewModel)
+                Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                PiecePalletConverter(state, viewModel)
+                Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                SquareCubicConverter(state,viewModel)
+            }
         }
     }
 }

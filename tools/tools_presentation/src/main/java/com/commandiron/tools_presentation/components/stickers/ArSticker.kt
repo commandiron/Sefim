@@ -27,7 +27,8 @@ fun ArSticker(
         Icon(
             painter = painterResource(id = R.drawable.ic_augmented_reality),
             contentDescription = null,
-            modifier = Modifier.padding(spacing.spaceExtraSmall)
+            modifier = Modifier.padding(spacing.spaceExtraSmall),
+            tint = MaterialTheme.colorScheme.onTertiary
         )
     }
 }

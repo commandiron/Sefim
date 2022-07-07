@@ -187,14 +187,16 @@ fun RebarCalculatorScreen(
                                 Text(
                                     text = item.resultText,
                                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                                    textAlign = TextAlign.Center
+                                    textAlign = TextAlign.Center,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer
                                 )
                                 Spacer(modifier = Modifier.width(spacing.spaceSmall))
                                 if(item.resultText.isNotEmpty()){
                                     Text(
                                         text = item.resultUnit,
                                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                                        textAlign = TextAlign.Center
+                                        textAlign = TextAlign.Center,
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer
                                     )
                                 }
                             }
@@ -217,39 +219,45 @@ fun RebarCalculatorScreen(
                     Text(
                         text = "$GRAND_TOTAL : ",
                         style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     Text(
                         text = state.grandResult,
                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     Spacer(modifier = Modifier.width(spacing.spaceSmall))
                     if(state.grandResult.isNotEmpty()){
                         Text(
                             text = state.grandResultUnit,
                             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                     Spacer(modifier = Modifier.width(spacing.spaceSmall))
                     Text(
                         text = "=",
                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     Spacer(modifier = Modifier.width(spacing.spaceSmall))
                     Text(
                         text = state.grandResult2,
                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     Spacer(modifier = Modifier.width(spacing.spaceSmall))
                     if(state.grandResult2.isNotEmpty()){
                         Text(
                             text = state.grandResult2Unit,
                             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 }

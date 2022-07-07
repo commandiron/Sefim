@@ -7,8 +7,8 @@ class GetWeather(
     private val repository: WeatherToolRepository
 ) {
     suspend operator fun invoke(latLng: LatLng) =
-        repository.getWeather(
-            latitude = latLng.latitude.toString(),
-            longitude = latLng.longitude.toString()
+        repository.getWeatherData(
+            lat = latLng.latitude,
+            long = latLng.longitude
         )
 }

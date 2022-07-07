@@ -18,7 +18,6 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-        buildConfigField "String", "OPEN_WEATHER_API_KEY", "\"${properties.getProperty("OPEN_WEATHER_API_KEY")}\""
         buildConfigField "String", "JSOUP_DATA_URL", "\"${properties.getProperty("JSOUP_DATA_URL")}\""
     }
     buildTypes {
@@ -46,6 +45,7 @@ dependencies {
     implementation DaggerHilt.hiltAndroid
 
     testImplementation Testing.junit
+    testImplementation Testing.truth
     androidTestImplementation Testing.junitAndroidExt
     androidTestImplementation Testing.composeUiTestJunit4
     debugImplementation Testing.composeUiTooling

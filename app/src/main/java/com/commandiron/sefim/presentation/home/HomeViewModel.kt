@@ -18,6 +18,7 @@ import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -68,9 +69,16 @@ class HomeViewModel @Inject constructor(
             }
             is HomeUserEvent.UnFavoriteClick -> {
                 viewModelScope.launch {
-                    toolsUseCases.unFavoriteTool(userEvent.tool)
-                    getFavoriteTools()
-                    getRecommendedTools()
+                    toolsUseCases.unFavoriteTool(userEvent.tool).collect{ response ->
+                        when(response){
+                            is Response.Error -> {}
+                            Response.Loading -> {}
+                            is Response.Success -> {
+                                getFavoriteTools()
+                                getRecommendedTools()
+                            }
+                        }
+                    }
                 }
             }
             is HomeUserEvent.FavoriteClick -> {
@@ -80,9 +88,16 @@ class HomeViewModel @Inject constructor(
                     sendUiEvent(UiEvent.ShowSnackbar(LOCKED))
                 }else{
                     viewModelScope.launch {
-                        toolsUseCases.favoriteTool(userEvent.tool)
-                        getFavoriteTools()
-                        getRecommendedTools()
+                        toolsUseCases.favoriteTool(userEvent.tool).collect{ response ->
+                            when(response){
+                                is Response.Error -> {}
+                                Response.Loading -> {}
+                                is Response.Success -> {
+                                    getFavoriteTools()
+                                    getRecommendedTools()
+                                }
+                            }
+                        }
                     }
                 }
             }

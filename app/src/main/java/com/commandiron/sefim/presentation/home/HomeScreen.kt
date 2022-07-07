@@ -19,7 +19,6 @@ fun HomeScreen(
     showSnackbar: (String) -> Unit
 ) {
     val windowTypeInfo = LocalWindowTypeInfo.current
-    val systemUiController = LocalSystemUiController.current
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect{ event ->
             when(event) {
@@ -29,12 +28,6 @@ fun HomeScreen(
             }
         }
     }
-    systemUiController.setStatusBarColor(
-        color = MaterialTheme.colorScheme.background
-    )
-    systemUiController.setNavigationBarColor(
-        color = MaterialTheme.colorScheme.onBackground
-    )
     Box(
         modifier = Modifier
             .fillMaxSize()

@@ -24,6 +24,7 @@ import com.commandiron.core.model.News
 import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.rebarpricestool_domain.model.RebarPrice
 import com.commandiron.core.model.Tool
+import com.commandiron.core_ui.util.Strings.Turkish.DAILY_IRON_PRICE
 import com.commandiron.rebarpricestool_presentation.components.RebarPriceItem
 import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
 import com.google.accompanist.pager.*
@@ -180,7 +181,7 @@ fun RebarPriceContent(
     Column(
         modifier = Modifier
             .background(
-                color = MaterialTheme.colorScheme.primaryContainer.copy(0.8f),
+                color = MaterialTheme.colorScheme.onBackground.copy(0.5f),
                 shape = MaterialTheme.shapes.small
             )
             .fillMaxSize(0.9f)
@@ -193,8 +194,9 @@ fun RebarPriceContent(
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
-            text = "Günlük Demir Fiyatı:",
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
+            text = DAILY_IRON_PRICE,
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
+            color = MaterialTheme.colorScheme.background
         )
         RebarPriceItem(
             rebarPrice = rebarPrice,
@@ -211,7 +213,7 @@ fun NewToolContent(
     Column(
         modifier = Modifier
             .background(
-                color = MaterialTheme.colorScheme.primaryContainer.copy(0.8f),
+                color = MaterialTheme.colorScheme.onBackground.copy(0.8f),
                 shape = MaterialTheme.shapes.small
             )
             .fillMaxSize(0.9f)
@@ -221,7 +223,8 @@ fun NewToolContent(
     ) {
         Text(
             text = "Yeni Aracımız Çıktı",
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
+            color = MaterialTheme.colorScheme.background
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         ToolItemWithSticker(

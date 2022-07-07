@@ -1,7 +1,6 @@
 package com.commandiron.weathertool_presentation
 
 import android.location.Location
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,10 +9,9 @@ import androidx.lifecycle.viewModelScope
 import com.commandiron.core.util.Response
 import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.weathertool_domain.use_cases.WeatherToolUseCases
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,6 +37,9 @@ class WeatherViewModel @Inject constructor(
             WeatherUserEvent.Back -> {
                 sendUiEvent(UiEvent.NavigateUp)
             }
+            WeatherUserEvent.Refresh -> {
+                getUserLastKnownPosition()
+            }
             WeatherUserEvent.FineLocationPermissionDenied -> {
                 state = state.copy(
                     locationPermissionGranted = false
@@ -59,20 +60,23 @@ class WeatherViewModel @Inject constructor(
                 when (response) {
                     is Response.Error -> {
                         state = state.copy(
-                            isLoading = false
+                            isLoading = false,
+                            hasError = true
                         )
                     }
                     Response.Loading -> {
                         state = state.copy(
-                            isLoading = true
+                            isLoading = true,
+                            hasError = false
                         )
                     }
                     is Response.Success -> {
                         state = state.copy(
-                            isLoading = false
+                            isLoading = false,
+                            hasError = false
                         )
                         getCityFromLocation(response.data)
-                        getWeatherFromLocation(response.data)
+                        getWeather(weatherToolUseCases.getLatLngFromLocation(response.data))
                     }
                 }
             }
@@ -87,37 +91,33 @@ class WeatherViewModel @Inject constructor(
         )
     }
 
-    private fun getWeatherFromLocation(location: Location){
+    private fun getWeather(latLng: LatLng){
         viewModelScope.launch {
-            weatherToolUseCases.getWeather(
-                weatherToolUseCases.getLatLngFromLocation(location)
-            ).onEach { response ->
+            weatherToolUseCases.getWeather(latLng).collect { response ->
                 when(response){
                     is Response.Error -> {
-                        Log.e("WeatherViewModel", response.message)
                         state = state.copy(
-                            isLoading = false
+                            isLoading = false,
+                            hasError = true
                         )
                     }
                     Response.Loading -> {
                         state = state.copy(
-                            isLoading = true
+                            isLoading = true,
+                            hasError = false
                         )
                     }
                     is Response.Success -> {
                         state = state.copy(
-                            isLoading = false
+                            isLoading = false,
+                            hasError = false
                         )
                         state = state.copy(
-                            weatherDescription = response.data.description,
-                            weatherTemp = response.data.temp,
-                            weatherHumidity = response.data.humidity,
-                            weatherVisibility = response.data.visibility,
-                            weatherWindSpeed = response.data.windSpeed
+                            weatherInfo = response.data
                         )
                     }
                 }
-            }.collect()
+            }
         }
     }
 

@@ -36,7 +36,11 @@ fun FavoriteSticker(
             ),
             contentDescription = null,
             modifier = Modifier.padding(spacing.spaceExtraSmall),
-            tint = Color.Unspecified
+            tint = if(isFavorite) {
+                Color.Unspecified
+            } else {
+                MaterialTheme.colorScheme.onTertiary
+            }
         )
     }
 }

@@ -9,10 +9,12 @@ import com.commandiron.core_ui.util.Strings.Turkish.LOCKED
 import com.commandiron.core_ui.util.Strings.Turkish.SOON_THREE_DOT
 import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.core.model.ToolTag
+import com.commandiron.core.util.Response
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -40,16 +42,30 @@ class ToolsViewModel @Inject constructor(
             is ToolsUserEvent.Favorite -> {
                 viewModelScope.launch {
                     if(userEvent.tool.isFavorite){
-                        toolsUseCases.unFavoriteTool(userEvent.tool)
-                        refresh()
+                        toolsUseCases.unFavoriteTool(userEvent.tool).collect{ response ->
+                            when(response){
+                                is Response.Error -> {}
+                                Response.Loading -> {}
+                                is Response.Success -> {
+                                    refresh()
+                                }
+                            }
+                        }
                     }else{
                         if(userEvent.tool.toolTags.contains(ToolTag.SOON)){
                             sendUiEvent(UiEvent.ShowSnackbar(SOON_THREE_DOT))
                         }else if (userEvent.tool.toolTags.contains(ToolTag.LOCKED)){
                             sendUiEvent(UiEvent.ShowSnackbar(LOCKED))
                         }else{
-                            toolsUseCases.favoriteTool(userEvent.tool)
-                            refresh()
+                            toolsUseCases.favoriteTool(userEvent.tool).collect{ response ->
+                                when(response){
+                                    is Response.Error -> {}
+                                    Response.Loading -> {}
+                                    is Response.Success -> {
+                                        refresh()
+                                    }
+                                }
+                            }
                         }
                     }
                 }

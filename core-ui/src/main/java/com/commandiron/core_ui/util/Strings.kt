@@ -22,6 +22,7 @@ object Strings {
         const val DEGREE_SYMBOL = "°"
         const val HUMIDITY = "Nem"
         const val SIGHT = "Görüş"
+        const val PRESSURE = "Basınç"
         const val WIND = "Rüzgar"
         const val TURN_BACK = "Geri Dön"
         const val MY_FAVORITE_TOOLS = "Favori Araçlarım"
@@ -36,6 +37,7 @@ object Strings {
         const val SNACKBAR_CLOSE_ACTION_TEXT = "Kapat"
         const val SOON_THREE_DOT = "Yakında..."
         const val LOCKED = "Kilitli."
-        const val SOMETHING_WENT_WRONG = "Bir hata oluştu."
+        const val FAILED_TO_GET_LOCATION_PLEASE_OPEN_GOOGLE_MAPS = "Konum alınamadı, lütfen Google Maps uygulamasını açın."
+        const val DAILY_IRON_PRICE = "Günlük Demir Fiyatı:"
     }
 }

@@ -55,7 +55,7 @@ fun SearchTextField(
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f)
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.3f)
                 )
                 Spacer(modifier = Modifier.width(spacing.spaceSmall))
                 Box(
@@ -65,7 +65,7 @@ fun SearchTextField(
                         Text(
                             text = hint,
                             style = MaterialTheme.typography.bodyMedium.copy(
-                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f)
+                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.3f)
                             )
                         )
                     innerTextField()

@@ -102,14 +102,16 @@ fun AeratedConcConverterComponent(
                 Text(
                     text = resultText,
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Spacer(modifier = Modifier.width(spacing.spaceSmall))
                 if(resultText.isNotEmpty()){
                     Text(
                         text = resultUnit,
                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
             }

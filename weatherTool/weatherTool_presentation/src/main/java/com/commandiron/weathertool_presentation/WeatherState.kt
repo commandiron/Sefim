@@ -1,13 +1,12 @@
 package com.commandiron.weathertool_presentation
 
+import com.commandiron.weathertool_domain.model.WeatherInfo
+
 data class WeatherState(
     val isLoading: Boolean = false,
+    val hasError: Boolean = false,
     val title: String = "",
     val myCity: String = "İstanbul",
     val locationPermissionGranted: Boolean = false,
-    val weatherDescription: String = "--",
-    val weatherTemp: String = "--",
-    val weatherHumidity: String = "--",
-    val weatherVisibility: String = "--",
-    val weatherWindSpeed: String = "--",
+    val weatherInfo: WeatherInfo? = null,
 )

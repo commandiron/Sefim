@@ -10,12 +10,12 @@ import android.location.LocationManager
 import androidx.core.content.ContextCompat
 import com.commandiron.core.util.Response
 import com.commandiron.core.util.Strings
-import com.commandiron.weathertool_data.mapper.toWeatherPresentation
-import com.commandiron.weathertool_data.remote.OpenWeatherApi
-import com.commandiron.weathertool_domain.model.WeatherPresentation
+import com.commandiron.weathertool_data.mapper.toWeatherInfo
 import com.commandiron.weathertool_domain.repository.WeatherToolRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.model.LatLng
+import com.commandiron.weathertool_data.remote.WeatherApi
+import com.commandiron.weathertool_domain.model.WeatherInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -23,7 +23,7 @@ import java.util.*
 import kotlin.coroutines.resume
 
 class WeatherToolRepositoryImpl(
-    private val api: OpenWeatherApi,
+    private val api: WeatherApi,
     private val fusedLocationClient: FusedLocationProviderClient,
     private val application: Application
 ): WeatherToolRepository {
@@ -56,7 +56,11 @@ class WeatherToolRepositoryImpl(
                     return@suspendCancellableCoroutine
                 }
                 addOnSuccessListener {
-                    cont.resume(Response.Success(it))
+                    it?.let {
+                        cont.resume(Response.Success(it))
+                    } ?: kotlin.run {
+                        cont.resume(Response.Error(Strings.ExceptionMessages.NO_LAST_KNOWN_LOCATION))
+                    }
                 }
                 addOnFailureListener {
                     cont.resume(Response.Error(Strings.ExceptionMessages.LOCATION_FAILED))
@@ -74,16 +78,15 @@ class WeatherToolRepositoryImpl(
         return addresses[0].adminArea + ", " +addresses[0].countryName
     }
 
-    override suspend fun getWeather(
-        latitude: String,
-        longitude: String,
-    ): Flow<Response<WeatherPresentation>> = flow {
-        emit(Response.Loading)
+    override suspend fun getWeatherData(lat: Double, long: Double): Flow<Response<WeatherInfo>> = flow {
         try {
-            val weatherPresentation = api.getWeather(latitude, longitude).toWeatherPresentation()
-            emit(Response.Success(weatherPresentation))
+            emit(Response.Loading)
+            val weatherData = api.getWeatherData(lat, long)
+            val weatherInfo = weatherData.toWeatherInfo()
+            emit(Response.Success(weatherInfo))
         }catch (e: Exception){
-            emit(Response.Error(e.message ?: Strings.ExceptionMessages.AN_ERROR_OCCURRED))
+            e.printStackTrace()
+            emit(Response.Error(e.message ?: "An unknown error occurred"))
         }
     }
 }
