@@ -25,6 +25,7 @@ Sefim is a native android tools app for construction site supervisors written in
    * Calculation tools
    * Database operations - CRUD
    * Various animations
+   * Unit tests
    * Language - Turkish
 * Tech-stack ⚛️
     * [Kotlin](https://kotlinlang.org/) + [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform background operation
