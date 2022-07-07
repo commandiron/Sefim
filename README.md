@@ -51,5 +51,4 @@ Sefim is a native android tools app for construction site supervisors written in
  
  * Todo ✔️
    * Test ❌ - working on
-   * Language - English ❌
-   * Dark Theme ❌
+   * Dark Theme ✔️
