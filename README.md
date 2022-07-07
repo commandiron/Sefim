@@ -4,9 +4,9 @@ Sefim is a native android tools app for construction site supervisors written in
 
 * Screenshots 🖼️
 
-<img src="https://user-images.githubusercontent.com/50905347/177772768-6ed6b190-23a8-48d5-992d-faf00cdfb66c.png" width="400" height="848">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772775-bc3fbbe7-5aac-411f-a791-26288fda540f.png" width="400" height="848">
+<img src="https://user-images.githubusercontent.com/50905347/177772768-6ed6b190-23a8-48d5-992d-faf00cdfb66c.png" width="200" height="424">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772775-bc3fbbe7-5aac-411f-a791-26288fda540f.png" width="200" height="424">
 
-<img src="https://user-images.githubusercontent.com/50905347/177772768-6ed6b190-23a8-48d5-992d-faf00cdfb66c.png" width="200" height="424">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772775-bc3fbbe7-5aac-411f-a791-26288fda540f.png" width="200" height="424">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772776-b0c9cdc0-a706-4a1a-8d20-e9e5b9c87128.png" width="200" height="424">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772779-be6434de-01c2-42fe-81d9-b4c2c43cbdf1.png" width="200" height="424">
+<img src="https://user-images.githubusercontent.com/50905347/177772776-b0c9cdc0-a706-4a1a-8d20-e9e5b9c87128.png" width="200" height="424">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772779-be6434de-01c2-42fe-81d9-b4c2c43cbdf1.png" width="200" height="424">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772776-b0c9cdc0-a706-4a1a-8d20-e9e5b9c87128.png" width="200" height="424">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/177772779-be6434de-01c2-42fe-81d9-b4c2c43cbdf1.png" width="200" height="424">
 
 <img src="https://user-images.githubusercontent.com/50905347/174627212-691237a2-88ea-4922-b1e7-95b943099ffe.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946391-d27a581f-9f47-4001-b70b-a4a944d78399.png" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/176946401-482da9a1-49cc-452f-9bea-8e255a364c53.png" width="250" height="530">
 
