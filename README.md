@@ -21,8 +21,9 @@ Sefim is a native android tools app for construction site supervisors written in
 
 * Application - Features ☕
    * One time splash screen
-   * Geolocation
-   * Calculation tools
+   * Geolocation - permissions
+   * Various calculation tools
+   * Web scrapping
    * Database operations - CRUD
    * Various animations
    * Unit tests
