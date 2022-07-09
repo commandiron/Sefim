@@ -2,6 +2,7 @@ package com.commandiron.core_ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.commandiron.core_ui.R
 import com.commandiron.core_ui.util.Strings.APP_NAME
 
@@ -39,11 +42,12 @@ fun AppLogoWithName(
 @Composable
 fun AppLogo(
     modifier: Modifier = Modifier,
+    size: Dp = 80.dp,
     alpha: Float = 1.0f,
     color: Color = MaterialTheme.colorScheme.primary,
 ) {
     Icon(
-        modifier = modifier,
+        modifier = modifier.size(size),
         painter = painterResource(id = R.drawable.app_icon),
         contentDescription = null,
         tint = color.copy(

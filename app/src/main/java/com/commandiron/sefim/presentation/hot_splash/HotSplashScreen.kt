@@ -32,7 +32,7 @@ fun HotSplashScreen(
         color = MaterialTheme.colorScheme.background
     )
     LaunchedEffect(key1 = true){
-        delay(3000)
+        delay(6000)
         onFinish()
     }
     Surface(
@@ -44,7 +44,6 @@ fun HotSplashScreen(
             verticalArrangement = Arrangement.Center
         ) {
             AppLogoWithName(
-                modifier = Modifier.fillMaxWidth(0.2f),
                 color = MyPrimaryColor
             )
         }

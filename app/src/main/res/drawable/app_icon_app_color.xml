@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+    android:viewportWidth="512"
+    android:viewportHeight="512"
+    android:width="80dp"
+    android:height="80dp">
+    <group
+        android:pivotY="244"
+        android:pivotX="196"
+        android:scaleX="0.27"
+        android:scaleY="0.27"
+        android:translateX="59">
+        <path
+            android:pathData="M173.5 0L216.5 0L227 8.5L230 17.5L230 115.5Q228.1 123.2 222.5 127L216.5 129L177.5 129Q169.4 127.6 166 121.5L164 115.5L164 13.5Q165.2 5.7 170.5 2L173.5 0Z"
+            android:fillColor="#37A296"
+            android:strokeColor="#37A296"
+            android:strokeWidth="1" />
+        <path
+            android:pathData="M154.5 36L157 37.5L157 119.5Q159.4 128.5 166.5 133L172.5 136L221.5 136L232 129.5L236 123.5L238 115.5L238 37.5L239.5 36Q258.8 46.8 273 62.5Q294.8 85 304 119L319.5 119L321 120.5L321 154.5L319.5 156L74.5 156L73 154.5L73 120.5L74.5 119L89.5 119L90 117.5Q101.5 80.5 126.5 57Q138.7 44.7 154.5 36Z"
+            android:fillColor="#37A296"
+            android:strokeColor="#37A296"
+            android:strokeWidth="1" />
+        <path
+            android:pathData="M93.5 174L300.5 174L302 175.5Q313.5 184.5 312 206.5Q308.9 220.9 298.5 228L290.5 232L283 233L282 243.5L276 262.5Q266.8 284.3 250.5 299Q239 309.5 223.5 316L204.5 321L185.5 321L175.5 319L157.5 312Q141.4 303.1 130 289.5Q110.6 267.7 106 232Q93.6 230.4 88 220.5L82 206.5L82 195.5Q84.4 181.4 93.5 174Z"
+            android:fillColor="#37A296"
+            android:strokeColor="#37A296"
+            android:strokeWidth="1" />
+        <path
+            android:pathData="M257.5 315Q272 324.5 282.5 338L327.5 338L337.5 340Q354.9 346.1 365 359.5Q374.4 370.6 380 385.5L389 416.5L391 435.5L392 436.5L393 459.5L394 460.5L394 500.5L393 501.5L393 512L2.5 512Q1.3 511.8 2 505.5L1 504.5L1 489.5L0 488.5L0 453.5L1 452.5L1 437.5L2 436.5L2 428.5L3 427.5L4 416.5L12 386.5L23 365.5L38.5 349L50.5 342L65.5 338L113.5 338L136.5 317Q158.2 336.8 198.5 338L199.5 337L209.5 337L219.5 335L231.5 331Q246.5 325 257.5 315Z"
+            android:fillColor="#37A296"
+            android:strokeColor="#37A296"
+            android:strokeWidth="1" />
+    </group>
+</vector>

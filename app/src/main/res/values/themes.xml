@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.Sefim" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/primaryColor</item>
-        <item name="android:navigationBarColor">@color/primaryColor</item>
+        <item name="android:statusBarColor">@color/backGroundColor</item>
+        <item name="android:navigationBarColor">@color/backGroundColor</item>
     </style>
 </resources>

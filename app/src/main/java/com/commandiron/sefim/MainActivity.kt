@@ -36,11 +36,10 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var preferences: Preferences
 
-    @SuppressLint("UnusedMaterialScaffoldPaddingParameter",
-        "UnusedMaterial3ScaffoldPaddingParameter")
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen().setKeepVisibleCondition{
+        installSplashScreen().setKeepOnScreenCondition{
             viewModel.state.isColdSplashScreenVisible
         }
         val shouldShowHotSplash = preferences.loadShouldShowHotSplash()
