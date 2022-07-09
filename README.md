@@ -1,6 +1,6 @@
 # Sefim <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" width="80" height="20"> <img src="https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white" width="80" height="20">
 
-Sefim is a native android tools app for construction site supervisors written in Kotlin using Jetpack Compose.
+Sefim is a native android tools app for construction site supervisors written in Kotlin using Jetpack Compose with multi-module architecture.
 
 * Screenshots 🖼️
 
@@ -37,6 +37,7 @@ Sefim is a native android tools app for construction site supervisors written in
         * [Compose](https://developer.android.com/jetpack/compose) - toolkit for building native UI
         * [Navigation](https://developer.android.com/topic/libraries/architecture/navigation/) - deal with whole in-app navigation      
         * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - store and manage UI-related data in a lifecycle conscious way
+    * [Room](https://developer.android.com/jetpack/androidx/releases/room) - database object mapping
     * [Retrofit](https://square.github.io/retrofit/) - HTTP client
     * [Accompanist](https://github.com/google/accompanist)
         * systemUi
@@ -47,6 +48,7 @@ Sefim is a native android tools app for construction site supervisors written in
     * [Hilt](https://dagger.dev/hilt/) - DI
     * [Google Play Services](https://developers.google.com/android)
         * location
+    * [Material 3](https://m3.material.io) - design
     * [Jsoup](https://jsoup.org) - perform web scraping
     * [Junit 4](https://junit.org/junit4/) - perform unit tests
 * Architecture 🏗️
@@ -54,5 +56,5 @@ Sefim is a native android tools app for construction site supervisors written in
     * [Android Architecture components](https://developer.android.com/topic/libraries/architecture) ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
  
  * Todo ✔️
-   * Test ❌ - working on
+   * Tests ❌ - working on
    * Dark Theme ✔️
