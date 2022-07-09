@@ -228,6 +228,7 @@ fun NewToolContent(
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         ToolItemWithSticker(
+            modifier = Modifier.padding(spacing.spaceSmall),
             tool = newTool,
             onIconClick = { onClick(newTool) },
             onIconLongClick = {},

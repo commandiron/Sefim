@@ -52,7 +52,7 @@ fun CompactWindowTypeContent(viewModel: RebarPricesViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(spacing.defaultScreenPaddingForCompact)
+            .padding(spacing.defaultScreenPaddingForCompactNoBottomNav)
     ) {
         ToolHeader(
             title = REBAR_PRICES,
