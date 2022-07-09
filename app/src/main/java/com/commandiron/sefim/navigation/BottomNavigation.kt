@@ -7,6 +7,9 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.commandiron.core_ui.theme.NoRippleTheme
+import com.commandiron.core_ui.util.LocalSpacing
 
 @Composable
 fun BottomNavigation(
@@ -26,6 +30,7 @@ fun BottomNavigation(
     currentRoute: String?,
     onBottomNavItemClick:(String) -> Unit
 ) {
+    val spacing = LocalSpacing.current
     val navigationItems = listOf(
         NavigationItem.HomeScreen,
         NavigationItem.Tools,
@@ -42,7 +47,7 @@ fun BottomNavigation(
         ) {
             Box {
                 NavigationBar(
-                    modifier = modifier.height(64.dp),
+                    modifier = modifier.height(spacing.bottomNavigationHeight),
                     containerColor = MaterialTheme.colorScheme.background,
                     contentColor = MaterialTheme.colorScheme.onBackground
                 ) {
@@ -60,6 +65,7 @@ fun BottomNavigation(
                             onClick = { onBottomNavItemClick(item.route) },
                             icon = {
                                 Icon(
+                                    modifier = Modifier.height(24.dp),
                                     painter = if(currentRoute == item.route) {
                                         painterResource(id = item.selectedImageResource!!)
                                     } else painterResource(id = item.unSelectedImageResource!!),
@@ -67,7 +73,9 @@ fun BottomNavigation(
                                     tint = if(currentRoute == item.route) {
                                         if(currentRoute == NavigationItem.Tools.route){
                                             Color.Unspecified
-                                        }else MaterialTheme.colorScheme.primary
+                                        }else{
+                                            MaterialTheme.colorScheme.primary
+                                        }
                                     } else MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f)
                                 )
                             },

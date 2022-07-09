@@ -22,7 +22,7 @@ data class Dimensions(
     val spaceXXLarge: Dp = 128.dp,
     val spaceXXXLarge: Dp = 256.dp,
 
-    val bottomNavigationHeight: Dp = 80.dp,
+    val bottomNavigationHeight: Dp = 68.dp,
     val defaultScreenPaddingForCompact: PaddingValues = PaddingValues(
         start = spaceMedium,
         top = spaceLarge,
