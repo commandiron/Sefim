@@ -9,6 +9,8 @@ buildscript {
         classpath(Build.kotlinGradlePlugin)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath(DaggerHilt.hiltAndroidGradlePlugin)
+        classpath(Google.services)
+        classpath(Firebase.crashlyticsPlugin)
     }
 }
 

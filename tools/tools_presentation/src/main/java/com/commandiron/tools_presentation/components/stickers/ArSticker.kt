@@ -9,8 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import com.commandiron.core.R
 import com.commandiron.core_ui.util.LocalSpacing
+import com.commandiron.tools_presentation.R
 
 @Composable
 fun ArSticker(

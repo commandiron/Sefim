@@ -8,10 +8,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -26,13 +24,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.core_ui.util.LocalSpacing
-import com.commandiron.core_ui.util.Strings.Turkish.GRAND_TOTAL
 import com.commandiron.core_ui.util.Strings.Turkish.REBAR_QUANTITY_CALCULATOR
 import com.commandiron.core_ui.components.CustomOutlinedNumberTextField
 import com.commandiron.core_ui.components.OutlinedDropDown
 import com.commandiron.core_ui.components.ToolHeader
 import com.commandiron.core_ui.util.LocalWindowTypeInfo
 import com.commandiron.core_ui.util.WindowInfo
+import com.commandiron.rebarcalculatortool_presentation.components.RebarCalculatorAddRowButton
+import com.commandiron.rebarcalculatortool_presentation.components.RebarCalculatorResultRow
 
 @Composable
 fun RebarCalculatorScreen(
@@ -60,9 +59,9 @@ fun RebarCalculatorScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(
-                if(windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact){
+                if (windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
                     spacing.defaultScreenPaddingForCompact
-                }else spacing.defaultScreenPaddingForExpandedNoBottomNav
+                } else spacing.defaultScreenPaddingForExpandedNoBottomNav
             )
     ) {
         ToolHeader(
@@ -205,77 +204,11 @@ fun RebarCalculatorScreen(
                 )
             }
             item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(spacing.spaceExtraLarge)
-                        .background(
-                            color = MaterialTheme.colorScheme.primaryContainer,
-                            shape = MaterialTheme.shapes.large
-                        ),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "$GRAND_TOTAL : ",
-                        style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                    Text(
-                        text = state.grandResult,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                    Spacer(modifier = Modifier.width(spacing.spaceSmall))
-                    if(state.grandResult.isNotEmpty()){
-                        Text(
-                            text = state.grandResultUnit,
-                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                            textAlign = TextAlign.Center,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
-                    Spacer(modifier = Modifier.width(spacing.spaceSmall))
-                    Text(
-                        text = "=",
-                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                    Spacer(modifier = Modifier.width(spacing.spaceSmall))
-                    Text(
-                        text = state.grandResult2,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                    Spacer(modifier = Modifier.width(spacing.spaceSmall))
-                    if(state.grandResult2.isNotEmpty()){
-                        Text(
-                            text = state.grandResult2Unit,
-                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                            textAlign = TextAlign.Center,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
-                }
+                RebarCalculatorResultRow(viewModel = viewModel)
             }
             item {
                 Spacer(modifier = Modifier.height(spacing.spaceMedium))
-                IconButton(
-                    onClick = {
-                        viewModel.onEvent(RebarCalculatorUserEvent.AddRebarCalculatorItem)
-                    }
-                ) {
-                    Icon(
-                        modifier = Modifier.size(spacing.spaceExtraLarge),
-                        imageVector = Icons.Default.AddCircle,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
+                RebarCalculatorAddRowButton(viewModel = viewModel)
             }
         }
     }

@@ -8,13 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.commandiron.core_ui.util.Strings.Turkish.LOCKED
 import com.commandiron.core_ui.util.Strings.Turkish.SOON_THREE_DOT
 import com.commandiron.core_ui.util.UiEvent
-import com.commandiron.core.model.ToolTag
+import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.core.util.Response
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -6,7 +6,7 @@ data class WeatherState(
     val isLoading: Boolean = false,
     val hasError: Boolean = false,
     val title: String = "",
-    val myCity: String = "İstanbul",
+    val myCity: String = "--",
     val locationPermissionGranted: Boolean = false,
     val weatherInfo: WeatherInfo? = null,
 )

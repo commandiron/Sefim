@@ -1,6 +1,6 @@
 package com.commandiron.tools_presentation.tools
 
-import com.commandiron.core.model.Tool
+import com.commandiron.tools_domain.model.Tool
 
 data class ToolsState(
     val allTools: List<Tool>? = null,

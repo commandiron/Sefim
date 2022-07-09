@@ -10,12 +10,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class  HotSplashViewModel @Inject constructor(
-    preferences: Preferences,
-    newsUseCases: NewsUseCases,
-    toolsUseCases: ToolsUseCases
+class HotSplashViewModel @Inject constructor(
+    private val preferences: Preferences,
+    private val newsUseCases: NewsUseCases,
+    private val toolsUseCases: ToolsUseCases
 ): ViewModel() {
-    init {
+
+    fun onFirstOpen(){
         preferences.saveShouldShowHotSplash(false)
         viewModelScope.launch {
             newsUseCases.prepopulateAllNewsIntoNewsDb()

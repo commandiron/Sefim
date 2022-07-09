@@ -16,4 +16,7 @@ object Google {
 
     private const val playServicesMapsVersion = "18.0.2"
     const val playServicesMaps = "com.google.android.gms:play-services-maps:$playServicesMapsVersion"
+
+    private const val servicesVersion = "4.3.13"
+    const val services = "com.google.gms:google-services:$servicesVersion"
 }

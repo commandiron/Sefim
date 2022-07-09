@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "227714951935",
+    "project_id": "sefim-1b915",
+    "storage_bucket": "sefim-1b915.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227714951935:android:9da427e17302ee4508faca",
+        "android_client_info": {
+          "package_name": "com.commandiron.sefim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227714951935-e8sidg2so3015ptlg740dcpgb6k00dtm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvHieL35Bf0L9ITt2kGOezgak7elEldpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227714951935-e8sidg2so3015ptlg740dcpgb6k00dtm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

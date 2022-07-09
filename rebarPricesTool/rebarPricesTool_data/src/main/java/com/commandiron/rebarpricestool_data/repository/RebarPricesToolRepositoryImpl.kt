@@ -58,6 +58,7 @@ class RebarPricesToolRepositoryImpl(
                     dataForLoop?.let { elements ->
                         for(i in 0 until elements.size){
                             val dataChildren = elements[i].children()
+
                             val rebarPriceEntity =
                                 RebarPriceEntity(
                                     id = i,

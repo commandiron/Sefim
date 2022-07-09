@@ -19,7 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
--keep class com.commandiron.news_data.local.entity.* { *; }
--keep class com.commandiron.tools_data.remote.dto.* { *; }
--keep class com.commandiron.tools_data.local.entity.* { *; }

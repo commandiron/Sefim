@@ -1,10 +1,10 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
     id("com.android.application")
     kotlin("android")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -59,15 +59,6 @@ android {
 }
 
 dependencies {
-    implementation(Compose.compiler)
-    implementation(Compose.ui)
-    implementation(Compose.uiToolingPreview)
-    implementation(Compose.runtime)
-    implementation(Compose.navigation)
-    implementation(Compose.viewModelCompose)
-    implementation(Compose.activityCompose)
-    implementation(Compose.hiltNavigationCompose)
-
     implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
     implementation(project(Modules.toolsData))
@@ -87,27 +78,55 @@ dependencies {
     implementation(project(Modules.rebarPricesToolDomain))
     implementation(project(Modules.rebarPricesToolPresentation))
 
-    implementation(AndroidX.coreKtx)
-    implementation(AndroidX.appCompat)
-    implementation(AndroidX.splashScreen)
-
-    implementation(Google.material)
-    implementation(Google.material3)
-    implementation(Google.materialIconsCore)
-    implementation(Google.materialIconsExtended)
-
-    implementation(Coil.coil)
-    implementation(Coil.compose)
-    implementation(Coil.composeBase)
-
     implementation(Accompanist.systemUi)
     implementation(Accompanist.pager)
     implementation(Accompanist.indicators)
     implementation(Accompanist.navigationAnimation)
     implementation(Accompanist.permissions)
 
+    implementation(AndroidX.coreKtx)
+    implementation(AndroidX.appCompat)
+    implementation(AndroidX.splashScreen)
+
+    implementation(Coil.coil)
+    implementation(Coil.compose)
+    implementation(Coil.composeBase)
+
+    implementation(Compose.compiler)
+    implementation(Compose.ui)
+    implementation(Compose.uiToolingPreview)
+    implementation(Compose.runtime)
+    implementation(Compose.navigation)
+    implementation(Compose.viewModelCompose)
+    implementation(Compose.activityCompose)
+    implementation(Compose.hiltNavigationCompose)
+
+    implementation(Coroutines.coroutines)
+
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)
+
+    implementation(platform(Firebase.bom))
+    implementation(Firebase.analytics)
+    implementation(Firebase.crashlytics)
+
+    implementation(Google.material)
+    implementation(Google.material3)
+    implementation(Google.materialIconsCore)
+    implementation(Google.materialIconsExtended)
+    implementation(Google.playServicesLocation)
+    implementation(Google.playServicesMaps)
+
+    implementation(Jsoup.jsoup)
+
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.moshiConverter)
+    implementation(Retrofit.okHttp)
+    implementation(Retrofit.okHttpLoggingInterceptor)
+
+    implementation(Room.runtime)
+    kapt(Room.compiler)
+    implementation(Room.ktx)
 
     testImplementation(Testing.junit)
 

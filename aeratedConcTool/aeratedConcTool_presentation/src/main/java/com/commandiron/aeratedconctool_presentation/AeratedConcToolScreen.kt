@@ -81,7 +81,6 @@ fun ExpandedWindowTypeContent(viewModel: AeratedConcToolViewModel) {
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
         LazyColumn {
             item {
-
                 SquareMetersPalletConverter(state, viewModel)
                 Spacer(modifier = Modifier.height(spacing.spaceMedium))
                 CubicMetersPalletConverter(state, viewModel)

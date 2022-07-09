@@ -3,16 +3,16 @@ package com.commandiron.aeratedconctool_presentation
 data class AeratedConcToolState(
 
     val squareMetersPallet: String = "",
-    val squareMetersPalletLabel: String = "m2",
-    val squareMetersPalletUnit: String = "m2",
+    val squareMetersPalletLabel: String = "m²",
+    val squareMetersPalletUnit: String = "m²",
     val squareMetersPalletResult: String = "--",
     val squareMetersPalletResultUnit: String = "Palet",
     val squareMetersPalletUnitConverterIsChanged: Boolean = false,
     val squareMetersPalletThicknessDropDownIsExpanded: Boolean = false,
 
     val cubicMetersPallet: String = "",
-    val cubicMetersPalletLabel: String = "m3",
-    val cubicMetersPalletUnit: String = "m3",
+    val cubicMetersPalletLabel: String = "m³",
+    val cubicMetersPalletUnit: String = "m³",
     val cubicMetersPalletResult: String = "--",
     val cubicMetersPalletResultUnit: String = "Palet",
     val cubicMetersPalletUnitConverterIsChanged: Boolean = false,
@@ -27,10 +27,10 @@ data class AeratedConcToolState(
     val piecePalletThicknessDropDownIsExpanded: Boolean = false,
 
     val squareCubic: String = "",
-    val squareCubicLabel: String = "m2",
-    val squareCubicUnit: String = "m2",
+    val squareCubicLabel: String = "m²",
+    val squareCubicUnit: String = "m²",
     val squareCubicResult: String = "--",
-    val squareCubicResultUnit: String = "m3",
+    val squareCubicResultUnit: String = "m³",
     val squareCubicUnitConverterIsChanged: Boolean = false,
     val squareCubicThicknessDropDownIsExpanded: Boolean = false,
 

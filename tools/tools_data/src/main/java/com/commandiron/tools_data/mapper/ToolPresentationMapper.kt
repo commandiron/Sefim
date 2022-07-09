@@ -1,8 +1,8 @@
 package com.commandiron.tools_data.mapper
 
 import com.commandiron.tools_data.local.entity.ToolEntity
-import com.commandiron.core.model.Tool
-import com.commandiron.core.model.ToolTag
+import com.commandiron.tools_domain.model.Tool
+import com.commandiron.tools_domain.model.ToolTag
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types

@@ -6,6 +6,8 @@ dependencies {
     "implementation"(project(Modules.core))
     "implementation"(project(Modules.weatherToolDomain))
 
+    "implementation"(Coroutines.coroutines)
+
     "implementation"(Retrofit.okHttp)
     "implementation"(Retrofit.retrofit)
     "implementation"(Retrofit.moshiConverter)

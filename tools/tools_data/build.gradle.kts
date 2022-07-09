@@ -6,9 +6,9 @@ dependencies {
     "implementation"(project(Modules.core))
     "implementation"(project(Modules.toolsDomain))
 
-    "kapt"(Room.roomCompiler)
-    "implementation"(Room.roomKtx)
-    "implementation"(Room.roomRuntime)
+    "kapt"(Room.compiler)
+    "implementation"(Room.ktx)
+    "implementation"(Room.runtime)
 
     "implementation"(Retrofit.okHttp)
     "implementation"(Retrofit.retrofit)

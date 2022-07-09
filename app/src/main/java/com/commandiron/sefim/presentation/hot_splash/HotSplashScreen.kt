@@ -23,6 +23,9 @@ fun HotSplashScreen(
     viewModel: HotSplashViewModel = hiltViewModel(),
     onFinish:() -> Unit
 ) {
+    LaunchedEffect(key1 = Unit){
+        viewModel.onFirstOpen()
+    }
     val spacing = LocalSpacing.current
     val systemUiController = LocalSystemUiController.current
     systemUiController.setStatusBarColor(
@@ -71,7 +74,7 @@ fun HotSplashScreen(
                 ) {
                     Icon(
                         modifier = Modifier.height(20.dp),
-                        painter = painterResource(id = R.drawable.ci_tech_logo_4),
+                        painter = painterResource(id = R.drawable.ci_tech_logo),
                         contentDescription = "CITECH",
                         tint = companyColor
                     )

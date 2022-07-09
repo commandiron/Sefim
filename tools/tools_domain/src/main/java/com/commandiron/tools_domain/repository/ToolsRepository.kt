@@ -1,7 +1,7 @@
 package com.commandiron.tools_domain.repository
 
-import com.commandiron.core.model.Tool
 import com.commandiron.core.util.Response
+import com.commandiron.tools_domain.model.Tool
 import kotlinx.coroutines.flow.Flow
 
 interface ToolsRepository {

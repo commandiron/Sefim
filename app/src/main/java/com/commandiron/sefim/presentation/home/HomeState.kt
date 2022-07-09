@@ -1,8 +1,8 @@
 package com.commandiron.sefim.presentation.home
 
-import com.commandiron.core.model.News
+import com.commandiron.news_domain.model.News
 import com.commandiron.rebarpricestool_domain.model.RebarPrice
-import com.commandiron.core.model.Tool
+import com.commandiron.tools_domain.model.Tool
 
 data class HomeState(
     val newsIsLoading: Boolean = false,

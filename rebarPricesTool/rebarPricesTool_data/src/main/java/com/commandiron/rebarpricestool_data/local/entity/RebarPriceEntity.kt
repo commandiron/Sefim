@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class RebarPriceEntity(
     @PrimaryKey
     val id: Int,
-    val date: String,
+    val date: String = "0",
     val city: String,
     val q8mmPrice: String,
     val q10mmPrice: String,

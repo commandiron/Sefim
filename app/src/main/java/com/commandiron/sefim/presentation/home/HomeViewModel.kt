@@ -12,13 +12,12 @@ import com.commandiron.core_ui.util.Strings.Turkish.THIS_FEATURE_IS_NOT_ACTIVE_Y
 import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.sefim.navigation.NavigationItem
 import com.commandiron.news_domain.use_cases.NewsUseCases
-import com.commandiron.core.model.ToolTag
+import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.rebarpricestool_domain.use_cases.RebarPricesToolUseCases
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject

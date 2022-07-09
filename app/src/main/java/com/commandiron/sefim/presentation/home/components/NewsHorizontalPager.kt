@@ -20,12 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.commandiron.core.model.News
 import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.rebarpricestool_domain.model.RebarPrice
-import com.commandiron.core.model.Tool
 import com.commandiron.core_ui.util.Strings.Turkish.DAILY_IRON_PRICE
+import com.commandiron.news_domain.model.News
 import com.commandiron.rebarpricestool_presentation.components.RebarPriceItem
+import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
 import com.google.accompanist.pager.*
 import kotlin.math.absoluteValue
