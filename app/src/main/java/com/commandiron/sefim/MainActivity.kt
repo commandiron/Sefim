@@ -87,14 +87,9 @@ class MainActivity : ComponentActivity() {
                             showSnackBar = {
                                 coroutineScope.launch {
                                     snackbarHostState.showSnackbar(it, SNACKBAR_CLOSE_ACTION_TEXT)
-
                                 }
                             }
                         )
-                        BackHandler {
-                            navController.popBackStack()
-                            navController.navigate(NavigationItem.HomeScreen.route)
-                        }
                     }
                 }
             }
