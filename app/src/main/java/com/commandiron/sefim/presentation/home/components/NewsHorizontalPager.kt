@@ -181,7 +181,7 @@ fun RebarPriceContent(
     Column(
         modifier = Modifier
             .background(
-                color = MaterialTheme.colorScheme.onBackground.copy(0.5f),
+                color = MaterialTheme.colorScheme.onBackground.copy(0.25f),
                 shape = MaterialTheme.shapes.small
             )
             .fillMaxSize(0.9f)
@@ -213,7 +213,7 @@ fun NewToolContent(
     Column(
         modifier = Modifier
             .background(
-                color = MaterialTheme.colorScheme.onBackground.copy(0.8f),
+                color = MaterialTheme.colorScheme.onBackground.copy(0.25f),
                 shape = MaterialTheme.shapes.small
             )
             .fillMaxSize(0.9f)

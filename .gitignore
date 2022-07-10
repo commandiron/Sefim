@@ -15,4 +15,4 @@
 local.properties
 
 # Project exclude paths
-/buildSrc/build/
+/buildSrc/build/release\
