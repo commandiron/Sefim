@@ -16,3 +16,5 @@ local.properties
 
 # Project exclude paths
 /buildSrc/build/release\
+app-release.apk
+output-metadata.json
