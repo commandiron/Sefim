@@ -14,6 +14,7 @@ import com.commandiron.sefim.navigation.NavigationItem
 import com.commandiron.news_domain.use_cases.NewsUseCases
 import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.rebarpricestool_domain.use_cases.RebarPricesToolUseCases
+import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -112,6 +113,12 @@ class HomeViewModel @Inject constructor(
             HomeUserEvent.NewsRefresh -> {
                 refreshData()
             }
+            is HomeUserEvent.ToolToLeft -> {
+                toolToLeft(userEvent.tool)
+            }
+            is HomeUserEvent.ToolToRight -> {
+                toolToRight(userEvent.tool)
+            }
         }
     }
 
@@ -180,6 +187,58 @@ class HomeViewModel @Inject constructor(
             state = state.copy(newsList = allNews)
         }
     }
+
+    private fun toolToLeft(tool: Tool){
+        viewModelScope.launch {
+            state.favoriteTools?.let { favoriteTools ->
+                val increasedTool = favoriteTools.find { it.queue == tool.queue - 1 }
+                increasedTool?.let { nonNullIncreasedTool ->
+                    toolsUseCases.decreaseToolQuery(tool).collect{ response ->
+                        when(response){
+                            is Response.Error -> {}
+                            Response.Loading -> {}
+                            is Response.Success -> {}
+                        }
+                    }
+                    toolsUseCases.increaseToolQuery(nonNullIncreasedTool).collect{ response ->
+                        when(response){
+                            is Response.Error -> {}
+                            Response.Loading -> {}
+                            is Response.Success -> {}
+                        }
+                    }
+                    getFavoriteTools()
+                }
+            }
+        }
+    }
+
+    private fun toolToRight(tool: Tool){
+        viewModelScope.launch {
+            state.favoriteTools?.let { favoriteTools ->
+                val decreasedTool = favoriteTools.find { it.queue == tool.queue + 1 }
+                decreasedTool?.let { nonNullDecreasedTool ->
+                    toolsUseCases.increaseToolQuery(tool).collect{ response ->
+                        when(response){
+                            is Response.Error -> {}
+                            Response.Loading -> {}
+                            is Response.Success -> {}
+                        }
+                    }
+                    toolsUseCases.decreaseToolQuery(nonNullDecreasedTool).collect{ response ->
+                        when(response){
+                            is Response.Error -> {}
+                            Response.Loading -> {}
+                            is Response.Success -> {}
+                        }
+                    }
+                    getFavoriteTools()
+                }
+            }
+        }
+    }
+
+
 
     private fun sendUiEvent(uiEvent: UiEvent){
         viewModelScope.launch(Dispatchers.Main) {

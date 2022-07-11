@@ -8,8 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import com.commandiron.core_ui.theme.MyPrimaryColor
-import com.commandiron.core_ui.theme.companyColor
 import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.core_ui.util.Strings.EMPTY_RESULT_DOUBLE_DASH
 import com.commandiron.core_ui.util.Strings.PHI_10

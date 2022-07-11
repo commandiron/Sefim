@@ -44,7 +44,7 @@ fun ToolItem(
             ) {
                 Icon(
                     modifier = Modifier.fillMaxSize(0.8f),
-                    painter = painterResource(id = tool.resources),
+                    painter = painterResource(id = tool.icon),
                     contentDescription = null,
                     tint = Color.Unspecified
                 )

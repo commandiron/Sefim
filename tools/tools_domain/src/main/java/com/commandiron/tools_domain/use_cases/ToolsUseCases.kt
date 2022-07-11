@@ -8,5 +8,7 @@ class ToolsUseCases(
     val favoriteTool: FavoriteTool,
     val unFavoriteTool: UnFavoriteTool,
     val getFavoriteTools: GetFavoriteTools,
-    val filterTools: FilterTools
+    val filterTools: FilterTools,
+    val increaseToolQuery: IncreaseToolQuery,
+    val decreaseToolQuery: DecreaseToolQuery
 )

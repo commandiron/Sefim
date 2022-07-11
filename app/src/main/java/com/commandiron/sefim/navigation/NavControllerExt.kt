@@ -19,7 +19,5 @@ fun NavController.bottomNavigate(route: String) {
                 saveState = true
             }
         }
-        launchSingleTop = true
-        restoreState = true
     }
 }

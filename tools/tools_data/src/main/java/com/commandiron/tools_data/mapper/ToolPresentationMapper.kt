@@ -13,8 +13,9 @@ fun ToolEntity.toTool(): Tool {
     val jsonAdapter: JsonAdapter<List<ToolTag>> = moshi.adapter(type)
     return Tool(
         id = id,
+        queue = queue,
         title = title,
-        resources = resources,
+        icon = resources,
         isFavorite = isFavorite,
         toolTags = jsonAdapter.fromJson(toolTags) ?: listOf(),
         route = route
@@ -27,8 +28,9 @@ fun Tool.toToolEntity(): ToolEntity {
     val jsonAdapter: JsonAdapter<List<ToolTag>> = moshi.adapter(type)
     return ToolEntity(
         id = id,
+        queue = queue,
         title = title,
-        resources = resources,
+        resources = icon,
         isFavorite = isFavorite,
         toolTags = jsonAdapter.toJson(toolTags),
         route = route

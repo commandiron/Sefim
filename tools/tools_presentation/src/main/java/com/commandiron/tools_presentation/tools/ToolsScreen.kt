@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.core_ui.util.LocalSpacing
@@ -21,24 +22,28 @@ fun ToolsScreen(
     showSnackbar: (String) -> Unit
 ) {
     val windowTypeInfo = LocalWindowTypeInfo.current
+    val keyboardController = LocalSoftwareKeyboardController.current
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect{ event ->
             when(event) {
                 is UiEvent.Navigate -> navigateTo(event.route)
                 is UiEvent.ShowSnackbar -> showSnackbar(event.message)
+                UiEvent.HideKeyboard -> {
+                    keyboardController?.hide()
+                }
                 else -> {}
             }
         }
     }
     if(windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact){
-        CompactWindowTypeContent(viewModel)
+        ToolsCompactContent(viewModel)
     }else{
-        ExpandedWindowTypeContent(viewModel)
+        ToolsExpandedContent(viewModel)
     }
 }
 
 @Composable
-fun CompactWindowTypeContent(viewModel: ToolsViewModel) {
+fun ToolsCompactContent(viewModel: ToolsViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     Column(
@@ -51,6 +56,7 @@ fun CompactWindowTypeContent(viewModel: ToolsViewModel) {
             text = state.searchText,
             hint = SEARCH.uppercase(),
             onChange = {viewModel.onEvent(ToolsUserEvent.SearchChange(it))},
+            onDone = {viewModel.onEvent(ToolsUserEvent.OnKeyboardDone)}
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         ToolsVerticalGrid(
@@ -64,12 +70,14 @@ fun CompactWindowTypeContent(viewModel: ToolsViewModel) {
             onIconLongClick = {},
             onFavorite = { viewModel.onEvent(ToolsUserEvent.Favorite(it))},
             onUnFavorite = {},
-            onAddClick = {}
+            onAddClick = {},
+            onToLeft = {},
+            onToRight = {}
         )
     }
 }
 @Composable
-fun ExpandedWindowTypeContent(viewModel: ToolsViewModel) {
+fun ToolsExpandedContent(viewModel: ToolsViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     Column(
@@ -82,6 +90,7 @@ fun ExpandedWindowTypeContent(viewModel: ToolsViewModel) {
             text = state.searchText,
             hint = SEARCH.uppercase(),
             onChange = {viewModel.onEvent(ToolsUserEvent.SearchChange(it))},
+            onDone = {viewModel.onEvent(ToolsUserEvent.OnKeyboardDone)}
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         ToolsVerticalGrid(
@@ -95,7 +104,9 @@ fun ExpandedWindowTypeContent(viewModel: ToolsViewModel) {
             onIconLongClick = {},
             onFavorite = { viewModel.onEvent(ToolsUserEvent.Favorite(it))},
             onUnFavorite = {},
-            onAddClick = {}
+            onAddClick = {},
+            onToLeft = {},
+            onToRight = {}
         )
     }
 }

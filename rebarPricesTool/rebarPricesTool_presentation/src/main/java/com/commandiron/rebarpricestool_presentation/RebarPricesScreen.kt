@@ -2,12 +2,10 @@ package com.commandiron.rebarpricestool_presentation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -39,14 +37,14 @@ fun RebarPricesScreen(
         }
     }
     if(windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact){
-        CompactWindowTypeContent(viewModel)
+        RebarPricesCompactContent(viewModel)
     }else{
-        ExpandedWindowTypeContent(viewModel)
+        RebarPricesExpandedContent(viewModel)
     }
 }
 
 @Composable
-fun CompactWindowTypeContent(viewModel: RebarPricesViewModel) {
+fun RebarPricesCompactContent(viewModel: RebarPricesViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     Column(
@@ -68,12 +66,15 @@ fun CompactWindowTypeContent(viewModel: RebarPricesViewModel) {
                         rebarPrice = item
                     )
                 }
+                item {
+                    Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                }
             }
         }
     }
 }
 @Composable
-fun ExpandedWindowTypeContent(viewModel: RebarPricesViewModel) {
+fun RebarPricesExpandedContent(viewModel: RebarPricesViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     Column(
@@ -96,6 +97,9 @@ fun ExpandedWindowTypeContent(viewModel: RebarPricesViewModel) {
                     RebarPriceItem(
                         rebarPrice = item
                     )
+                }
+                item {
+                    Spacer(modifier = Modifier.height(spacing.spaceMedium))
                 }
             }
         }

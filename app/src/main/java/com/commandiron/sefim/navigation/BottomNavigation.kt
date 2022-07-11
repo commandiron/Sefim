@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.commandiron.core_ui.theme.NoRippleTheme
 import com.commandiron.core_ui.util.LocalSpacing
+import com.commandiron.core_ui.util.Strings
+import kotlinx.coroutines.launch
 
 @Composable
 fun BottomNavigation(
@@ -51,13 +53,31 @@ fun BottomNavigation(
                     containerColor = MaterialTheme.colorScheme.background,
                     contentColor = MaterialTheme.colorScheme.onBackground
                 ) {
+                    val iconUnselectedHeight = (spacing.bottomNavigationHeight / 4).value
                     navigationItems.forEachIndexed { index, item ->
+                        val iconHeightAnim = remember {
+                            Animatable(iconUnselectedHeight)
+                        }
                         LaunchedEffect(key1 = currentRoute){
                             if(currentRoute == item.route){
-                                bottomNavLineOffsetXAnim.animateTo(
-                                    targetValue = screenWidth.value / navigationItems.size * index,
-                                    animationSpec = tween(durationMillis = 700)
-                                )
+                                launch {
+                                    bottomNavLineOffsetXAnim.animateTo(
+                                        targetValue = screenWidth.value / navigationItems.size * index,
+                                        animationSpec = tween(durationMillis = 700)
+                                    )
+                                }
+                                launch {
+                                    iconHeightAnim.animateTo(
+                                        targetValue = iconUnselectedHeight
+                                                + (spacing.bottomNavigationHeight / 10).value
+                                    )
+                                }
+                            }else{
+                                launch {
+                                    iconHeightAnim.animateTo(
+                                        targetValue = iconUnselectedHeight
+                                    )
+                                }
                             }
                         }
                         NavigationBarItem(
@@ -65,7 +85,7 @@ fun BottomNavigation(
                             onClick = { onBottomNavItemClick(item.route) },
                             icon = {
                                 Icon(
-                                    modifier = Modifier.height(24.dp),
+                                    modifier = Modifier.height(iconHeightAnim.value.dp),
                                     painter = if(currentRoute == item.route) {
                                         painterResource(id = item.selectedImageResource!!)
                                     } else painterResource(id = item.unSelectedImageResource!!),
@@ -81,7 +101,7 @@ fun BottomNavigation(
                             },
                             label = {
                                 Text(
-                                    text = item.title ?: "",
+                                    text = item.title ?: Strings.EMPTY_STRING,
                                     color = MaterialTheme.colorScheme.primary,
                                     style = MaterialTheme.typography.labelLarge.copy(
                                         fontWeight = FontWeight.Bold

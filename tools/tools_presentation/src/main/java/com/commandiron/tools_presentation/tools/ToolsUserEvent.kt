@@ -6,4 +6,5 @@ sealed class ToolsUserEvent{
     data class IconClick(val tool: Tool): ToolsUserEvent()
     data class Favorite(val tool: Tool): ToolsUserEvent()
     data class SearchChange(val text: String): ToolsUserEvent()
+    object OnKeyboardDone: ToolsUserEvent()
 }

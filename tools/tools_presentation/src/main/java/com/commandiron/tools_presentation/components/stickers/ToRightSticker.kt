@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.rounded.ArrowLeft
+import androidx.compose.material.icons.rounded.ArrowRight
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import com.commandiron.core_ui.util.LocalSpacing
 
 @Composable
-fun UnFavoriteSticker(
+fun ToRightSticker(
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
@@ -27,10 +27,9 @@ fun UnFavoriteSticker(
         shadowElevation = spacing.spaceSmall
     ) {
         Icon(
-            modifier = Modifier.padding(spacing.spaceExtraSmall),
-            imageVector = Icons.Default.Delete,
+            imageVector = Icons.Rounded.ArrowRight,
             contentDescription = null,
-            tint = Color.Red
+            tint = Color.Green
         )
     }
 }

@@ -7,7 +7,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -18,7 +17,7 @@ import com.commandiron.sefim.presentation.home.HomeViewModel
 import com.commandiron.tools_presentation.components.tool_items.ToolsVerticalGrid
 
 @Composable
-fun ExpandedWindowTypeContent(
+fun HomeExpandedContent(
     viewModel: HomeViewModel
 ) {
     val spacing = LocalSpacing.current
@@ -58,7 +57,9 @@ fun ExpandedWindowTypeContent(
                     onAddClick = { viewModel.onEvent(HomeUserEvent.AddClick) },
                     onIconLongClick = { viewModel.onEvent(HomeUserEvent.ToolLongClick) },
                     onFavorite = {},
-                    onUnFavorite = { viewModel.onEvent(HomeUserEvent.UnFavoriteClick(it)) }
+                    onUnFavorite = { viewModel.onEvent(HomeUserEvent.UnFavoriteClick(it)) },
+                    onToLeft = { viewModel.onEvent(HomeUserEvent.ToolToLeft(it)) },
+                    onToRight = { viewModel.onEvent(HomeUserEvent.ToolToRight(it)) }
                 )
             }
             Column(

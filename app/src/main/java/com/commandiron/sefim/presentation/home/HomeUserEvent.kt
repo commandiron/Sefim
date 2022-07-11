@@ -13,6 +13,8 @@ sealed class HomeUserEvent{
     object SpaceClick: HomeUserEvent()
     data class FavoriteClick(val tool: Tool): HomeUserEvent()
     data class UnFavoriteClick(val tool: Tool): HomeUserEvent()
+    data class ToolToLeft(val tool: Tool): HomeUserEvent()
+    data class ToolToRight(val tool: Tool): HomeUserEvent()
 
     object NewsRefresh: HomeUserEvent()
 

@@ -3,10 +3,10 @@ package com.commandiron.tools_domain.use_cases
 import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_domain.repository.ToolsRepository
 
-class GetFavoriteTools(
+class IncreaseToolQuery(
     private val repository: ToolsRepository
 ) {
-    suspend operator fun invoke() : List<Tool> {
-        return repository.getAllTools().filter { it.isFavorite }.sortedBy { it.queue }
-    }
+    suspend operator fun invoke(
+        tool: Tool
+    ) = repository.insertTool(tool.copy(queue = tool.queue + 1))
 }

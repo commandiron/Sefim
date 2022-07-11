@@ -84,11 +84,23 @@ class WeatherViewModel @Inject constructor(
     }
 
     private fun getCityFromLocation(location: Location){
-        val myLocationCity = weatherToolUseCases
-            .getCityFromLatLng(weatherToolUseCases.getLatLngFromLocation(location))
-        state = state.copy(
-            myCity = myLocationCity
-        )
+        viewModelScope.launch {
+            weatherToolUseCases
+                .getCityFromLatLng(weatherToolUseCases.getLatLngFromLocation(location))
+                .collect{ response ->
+                    when(response){
+                        is Response.Error -> {
+                        }
+                        Response.Loading -> {
+                        }
+                        is Response.Success -> {
+                            state = state.copy(
+                                myCity = response.data
+                            )
+                        }
+                    }
+                }
+        }
     }
 
     private fun getWeather(latLng: LatLng){

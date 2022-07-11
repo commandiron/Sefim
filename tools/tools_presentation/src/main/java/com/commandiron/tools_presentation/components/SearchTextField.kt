@@ -5,6 +5,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActionScope
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -25,7 +27,8 @@ fun SearchTextField(
     height: Dp = 64.dp,
     text: String,
     hint: String,
-    onChange:(String) -> Unit = {}
+    onChange:(String) -> Unit = {},
+    onDone:(KeyboardActionScope) -> Unit = {}
 ) {
     val spacing = LocalSpacing.current
     BasicTextField(
@@ -47,6 +50,7 @@ fun SearchTextField(
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text,
         ),
+        keyboardActions = KeyboardActions(onDone = onDone),
         decorationBox = { innerTextField ->
             Row(
                 Modifier.padding(horizontal = height/3),

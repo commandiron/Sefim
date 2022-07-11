@@ -24,7 +24,9 @@ fun ToolsVerticalGrid(
     onIconLongClick: () -> Unit,
     onFavorite: (Tool) -> Unit,
     onUnFavorite: (Tool) -> Unit,
-    onAddClick: () -> Unit
+    onAddClick: () -> Unit,
+    onToLeft: (Tool) -> Unit,
+    onToRight: (Tool) -> Unit
 ) {
     val spacing = LocalSpacing.current
     Surface(
@@ -50,7 +52,9 @@ fun ToolsVerticalGrid(
                         onIconClick = { onIconClick(tool) },
                         onIconLongClick = onIconLongClick,
                         onFavorite = { onFavorite(tool) },
-                        onUnFavorite = { onUnFavorite(tool) }
+                        onUnFavorite = { onUnFavorite(tool) },
+                        onToLeft = { onToLeft(tool) },
+                        onToRight = { onToRight(tool) }
                     )
                 }
                 item {

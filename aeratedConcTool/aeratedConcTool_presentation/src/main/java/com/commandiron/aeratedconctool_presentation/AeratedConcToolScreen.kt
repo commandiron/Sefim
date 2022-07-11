@@ -38,13 +38,13 @@ fun AeratedConcToolScreen(
         }
     }
     if(windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact){
-        CompactWindowTypeContent(viewModel)
+        AeratedConcToolCompactContent(viewModel)
     }else{
-        ExpandedWindowTypeContent(viewModel)
+        AeratedConcToolExpandedContent(viewModel)
     }
 }
 @Composable
-fun CompactWindowTypeContent(viewModel: AeratedConcToolViewModel) {
+fun AeratedConcToolCompactContent(viewModel: AeratedConcToolViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     Column(
@@ -67,7 +67,7 @@ fun CompactWindowTypeContent(viewModel: AeratedConcToolViewModel) {
     }
 }
 @Composable
-fun ExpandedWindowTypeContent(viewModel: AeratedConcToolViewModel) {
+fun AeratedConcToolExpandedContent(viewModel: AeratedConcToolViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     Column(modifier = Modifier

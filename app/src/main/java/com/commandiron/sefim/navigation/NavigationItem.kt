@@ -1,13 +1,5 @@
 package com.commandiron.sefim.navigation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Assistant
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.outlined.Assistant
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.commandiron.core_ui.util.Strings.Turkish.MAIN_SCREEN
 import com.commandiron.core_ui.util.Strings.Turkish.NEWS
 import com.commandiron.core_ui.util.Strings.Turkish.TOOLS

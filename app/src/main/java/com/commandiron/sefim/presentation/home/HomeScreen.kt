@@ -3,9 +3,6 @@ package com.commandiron.sefim.presentation.home
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -40,9 +37,9 @@ fun HomeScreen(
             }
     ) {
         if(windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact){
-            CompactWindowTypeContent(viewModel)
+            HomeCompactContent(viewModel)
         }else{
-            ExpandedWindowTypeContent(viewModel)
+            HomeExpandedContent(viewModel)
         }
     }
 

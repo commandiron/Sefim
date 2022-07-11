@@ -38,7 +38,9 @@ fun ToolsRow(
                 onIconClick = { onIconClick(tool) },
                 onIconLongClick = {},
                 onFavorite = { onFavorite(tool) },
-                onUnFavorite = {}
+                onUnFavorite = {},
+                onToLeft = {},
+                onToRight = {}
             )
         }
     }

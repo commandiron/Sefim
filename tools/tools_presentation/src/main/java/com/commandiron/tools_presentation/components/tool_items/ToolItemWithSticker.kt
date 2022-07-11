@@ -33,6 +33,8 @@ fun ToolItemWithSticker(
     onIconLongClick: () -> Unit,
     onFavorite: () -> Unit,
     onUnFavorite: () -> Unit,
+    onToLeft: () -> Unit,
+    onToRight: () -> Unit,
 ) {
     val iconRotateAnim = remember { Animatable(0f) }
     LaunchedEffect(key1 = isWobbling){
@@ -53,7 +55,11 @@ fun ToolItemWithSticker(
         modifier = modifier
             .rotate(iconRotateAnim.value)
             .combinedClickable(
-                onClick = onIconClick,
+                onClick = {
+                    if(!isWobbling){
+                        onIconClick()
+                    }
+                },
                 onLongClick = onIconLongClick
             )
     ) {
@@ -67,6 +73,18 @@ fun ToolItemWithSticker(
                     .align(Alignment.TopStart)
                     .fillMaxSize(0.35f)
                     .clickable { onUnFavorite() }
+            )
+            ToLeftSticker(
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .fillMaxSize(0.35f)
+                    .clickable { onToLeft() }
+            )
+            ToRightSticker(
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .fillMaxSize(0.35f)
+                    .clickable { onToRight() }
             )
         }else{
             if(tool.toolTags.contains(ToolTag.NEW)){

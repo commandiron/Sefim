@@ -233,7 +233,9 @@ fun NewToolContent(
             onIconClick = { onClick(newTool) },
             onIconLongClick = {},
             onFavorite = {},
-            onUnFavorite = {}
+            onUnFavorite = {},
+            onToLeft = {},
+            onToRight = {}
         )
     }
 

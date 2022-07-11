@@ -71,20 +71,21 @@ fun WeatherScreen(
         }
     }
     if(windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact){
-        CompactWindowTypeContent(viewModel)
+        WeatherCompactContent(viewModel)
     }else{
-        ExpandedWindowTypeContent(viewModel)
+        WeatherExpandedContent(viewModel)
     }
 
 }
 @Composable
-fun CompactWindowTypeContent(viewModel: WeatherViewModel) {
+fun WeatherCompactContent(viewModel: WeatherViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(spacing.defaultScreenPaddingForCompact),
+        verticalArrangement = Arrangement.Center
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -270,13 +271,13 @@ fun CompactWindowTypeContent(viewModel: WeatherViewModel) {
     }
 }
 @Composable
-fun ExpandedWindowTypeContent(viewModel: WeatherViewModel) {
+fun WeatherExpandedContent(viewModel: WeatherViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(spacing.defaultScreenPaddingForExpandedNoBottomNav),
+            .padding(spacing.defaultScreenPaddingForExpandedNoBottomNav)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -332,7 +333,7 @@ fun ExpandedWindowTypeContent(viewModel: WeatherViewModel) {
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         if(state.isLoading){
-            CircularProgressIndicator()
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
         }else{
             Column(modifier = Modifier.fillMaxWidth()) {
                 state.weatherInfo?.currentWeatherData?.let { currentWeatherData ->

@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface WeatherToolRepository {
     suspend fun getUserLastKnownPosition(): Response<Location>
-    fun getCityAndCountryNameFromLatLng(latLng: LatLng): String
+    suspend fun getCityAndCountryNameFromLatLng(latLng: LatLng): Flow<Response<String>>
     suspend fun getWeatherData(lat: Double, long: Double) : Flow<Response<WeatherInfo>>
 }

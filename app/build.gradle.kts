@@ -59,6 +59,9 @@ android {
 }
 
 dependencies {
+
+    implementation("com.github.commandiron:BubbleNavigationBarCompose:1.0")
+
     implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
     implementation(project(Modules.toolsData))

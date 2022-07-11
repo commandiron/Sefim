@@ -25,7 +25,9 @@ object ToolsDomainModule {
             favoriteTool = FavoriteTool(repository),
             unFavoriteTool = UnFavoriteTool(repository),
             getFavoriteTools = GetFavoriteTools(repository),
-            filterTools = FilterTools()
+            filterTools = FilterTools(),
+            increaseToolQuery = IncreaseToolQuery(repository),
+            decreaseToolQuery = DecreaseToolQuery(repository)
         )
     }
 }

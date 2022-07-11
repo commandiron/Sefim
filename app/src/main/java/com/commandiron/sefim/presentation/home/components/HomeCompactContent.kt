@@ -19,7 +19,7 @@ import com.commandiron.sefim.presentation.home.HomeViewModel
 import com.commandiron.tools_presentation.components.tool_items.ToolsVerticalGrid
 
 @Composable
-fun CompactWindowTypeContent(
+fun HomeCompactContent(
     viewModel: HomeViewModel
 ) {
     val spacing = LocalSpacing.current
@@ -51,7 +51,9 @@ fun CompactWindowTypeContent(
             onAddClick = { viewModel.onEvent(HomeUserEvent.AddClick) },
             onIconLongClick = { viewModel.onEvent(HomeUserEvent.ToolLongClick) },
             onFavorite = {},
-            onUnFavorite = { viewModel.onEvent(HomeUserEvent.UnFavoriteClick(it)) }
+            onUnFavorite = { viewModel.onEvent(HomeUserEvent.UnFavoriteClick(it)) },
+            onToLeft = { viewModel.onEvent(HomeUserEvent.ToolToLeft(it)) },
+            onToRight = { viewModel.onEvent(HomeUserEvent.ToolToRight(it)) }
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         Text(

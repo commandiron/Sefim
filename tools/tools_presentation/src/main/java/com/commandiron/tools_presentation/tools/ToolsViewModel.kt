@@ -80,6 +80,9 @@ class ToolsViewModel @Inject constructor(
                 state = state.copy(searchText = userEvent.text)
                 filterTools(userEvent.text)
             }
+            ToolsUserEvent.OnKeyboardDone -> {
+                sendUiEvent(UiEvent.HideKeyboard)
+            }
         }
     }
 

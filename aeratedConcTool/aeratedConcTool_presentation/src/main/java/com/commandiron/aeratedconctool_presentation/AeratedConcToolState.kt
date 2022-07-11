@@ -1,42 +1,51 @@
 package com.commandiron.aeratedconctool_presentation
 
+import com.commandiron.core_ui.util.Strings.CENTIMETER
+import com.commandiron.core_ui.util.Strings.CUBIC_METER
+import com.commandiron.core_ui.util.Strings.EMPTY_RESULT_DOUBLE_DASH
+import com.commandiron.core_ui.util.Strings.EMPTY_STRING
+import com.commandiron.core_ui.util.Strings.SQUARE_METER
+import com.commandiron.core_ui.util.Strings.Turkish.PALLET
+import com.commandiron.core_ui.util.Strings.Turkish.PIECE
+import com.commandiron.core_ui.util.Strings.Turkish.THICKNESS
+
 data class AeratedConcToolState(
 
-    val squareMetersPallet: String = "",
-    val squareMetersPalletLabel: String = "m²",
-    val squareMetersPalletUnit: String = "m²",
-    val squareMetersPalletResult: String = "--",
-    val squareMetersPalletResultUnit: String = "Palet",
+    val squareMetersPallet: String = EMPTY_STRING,
+    val squareMetersPalletLabel: String = SQUARE_METER,
+    val squareMetersPalletUnit: String = SQUARE_METER,
+    val squareMetersPalletResult: String = EMPTY_RESULT_DOUBLE_DASH,
+    val squareMetersPalletResultUnit: String = PALLET,
     val squareMetersPalletUnitConverterIsChanged: Boolean = false,
     val squareMetersPalletThicknessDropDownIsExpanded: Boolean = false,
 
-    val cubicMetersPallet: String = "",
-    val cubicMetersPalletLabel: String = "m³",
-    val cubicMetersPalletUnit: String = "m³",
-    val cubicMetersPalletResult: String = "--",
-    val cubicMetersPalletResultUnit: String = "Palet",
+    val cubicMetersPallet: String = EMPTY_STRING,
+    val cubicMetersPalletLabel: String = CUBIC_METER,
+    val cubicMetersPalletUnit: String = CUBIC_METER,
+    val cubicMetersPalletResult: String = EMPTY_RESULT_DOUBLE_DASH,
+    val cubicMetersPalletResultUnit: String = PALLET,
     val cubicMetersPalletUnitConverterIsChanged: Boolean = false,
     val cubicMetersPalletThicknessDropDownIsExpanded: Boolean = false,
 
-    val piecePallet: String = "",
-    val piecePalletLabel: String = "Adet",
-    val piecePalletUnit: String = "Adet",
-    val piecePalletResult: String = "--",
-    val piecePalletResultUnit: String = "Palet",
+    val piecePallet: String = EMPTY_STRING,
+    val piecePalletLabel: String = PIECE,
+    val piecePalletUnit: String = PIECE,
+    val piecePalletResult: String = EMPTY_RESULT_DOUBLE_DASH,
+    val piecePalletResultUnit: String = PALLET,
     val piecePalletUnitConverterIsChanged: Boolean = false,
     val piecePalletThicknessDropDownIsExpanded: Boolean = false,
 
-    val squareCubic: String = "",
-    val squareCubicLabel: String = "m²",
-    val squareCubicUnit: String = "m²",
-    val squareCubicResult: String = "--",
-    val squareCubicResultUnit: String = "m³",
+    val squareCubic: String = EMPTY_STRING,
+    val squareCubicLabel: String = SQUARE_METER,
+    val squareCubicUnit: String = SQUARE_METER,
+    val squareCubicResult: String = EMPTY_RESULT_DOUBLE_DASH,
+    val squareCubicResultUnit: String = CUBIC_METER,
     val squareCubicUnitConverterIsChanged: Boolean = false,
     val squareCubicThicknessDropDownIsExpanded: Boolean = false,
 
-    val thickness: String = "",
-    val thicknessLabel: String = "Kalınlık",
-    val thicknessUnit: String = "cm",
+    val thickness: String = EMPTY_STRING,
+    val thicknessLabel: String = THICKNESS,
+    val thicknessUnit: String = CENTIMETER,
     val thicknessList: List<String> = defaultThicknessList,
 )
 
