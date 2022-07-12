@@ -61,7 +61,10 @@ fun OutlinedDropDown(
                 maxFractionDigits = 1,
                 addedUnit = Unit
             ),
-            shape = MaterialTheme.shapes.large
+            shape = MaterialTheme.shapes.large,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            )
         )
         CustomDropDownMenu(
             modifier = Modifier

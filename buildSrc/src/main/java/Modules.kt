@@ -25,4 +25,7 @@ object Modules {
     const val rebarPricesToolData = ":rebarPricesTool:rebarPricesTool_data"
     const val rebarPricesToolDomain = ":rebarPricesTool:rebarPricesTool_domain"
     const val rebarPricesToolPresentation = ":rebarPricesTool:rebarPricesTool_presentation"
+
+    const val roughConstructionCostToolDomain = ":roughConstructionCostTool:roughConstructionCostTool_domain"
+    const val roughConstructionCostToolPresentation = ":roughConstructionCostTool:roughConstructionCostTool_presentation"
 }

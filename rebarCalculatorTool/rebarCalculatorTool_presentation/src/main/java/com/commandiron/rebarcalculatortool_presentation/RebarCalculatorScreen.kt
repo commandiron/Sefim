@@ -177,7 +177,7 @@ fun RebarCalculatorScreen(
                                     .weight(1f)
                                     .fillMaxHeight()
                                     .background(
-                                        color = MaterialTheme.colorScheme.primaryContainer,
+                                        color = MaterialTheme.colorScheme.tertiaryContainer,
                                         shape = MaterialTheme.shapes.large
                                     ),
                                 horizontalArrangement = Arrangement.Center,
@@ -187,7 +187,7 @@ fun RebarCalculatorScreen(
                                     text = item.resultText,
                                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                                     textAlign = TextAlign.Center,
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                                    color = MaterialTheme.colorScheme.onTertiaryContainer
                                 )
                                 Spacer(modifier = Modifier.width(spacing.spaceSmall))
                                 if(item.resultText.isNotEmpty()){
@@ -195,7 +195,7 @@ fun RebarCalculatorScreen(
                                         text = item.resultUnit,
                                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                                         textAlign = TextAlign.Center,
-                                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                                        color = MaterialTheme.colorScheme.onTertiaryContainer
                                     )
                                 }
                             }

@@ -24,7 +24,7 @@ fun RebarCalculatorResultRow(
             .fillMaxWidth()
             .height(spacing.spaceExtraLarge)
             .background(
-                color = MaterialTheme.colorScheme.primaryContainer,
+                color = MaterialTheme.colorScheme.tertiaryContainer,
                 shape = MaterialTheme.shapes.large
             ),
         horizontalArrangement = Arrangement.Center,
@@ -33,45 +33,39 @@ fun RebarCalculatorResultRow(
         Text(
             text = "${Strings.Turkish.GRAND_TOTAL} : ",
             style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
+            textAlign = TextAlign.Center
         )
         Text(
             text = state.grandResult,
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
         if(state.grandResult.isNotEmpty()){
             Text(
                 text = state.grandResultUnit,
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                textAlign = TextAlign.Center
             )
         }
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
         Text(
             text = "=",
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
         Text(
             text = state.grandResult2,
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
         if(state.grandResult2.isNotEmpty()){
             Text(
                 text = state.grandResult2Unit,
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                textAlign = TextAlign.Center
             )
         }
     }

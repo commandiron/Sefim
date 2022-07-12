@@ -80,6 +80,8 @@ dependencies {
     implementation(project(Modules.rebarPricesToolData))
     implementation(project(Modules.rebarPricesToolDomain))
     implementation(project(Modules.rebarPricesToolPresentation))
+    implementation(project(Modules.roughConstructionCostToolDomain))
+    implementation(project(Modules.roughConstructionCostToolPresentation))
 
     implementation(Accompanist.systemUi)
     implementation(Accompanist.pager)

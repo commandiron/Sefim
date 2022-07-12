@@ -23,8 +23,14 @@ val MyOnPrimaryContainerColorDark = Color(0xFFFFFFFF)
 val MyTertiaryColor = Color(0xFFEBEBEB)
 val MyOnTertiaryColor = Color(0xFF212121)
 
-val MyTertiaryColorDark = Color(0xFF205D56)
+val MyTertiaryColorDark = Color(0xFF2E887D)
 val MyOnTertiaryColorDark = Color(0xFFEBEBEB)
+
+val MyTertiaryContainerColor = Color(0xFFD1EFEC)
+val MyOnTertiaryContainerColor = Color(0xFF212121)
+
+val MyTertiaryContainerColorDark = Color(0xFF1C514B)
+val MyOnTertiaryContainerColorDark = Color(0xFFFFFFFF)
 
 val companyColor = Color(0xFFED7600)
 

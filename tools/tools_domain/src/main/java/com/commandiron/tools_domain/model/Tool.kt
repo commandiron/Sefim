@@ -49,8 +49,8 @@ val roughConstructionCostCalculatorTool = Tool(
     queue = 4,
     title = "Kaba İnşaat Maliyet Hesaplayıcı",
     icon = R.drawable.construction,
-    toolTags = listOf(ToolTag.SOON),
-    route = ""
+    toolTags = listOf(ToolTag.NEW),
+    route = "roughConstructionCost"
 )
 val lengthMeasureWithCamTool = Tool(
     id = 5,

@@ -54,7 +54,7 @@ fun RebarPricesCompactContent(viewModel: RebarPricesViewModel) {
     ) {
         ToolHeader(
             title = REBAR_PRICES,
-            onIconClick = {viewModel.onEvent(RebarPricesUserEvent.Back)}
+            onIconClick = { viewModel.onEvent(RebarPricesUserEvent.Back) }
         )
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
         LazyColumn(

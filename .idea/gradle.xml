@@ -29,6 +29,9 @@
             <option value="$PROJECT_DIR$/rebarPricesTool/rebarPricesTool_data" />
             <option value="$PROJECT_DIR$/rebarPricesTool/rebarPricesTool_domain" />
             <option value="$PROJECT_DIR$/rebarPricesTool/rebarPricesTool_presentation" />
+            <option value="$PROJECT_DIR$/roughConstructionCostTool" />
+            <option value="$PROJECT_DIR$/roughConstructionCostTool/roughConstructionCostTool_domain" />
+            <option value="$PROJECT_DIR$/roughConstructionCostTool/roughConstructionCostTool_presentation" />
             <option value="$PROJECT_DIR$/tools" />
             <option value="$PROJECT_DIR$/tools/tools_data" />
             <option value="$PROJECT_DIR$/tools/tools_domain" />

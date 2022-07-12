@@ -2,14 +2,18 @@ package com.commandiron.sefim.navigation
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.commandiron.aeratedconctool_presentation.AeratedConcToolScreen
 import com.commandiron.core_ui.util.LocalSystemUiController
 import com.commandiron.news_presentation.NewsScreen
 import com.commandiron.rebarcalculatortool_presentation.RebarCalculatorScreen
 import com.commandiron.rebarpricestool_presentation.RebarPricesScreen
+import com.commandiron.roughconstructioncosttool_presentation.RoughConstructionCostScreen
 import com.commandiron.sefim.presentation.home.HomeScreen
 import com.commandiron.sefim.presentation.hot_splash.HotSplashScreen
 import com.commandiron.tools_presentation.tools.ToolsScreen
@@ -241,6 +245,31 @@ fun NavigationGraph(
             }
         ){
             RebarCalculatorScreen(
+                navigateUp = {
+                    navController.navigateUp()
+                }
+            )
+        }
+        composable(
+            route = NavigationItem.RoughConstructionCostTool.route,
+            enterTransition = {
+                when(initialState.destination.route){
+                    else -> slideIntoContainer(
+                        towards = AnimatedContentScope.SlideDirection.Up,
+                        animationSpec = tween(700)
+                    )
+                }
+            },
+            exitTransition = {
+                when (targetState.destination.route) {
+                    else -> slideOutOfContainer(
+                        towards = AnimatedContentScope.SlideDirection.Down,
+                        animationSpec = tween(700)
+                    )
+                }
+            }
+        ){
+            RoughConstructionCostScreen(
                 navigateUp = {
                     navController.navigateUp()
                 }

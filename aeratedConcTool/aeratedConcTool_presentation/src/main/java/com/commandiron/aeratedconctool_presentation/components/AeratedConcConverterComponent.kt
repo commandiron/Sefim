@@ -93,7 +93,7 @@ fun AeratedConcConverterComponent(
                     .weight(1f)
                     .fillMaxHeight()
                     .background(
-                        color = MaterialTheme.colorScheme.primaryContainer,
+                        color = MaterialTheme.colorScheme.tertiaryContainer,
                         shape = MaterialTheme.shapes.large
                     ),
                 horizontalArrangement = Arrangement.Center,
@@ -103,7 +103,7 @@ fun AeratedConcConverterComponent(
                     text = resultText,
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
                 Spacer(modifier = Modifier.width(spacing.spaceSmall))
                 if(resultText.isNotEmpty()){
@@ -111,11 +111,10 @@ fun AeratedConcConverterComponent(
                         text = resultUnit,
                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
                     )
                 }
             }
-
         }
     }
 }

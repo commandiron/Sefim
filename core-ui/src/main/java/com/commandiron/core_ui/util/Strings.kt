@@ -12,6 +12,7 @@ object Strings {
     const val PHI_8 = "Φ8"
     const val PHI_10 = "Φ10"
     const val PHI_12_DASH_32 = "Φ12-32"
+    const val TURKISH_LIRA = "TL"
     object Turkish {
         const val SOON = "Yakında"
         const val WITH_YOU = "Sizlerle"
@@ -19,6 +20,7 @@ object Strings {
         const val REBAR_QUANTITY_CALCULATOR = "İnşaat Demiri Metraj Hesaplayıcı"
         const val GRAND_TOTAL = "Genel Toplam"
         const val REBAR_PRICES = "İnşaat Demiri Fiyatları"
+        const val ROUGH_CONSTRUCTION_COST_CALCULATOR = "Kaba İnşaat Maliyet Hesaplayıcı"
         const val SEARCH = "Ara"
         const val LOCATION_PERMISSION_REQUIRED = "Konum İzni Gerekiyor"
         const val TODAY_REPORT = "Bugünün Raporu"
@@ -43,5 +45,11 @@ object Strings {
         const val LOCKED = "Kilitli."
         const val FAILED_TO_GET_LOCATION_PLEASE_OPEN_GOOGLE_MAPS = "Konum alınamadı, lütfen Google Maps uygulamasını açın."
         const val DAILY_IRON_PRICE = "Günlük Demir Fiyatı:"
+        const val FORMWORK = "Kalıp"
+        const val QUANTITY_FLAT_MEASURE = "Metraj (Düz Ölçü)"
+        const val QUANTITY = "Metraj"
+        const val UNIT_PRICE = "Birim Fiyat"
+        const val IRON = "Demir"
+        const val CONCRETE = "Beton"
     }
 }

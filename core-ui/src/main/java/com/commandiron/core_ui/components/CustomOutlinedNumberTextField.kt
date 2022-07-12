@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -23,6 +24,7 @@ fun CustomOutlinedNumberTextField(
     onDone:() -> Unit,
     label: String,
     Unit: String,
+    maxFractionDigits: Int = 2,
     forceValueInt: Boolean = false
 ) {
     val focusRequester = FocusRequester()
@@ -31,13 +33,29 @@ fun CustomOutlinedNumberTextField(
         modifier = modifier.focusRequester(focusRequester),
         value = value,
         onValueChange = {
-            if(forceValueInt){
-                if(it.toIntOrNull() != null || it.isEmpty()){
-                    onValueChange(it)
+            if(it.contains(".")){
+                val indexOfDot = it.indexOf(".")
+                val lastIndex = it.lastIndex
+                if(lastIndex - indexOfDot <= maxFractionDigits){
+                    if(forceValueInt){
+                        if(it.toIntOrNull() != null || it.isEmpty()){
+                            onValueChange(it)
+                        }
+                    }else{
+                        if(it.toDoubleOrNull() != null || it.isEmpty()){
+                            onValueChange(it)
+                        }
+                    }
                 }
             }else{
-                if(it.toDoubleOrNull() != null || it.isEmpty()){
-                    onValueChange(it)
+                if(forceValueInt){
+                    if(it.toIntOrNull() != null || it.isEmpty()){
+                        onValueChange(it)
+                    }
+                }else{
+                    if(it.toDoubleOrNull() != null || it.isEmpty()){
+                        onValueChange(it)
+                    }
                 }
             }
         },
@@ -62,9 +80,13 @@ fun CustomOutlinedNumberTextField(
             )
         },
         visualTransformation = ThousandSeparatorVisualTransformationWithAddedUnit(
-            maxFractionDigits = 2,
+            maxFractionDigits = maxFractionDigits,
             addedUnit = Unit
         ),
-        shape = MaterialTheme.shapes.large
+        shape = MaterialTheme.shapes.large,
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        )
     )
 }
+

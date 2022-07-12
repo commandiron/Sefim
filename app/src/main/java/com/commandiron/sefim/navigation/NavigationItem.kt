@@ -4,10 +4,7 @@ import com.commandiron.core_ui.util.Strings.Turkish.MAIN_SCREEN
 import com.commandiron.core_ui.util.Strings.Turkish.NEWS
 import com.commandiron.core_ui.util.Strings.Turkish.TOOLS
 import com.commandiron.core_ui.R
-import com.commandiron.tools_domain.model.aeratedConcTool
-import com.commandiron.tools_domain.model.rebarCalculatorTool
-import com.commandiron.tools_domain.model.rebarPricesTool
-import com.commandiron.tools_domain.model.weatherTool
+import com.commandiron.tools_domain.model.*
 
 sealed class NavigationItem(
     val title: String? = null,
@@ -51,5 +48,9 @@ sealed class NavigationItem(
     object RebarCalculatorTool : NavigationItem(
         title = rebarCalculatorTool.title,
         route = rebarCalculatorTool.route
+    )
+    object RoughConstructionCostTool : NavigationItem(
+        title = roughConstructionCostCalculatorTool.title,
+        route = roughConstructionCostCalculatorTool.route
     )
 }
