@@ -2,8 +2,6 @@
 
 [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width="323" height="125">](https://play.google.com/store/apps/details?id=com.commandiron.sefim)
 
-<a href='https://play.google.com/store/apps/details?id=com.commandiron.sefim&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-
 Sefim is a native android tools app for construction site supervisors written in Kotlin using Jetpack Compose with multi-module architecture.
 
 * Screenshots 🖼️
