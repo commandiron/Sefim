@@ -10,8 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import com.commandiron.core_ui.components.getThousandSeparatorTransformedText
 import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.core_ui.util.Strings
+import com.commandiron.core_ui.util.Strings.TURKISH_LIRA
 
 @Composable
 fun RoughConstructionCostFooter(
@@ -36,19 +38,11 @@ fun RoughConstructionCostFooter(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = resultText,
+                text = getThousandSeparatorTransformedText(text = resultText, addedUnit = TURKISH_LIRA),
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.width(spacing.spaceSmall))
-            if(resultText.isNotEmpty()){
-                Text(
-                    text = "TL",
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                    textAlign = TextAlign.Center
-                )
-            }
         }
     }
 

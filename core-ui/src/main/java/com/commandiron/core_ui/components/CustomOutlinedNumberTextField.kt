@@ -5,14 +5,14 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import com.commandiron.tools_presentation.components.ThousandSeparatorVisualTransformationWithAddedUnit
 
 
 @Composable
@@ -21,7 +21,7 @@ fun CustomOutlinedNumberTextField(
     textStyle: TextStyle = MaterialTheme.typography.bodyLarge,
     value: String,
     onValueChange:(String) -> Unit,
-    onDone:() -> Unit,
+    onNext:() -> Unit,
     label: String,
     Unit: String,
     maxFractionDigits: Int = 2,
@@ -59,15 +59,16 @@ fun CustomOutlinedNumberTextField(
                 }
             }
         },
+        keyboardActions = KeyboardActions(
+            onNext = {
+                focusManager.moveFocus(FocusDirection.Next)
+                onNext()
+            }
+        ),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Number,
-            autoCorrect = false
-        ),
-        keyboardActions = KeyboardActions(
-            onDone = {
-                onDone()
-                focusManager.clearFocus()
-            }
+            autoCorrect = false,
+            imeAction = ImeAction.Next
         ),
         singleLine = true,
         textStyle = textStyle.copy(

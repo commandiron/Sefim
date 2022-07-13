@@ -220,10 +220,6 @@ class AeratedConcToolViewModel @Inject constructor(
                     calculateSquareToCubic()
                 }
             }
-
-            AeratedConcToolUserEvent.KeyboardDone -> {
-                sendUiEvent(UiEvent.HideKeyboard)
-            }
             AeratedConcToolUserEvent.ThicknessDropDownDismissClick -> {
                 state = state.copy(
                     squareMetersPalletThicknessDropDownIsExpanded = false,

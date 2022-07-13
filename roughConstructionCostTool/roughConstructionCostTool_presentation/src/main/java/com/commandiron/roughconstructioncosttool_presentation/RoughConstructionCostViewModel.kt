@@ -35,7 +35,7 @@ class RoughConstructionCostViewModel @Inject constructor(
             RoughConstructionCostUserEvent.Back -> {
                 sendUiEvent(UiEvent.NavigateUp)
             }
-            RoughConstructionCostUserEvent.KeyboardDone -> {
+            RoughConstructionCostUserEvent.OnLastTextFieldNext -> {
                 sendUiEvent(UiEvent.HideKeyboard)
             }
             is RoughConstructionCostUserEvent.FormWorkQuantityTextChange -> {
@@ -50,6 +50,7 @@ class RoughConstructionCostViewModel @Inject constructor(
                         state = state.copy(formWorkResultText = "--")
                     }
                 }
+                calculateGrandTotal()
             }
             is RoughConstructionCostUserEvent.FormWorkUnitPriceTextChange -> {
                 state = state.copy(formWorkUnitPriceText = userEvent.text)
@@ -63,6 +64,7 @@ class RoughConstructionCostViewModel @Inject constructor(
                         state = state.copy(formWorkResultText = "--")
                     }
                 }
+                calculateGrandTotal()
             }
             is RoughConstructionCostUserEvent.RebarQuantityTextChange -> {
                 state = state.copy(rebarQuantityText = userEvent.text)
@@ -76,6 +78,7 @@ class RoughConstructionCostViewModel @Inject constructor(
                         state = state.copy(rebarResultText = "--")
                     }
                 }
+                calculateGrandTotal()
             }
             is RoughConstructionCostUserEvent.RebarUnitPriceTextChange -> {
                 state = state.copy(rebarUnitPriceText = userEvent.text)
@@ -89,6 +92,7 @@ class RoughConstructionCostViewModel @Inject constructor(
                         state = state.copy(rebarResultText = "--")
                     }
                 }
+                calculateGrandTotal()
             }
             is RoughConstructionCostUserEvent.ConcreteQuantityTextChange -> {
                 state = state.copy(concreteQuantityText = userEvent.text)
@@ -102,6 +106,7 @@ class RoughConstructionCostViewModel @Inject constructor(
                         state = state.copy(concreteResultText = "--")
                     }
                 }
+                calculateGrandTotal()
             }
             is RoughConstructionCostUserEvent.ConcreteUnitPriceTextChange -> {
                 state = state.copy(concreteUnitPriceText = userEvent.text)
@@ -115,6 +120,7 @@ class RoughConstructionCostViewModel @Inject constructor(
                         state = state.copy(concreteResultText = "--")
                     }
                 }
+                calculateGrandTotal()
             }
         }
     }
@@ -124,6 +130,17 @@ class RoughConstructionCostViewModel @Inject constructor(
             formWorkUnitPriceText = roughConstructionCostUseCases.getFormWorkPrice().toString(),
             rebarUnitPriceText = roughConstructionCostUseCases.getRebarPrice().toString(),
             concreteUnitPriceText = roughConstructionCostUseCases.getConcretePrice().toString()
+        )
+    }
+
+    private fun calculateGrandTotal(){
+
+        val formWorkResult = state.formWorkResultText.toDoubleOrNull() ?: 0.0
+        val rebarResult = state.rebarResultText.toDoubleOrNull() ?: 0.0
+        val concreteResult = state.concreteResultText.toDoubleOrNull() ?: 0.0
+
+        state = state.copy(
+            grandTotalText = (formWorkResult + rebarResult + concreteResult).toString()
         )
     }
 

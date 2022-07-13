@@ -17,17 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.commandiron.core_ui.components.*
 import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.core_ui.util.Strings.Turkish.REBAR_QUANTITY_CALCULATOR
-import com.commandiron.core_ui.components.CustomOutlinedNumberTextField
-import com.commandiron.core_ui.components.OutlinedDropDown
-import com.commandiron.core_ui.components.ToolHeader
 import com.commandiron.core_ui.util.LocalWindowTypeInfo
 import com.commandiron.core_ui.util.WindowInfo
 import com.commandiron.rebarcalculatortool_presentation.components.RebarCalculatorAddRowButton
@@ -40,14 +37,10 @@ fun RebarCalculatorScreen(
 ) {
     val spacing = LocalSpacing.current
     val windowTypeInfo = LocalWindowTypeInfo.current
-    val keyboardController = LocalSoftwareKeyboardController.current
     val state = viewModel.state
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect{ event ->
             when(event) {
-                UiEvent.HideKeyboard -> {
-                    keyboardController?.hide()
-                }
                 UiEvent.NavigateUp -> {
                     navigateUp()
                 }
@@ -136,7 +129,7 @@ fun RebarCalculatorScreen(
                                         RebarCalculatorUserEvent.PieceValueChange(index, it)
                                     )
                                 },
-                                onDone = {},
+                                onNext = {},
                                 label = item.pieceLabel,
                                 Unit = item.pieceUnit,
                                 forceValueInt = true
@@ -152,7 +145,7 @@ fun RebarCalculatorScreen(
                                         RebarCalculatorUserEvent.LengthValueChange(index, it)
                                     )
                                 },
-                                onDone = {},
+                                onNext = {},
                                 label = item.lengthLabel,
                                 Unit = item.lengthUnit
                             )
@@ -183,21 +176,15 @@ fun RebarCalculatorScreen(
                                 horizontalArrangement = Arrangement.Center,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
+                                val transformedText = getThousandSeparatorTransformedText(text = item.resultText, addedUnit = item.resultUnit)
                                 Text(
-                                    text = item.resultText,
-                                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                                    text = transformedText,
+                                    style = if(transformedText.length <= 12 )
+                                        MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold) else
+                                        MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                                     textAlign = TextAlign.Center,
                                     color = MaterialTheme.colorScheme.onTertiaryContainer
                                 )
-                                Spacer(modifier = Modifier.width(spacing.spaceSmall))
-                                if(item.resultText.isNotEmpty()){
-                                    Text(
-                                        text = item.resultUnit,
-                                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                                        textAlign = TextAlign.Center,
-                                        color = MaterialTheme.colorScheme.onTertiaryContainer
-                                    )
-                                }
                             }
                         }
                     }
@@ -209,6 +196,7 @@ fun RebarCalculatorScreen(
             item {
                 Spacer(modifier = Modifier.height(spacing.spaceMedium))
                 RebarCalculatorAddRowButton(viewModel = viewModel)
+                Spacer(modifier = Modifier.height(spacing.spaceXXLarge))
             }
         }
     }

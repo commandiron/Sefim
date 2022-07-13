@@ -23,7 +23,6 @@ fun AeratedConcConverterComponent(
     firstValueChange:(String) -> Unit,
     firstValueLabel: String,
     firstValueUnit: String,
-    firstValueOnDone: () -> Unit,
     secondValue: String,
     secondValueChange:(String) -> Unit,
     secondValueLabel: String,
@@ -68,7 +67,7 @@ fun AeratedConcConverterComponent(
                     .fillMaxHeight(),
                 value = firstValue,
                 onValueChange = firstValueChange,
-                onDone = firstValueOnDone,
+                onNext = {},
                 label = firstValueLabel,
                 Unit = firstValueUnit
             )

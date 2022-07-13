@@ -2,7 +2,7 @@ package com.commandiron.roughconstructioncosttool_presentation
 
 sealed class RoughConstructionCostUserEvent{
     object Back: RoughConstructionCostUserEvent()
-    object KeyboardDone: RoughConstructionCostUserEvent()
+    object OnLastTextFieldNext: RoughConstructionCostUserEvent()
 
     data class FormWorkQuantityTextChange(val text: String): RoughConstructionCostUserEvent()
     data class FormWorkUnitPriceTextChange(val text: String): RoughConstructionCostUserEvent()

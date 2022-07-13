@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import com.commandiron.core_ui.components.getThousandSeparatorTransformedText
 import com.commandiron.core_ui.util.LocalSpacing
 import com.commandiron.core_ui.util.Strings
 import com.commandiron.rebarcalculatortool_presentation.RebarCalculatorViewModel
@@ -36,18 +37,10 @@ fun RebarCalculatorResultRow(
             textAlign = TextAlign.Center
         )
         Text(
-            text = state.grandResult,
+            text = getThousandSeparatorTransformedText(state.grandResult, state.grandResultUnit),
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.width(spacing.spaceSmall))
-        if(state.grandResult.isNotEmpty()){
-            Text(
-                text = state.grandResultUnit,
-                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                textAlign = TextAlign.Center
-            )
-        }
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
         Text(
             text = "=",

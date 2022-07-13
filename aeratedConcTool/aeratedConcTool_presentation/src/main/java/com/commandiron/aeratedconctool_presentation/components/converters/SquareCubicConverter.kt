@@ -20,7 +20,6 @@ fun SquareCubicConverter(
         firstValueChange = { viewModel.onEvent(AeratedConcToolUserEvent.SquareCubicChange(it)) },
         firstValueLabel = state.squareCubicLabel,
         firstValueUnit = state.squareCubicUnit,
-        firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.KeyboardDone) },
         secondValue = state.thickness,
         secondValueChange = {},
         secondValueLabel = state.thicknessLabel,

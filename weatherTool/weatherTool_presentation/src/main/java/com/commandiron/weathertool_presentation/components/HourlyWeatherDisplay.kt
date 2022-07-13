@@ -20,8 +20,7 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun HourlyWeatherDisplay(
     weatherData: WeatherData,
-    modifier: Modifier = Modifier,
-    textColor: Color = Color.White
+    modifier: Modifier = Modifier
 ) {
     val formattedTime = remember(weatherData) {
         weatherData.time.format(
@@ -44,8 +43,8 @@ fun HourlyWeatherDisplay(
         )
         Text(
             text = "${weatherData.temperatureCelsius}°C",
-            color = textColor,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = Color.LightGray
         )
     }
 }

@@ -20,7 +20,6 @@ fun SquareMetersPalletConverter(
         firstValueChange = { viewModel.onEvent(AeratedConcToolUserEvent.SquareMetersPalletChange(it)) },
         firstValueLabel = state.squareMetersPalletLabel,
         firstValueUnit = state.squareMetersPalletUnit,
-        firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.KeyboardDone) },
         secondValue = state.thickness,
         secondValueChange = {},
         secondValueLabel = state.thicknessLabel,

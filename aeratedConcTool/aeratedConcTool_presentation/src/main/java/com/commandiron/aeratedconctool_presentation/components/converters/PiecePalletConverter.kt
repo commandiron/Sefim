@@ -20,7 +20,6 @@ fun PiecePalletConverter(
         firstValueChange = { viewModel.onEvent(AeratedConcToolUserEvent.PiecePalletChange(it)) },
         firstValueLabel = state.piecePalletLabel,
         firstValueUnit = state.piecePalletUnit,
-        firstValueOnDone = { viewModel.onEvent(AeratedConcToolUserEvent.KeyboardDone) },
         secondValue = state.thickness,
         secondValueChange = {},
         secondValueLabel = state.thicknessLabel,

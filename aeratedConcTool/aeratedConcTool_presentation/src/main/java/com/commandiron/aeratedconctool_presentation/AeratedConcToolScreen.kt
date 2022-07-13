@@ -23,13 +23,9 @@ fun AeratedConcToolScreen(
     navigateUp:() -> Unit
 ) {
     val windowTypeInfo = LocalWindowTypeInfo.current
-    val keyboardController = LocalSoftwareKeyboardController.current
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect{ event ->
             when(event) {
-                UiEvent.HideKeyboard -> {
-                    keyboardController?.hide()
-                }
                 UiEvent.NavigateUp -> {
                     navigateUp()
                 }

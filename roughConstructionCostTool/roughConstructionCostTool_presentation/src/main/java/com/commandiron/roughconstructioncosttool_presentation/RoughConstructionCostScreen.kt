@@ -1,18 +1,14 @@
 package com.commandiron.roughconstructioncosttool_presentation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core_ui.components.ToolHeader
 import com.commandiron.core_ui.util.LocalSpacing
@@ -23,7 +19,6 @@ import com.commandiron.core_ui.util.Strings.TON
 import com.commandiron.core_ui.util.Strings.TURKISH_LIRA
 import com.commandiron.core_ui.util.Strings.Turkish.CONCRETE
 import com.commandiron.core_ui.util.Strings.Turkish.FORMWORK
-import com.commandiron.core_ui.util.Strings.Turkish.GRAND_TOTAL
 import com.commandiron.core_ui.util.Strings.Turkish.IRON
 import com.commandiron.core_ui.util.Strings.Turkish.QUANTITY
 import com.commandiron.core_ui.util.Strings.Turkish.QUANTITY_FLAT_MEASURE
@@ -40,15 +35,15 @@ fun RoughConstructionCostScreen(
     navigateUp:() -> Unit
 ) {
     val windowTypeInfo = LocalWindowTypeInfo.current
-    val keyboardController = LocalSoftwareKeyboardController.current
+    val localSoftwareKeyboard = LocalSoftwareKeyboardController.current
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect{ event ->
             when(event) {
-                UiEvent.HideKeyboard -> {
-                    keyboardController?.hide()
-                }
                 UiEvent.NavigateUp -> {
                     navigateUp()
+                }
+                UiEvent.HideKeyboard -> {
+                    localSoftwareKeyboard?.hide()
                 }
                 else -> {}
             }
@@ -85,18 +80,17 @@ fun RoughConstructionCostCompactContent(viewModel: RoughConstructionCostViewMode
             onFirstValueChange = {
                 viewModel.onEvent(RoughConstructionCostUserEvent.FormWorkQuantityTextChange(it))
             },
+            onFirstNext = {},
             firstValueLabel= QUANTITY_FLAT_MEASURE,
             firstValueUnit= SQUARE_METER,
             secondValue = state.formWorkUnitPriceText,
             onSecondValueChange = {
                 viewModel.onEvent(RoughConstructionCostUserEvent.FormWorkUnitPriceTextChange(it))
             },
+            onSecondNext = {},
             secondValueLabel = UNIT_PRICE,
             secondValueUnit = "$TURKISH_LIRA/$SQUARE_METER",
-            resultText = state.formWorkResultText,
-            onDone = {
-                viewModel.onEvent(RoughConstructionCostUserEvent.KeyboardDone)
-            }
+            resultText = state.formWorkResultText
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         Text(
@@ -109,18 +103,17 @@ fun RoughConstructionCostCompactContent(viewModel: RoughConstructionCostViewMode
             onFirstValueChange = {
                 viewModel.onEvent(RoughConstructionCostUserEvent.RebarQuantityTextChange(it))
             },
+            onFirstNext = {},
             firstValueLabel= QUANTITY,
             firstValueUnit= TON,
             secondValue = state.rebarUnitPriceText,
             onSecondValueChange = {
                 viewModel.onEvent(RoughConstructionCostUserEvent.RebarUnitPriceTextChange(it))
             },
+            onSecondNext = {},
             secondValueLabel = UNIT_PRICE,
             secondValueUnit = "$TURKISH_LIRA/$TON",
-            resultText = state.rebarResultText,
-            onDone = {
-                viewModel.onEvent(RoughConstructionCostUserEvent.KeyboardDone)
-            }
+            resultText = state.rebarResultText
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         Text(
@@ -133,18 +126,17 @@ fun RoughConstructionCostCompactContent(viewModel: RoughConstructionCostViewMode
             onFirstValueChange = {
                 viewModel.onEvent(RoughConstructionCostUserEvent.ConcreteQuantityTextChange(it))
             },
+            onFirstNext = {},
             firstValueLabel= QUANTITY,
             firstValueUnit= CUBIC_METER,
             secondValue = state.concreteUnitPriceText,
             onSecondValueChange = {
                 viewModel.onEvent(RoughConstructionCostUserEvent.ConcreteUnitPriceTextChange(it))
             },
+            onSecondNext = { viewModel.onEvent(RoughConstructionCostUserEvent.OnLastTextFieldNext) },
             secondValueLabel = UNIT_PRICE,
             secondValueUnit = "$TURKISH_LIRA/$CUBIC_METER",
-            resultText = state.concreteResultText,
-            onDone = {
-                viewModel.onEvent(RoughConstructionCostUserEvent.KeyboardDone)
-            }
+            resultText = state.concreteResultText
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         RoughConstructionCostFooter(resultText = state.grandTotalText)
@@ -176,18 +168,17 @@ fun RoughConstructionCostExpandedContent(viewModel: RoughConstructionCostViewMod
                 onFirstValueChange = {
                     viewModel.onEvent(RoughConstructionCostUserEvent.FormWorkQuantityTextChange(it))
                 },
+                onFirstNext = {},
                 firstValueLabel= QUANTITY_FLAT_MEASURE,
                 firstValueUnit= SQUARE_METER,
                 secondValue = state.formWorkUnitPriceText,
                 onSecondValueChange = {
                     viewModel.onEvent(RoughConstructionCostUserEvent.FormWorkUnitPriceTextChange(it))
                 },
+                onSecondNext = {},
                 secondValueLabel = UNIT_PRICE,
                 secondValueUnit = "$TURKISH_LIRA/$SQUARE_METER",
-                resultText = state.formWorkResultText,
-                onDone = {
-                    viewModel.onEvent(RoughConstructionCostUserEvent.KeyboardDone)
-                }
+                resultText = state.formWorkResultText
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
             Text(
@@ -200,18 +191,17 @@ fun RoughConstructionCostExpandedContent(viewModel: RoughConstructionCostViewMod
                 onFirstValueChange = {
                     viewModel.onEvent(RoughConstructionCostUserEvent.RebarQuantityTextChange(it))
                 },
+                onFirstNext = {},
                 firstValueLabel= QUANTITY,
                 firstValueUnit= TON,
                 secondValue = state.rebarUnitPriceText,
                 onSecondValueChange = {
                     viewModel.onEvent(RoughConstructionCostUserEvent.RebarUnitPriceTextChange(it))
                 },
+                onSecondNext = {},
                 secondValueLabel = UNIT_PRICE,
                 secondValueUnit = "$TURKISH_LIRA/$TON",
-                resultText = state.rebarResultText,
-                onDone = {
-                    viewModel.onEvent(RoughConstructionCostUserEvent.KeyboardDone)
-                }
+                resultText = state.rebarResultText
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
             Text(
@@ -224,18 +214,17 @@ fun RoughConstructionCostExpandedContent(viewModel: RoughConstructionCostViewMod
                 onFirstValueChange = {
                     viewModel.onEvent(RoughConstructionCostUserEvent.ConcreteQuantityTextChange(it))
                 },
+                onFirstNext = {},
                 firstValueLabel= QUANTITY,
                 firstValueUnit= CUBIC_METER,
                 secondValue = state.concreteUnitPriceText,
                 onSecondValueChange = {
                     viewModel.onEvent(RoughConstructionCostUserEvent.ConcreteUnitPriceTextChange(it))
                 },
+                onSecondNext = { viewModel.onEvent(RoughConstructionCostUserEvent.OnLastTextFieldNext) },
                 secondValueLabel = UNIT_PRICE,
                 secondValueUnit = "$TURKISH_LIRA/$CUBIC_METER",
-                resultText = state.concreteResultText,
-                onDone = {
-                    viewModel.onEvent(RoughConstructionCostUserEvent.KeyboardDone)
-                }
+                resultText = state.concreteResultText
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
             RoughConstructionCostFooter(resultText = state.grandTotalText)

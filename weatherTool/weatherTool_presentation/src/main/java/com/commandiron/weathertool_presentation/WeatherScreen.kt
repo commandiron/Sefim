@@ -341,12 +341,13 @@ fun WeatherExpandedContent(viewModel: WeatherViewModel) {
                         Row(modifier = Modifier.weight(1f)) {
                             Column(
                                 modifier = Modifier
-                                    .fillMaxSize()
-                                    .weight(1f),
+                                    .weight(1f)
+                                    .fillMaxHeight(),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
                                 Icon(
+                                    modifier = Modifier.weight(2f),
                                     painter = painterResource(
                                         id = currentWeatherData.weatherType.iconRes
                                     ),
@@ -354,11 +355,11 @@ fun WeatherExpandedContent(viewModel: WeatherViewModel) {
                                     tint = Color.Unspecified
                                 )
                                 Text(
+                                    modifier = Modifier.weight(1f),
                                     text = currentWeatherData.weatherType.weatherDesc,
-                                    style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+                                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                                 )
                             }
-
                             Row(
                                 modifier = Modifier
                                     .weight(1f)

@@ -21,15 +21,15 @@ fun ToolsScreen(
     navigateTo: (String) -> Unit,
     showSnackbar: (String) -> Unit
 ) {
+    val localSoftwareKeyboard = LocalSoftwareKeyboardController.current
     val windowTypeInfo = LocalWindowTypeInfo.current
-    val keyboardController = LocalSoftwareKeyboardController.current
     LaunchedEffect(key1 = true){
         viewModel.uiEvent.collect{ event ->
             when(event) {
                 is UiEvent.Navigate -> navigateTo(event.route)
                 is UiEvent.ShowSnackbar -> showSnackbar(event.message)
-                UiEvent.HideKeyboard -> {
-                    keyboardController?.hide()
+                is UiEvent.HideKeyboard -> {
+                    localSoftwareKeyboard?.hide()
                 }
                 else -> {}
             }

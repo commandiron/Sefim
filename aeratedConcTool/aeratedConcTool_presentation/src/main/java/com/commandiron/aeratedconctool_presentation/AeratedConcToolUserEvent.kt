@@ -22,7 +22,6 @@ sealed class AeratedConcToolUserEvent{
     object SquareCubicThicknessClick: AeratedConcToolUserEvent()
     data class SquareCubicThicknessDropDownSelect(val text: String): AeratedConcToolUserEvent()
 
-    object KeyboardDone: AeratedConcToolUserEvent()
     object ThicknessDropDownDismissClick: AeratedConcToolUserEvent()
     object Back: AeratedConcToolUserEvent()
 }

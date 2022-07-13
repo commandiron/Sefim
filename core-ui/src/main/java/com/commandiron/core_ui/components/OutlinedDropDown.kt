@@ -12,7 +12,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import com.commandiron.tools_presentation.components.ThousandSeparatorVisualTransformationWithAddedUnit
 
 @Composable
 fun OutlinedDropDown(

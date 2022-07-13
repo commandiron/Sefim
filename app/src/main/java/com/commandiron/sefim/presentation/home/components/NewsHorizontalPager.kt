@@ -3,6 +3,7 @@ package com.commandiron.sefim.presentation.home.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -28,6 +29,7 @@ import com.commandiron.rebarpricestool_presentation.components.RebarPriceItem
 import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
 import com.google.accompanist.pager.*
+import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import kotlin.math.absoluteValue
 
 @Composable
@@ -58,7 +60,8 @@ fun NewsHorizontalPager(
         HorizontalPager(
             state = pagerState,
             count = pagerCount,
-            contentPadding = PaddingValues(vertical = spacing.spaceSmall)
+            contentPadding = PaddingValues(vertical = spacing.spaceSmall),
+            flingBehavior = flingBehavior(pagerState = pagerState, noOfPages = pagerCount)
         ) { page ->
             Surface(
                 modifier = Modifier
@@ -275,4 +278,30 @@ fun NewsContent(
             textAlign = TextAlign.Center
         )
     }
+}
+
+private val minFlingDistanceDp = 150.dp
+
+@OptIn(ExperimentalSnapperApi::class)
+@Composable
+fun flingBehavior(pagerState: PagerState, noOfPages: Int): FlingBehavior {
+    var currentPageIndex = remember { pagerState.currentPage }
+    return PagerDefaults.flingBehavior(
+        state = pagerState,
+        snapIndex = { layoutInfo, _, _ ->
+            val distanceToStartSnap = layoutInfo.distanceToIndexSnap(currentPageIndex)
+            currentPageIndex = when {
+                distanceToStartSnap < -(minFlingDistanceDp.value) -> {
+                    (currentPageIndex + 1).coerceAtMost(noOfPages - 1)
+                }
+                distanceToStartSnap > minFlingDistanceDp.value -> {
+                    (currentPageIndex - 1).coerceAtLeast(0)
+                }
+                else -> {
+                    currentPageIndex
+                }
+            }
+            currentPageIndex
+        }
+    )
 }

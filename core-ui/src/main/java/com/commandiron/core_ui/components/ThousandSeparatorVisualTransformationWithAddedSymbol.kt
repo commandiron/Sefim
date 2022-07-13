@@ -1,5 +1,7 @@
-package com.commandiron.tools_presentation.components
+package com.commandiron.core_ui.components
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
@@ -86,4 +88,17 @@ class ThousandSeparatorVisualTransformationWithAddedUnit(
         private fun calcCommaCount(intDigitCount: Int) =
             max((intDigitCount - 1) / 3, 0)
     }
+}
+
+@Composable
+fun getThousandSeparatorTransformedText(text: String, addedUnit: String): String {
+    val visualTransformation = remember {
+        ThousandSeparatorVisualTransformationWithAddedUnit(
+            addedUnit = addedUnit
+        )
+    }
+    val transformedText = remember(text) {
+        visualTransformation.filter(AnnotatedString(text))
+    }.text
+    return transformedText.text
 }
