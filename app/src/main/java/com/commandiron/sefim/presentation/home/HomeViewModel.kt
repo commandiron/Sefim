@@ -175,7 +175,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getNewestTool(){
-        viewModelScope.launch {
+        viewModelScope.launch() {
             val newestTool = toolsUseCases.getNewestTool()
             state = state.copy(newTool = newestTool)
         }

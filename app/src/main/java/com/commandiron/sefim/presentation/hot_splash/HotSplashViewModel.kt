@@ -11,16 +11,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HotSplashViewModel @Inject constructor(
-    private val preferences: Preferences,
-    private val newsUseCases: NewsUseCases,
-    private val toolsUseCases: ToolsUseCases
+    private val preferences: Preferences
 ): ViewModel() {
 
     fun onFirstOpen(){
         preferences.saveShouldShowHotSplash(false)
-        viewModelScope.launch {
-            newsUseCases.prepopulateAllNewsIntoNewsDb()
-            toolsUseCases.prePopulateAllToolsInToolsDb()
-        }
     }
 }

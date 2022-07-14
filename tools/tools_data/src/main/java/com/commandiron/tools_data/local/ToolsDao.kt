@@ -2,6 +2,7 @@ package com.commandiron.tools_data.local
 
 import androidx.room.*
 import com.commandiron.tools_data.local.entity.ToolEntity
+import dagger.Provides
 
 @Dao
 interface ToolsDao {

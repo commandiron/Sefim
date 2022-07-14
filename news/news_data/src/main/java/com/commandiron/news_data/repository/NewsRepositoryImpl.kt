@@ -9,8 +9,8 @@ import com.commandiron.news_domain.repository.NewsRepository
 class NewsRepositoryImpl(
     private val dao: NewsDao
 ): NewsRepository {
-    override suspend fun insertAllNews(newsList: List<News>) {
-        dao.insertAllNews(newsList.map { it.toNewsEntity() })
+    override suspend fun checkDatabaseIsExist(): Boolean {
+        return dao.getAllNews().isNotEmpty()
     }
 
     override suspend fun getAllNews(): List<News> {

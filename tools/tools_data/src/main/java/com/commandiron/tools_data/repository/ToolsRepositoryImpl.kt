@@ -5,6 +5,7 @@ import com.commandiron.tools_data.mapper.toToolEntity
 import com.commandiron.tools_data.mapper.toTool
 import com.commandiron.core.util.Response
 import com.commandiron.core.util.Strings.ExceptionMessages.AN_ERROR_OCCURRED
+import com.commandiron.tools_data.local.ToolsDatabase
 import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_domain.repository.ToolsRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,8 +14,8 @@ import kotlinx.coroutines.flow.flow
 class ToolsRepositoryImpl(
     private val dao: ToolsDao,
 ): ToolsRepository {
-    override suspend fun insertAllTools(tools: List<Tool>) {
-        dao.insertAllTools(tools.map { it.toToolEntity() })
+    override suspend fun checkDatabaseIsExist(): Boolean {
+        return dao.getAllTools().isNotEmpty()
     }
 
     override suspend fun getAllTools(): List<Tool> {

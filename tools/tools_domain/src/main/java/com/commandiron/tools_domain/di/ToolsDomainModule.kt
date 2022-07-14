@@ -18,7 +18,7 @@ object ToolsDomainModule {
         repository: ToolsRepository
     ): ToolsUseCases {
         return ToolsUseCases(
-            prePopulateAllToolsInToolsDb = PrepopulateAllToolsInToolsDb(repository),
+            checkDatabaseIsExist = CheckDatabaseIsExist(repository),
             getAllTools = GetAllTools(repository),
             getNewestTool = GetNewestTool(repository),
             getRecommendedTools = GetRecommendedTools(repository),

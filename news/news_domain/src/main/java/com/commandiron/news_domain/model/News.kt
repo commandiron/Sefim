@@ -6,5 +6,4 @@ data class News(
 )
 
 val newsList = listOf<News>(
-    //News to be insert
 )

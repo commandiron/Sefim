@@ -13,13 +13,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AppViewModel @Inject constructor(): ViewModel() {
+class AppViewModel @Inject constructor(
+    private val newsUseCases: NewsUseCases,
+    private val toolsUseCases: ToolsUseCases
+): ViewModel() {
 
     var state by mutableStateOf(AppState())
         private set
 
     init {
         viewModelScope.launch {
+            println("1: " + toolsUseCases.checkDatabaseIsExist())
             delay(timeMillis = state.coldSplashScreenDelay)
             state = state.copy(
                 isColdSplashScreenVisible = false
