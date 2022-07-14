@@ -29,7 +29,6 @@ import com.commandiron.rebarpricestool_presentation.components.RebarPriceItem
 import com.commandiron.tools_domain.model.Tool
 import com.commandiron.tools_presentation.components.tool_items.ToolItemWithSticker
 import com.google.accompanist.pager.*
-import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import kotlin.math.absoluteValue
 
 @Composable
@@ -282,7 +281,6 @@ fun NewsContent(
 
 private val minFlingDistanceDp = 150.dp
 
-@OptIn(ExperimentalSnapperApi::class)
 @Composable
 fun flingBehavior(pagerState: PagerState, noOfPages: Int): FlingBehavior {
     var currentPageIndex = remember { pagerState.currentPage }

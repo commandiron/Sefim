@@ -23,7 +23,8 @@ class AppViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            println("1: " + toolsUseCases.checkDatabaseIsExist())
+            toolsUseCases.checkDatabaseIsExist()
+            newsUseCases.checkDatabaseIsExist()
             delay(timeMillis = state.coldSplashScreenDelay)
             state = state.copy(
                 isColdSplashScreenVisible = false

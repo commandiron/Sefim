@@ -60,12 +60,3 @@ val lengthMeasureWithCamTool = Tool(
     toolTags = listOf(ToolTag.AR, ToolTag.SOON),
     route = ""
 )
-
-val allToolsInApp = listOf(
-    rebarPricesTool,
-    weatherTool,
-    aeratedConcTool,
-    rebarCalculatorTool,
-    roughConstructionCostCalculatorTool,
-    lengthMeasureWithCamTool
-)

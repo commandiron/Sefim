@@ -1,6 +1,5 @@
 package com.commandiron.news_data.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.commandiron.news_data.local.NewsCallback

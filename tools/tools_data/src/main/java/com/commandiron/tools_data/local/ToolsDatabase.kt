@@ -6,7 +6,7 @@ import com.commandiron.tools_data.local.entity.ToolEntity
 
 @Database(
     entities = [ToolEntity::class],
-    version = 3,
+    version = 1,
     exportSchema = false
 )
 abstract class ToolsDatabase: RoomDatabase(){
