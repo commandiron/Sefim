@@ -10,7 +10,21 @@ data class Tool(
     val isFavorite: Boolean = false,
     val toolTags: List<ToolTag> = listOf(),
     val route: String
-)
+){
+    companion object {
+        fun toolFromId(id: Int): Tool{
+            when(id){
+                0 -> return rebarPricesTool
+                1 -> return weatherTool
+                2 -> return aeratedConcTool
+                3 -> return rebarCalculatorTool
+                4 -> return roughConstructionCostCalculatorTool
+                5 -> return lengthMeasureWithCamTool
+            }
+            return rebarPricesTool
+        }
+    }
+}
 
 val rebarPricesTool = Tool(
     id = 0,
@@ -60,3 +74,4 @@ val lengthMeasureWithCamTool = Tool(
     toolTags = listOf(ToolTag.AR, ToolTag.SOON),
     route = ""
 )
+

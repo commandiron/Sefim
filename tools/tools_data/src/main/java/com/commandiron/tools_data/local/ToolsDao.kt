@@ -2,7 +2,6 @@ package com.commandiron.tools_data.local
 
 import androidx.room.*
 import com.commandiron.tools_data.local.entity.ToolEntity
-import dagger.Provides
 
 @Dao
 interface ToolsDao {
@@ -13,6 +12,6 @@ interface ToolsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTool(toolEntity: ToolEntity): Long
 
-    @Query(" SELECT * FROM toolentity")
+    @Query("SELECT * FROM toolentity")
     suspend fun getAllTools(): List<ToolEntity>
 }

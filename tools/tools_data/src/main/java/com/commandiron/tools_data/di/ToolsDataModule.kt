@@ -2,6 +2,8 @@ package com.commandiron.tools_data.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.commandiron.tools_data.local.ToolsCallback
 import com.commandiron.tools_data.local.ToolsDao
 import com.commandiron.tools_data.local.ToolsDatabase
@@ -29,7 +31,10 @@ object ToolsDataModule {
             context,
             ToolsDatabase::class.java,
             "tools_db"
-        ).addCallback(ToolsCallback(provider)).build()
+        )
+            .addCallback(ToolsCallback(provider))
+//            .addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     @Provides
@@ -45,3 +50,9 @@ object ToolsDataModule {
         )
     }
 }
+
+//val MIGRATION_1_2 = object : Migration(1, 2) {
+//    override fun migrate(database: SupportSQLiteDatabase) {
+//        database.execSQL("INSERT INTO toolentity VALUES (6,6,0) ")
+//    }
+//}

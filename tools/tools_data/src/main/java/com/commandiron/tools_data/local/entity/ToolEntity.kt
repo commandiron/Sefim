@@ -8,9 +8,5 @@ data class ToolEntity(
     @PrimaryKey
     val id: Int,
     val queue: Int,
-    val title: String,
-    val resources : Int,
     val isFavorite: Boolean,
-    val toolTags: String,
-    val route: String
 )
