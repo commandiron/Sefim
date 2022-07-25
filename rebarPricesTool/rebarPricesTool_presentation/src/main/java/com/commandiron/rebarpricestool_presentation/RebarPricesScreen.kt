@@ -80,7 +80,7 @@ fun RebarPricesExpandedContent(viewModel: RebarPricesViewModel) {
     ) {
         ToolHeader(
             title = REBAR_PRICES,
-            onBackClick = {viewModel.onEvent(RebarPricesUserEvent.Back)},
+            onBackClick = { viewModel.onEvent(RebarPricesUserEvent.Back) },
             onFavoriteClick = { TODO() }
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))

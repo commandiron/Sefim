@@ -56,7 +56,8 @@ fun ToolHeader(
         IconButton(
             modifier = Modifier
                 .fillMaxHeight(),
-            onClick = { onFavoriteClick() }
+            onClick = { onFavoriteClick() },
+            enabled = false
         ) {
             Icon(
                 imageVector =
@@ -66,7 +67,7 @@ fun ToolHeader(
                         Icons.Default.FavoriteBorder
                     },
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
+                tint = MaterialTheme.colorScheme.background
             )
         }
     }
