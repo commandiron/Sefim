@@ -51,5 +51,7 @@ object Strings {
         const val UNIT_PRICE = "Birim Fiyat"
         const val IRON = "Demir"
         const val CONCRETE = "Beton"
+        const val ADDED_TO_FAVORITES = "Favorilere Eklendi"
+        const val REMOVED_FROM_FAVORITES = "Favorilerden Çıkarıldı"
     }
 }

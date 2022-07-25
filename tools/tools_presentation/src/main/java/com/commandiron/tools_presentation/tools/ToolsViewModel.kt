@@ -10,6 +10,8 @@ import com.commandiron.core_ui.util.Strings.Turkish.SOON_THREE_DOT
 import com.commandiron.core_ui.util.UiEvent
 import com.commandiron.tools_domain.model.ToolTag
 import com.commandiron.core.util.Response
+import com.commandiron.core_ui.util.Strings.Turkish.ADDED_TO_FAVORITES
+import com.commandiron.core_ui.util.Strings.Turkish.REMOVED_FROM_FAVORITES
 import com.commandiron.tools_domain.use_cases.ToolsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -47,6 +49,7 @@ class ToolsViewModel @Inject constructor(
                                 Response.Loading -> {}
                                 is Response.Success -> {
                                     refresh()
+                                    sendUiEvent(UiEvent.ShowSnackbar(REMOVED_FROM_FAVORITES))
                                 }
                             }
                         }
@@ -63,6 +66,7 @@ class ToolsViewModel @Inject constructor(
                                     Response.Loading -> {}
                                     is Response.Success -> {
                                         refresh()
+                                        sendUiEvent(UiEvent.ShowSnackbar(ADDED_TO_FAVORITES))
                                     }
                                 }
                             }
