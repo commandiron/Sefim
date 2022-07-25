@@ -43,7 +43,7 @@ object Strings {
         const val SNACKBAR_CLOSE_ACTION_TEXT = "Kapat"
         const val SOON_THREE_DOT = "Yakında..."
         const val LOCKED = "Kilitli."
-        const val FAILED_TO_GET_LOCATION_PLEASE_OPEN_GOOGLE_MAPS = "Konum alınamadı, lütfen Google Maps uygulamasını açın."
+        const val FAILED_TO_GET_LOCATION = "Konum alınamadı."
         const val DAILY_IRON_PRICE = "Günlük Demir Fiyatı:"
         const val FORMWORK = "Kalıp"
         const val QUANTITY_FLAT_MEASURE = "Metraj (Düz Ölçü)"

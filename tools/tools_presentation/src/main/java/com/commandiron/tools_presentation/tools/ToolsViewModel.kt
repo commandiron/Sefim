@@ -56,7 +56,8 @@ class ToolsViewModel @Inject constructor(
                         }else if (userEvent.tool.toolTags.contains(ToolTag.LOCKED)){
                             sendUiEvent(UiEvent.ShowSnackbar(LOCKED))
                         }else{
-                            toolsUseCases.favoriteTool(userEvent.tool).collect{ response ->
+                            val queue = state.allTools?.filter { it.isFavorite }?.size ?: 0
+                            toolsUseCases.favoriteTool(userEvent.tool.copy(queue = queue)).collect{ response ->
                                 when(response){
                                     is Response.Error -> {}
                                     Response.Loading -> {}

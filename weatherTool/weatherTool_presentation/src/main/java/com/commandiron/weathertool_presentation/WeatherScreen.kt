@@ -28,7 +28,7 @@ import com.commandiron.core_ui.util.Strings.Turkish.WIND
 import com.commandiron.core_ui.components.OnLifecycleEvent
 import com.commandiron.core_ui.theme.MyPrimaryColor
 import com.commandiron.core_ui.util.*
-import com.commandiron.core_ui.util.Strings.Turkish.FAILED_TO_GET_LOCATION_PLEASE_OPEN_GOOGLE_MAPS
+import com.commandiron.core_ui.util.Strings.Turkish.FAILED_TO_GET_LOCATION
 import com.commandiron.core_ui.util.Strings.Turkish.PRESSURE
 import com.commandiron.weathertool_presentation.components.CheckFineLocationPermission
 import com.commandiron.weathertool_presentation.components.HourlyWeatherDisplay
@@ -158,7 +158,7 @@ fun WeatherCompactContent(viewModel: WeatherViewModel) {
                             contentDescription = null
                         )
                     }
-                    Text(text = FAILED_TO_GET_LOCATION_PLEASE_OPEN_GOOGLE_MAPS )
+                    Text(text = FAILED_TO_GET_LOCATION )
                 }
             }
             state.weatherInfo?.let { weatherInfo ->

@@ -88,7 +88,8 @@ class HomeViewModel @Inject constructor(
                     sendUiEvent(UiEvent.ShowSnackbar(LOCKED))
                 }else{
                     viewModelScope.launch {
-                        toolsUseCases.favoriteTool(userEvent.tool).collect{ response ->
+                        val queue = state.favoriteTools?.size ?: 0
+                        toolsUseCases.favoriteTool(userEvent.tool.copy(queue = queue)).collect{ response ->
                             when(response){
                                 is Response.Error -> {}
                                 Response.Loading -> {}

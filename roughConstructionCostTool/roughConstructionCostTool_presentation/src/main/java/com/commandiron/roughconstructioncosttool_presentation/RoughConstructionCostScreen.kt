@@ -60,86 +60,88 @@ fun RoughConstructionCostScreen(
 fun RoughConstructionCostCompactContent(viewModel: RoughConstructionCostViewModel) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(spacing.defaultScreenPaddingForCompactNoBottomNav)
     ) {
-        ToolHeader(
-            title = ROUGH_CONSTRUCTION_COST_CALCULATOR,
-            onIconClick = { viewModel.onEvent(RoughConstructionCostUserEvent.Back) }
-        )
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
-        Text(
-            text = FORMWORK,
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-        )
-        Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        RoughConstructionCostBodyRow(
-            firstValue = state.formWorkQuantityText,
-            onFirstValueChange = {
-                viewModel.onEvent(RoughConstructionCostUserEvent.FormWorkQuantityTextChange(it))
-            },
-            onFirstNext = {},
-            firstValueLabel= QUANTITY_FLAT_MEASURE,
-            firstValueUnit= SQUARE_METER,
-            secondValue = state.formWorkUnitPriceText,
-            onSecondValueChange = {
-                viewModel.onEvent(RoughConstructionCostUserEvent.FormWorkUnitPriceTextChange(it))
-            },
-            onSecondNext = {},
-            secondValueLabel = UNIT_PRICE,
-            secondValueUnit = "$TURKISH_LIRA/$SQUARE_METER",
-            resultText = state.formWorkResultText
-        )
-        Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        Text(
-            text = IRON,
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-        )
-        Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        RoughConstructionCostBodyRow(
-            firstValue = state.rebarQuantityText,
-            onFirstValueChange = {
-                viewModel.onEvent(RoughConstructionCostUserEvent.RebarQuantityTextChange(it))
-            },
-            onFirstNext = {},
-            firstValueLabel= QUANTITY,
-            firstValueUnit= TON,
-            secondValue = state.rebarUnitPriceText,
-            onSecondValueChange = {
-                viewModel.onEvent(RoughConstructionCostUserEvent.RebarUnitPriceTextChange(it))
-            },
-            onSecondNext = {},
-            secondValueLabel = UNIT_PRICE,
-            secondValueUnit = "$TURKISH_LIRA/$TON",
-            resultText = state.rebarResultText
-        )
-        Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        Text(
-            text = CONCRETE,
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-        )
-        Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        RoughConstructionCostBodyRow(
-            firstValue = state.concreteQuantityText,
-            onFirstValueChange = {
-                viewModel.onEvent(RoughConstructionCostUserEvent.ConcreteQuantityTextChange(it))
-            },
-            onFirstNext = {},
-            firstValueLabel= QUANTITY,
-            firstValueUnit= CUBIC_METER,
-            secondValue = state.concreteUnitPriceText,
-            onSecondValueChange = {
-                viewModel.onEvent(RoughConstructionCostUserEvent.ConcreteUnitPriceTextChange(it))
-            },
-            onSecondNext = { viewModel.onEvent(RoughConstructionCostUserEvent.OnLastTextFieldNext) },
-            secondValueLabel = UNIT_PRICE,
-            secondValueUnit = "$TURKISH_LIRA/$CUBIC_METER",
-            resultText = state.concreteResultText
-        )
-        Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        RoughConstructionCostFooter(resultText = state.grandTotalText)
+        item {
+            ToolHeader(
+                title = ROUGH_CONSTRUCTION_COST_CALCULATOR,
+                onIconClick = { viewModel.onEvent(RoughConstructionCostUserEvent.Back) }
+            )
+            Spacer(modifier = Modifier.height(spacing.spaceLarge))
+            Text(
+                text = FORMWORK,
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+            )
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
+            RoughConstructionCostBodyRow(
+                firstValue = state.formWorkQuantityText,
+                onFirstValueChange = {
+                    viewModel.onEvent(RoughConstructionCostUserEvent.FormWorkQuantityTextChange(it))
+                },
+                onFirstNext = {},
+                firstValueLabel= QUANTITY_FLAT_MEASURE,
+                firstValueUnit= SQUARE_METER,
+                secondValue = state.formWorkUnitPriceText,
+                onSecondValueChange = {
+                    viewModel.onEvent(RoughConstructionCostUserEvent.FormWorkUnitPriceTextChange(it))
+                },
+                onSecondNext = {},
+                secondValueLabel = UNIT_PRICE,
+                secondValueUnit = "$TURKISH_LIRA/$SQUARE_METER",
+                resultText = state.formWorkResultText
+            )
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
+            Text(
+                text = IRON,
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+            )
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
+            RoughConstructionCostBodyRow(
+                firstValue = state.rebarQuantityText,
+                onFirstValueChange = {
+                    viewModel.onEvent(RoughConstructionCostUserEvent.RebarQuantityTextChange(it))
+                },
+                onFirstNext = {},
+                firstValueLabel= QUANTITY,
+                firstValueUnit= TON,
+                secondValue = state.rebarUnitPriceText,
+                onSecondValueChange = {
+                    viewModel.onEvent(RoughConstructionCostUserEvent.RebarUnitPriceTextChange(it))
+                },
+                onSecondNext = {},
+                secondValueLabel = UNIT_PRICE,
+                secondValueUnit = "$TURKISH_LIRA/$TON",
+                resultText = state.rebarResultText
+            )
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
+            Text(
+                text = CONCRETE,
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+            )
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
+            RoughConstructionCostBodyRow(
+                firstValue = state.concreteQuantityText,
+                onFirstValueChange = {
+                    viewModel.onEvent(RoughConstructionCostUserEvent.ConcreteQuantityTextChange(it))
+                },
+                onFirstNext = {},
+                firstValueLabel= QUANTITY,
+                firstValueUnit= CUBIC_METER,
+                secondValue = state.concreteUnitPriceText,
+                onSecondValueChange = {
+                    viewModel.onEvent(RoughConstructionCostUserEvent.ConcreteUnitPriceTextChange(it))
+                },
+                onSecondNext = { viewModel.onEvent(RoughConstructionCostUserEvent.OnLastTextFieldNext) },
+                secondValueLabel = UNIT_PRICE,
+                secondValueUnit = "$TURKISH_LIRA/$CUBIC_METER",
+                resultText = state.concreteResultText
+            )
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
+            RoughConstructionCostFooter(resultText = state.grandTotalText)
+        }
     }
 }
 

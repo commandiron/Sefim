@@ -1,8 +1,12 @@
 package com.commandiron.core_ui.util
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material.ripple.RippleAlpha
+import androidx.compose.material.ripple.RippleTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -72,5 +76,17 @@ fun getProvidedValuesOnApp(
         LocalPermissionsState provides permissionsState,
         LocalSystemUiController provides systemUiController,
         LocalWindowTypeInfo provides windowInfo
+    )
+}
+object ClearRippleTheme : RippleTheme {
+    @Composable
+    override fun defaultColor(): Color = Color.Transparent
+
+    @Composable
+    override fun rippleAlpha() = RippleAlpha(
+        draggedAlpha = 0.0f,
+        focusedAlpha = 0.0f,
+        hoveredAlpha = 0.0f,
+        pressedAlpha = 0.0f,
     )
 }

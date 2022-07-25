@@ -37,8 +37,9 @@ fun RoughConstructionCostFooter(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            val transformedText = getThousandSeparatorTransformedText(text = resultText, addedUnit = TURKISH_LIRA)
             Text(
-                text = getThousandSeparatorTransformedText(text = resultText, addedUnit = TURKISH_LIRA),
+                text = transformedText,
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis

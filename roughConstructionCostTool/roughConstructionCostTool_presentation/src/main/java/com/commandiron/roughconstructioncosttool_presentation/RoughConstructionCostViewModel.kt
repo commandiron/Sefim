@@ -140,7 +140,7 @@ class RoughConstructionCostViewModel @Inject constructor(
         val concreteResult = state.concreteResultText.toDoubleOrNull() ?: 0.0
 
         state = state.copy(
-            grandTotalText = (formWorkResult + rebarResult + concreteResult).toString()
+            grandTotalText = (formWorkResult + rebarResult + concreteResult).toBigDecimal().toPlainString()
         )
     }
 
