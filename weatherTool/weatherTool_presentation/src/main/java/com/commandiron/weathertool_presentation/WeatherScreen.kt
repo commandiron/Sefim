@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.*
@@ -17,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
@@ -88,26 +91,29 @@ fun WeatherCompactContent(viewModel: WeatherViewModel) {
         verticalArrangement = Arrangement.Center
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(spacing.spaceExtraLarge),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Icon(
+            IconButton(
                 modifier = Modifier
-                    .alignBy(LastBaseline)
-                    .clickable { viewModel.onEvent(WeatherUserEvent.Back) },
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-            Row(
-                modifier = Modifier
-                    .alignBy(LastBaseline)
-                    .weight(1f),
-                horizontalArrangement = Arrangement.End
+                    .fillMaxHeight(),
+                onClick = { viewModel.onEvent(WeatherUserEvent.Back)  }
             ) {
                 Icon(
-                    modifier = Modifier.alignBy(LastBaseline),
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxHeight(),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
                     imageVector = Icons.Outlined.LocationOn,
                     contentDescription = null,
                     tint = if(state.locationPermissionGranted){
@@ -128,7 +134,7 @@ fun WeatherCompactContent(viewModel: WeatherViewModel) {
                 }
             }
         }
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
         Text(
             modifier = Modifier.align(Alignment.Start),
             text = "$TODAY_REPORT ",

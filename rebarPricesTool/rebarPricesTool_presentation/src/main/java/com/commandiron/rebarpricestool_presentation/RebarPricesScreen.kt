@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.core_ui.util.Strings.Turkish.REBAR_PRICES
 import com.commandiron.core_ui.components.ToolHeader
@@ -50,9 +49,10 @@ fun RebarPricesCompactContent(viewModel: RebarPricesViewModel) {
     ) {
         ToolHeader(
             title = REBAR_PRICES,
-            onIconClick = { viewModel.onEvent(RebarPricesUserEvent.Back) }
+            onBackClick = { viewModel.onEvent(RebarPricesUserEvent.Back) },
+            onFavoriteClick = { TODO() }
         )
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall)
         ) {
@@ -80,9 +80,10 @@ fun RebarPricesExpandedContent(viewModel: RebarPricesViewModel) {
     ) {
         ToolHeader(
             title = REBAR_PRICES,
-            onIconClick = {viewModel.onEvent(RebarPricesUserEvent.Back)}
+            onBackClick = {viewModel.onEvent(RebarPricesUserEvent.Back)},
+            onFavoriteClick = { TODO() }
         )
-        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(spacing.spaceSmall),

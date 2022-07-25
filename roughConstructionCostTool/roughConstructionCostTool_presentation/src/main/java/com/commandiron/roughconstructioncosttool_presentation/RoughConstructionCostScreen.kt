@@ -68,9 +68,10 @@ fun RoughConstructionCostCompactContent(viewModel: RoughConstructionCostViewMode
         item {
             ToolHeader(
                 title = ROUGH_CONSTRUCTION_COST_CALCULATOR,
-                onIconClick = { viewModel.onEvent(RoughConstructionCostUserEvent.Back) }
+                onBackClick = { viewModel.onEvent(RoughConstructionCostUserEvent.Back) },
+                onFavoriteClick = { TODO() }
             )
-            Spacer(modifier = Modifier.height(spacing.spaceLarge))
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
             Text(
                 text = FORMWORK,
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
@@ -157,9 +158,10 @@ fun RoughConstructionCostExpandedContent(viewModel: RoughConstructionCostViewMod
         item {
             ToolHeader(
                 title = ROUGH_CONSTRUCTION_COST_CALCULATOR,
-                onIconClick = { viewModel.onEvent(RoughConstructionCostUserEvent.Back) }
+                onBackClick = { viewModel.onEvent(RoughConstructionCostUserEvent.Back) },
+                onFavoriteClick = { TODO() }
             )
-            Spacer(modifier = Modifier.height(spacing.spaceMedium))
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
             Text(
                 text = FORMWORK,
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),

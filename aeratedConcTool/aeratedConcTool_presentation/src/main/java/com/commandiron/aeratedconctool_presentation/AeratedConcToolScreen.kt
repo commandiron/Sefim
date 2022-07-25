@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.commandiron.aeratedconctool_presentation.components.converters.CubicMetersPalletConverter
 import com.commandiron.aeratedconctool_presentation.components.converters.PiecePalletConverter
@@ -50,9 +49,10 @@ fun AeratedConcToolCompactContent(viewModel: AeratedConcToolViewModel) {
     ) {
         ToolHeader(
             title = AERATED_CONCRETE_CALCULATOR,
-            onIconClick = {viewModel.onEvent(AeratedConcToolUserEvent.Back)}
+            onBackClick = {viewModel.onEvent(AeratedConcToolUserEvent.Back)},
+            onFavoriteClick = { TODO() }
         )
-        Spacer(modifier = Modifier.height(spacing.spaceLarge))
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
         SquareMetersPalletConverter(state, viewModel)
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
         CubicMetersPalletConverter(state, viewModel)
@@ -72,9 +72,10 @@ fun AeratedConcToolExpandedContent(viewModel: AeratedConcToolViewModel) {
     ) {
         ToolHeader(
             title = AERATED_CONCRETE_CALCULATOR,
-            onIconClick = {viewModel.onEvent(AeratedConcToolUserEvent.Back)}
+            onBackClick = {viewModel.onEvent(AeratedConcToolUserEvent.Back)},
+            onFavoriteClick = { TODO() }
         )
-        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
         LazyColumn {
             item {
                 SquareMetersPalletConverter(state, viewModel)

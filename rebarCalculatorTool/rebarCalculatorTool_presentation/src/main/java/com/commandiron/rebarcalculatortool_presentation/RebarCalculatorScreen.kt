@@ -59,14 +59,10 @@ fun RebarCalculatorScreen(
     ) {
         ToolHeader(
             title = REBAR_QUANTITY_CALCULATOR,
-            onIconClick = {viewModel.onEvent(RebarCalculatorUserEvent.Back)}
+            onBackClick = {viewModel.onEvent(RebarCalculatorUserEvent.Back)},
+            onFavoriteClick = { TODO() }
         )
-        Spacer(
-            modifier = Modifier.height(
-                if(windowTypeInfo.screenWidthInfo is WindowInfo.WindowType.Compact)
-                    spacing.spaceLarge else spacing.spaceMedium
-            )
-        )
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall)
