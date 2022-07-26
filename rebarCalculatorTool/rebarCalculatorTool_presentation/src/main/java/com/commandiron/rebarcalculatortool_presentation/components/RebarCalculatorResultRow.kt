@@ -33,32 +33,37 @@ fun RebarCalculatorResultRow(
     ) {
         Text(
             text = "${Strings.Turkish.GRAND_TOTAL} : ",
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center
+            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Text(
             text = getThousandSeparatorTransformedText(state.grandResult, state.grandResultUnit),
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
         Text(
             text = "=",
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
         Text(
             text = state.grandResult2,
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
         if(state.grandResult2.isNotEmpty()){
             Text(
                 text = state.grandResult2Unit,
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onTertiaryContainer
             )
         }
     }
