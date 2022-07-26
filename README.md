@@ -58,7 +58,7 @@ Sefim is a native android tools app for construction site supervisors written in
     * [Jsoup](https://jsoup.org) - perform web scraping
     * [Junit 4](https://junit.org/junit4/) - perform unit tests
 * Architecture 🏗️
-    * Model-View-ViewModel
+    * Model-View-Intent
     * [Android Architecture components](https://developer.android.com/topic/libraries/architecture) ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
  
  * Todo ✔️
