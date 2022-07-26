@@ -1,6 +1,6 @@
 package com.commandiron.rebarcalculatortool_domain.use_cases
 
-import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 class CalculateRebarWeight {
     operator fun invoke(piece: Int, length: Double, diameter: Double) : Double {
@@ -23,7 +23,7 @@ class CalculateRebarWeight {
             36.0 -> weight = 7.990
             40.0 -> weight = 9.865
         }
-        return (piece * length * weight * 1000.0).roundToInt() / 1000.0
+        return (piece * length * weight * 1000.0).roundToLong() / 1000.0
     }
 }
 

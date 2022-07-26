@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 
 @HiltViewModel
@@ -154,7 +155,7 @@ class RebarCalculatorViewModel @Inject constructor(
                             element = state
                                 .rebarCalculatorItems[index]
                                 .copy(
-                                    resultText = result.toString()
+                                    resultText = result.toBigDecimal().toPlainString()
                                 )
                         )
                     }
@@ -186,10 +187,10 @@ class RebarCalculatorViewModel @Inject constructor(
                 grandResult += it.resultText.toDouble()
             }
         }
-        grandResult = (grandResult * 1000.0).roundToInt() / 1000.0
+        grandResult = (grandResult * 1000.0).roundToLong() / 1000.0
         state = state.copy(
-            grandResult = grandResult.toString(),
-            grandResult2 = (((grandResult / 1000) * 100.0).roundToInt() / 100.0) .toString()
+            grandResult = grandResult.toBigDecimal().toPlainString(),
+            grandResult2 = (((grandResult / 1000) * 100.0).roundToLong() / 100.0).toBigDecimal().toPlainString()
         )
     }
 
