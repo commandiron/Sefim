@@ -24,8 +24,8 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
-            isShrinkResources = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -60,8 +60,6 @@ android {
 }
 
 dependencies {
-
-    implementation("com.github.commandiron:BubbleNavigationBarCompose:1.0")
 
     implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
