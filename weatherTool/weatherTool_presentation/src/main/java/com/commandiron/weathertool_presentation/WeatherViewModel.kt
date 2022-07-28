@@ -112,14 +112,12 @@ class WeatherViewModel @Inject constructor(
                             isLoading = false,
                             hasError = true
                         )
-                        println("Error")
                     }
                     Response.Loading -> {
                         state = state.copy(
                             isLoading = true,
                             hasError = false
                         )
-                        println("Loading")
                     }
                     is Response.Success -> {
                         state = state.copy(

@@ -7,8 +7,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.*
@@ -19,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
@@ -203,13 +200,13 @@ fun WeatherCompactContent(viewModel: WeatherViewModel) {
                             )
                         }
                     }
-                    state.weatherInfo.weatherDataPerDay[0]?.let { data ->
+
                         LazyRow(
                             modifier = Modifier.weight(1f)
                         ) {
-                            items(data) { weatherData ->
+                            items(state.weatherInfo.weatherDataTodayPerHour) { weatherDataPerHour ->
                                 HourlyWeatherDisplay(
-                                    weatherData = weatherData,
+                                    weatherData = weatherDataPerHour,
                                     modifier = Modifier
                                         .weight(1f)
                                         .padding(horizontal = 16.dp)
@@ -217,7 +214,7 @@ fun WeatherCompactContent(viewModel: WeatherViewModel) {
                             }
                         }
                         Spacer(modifier = Modifier.height(spacing.spaceMedium))
-                    }
+
                     Card(
                         modifier = Modifier.weight(1f),
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
@@ -392,20 +389,17 @@ fun WeatherExpandedContent(viewModel: WeatherViewModel) {
                             modifier = Modifier.fillMaxHeight().weight(1f),
                             verticalArrangement = Arrangement.Center
                         ) {
-                            state.weatherInfo.weatherDataPerDay[0]?.let { data ->
-                                LazyRow(modifier = Modifier.fillMaxHeight(0.5f)) {
-                                    items(data) { weatherData ->
-                                        HourlyWeatherDisplay(
-                                            weatherData = weatherData,
-                                            modifier = Modifier
-                                                .weight(1f)
-                                                .padding(horizontal = 16.dp)
-                                        )
-                                    }
+                            LazyRow(modifier = Modifier.fillMaxHeight(0.5f)) {
+                                items(state.weatherInfo.weatherDataTodayPerHour) { weatherDataPerHour ->
+                                    HourlyWeatherDisplay(
+                                        weatherData = weatherDataPerHour,
+                                        modifier = Modifier
+                                            .weight(1f)
+                                            .padding(horizontal = 16.dp)
+                                    )
                                 }
                             }
                         }
-
                     }
                     Card(
                         modifier = Modifier.weight(1f),
