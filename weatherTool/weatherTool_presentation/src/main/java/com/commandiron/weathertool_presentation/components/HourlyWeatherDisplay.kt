@@ -1,10 +1,8 @@
 package com.commandiron.weathertool_presentation.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -28,18 +26,18 @@ fun HourlyWeatherDisplay(
         )
     }
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = formattedTime,
-            color = Color.LightGray
+            color = Color.LightGray,
         )
         Image(
+            modifier = Modifier.size(40.dp),
             painter = painterResource(id = weatherData.weatherType.iconRes),
             contentDescription = null,
-            modifier = Modifier.width(40.dp)
         )
         Text(
             text = "${weatherData.temperatureCelsius}°C",

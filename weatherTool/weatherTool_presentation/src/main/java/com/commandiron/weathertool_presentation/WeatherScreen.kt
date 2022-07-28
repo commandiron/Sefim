@@ -1,39 +1,26 @@
 package com.commandiron.weathertool_presentation
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.LastBaseline
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
-import com.commandiron.core_ui.util.Strings.Turkish.DEGREE_SYMBOL
-import com.commandiron.core_ui.util.Strings.Turkish.HUMIDITY
-import com.commandiron.core_ui.util.Strings.Turkish.LOCATION_PERMISSION_REQUIRED
-import com.commandiron.core_ui.util.Strings.Turkish.TODAY_REPORT
-import com.commandiron.core_ui.util.Strings.Turkish.WIND
 import com.commandiron.core_ui.components.OnLifecycleEvent
-import com.commandiron.core_ui.theme.MyPrimaryColor
 import com.commandiron.core_ui.util.*
 import com.commandiron.core_ui.util.Strings.Turkish.FAILED_TO_GET_LOCATION
-import com.commandiron.core_ui.util.Strings.Turkish.PRESSURE
-import com.commandiron.weathertool_presentation.components.CheckFineLocationPermission
-import com.commandiron.weathertool_presentation.components.HourlyWeatherDisplay
-import java.text.SimpleDateFormat
-import java.util.*
+import com.commandiron.weathertool_presentation.components.*
 
 @Composable
 fun WeatherScreen(
@@ -87,61 +74,12 @@ fun WeatherCompactContent(viewModel: WeatherViewModel) {
             .padding(spacing.defaultScreenPaddingForCompact),
         verticalArrangement = Arrangement.Center
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(spacing.spaceExtraLarge),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            IconButton(
-                modifier = Modifier
-                    .fillMaxHeight(),
-                onClick = { viewModel.onEvent(WeatherUserEvent.Back)  }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxHeight(),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.LocationOn,
-                    contentDescription = null,
-                    tint = if(state.locationPermissionGranted){
-                        MyPrimaryColor
-                    } else{ MaterialTheme.colorScheme.error }
-                )
-                if(state.locationPermissionGranted){
-                    Text(
-                        text = state.myCity,
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
-                    )
-                }else{
-                    Text(
-                        text = LOCATION_PERMISSION_REQUIRED,
-                        style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
-            }
-        }
+        WeatherHeader(
+            state = state,
+            onBackClick = { viewModel.onEvent(WeatherUserEvent.Back) }
+        )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        Text(
-            modifier = Modifier.align(Alignment.Start),
-            text = "$TODAY_REPORT ",
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
-        )
-        Text(
-            text = SimpleDateFormat("dd.MM.yyyy EEEE", Locale.getDefault()).format(Date()),
-            style = MaterialTheme.typography.titleSmall,
-            color = LocalContentColor.current.copy(alpha = 0.5f)
-        )
+        WeatherTitle()
         Spacer(modifier = Modifier.height(spacing.spaceLarge))
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -166,108 +104,37 @@ fun WeatherCompactContent(viewModel: WeatherViewModel) {
             }
             state.weatherInfo?.let { weatherInfo ->
                 weatherInfo.currentWeatherData?.let { currentWeatherData ->
-                    Icon(
-                        modifier = Modifier.weight(2f),
-                        painter = painterResource(id = currentWeatherData.weatherType.iconRes),
-                        contentDescription = null,
-                        tint = Color.Unspecified
-                    )
-                    Text(
+                    WeatherIconAndDescription(
                         modifier = Modifier
-                            .align(Alignment.CenterHorizontally),
-                        text = currentWeatherData.weatherType.weatherDesc,
-                        style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+                            .weight(3f),
+                        iconRes = currentWeatherData.weatherType.iconRes,
+                        weatherDesc = currentWeatherData.weatherType.weatherDesc
                     )
-                    Box(
+                    WeatherTemperatureText(
                         modifier = Modifier
-                            .weight(2f)
+                            .weight(1f)
                             .align(Alignment.CenterHorizontally),
-                        contentAlignment = Alignment.Center
+                        temperature = currentWeatherData.temperatureCelsius
+                    )
+                    LazyRow(
+                        modifier = Modifier.weight(1f)
                     ) {
-                        Row() {
-                            Text(
-                                text = DEGREE_SYMBOL,
-                                style = MaterialTheme.typography.displayLarge,
-                                color = MaterialTheme.colorScheme.background
-                            )
-                            Text(
-                                text = currentWeatherData.temperatureCelsius.toString(),
-                                style = MaterialTheme.typography.displayLarge
-                            )
-                            Text(
-                                text = DEGREE_SYMBOL,
-                                style = MaterialTheme.typography.displayLarge,
+                        items(state.weatherInfo.weatherDataTodayPerHour) { weatherDataPerHour ->
+                            HourlyWeatherDisplay(
+                                weatherData = weatherDataPerHour,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(horizontal = 16.dp)
                             )
                         }
                     }
-
-                        LazyRow(
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            items(state.weatherInfo.weatherDataTodayPerHour) { weatherDataPerHour ->
-                                HourlyWeatherDisplay(
-                                    weatherData = weatherDataPerHour,
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .padding(horizontal = 16.dp)
-                                )
-                            }
-                        }
-                        Spacer(modifier = Modifier.height(spacing.spaceMedium))
-
-                    Card(
+                    Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                    WeatherInfoCard(
                         modifier = Modifier.weight(1f),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
-                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Column(
-                                modifier = Modifier.weight(1f),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = "${currentWeatherData.humidity}%",
-                                    style = MaterialTheme.typography.titleLarge
-                                )
-                                Text(text = HUMIDITY)
-                            }
-                            Divider(
-                                modifier = Modifier
-                                    .width(1.dp)
-                                    .fillMaxHeight(0.5f),
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                            Column(
-                                modifier = Modifier.weight(1f),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = "${currentWeatherData.pressure} hpa",
-                                    style = MaterialTheme.typography.titleLarge
-                                )
-                                Text(text = PRESSURE)
-                            }
-                            Divider(
-                                modifier = Modifier
-                                    .width(1.dp)
-                                    .fillMaxHeight(0.5f),
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                            Column(
-                                modifier = Modifier.weight(1f),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = "${currentWeatherData.windSpeed} km/h",
-                                    style = MaterialTheme.typography.titleLarge
-                                )
-                                Text(text = WIND)
-                            }
-                        }
-                    }
+                        humidity = currentWeatherData.humidity,
+                        pressure = currentWeatherData.pressure,
+                        windSpeed = currentWeatherData.windSpeed
+                    )
                 }
             }
         }
@@ -282,178 +149,63 @@ fun WeatherExpandedContent(viewModel: WeatherViewModel) {
             .fillMaxSize()
             .padding(spacing.defaultScreenPaddingForExpandedNoBottomNav)
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                modifier = Modifier
-                    .alignBy(LastBaseline)
-                    .clickable { viewModel.onEvent(WeatherUserEvent.Back) },
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-            Row(
-                modifier = Modifier
-                    .alignBy(LastBaseline)
-                    .weight(1f),
-                horizontalArrangement = Arrangement.End
-            ) {
-                Icon(
-                    modifier = Modifier.alignBy(LastBaseline),
-                    imageVector = Icons.Outlined.LocationOn,
-                    contentDescription = null,
-                    tint = if(state.locationPermissionGranted){
-                        MyPrimaryColor
-                    } else{ MaterialTheme.colorScheme.error }
-                )
-                if(state.locationPermissionGranted){
-                    Text(
-                        text = state.myCity,
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
-                    )
-                }else{
-                    Text(
-                        text = LOCATION_PERMISSION_REQUIRED,
-                        style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
-            }
-        }
+        WeatherHeader(
+            state = state,
+            onBackClick = { viewModel.onEvent(WeatherUserEvent.Back) }
+        )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        Text(
-            modifier = Modifier.align(Alignment.Start),
-            text = "$TODAY_REPORT ",
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
-        )
-        Text(
-            text = SimpleDateFormat("dd.MM.yyyy EEEE", Locale.getDefault()).format(Date()),
-            style = MaterialTheme.typography.titleSmall,
-            color = LocalContentColor.current.copy(alpha = 0.5f)
-        )
+        WeatherTitle()
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         if(state.isLoading){
             CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
         }else{
-            Column(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 state.weatherInfo?.currentWeatherData?.let { currentWeatherData ->
-                    Row(modifier = Modifier.weight(3f)) {
-                        Row(modifier = Modifier.weight(1f)) {
-                            Column(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight(),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Center
-                            ) {
-                                Icon(
-                                    modifier = Modifier.weight(2f),
-                                    painter = painterResource(
-                                        id = currentWeatherData.weatherType.iconRes
-                                    ),
-                                    contentDescription = null,
-                                    tint = Color.Unspecified
-                                )
-                                Text(
-                                    modifier = Modifier.weight(1f),
-                                    text = currentWeatherData.weatherType.weatherDesc,
-                                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                                )
-                            }
-                            Row(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight(),
-                                horizontalArrangement = Arrangement.Center,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = DEGREE_SYMBOL,
-                                    style = MaterialTheme.typography.displayLarge,
-                                    color = MaterialTheme.colorScheme.background
-                                )
-                                Text(
-                                    text = currentWeatherData.temperatureCelsius.toString(),
-                                    style = MaterialTheme.typography.displayLarge
-                                )
-                                Text(
-                                    text = DEGREE_SYMBOL,
-                                    style = MaterialTheme.typography.displayLarge,
-                                )
-                            }
-                        }
-                        Column(
-                            modifier = Modifier.fillMaxHeight().weight(1f),
-                            verticalArrangement = Arrangement.Center
-                        ) {
-                            LazyRow(modifier = Modifier.fillMaxHeight(0.5f)) {
-                                items(state.weatherInfo.weatherDataTodayPerHour) { weatherDataPerHour ->
-                                    HourlyWeatherDisplay(
-                                        weatherData = weatherDataPerHour,
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .padding(horizontal = 16.dp)
-                                    )
-                                }
-                            }
-                        }
-                    }
-                    Card(
-                        modifier = Modifier.weight(1f),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
-                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
+                    Row(
+                        modifier = Modifier.weight(3f)
                     ) {
                         Row(
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier.weight(1f),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Column(
-                                modifier = Modifier.weight(1f),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = "${currentWeatherData.humidity}%",
-                                    style = MaterialTheme.typography.titleLarge
-                                )
-                                Text(text = HUMIDITY)
-                            }
-                            Divider(
+                            WeatherIconAndDescription(
                                 modifier = Modifier
-                                    .width(1.dp)
-                                    .fillMaxHeight(0.5f),
-                                color = MaterialTheme.colorScheme.primary
+                                    .weight(1f)
+                                    .padding(spacing.spaceSmall),
+                                iconRes = currentWeatherData.weatherType.iconRes,
+                                weatherDesc = currentWeatherData.weatherType.weatherDesc
                             )
-                            Column(
+                            WeatherTemperatureText(
                                 modifier = Modifier.weight(1f),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = "${currentWeatherData.pressure} hpa",
-                                    style = MaterialTheme.typography.titleLarge
+                                temperature = currentWeatherData.temperatureCelsius,
+                                centerText = false
+                            )
+                        }
+                        LazyVerticalGrid(
+                            modifier = Modifier
+                                .weight(1f),
+                            columns = GridCells.Fixed(4),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalArrangement = Arrangement.spacedBy(spacing.spaceMedium)
+                        ){
+                            items(state.weatherInfo.weatherDataTodayPerHour){ weatherDataPerHour ->
+                                HourlyWeatherDisplay(
+                                    weatherData = weatherDataPerHour
                                 )
-                                Text(text = PRESSURE)
                             }
-                            Divider(
-                                modifier = Modifier
-                                    .width(1.dp)
-                                    .fillMaxHeight(0.5f),
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                            Column(
-                                modifier = Modifier.weight(1f),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    text = "${currentWeatherData.windSpeed} km/h",
-                                    style = MaterialTheme.typography.titleLarge
-                                )
-                                Text(text = WIND)
+                            item {
+                                Spacer(modifier = Modifier.height(spacing.spaceXXLarge))
                             }
                         }
                     }
+                    WeatherInfoCard(
+                        modifier = Modifier.weight(1f),
+                        humidity = currentWeatherData.humidity,
+                        pressure = currentWeatherData.pressure,
+                        windSpeed = currentWeatherData.windSpeed
+                    )
                 }
             }
         }
