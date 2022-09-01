@@ -22,10 +22,6 @@ Sefim is a native android tools app for construction site supervisors written in
 
 <img src="https://user-images.githubusercontent.com/50905347/178331301-7561bb26-2b40-415a-81e4-f34bb0c176c9.gif" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/178331311-11dee195-d792-4dc3-9b12-d2131473fc81.gif" width="250" height="530">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/50905347/178331328-a6115f08-b479-4f7a-b5b2-5fce3c551867.gif" width="250" height="530">
 
-* Structure - Modularization 🌲
-
-<img src="https://user-images.githubusercontent.com/50905347/177567168-84dd5aa8-efaf-45d3-a2bb-7520135bb38b.png" width="540" height="540">
-
 * Application - Features ☕
    * One time splash screen
    * Geolocation - permissions
