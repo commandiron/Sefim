@@ -1,7 +1,6 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/50905347/188014522-08d75e88-6e15-404c-a3ad-08bd6ed0d7a5.png" width="128" height="128">
 </p>
-
 <h1>
   <p align="center">
     Sefim
