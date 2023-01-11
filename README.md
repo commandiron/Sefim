@@ -35,7 +35,7 @@
 
 * Ux 🧪
 
-[OverView](https://user-images.githubusercontent.com/50905347/178328848-39908123-1128-479c-8f5a-56f5643050da.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Favorites](https://user-images.githubusercontent.com/50905347/178371493-7131f78a-24ab-49e9-a427-a90b483a11a0.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Weather](https://user-images.githubusercontent.com/50905347/178331289-0203a902-06bc-4cfc-b62b-d1e7ab4394b4.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Calculator - 1](https://user-images.githubusercontent.com/50905347/178331301-7561bb26-2b40-415a-81e4-f34bb0c176c9.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Calculator - 2](https://user-images.githubusercontent.com/50905347/178331311-11dee195-d792-4dc3-9b12-d2131473fc81.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Prices](https://user-images.githubusercontent.com/50905347/178331328-a6115f08-b479-4f7a-b5b2-5fce3c551867.gif)
+[Overview](https://user-images.githubusercontent.com/50905347/178328848-39908123-1128-479c-8f5a-56f5643050da.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Favorites](https://user-images.githubusercontent.com/50905347/178371493-7131f78a-24ab-49e9-a427-a90b483a11a0.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Weather](https://user-images.githubusercontent.com/50905347/178331289-0203a902-06bc-4cfc-b62b-d1e7ab4394b4.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Calculator - 1](https://user-images.githubusercontent.com/50905347/178331301-7561bb26-2b40-415a-81e4-f34bb0c176c9.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Calculator - 2](https://user-images.githubusercontent.com/50905347/178331311-11dee195-d792-4dc3-9b12-d2131473fc81.gif)&nbsp;&nbsp;-&nbsp;&nbsp;[Prices](https://user-images.githubusercontent.com/50905347/178331328-a6115f08-b479-4f7a-b5b2-5fce3c551867.gif)
 
 * Application - Features ☕
    * One time splash screen
