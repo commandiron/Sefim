@@ -24,7 +24,8 @@
 </h1>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/50905347/212003495-79e22ffc-50d5-4d9c-8c3c-adc5197d6d61.png">
+<img src="https://user-images.githubusercontent.com/50905347/212004934-12193127-a17b-45ae-a52e-c7725f0683a7.png">
+
 </p>
 
 * Screenshots 🖼️
